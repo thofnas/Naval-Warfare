@@ -1,0 +1,6 @@
+﻿@import url("index.uss");
+
+Label {
+    color: #c5f3ff;
+    text-shadow: 0 0 1px #5092b2;
+}

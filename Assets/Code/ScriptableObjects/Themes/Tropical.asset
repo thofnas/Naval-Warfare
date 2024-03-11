@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3f38cca9814b779f490995f9f4c423, type: 3}
+  m_Name: Tropical
+  m_EditorClassIdentifier: 
+  MainColor: {r: 0.23113209, g: 0.8093716, b: 1, a: 1}
+  OutlineColor: {r: 0.26072443, g: 0.485404, b: 0.5943396, a: 1}
+  BackgroundSprites:
+  - {fileID: 21300000, guid: 158af67054a3cfb40b7261a958c4cfd9, type: 3}
+  - {fileID: 21300000, guid: 0d4e482079a95c742aab8b7299236a4e, type: 3}
+  BaseFont: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
+  GridCellSprites:
+  - {fileID: 1810070231, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
+  - {fileID: 1642896885, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
+  - {fileID: -420802148, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
+  - {fileID: -686416011, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
+  - {fileID: -65330500, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
+  - {fileID: 397587049, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
+  - {fileID: -983451538, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
+  - {fileID: -315657877, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
+  - {fileID: -303899553, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
+  GridCellSpriteColor: {r: 0.7821289, g: 0.9332369, b: 0.9811321, a: 1}
+  GridCellSpritePlacingColor: {r: 0.50614095, g: 0.8867924, b: 0.57747924, a: 1}
+  GridCellSpriteDestroyedShipColor: {r: 0.9245283, g: 0.43173724, b: 0.43173724, a: 1}
+  GridCellIcons:
+    serializedKvps:
+    - Key: 0
+      Value: {fileID: 200349901, guid: f9c056fc38733944b8f7e3dde24a9ff1, type: 3}
+      index: 0
+      isKeyRepeated: 0
+    - Key: 1
+      Value: {fileID: -722098857, guid: f9c056fc38733944b8f7e3dde24a9ff1, type: 3}
+      index: 1
+      isKeyRepeated: 0
+    dividerPos: 0.33

@@ -1,0 +1,14 @@
+:root {
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    
+    --font-main: url("project:/Assets/ThirdParty/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf");
+}
+
+Label {
+    margin: 0;
+    text-shadow: 0.5px 0.5px 1px #000000;
+    color: azure;
+    -unity-font-definition: var(--font-main);
+}
