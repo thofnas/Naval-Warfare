@@ -1,17 +1,19 @@
 ﻿using System;
+using EventBus;
 using Events;
-using Scripts.EventBus;
 
 namespace States.GameplayStates
 {
     public class Battle : BaseState
     {
+        private readonly TurnSystem _turnSystem;
         private readonly Level _level;
         private readonly Action _onStateExit;
         private EventBinding<OnCameraOrthographicSizeChanged> _onCameraOrthographicSizeChanged;
 
-        public Battle(TurnSystem turnSystem, Level level, Action onStateExit) : base(turnSystem)
+        public Battle(TurnSystem turnSystem, Level level, StateMachine.StateMachine stateMachine, Action onStateExit) : base(stateMachine)
         {
+            _turnSystem = turnSystem;
             _level = level;
             _onStateExit = onStateExit;
         }
@@ -22,7 +24,7 @@ namespace States.GameplayStates
             EventBus<OnBattleStateEntered>.Invoke(new OnBattleStateEntered());
 
             _level.MoveGridsToBattle();
-            TurnSystem.NextTurn();
+            _turnSystem.NextTurn();
             
             _onCameraOrthographicSizeChanged = new EventBinding<OnCameraOrthographicSizeChanged>(_level.MoveGridsToBattle);
             EventBus<OnCameraOrthographicSizeChanged>.Register(_onCameraOrthographicSizeChanged);

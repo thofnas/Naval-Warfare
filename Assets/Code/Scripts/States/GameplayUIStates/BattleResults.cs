@@ -1,5 +1,5 @@
-﻿using Events;
-using Scripts.EventBus;
+﻿using EventBus;
+using Events;
 using UI;
 using UI.Elements;
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace States.GameplayUIStates
     {
         private Label _resultsLabel;
 
-        public BattleResults(GameplayUIManager gameplayUIManager, StyleSheet styleSheet) : base(gameplayUIManager)
+        public BattleResults(GameplayUI gameplayUI, StyleSheet styleSheet) : base(gameplayUI)
         {
             var uiDocument = new GameObject(nameof(BattleResults)).AddComponent<UIDocument>();
             uiDocument.panelSettings = GameResources.Instance.UIDocumentPrefab.panelSettings;
@@ -22,6 +22,8 @@ namespace States.GameplayUIStates
 
             Root.styleSheets.Add(styleSheet);
 
+            GenerateView();
+
             var onAllCharactersShipsDestroyed =
                 new EventBinding<OnAllCharactersShipsDestroyed>(OnAllCharactersShipsDestroyed);
             EventBus<OnAllCharactersShipsDestroyed>.Register(onAllCharactersShipsDestroyed);
@@ -29,21 +31,23 @@ namespace States.GameplayUIStates
 
         protected sealed override VisualElement Root { get; }
 
-        protected override void GenerateView()
+        public sealed override void GenerateView()
         {
+            SetVisible(false);
+            
             VisualElement container = Root.CreateChild("container");
             VisualElement containerResults = container.CreateChild("container-results");
             VisualElement containerButtons = container.CreateChild("container-buttons");
             _resultsLabel = new Label();
             containerResults.Add(_resultsLabel);
 
-            StyledButton restartButton = new(GameplayUIManager.ThemeSettings, containerButtons,
+            StyledButton restartButton = new(GameplayUI.ThemeSettings, containerButtons,
                 () => SceneManager.LoadScene("Gameplay"))
             {
                 text = "Restart"
             };
 
-            StyledButton goToMainMenuButton = new(GameplayUIManager.ThemeSettings, containerButtons,
+            StyledButton goToMainMenuButton = new(GameplayUI.ThemeSettings, containerButtons,
                 () => SceneManager.LoadScene("MainMenu"))
             {
                 text = "Main menu"

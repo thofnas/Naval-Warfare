@@ -1,4 +1,4 @@
-﻿using Scripts.EventBus;
+﻿using EventBus;
 
 namespace Events
 {

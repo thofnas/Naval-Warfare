@@ -4,16 +4,12 @@ namespace States.GameplayStates
 {
     public abstract class BaseState : IState
     {
-        protected readonly TurnSystem TurnSystem;
-
-        protected BaseState(TurnSystem turnSystem)
+        protected BaseState(StateMachine.StateMachine stateMachine)
         {
-            TurnSystem = turnSystem;
+            StateMachine = stateMachine;
         }
-
-        public virtual void OnCreated()
-        {
-        }
+        
+        public StateMachine.StateMachine StateMachine { get; }
 
         public virtual void OnEnter()
         {
@@ -23,12 +19,11 @@ namespace States.GameplayStates
         {
         }
 
+
         public virtual void Update()
         {
         }
-
-        public virtual void FixedUpdate()
-        {
-        }
+        
+        public virtual void OnDispose() { }
     }
 }

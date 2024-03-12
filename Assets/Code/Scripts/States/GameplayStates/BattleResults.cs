@@ -1,9 +1,18 @@
-﻿namespace States.GameplayStates
+﻿using EventBus;
+using Events;
+
+namespace States.GameplayStates
 {
     public class BattleResults : BaseState
     {
-        public BattleResults(TurnSystem turnSystem) : base(turnSystem)
+        public BattleResults(StateMachine.StateMachine stateMachine) : base(stateMachine)
         {
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            EventBus<OnBattleResultStateEntered>.Invoke(new OnBattleResultStateEntered());
         }
     }
 }

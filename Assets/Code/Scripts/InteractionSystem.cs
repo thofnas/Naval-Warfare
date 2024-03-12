@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using EventBus;
 using Events;
 using Grid;
-using Scripts.EventBus;
 using UnityEngine;
 using Utilities;
 using Zenject;

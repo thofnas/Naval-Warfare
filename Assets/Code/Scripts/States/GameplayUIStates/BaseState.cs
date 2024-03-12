@@ -6,21 +6,15 @@ namespace States.GameplayUIStates
 {
     public abstract class BaseState : IState
     {
-        protected readonly GameplayUIManager GameplayUIManager;
+        protected readonly GameplayUI GameplayUI;
 
-        protected BaseState(GameplayUIManager gameplayUIManager)
+        protected BaseState(GameplayUI gameplayUI)
         {
-            GameplayUIManager = gameplayUIManager;
+            GameplayUI = gameplayUI;
         }
 
         protected abstract VisualElement Root { get; }
-
-        public virtual void OnCreated()
-        {
-            GenerateView();
-            SetVisible(false);
-        }
-
+        
         public virtual void OnEnter() => SetVisible(true);
 
         public virtual void OnExit() => SetVisible(false);
@@ -29,12 +23,10 @@ namespace States.GameplayUIStates
         {
         }
 
-        public virtual void FixedUpdate()
-        {
-        }
-
-        protected abstract void GenerateView();
+        public abstract void GenerateView();
 
         protected abstract void SetVisible(bool value);
+        
+        public virtual void OnDispose() { }
     }
 }

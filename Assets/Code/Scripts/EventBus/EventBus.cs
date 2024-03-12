@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Scripts.EventBus
+namespace EventBus
 {
     public static class EventBus<T> where T : IEvent
     {
@@ -12,7 +13,7 @@ namespace Scripts.EventBus
 
         public static void Invoke(T @event)
         {
-            foreach (IEventBinding<T> binding in bindings)
+            foreach (IEventBinding<T> binding in bindings.ToList())
             {
                 binding.OnEvent.Invoke(@event);
                 binding.OnEventNoArgs.Invoke();

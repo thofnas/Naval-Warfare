@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EventBus;
 using Events;
-using Scripts.EventBus;
 using UnityEngine;
 using Utilities.Extensions;
 using Zenject;

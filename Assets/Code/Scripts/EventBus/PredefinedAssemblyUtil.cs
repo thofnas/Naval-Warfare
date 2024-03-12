@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Scripts.EventBus
+namespace EventBus
 {
     /// <summary>
     ///     A utility class, PredefinedAssemblyUtil, provides methods to interact with predefined assemblies.

@@ -1,6 +1,6 @@
 using System;
+using EventBus;
 using Events;
-using Scripts.EventBus;
 
 public class TurnSystem : IDisposable
 {

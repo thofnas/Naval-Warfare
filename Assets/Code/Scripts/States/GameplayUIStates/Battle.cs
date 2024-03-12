@@ -7,7 +7,7 @@ namespace States.GameplayUIStates
 {
     public class Battle : BaseState
     {
-        public Battle(GameplayUIManager gameplayUIManager, StyleSheet styleSheet) : base(gameplayUIManager)
+        public Battle(GameplayUI gameplayUI, StyleSheet styleSheet) : base(gameplayUI)
         {
             var uiDocument = new GameObject(nameof(Battle)).AddComponent<UIDocument>();
             uiDocument.panelSettings = GameResources.Instance.UIDocumentPrefab.panelSettings;
@@ -15,12 +15,16 @@ namespace States.GameplayUIStates
             Root = uiDocument.rootVisualElement;
 
             Root.styleSheets.Add(styleSheet);
+
+            GenerateView();
         }
 
         protected sealed override VisualElement Root { get; }
 
-        protected override void GenerateView()
+        public sealed override void GenerateView()
         {
+            SetVisible(false);
+            
             VisualElement container = Root.CreateChild("container");
             VisualElement charactersDiv = container.CreateChild("characters-container");
             VisualElement characterPlayerDiv = charactersDiv.CreateChild("character-container");

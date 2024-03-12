@@ -1,5 +1,5 @@
-﻿using Events;
-using Scripts.EventBus;
+﻿using EventBus;
+using Events;
 using UI;
 using UI.Elements;
 using UnityEngine;
@@ -13,11 +13,12 @@ namespace States.GameplayUIStates
         private VisualElement _container;
 
         private Label _countDownLabel;
-        private EventBinding<OnCountdownUpdated> _onCountdownUpdatedBinding;
         private Toggle _readyToggle;
         private StyledButton _styledButton;
+        private EventBinding<OnCountdownUpdated> _onCountdownUpdated;
+        private EventBinding<OnBattleStateEntered> _onBattleStateEntered;
 
-        public PlacingShips(GameplayUIManager gameplayUIManager, StyleSheet styleSheet) : base(gameplayUIManager)
+        public PlacingShips(GameplayUI gameplayUI, StyleSheet styleSheet) : base(gameplayUI)
         {
             var uiDocument = new GameObject(nameof(PlacingShips)).AddComponent<UIDocument>();
             uiDocument.panelSettings = GameResources.Instance.UIDocumentPrefab.panelSettings;
@@ -25,19 +26,23 @@ namespace States.GameplayUIStates
             Root = uiDocument.rootVisualElement;
 
             Root.styleSheets.Add(styleSheet);
+            
+            GenerateView();
         }
 
         protected sealed override VisualElement Root { get; }
 
 
-        protected override void GenerateView()
+        public sealed override void GenerateView()
         {
+            SetVisible(false);
+            
             _container = Root.CreateChild("container");
             VisualElement center = _container.CreateChild("countdown-container", "flex-center");
             VisualElement buttons = _container.CreateChild("buttons-container", "flex-center");
 
-            _styledButton = new StyledButton(GameplayUIManager.ThemeSettings, buttons, "randomize-btn");
-            _readyToggle = new StyledToggle(GameplayUIManager.ThemeSettings, buttons, "ready-toggle");
+            _styledButton = new StyledButton(GameplayUI.ThemeSettings, buttons, "randomize-btn");
+            _readyToggle = new StyledToggle(GameplayUI.ThemeSettings, buttons, "ready-toggle");
             _countDownLabel = new Label("1") { visible = false };
 
             center.CreateChild("countdown-text", "flex-center").Add(_countDownLabel);
@@ -50,8 +55,8 @@ namespace States.GameplayUIStates
         {
             base.OnEnter();
 
-            _onCountdownUpdatedBinding = new EventBinding<OnCountdownUpdated>(Countdown_OnSecondPassed);
-            EventBus<OnCountdownUpdated>.Register(_onCountdownUpdatedBinding);
+            _onCountdownUpdated = new EventBinding<OnCountdownUpdated>(Countdown_OnSecondPassed);
+            EventBus<OnCountdownUpdated>.Register(_onCountdownUpdated);
 
             _readyToggle.RegisterCallback<MouseUpEvent>(_ => ReadyToggle_OnValueChanged(_readyToggle.value));
 
@@ -62,7 +67,8 @@ namespace States.GameplayUIStates
         {
             base.OnExit();
 
-            EventBus<OnCountdownUpdated>.Deregister(_onCountdownUpdatedBinding);
+            EventBus<OnCountdownUpdated>.Deregister(_onCountdownUpdated);
+            EventBus<OnBattleStateEntered>.Deregister(_onBattleStateEntered);
             _readyToggle.UnregisterCallback<MouseUpEvent>(_ => ReadyToggle_OnValueChanged(_readyToggle.value));
         }
 

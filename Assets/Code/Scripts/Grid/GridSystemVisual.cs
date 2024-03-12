@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
+using EventBus;
 using Events;
-using Scripts.EventBus;
 using Themes;
 using UnityEngine;
 using Zenject;

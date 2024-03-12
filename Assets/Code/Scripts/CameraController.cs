@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using DG.Tweening;
+using EventBus;
 using Events;
 using Grid;
-using Scripts.EventBus;
 using UnityEngine;
 using Utilities.Extensions;
 using Zenject;

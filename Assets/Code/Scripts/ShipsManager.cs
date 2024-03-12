@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EventBus;
 using Events;
 using Grid;
-using Scripts.EventBus;
 using Zenject;
 using Random = UnityEngine.Random;
 

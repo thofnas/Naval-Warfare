@@ -2,7 +2,7 @@
 {
     public class PlacingShips : BaseState
     {
-        public PlacingShips(TurnSystem turnSystem) : base(turnSystem)
+        public PlacingShips(StateMachine.StateMachine stateMachine) : base(stateMachine)
         {
         }
     }

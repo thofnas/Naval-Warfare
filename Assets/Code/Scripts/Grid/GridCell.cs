@@ -1,5 +1,5 @@
+using EventBus;
 using Events;
-using Scripts.EventBus;
 using UnityEngine;
 
 namespace Grid

@@ -1,4 +1,4 @@
-﻿using Scripts.EventBus;
+﻿using EventBus;
 using UnityEngine.UIElements;
 
 namespace Events

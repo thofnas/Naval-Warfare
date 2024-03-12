@@ -1,8 +1,5 @@
-﻿using Events;
-using Scripts.EventBus;
-using Themes;
+﻿using Themes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Grid

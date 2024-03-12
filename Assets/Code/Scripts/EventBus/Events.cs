@@ -1,4 +1,4 @@
-﻿namespace Scripts.EventBus
+﻿namespace EventBus
 {
     public interface IEvent
     {

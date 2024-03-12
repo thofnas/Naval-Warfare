@@ -6,10 +6,11 @@ namespace Utilities
 {
     public class CountdownTimer
     {
+        public bool IsActive { get; private set; }
+        
         private static int s_seconds;
         private static float s_waitSecondsBeforeComplete;
         private CancellationTokenSource _cancellationTokenSource;
-        private bool _isActive;
 
         public CountdownTimer(int seconds)
         {
@@ -28,7 +29,7 @@ namespace Utilities
 
             try
             {
-                _isActive = true;
+                IsActive = true;
 
                 for (int remainingSeconds = s_seconds; remainingSeconds > 0; remainingSeconds--)
                 {
@@ -42,13 +43,13 @@ namespace Utilities
                     //Debug.Log($"Waiting additionally for {(int)(s_waitSecondsBeforeComplete * 1000)}ms");
                     await Task.Delay((int)(s_waitSecondsBeforeComplete * 1000), _cancellationTokenSource.Token);
 
-                //Debug.Log("Countdown complete!");
+                //Debug.Log("Countdown complete.");
                 onComplete();
             }
             catch (TaskCanceledException)
             {
-                //Debug.Log("Countdown canceled!");
-                _isActive = false;
+                //Debug.Log("Countdown canceled.");
+                IsActive = false;
             }
         }
 
@@ -56,11 +57,8 @@ namespace Utilities
         {
             if (_cancellationTokenSource == null) return;
 
-            // If the button is pressed again, cancel the previous countdown
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource.Dispose();
         }
-
-        public bool IsActive() => _isActive;
     }
 }

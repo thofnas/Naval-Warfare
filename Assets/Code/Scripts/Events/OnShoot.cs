@@ -1,5 +1,5 @@
-﻿using Grid;
-using Scripts.EventBus;
+﻿using EventBus;
+using Grid;
 
 namespace Events
 {

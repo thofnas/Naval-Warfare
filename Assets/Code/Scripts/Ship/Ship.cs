@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using EventBus;
 using Events;
 using Grid;
-using Scripts.EventBus;
 using UnityEngine;
 using Utilities;
 using Utilities.Extensions;
@@ -142,7 +142,7 @@ namespace Ship
             if (_characterType == CharacterType.Enemy)
                 return false;
 
-            if (_gameManager.CountdownTimer.IsActive())
+            if (_gameManager.CountdownTimer.IsActive)
                 return false;
 
             if (!_gameManager.IsCurrentState(_gameManager.PlacingShips))

@@ -12,7 +12,7 @@ namespace Infrastructure
 {
     public class GameplayEssentialsInstaller : MonoInstaller, IValidatable
     {
-        [SerializeField] private GameplayUIManager _gameplayUIManager;
+        [SerializeField] private GameplayUI _gameplayUI;
         private ThemeSettings _playerThemeSettings;
 
         [Inject]
@@ -25,9 +25,8 @@ namespace Infrastructure
         {
             InitExecutionOrder();
 
-            Container.Bind<CharactersThemes>().AsSingle().WithArguments(_playerThemeSettings, GameResources.Instance.AIThemeSettings).NonLazy();
+            CharactersThemes();
             
-            StateMachine();
             TurnSystem();
             GameManager();
             ShipsManager();
@@ -45,9 +44,9 @@ namespace Infrastructure
             CameraController();
         }
 
-        private void CameraController() => Container.BindInterfacesAndSelfTo<CameraController>().FromNew().AsSingle();
+        private void CharactersThemes() => Container.Bind<CharactersThemes>().AsSingle().WithArguments(_playerThemeSettings, GameResources.Instance.AIThemeSettings).NonLazy();
 
-        private void StateMachine() => Container.Bind<StateMachine.StateMachine>().AsTransient();
+        private void CameraController() => Container.BindInterfacesAndSelfTo<CameraController>().FromNew().AsSingle();
 
         private void AIDamagedShipSearcher() => Container.Bind<AIDamagedShipSearcher>().AsSingle();
 
@@ -97,7 +96,7 @@ namespace Infrastructure
                 .BindFactory<Ship.Ship, Ship.Ship.Factory>()
                 .FromComponentInNewPrefab(GameResources.Instance.ShipPrefab);
 
-        private void UIManager() => Container.Bind<GameplayUIManager>().FromInstance(_gameplayUIManager).AsSingle();
+        private void UIManager() => Container.Bind<GameplayUI>().FromInstance(_gameplayUI).AsSingle();
 
         private void ShipSpawner() => Container.Bind<ShipsSpawner>().AsSingle();
 
