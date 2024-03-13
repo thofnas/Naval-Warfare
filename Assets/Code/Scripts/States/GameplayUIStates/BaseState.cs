@@ -1,16 +1,17 @@
 ﻿using StateMachine;
 using UI;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace States.GameplayUIStates
 {
     public abstract class BaseState : IState
     {
-        protected readonly GameplayUI GameplayUI;
+        protected readonly GameplayUIManager GameplayUIManager;
 
-        protected BaseState(GameplayUI gameplayUI)
+        protected BaseState(GameplayUIManager gameplayUIManager)
         {
-            GameplayUI = gameplayUI;
+            GameplayUIManager = gameplayUIManager;
         }
 
         protected abstract VisualElement Root { get; }
@@ -25,8 +26,23 @@ namespace States.GameplayUIStates
 
         public abstract void GenerateView();
 
-        protected abstract void SetVisible(bool value);
         
-        public virtual void OnDispose() { }
+        public virtual void OnDispose() { }        
+        
+        protected void SetVisible(bool value) => Root.visible = value;
+        
+        protected static VisualElement CreateDocument(string name, StyleSheet styleSheet)
+        {
+            var uiDocument = new GameObject(name).AddComponent<UIDocument>();
+            uiDocument.panelSettings = GameResources.Instance.UIDocumentPrefab.panelSettings;
+            uiDocument.visualTreeAsset = GameResources.Instance.UIDocumentPrefab.visualTreeAsset;
+            VisualElement root = uiDocument.rootVisualElement;
+
+            root.styleSheets.Add(styleSheet);
+
+            root.visible = false;
+            
+            return root;
+        }
     }
 }

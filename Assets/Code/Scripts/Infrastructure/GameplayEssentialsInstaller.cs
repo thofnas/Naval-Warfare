@@ -4,6 +4,7 @@ using Grid;
 using Themes;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
@@ -12,7 +13,7 @@ namespace Infrastructure
 {
     public class GameplayEssentialsInstaller : MonoInstaller, IValidatable
     {
-        [SerializeField] private GameplayUI _gameplayUI;
+        [FormerlySerializedAs("_gameplayUI")] [SerializeField] private GameplayUIManager _gameplayUIManager;
         private ThemeSettings _playerThemeSettings;
 
         [Inject]
@@ -96,7 +97,7 @@ namespace Infrastructure
                 .BindFactory<Ship.Ship, Ship.Ship.Factory>()
                 .FromComponentInNewPrefab(GameResources.Instance.ShipPrefab);
 
-        private void UIManager() => Container.Bind<GameplayUI>().FromInstance(_gameplayUI).AsSingle();
+        private void UIManager() => Container.Bind<GameplayUIManager>().FromInstance(_gameplayUIManager).AsSingle();
 
         private void ShipSpawner() => Container.Bind<ShipsSpawner>().AsSingle();
 

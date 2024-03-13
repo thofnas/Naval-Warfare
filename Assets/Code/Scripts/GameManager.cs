@@ -67,16 +67,13 @@ public class GameManager : IInitializable, IDisposable
             return;
         }
         
-        UnityMainThread.Instance.AddJob(() =>
-        {
-            CountdownTimer.StartCountdown(
-                second => { EventBus<OnCountdownUpdated>.Invoke(new OnCountdownUpdated(second)); },
-                () =>
-                {
-                    e.Toggle.value = false;
-                    _stateMachine.SwitchState(Battle);
-                });
-        });
+        CountdownTimer.StartCountdown(
+            second => { EventBus<OnCountdownUpdated>.Invoke(new OnCountdownUpdated(second)); },
+            () =>
+            {
+                e.Toggle.value = false;
+                _stateMachine.SwitchState(Battle);
+            });
     }
 
     private void Ships_OnOneSideDestroyed(OnAllCharactersShipsDestroyed obj)

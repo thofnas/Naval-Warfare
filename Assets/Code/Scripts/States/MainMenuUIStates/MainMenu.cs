@@ -1,4 +1,6 @@
-﻿using UI;
+﻿using EventBus;
+using Events;
+using UI;
 using UI.Elements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,14 +11,9 @@ namespace States.MainMenuUIStates
 {
     public class MainMenu : BaseState
     {
-        public MainMenu(MainMenuUI mainMenuUI, StyleSheet styleSheet, StateMachine.StateMachine stateMachine) : base(mainMenuUI, stateMachine)
+        public MainMenu(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine, StyleSheet styleSheet) : base(mainMenuUIManager, stateMachine)
         {
-            var uiDocument = new GameObject(nameof(MainMenuUI)).AddComponent<UIDocument>();
-            uiDocument.panelSettings = GameResources.Instance.UIDocumentPrefab.panelSettings;
-            uiDocument.visualTreeAsset = GameResources.Instance.UIDocumentPrefab.visualTreeAsset;
-            Root = uiDocument.rootVisualElement;
-
-            Root.styleSheets.Add(styleSheet);
+            Root = CreateDocument(nameof(MainMenu), styleSheet);
 
             GenerateView();
         }
@@ -34,18 +31,29 @@ namespace States.MainMenuUIStates
 
             VisualElement buttonsContainer = container.CreateChild("buttons-container");
 
-            StyledButton startGameButton = new(MainMenuUIInstance.ThemeSettings, buttonsContainer,
-                () => SceneManager.LoadScene("Gameplay"), "start-button")
+            StyledButton startGameButton = new(MainMenuUIManager.ThemeSettings,
+                buttonsContainer,
+                () => SceneManager.LoadScene("Gameplay"),
+                "start-button")
             {
                 text = "Start Game"
             };
+            
+            StyledButton storeButton = new(MainMenuUIManager.ThemeSettings, 
+                buttonsContainer,
+                () => StateMachine.SwitchState(MainMenuUIManager.StoreState), 
+                "start-button")
+            {
+                text = "Store"
+            };
 
-            StyledButton optionsButton = new(MainMenuUIInstance.ThemeSettings, buttonsContainer, "options-button")
+            StyledButton optionsButton = new(MainMenuUIManager.ThemeSettings, 
+                buttonsContainer, 
+                () => StateMachine.SwitchState(MainMenuUIManager.OptionsState), 
+                "options-button")
             {
                 text = "Options"
             };
         }
-
-        protected override void SetVisible(bool value) => Root.visible = value;
     }
 }

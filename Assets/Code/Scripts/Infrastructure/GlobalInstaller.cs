@@ -9,7 +9,10 @@ namespace Infrastructure
         {
             StateMachine();
             AsyncProcessor();
+            UnityMainThread();
         }
+
+        private void UnityMainThread() => Container.Bind<UnityMainThread>().FromNewComponentOnNewGameObject().AsSingle();
 
         private void StateMachine() => Container.BindInterfacesAndSelfTo<StateMachine.StateMachine>().AsTransient();
         

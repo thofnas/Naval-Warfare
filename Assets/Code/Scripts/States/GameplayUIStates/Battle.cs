@@ -7,14 +7,9 @@ namespace States.GameplayUIStates
 {
     public class Battle : BaseState
     {
-        public Battle(GameplayUI gameplayUI, StyleSheet styleSheet) : base(gameplayUI)
+        public Battle(GameplayUIManager gameplayUIManager, StyleSheet styleSheet) : base(gameplayUIManager)
         {
-            var uiDocument = new GameObject(nameof(Battle)).AddComponent<UIDocument>();
-            uiDocument.panelSettings = GameResources.Instance.UIDocumentPrefab.panelSettings;
-            uiDocument.visualTreeAsset = GameResources.Instance.UIDocumentPrefab.visualTreeAsset;
-            Root = uiDocument.rootVisualElement;
-
-            Root.styleSheets.Add(styleSheet);
+            Root = CreateDocument(nameof(Battle), styleSheet);
 
             GenerateView();
         }
@@ -23,8 +18,6 @@ namespace States.GameplayUIStates
 
         public sealed override void GenerateView()
         {
-            SetVisible(false);
-            
             VisualElement container = Root.CreateChild("container");
             VisualElement charactersDiv = container.CreateChild("characters-container");
             VisualElement characterPlayerDiv = charactersDiv.CreateChild("character-container");
@@ -33,7 +26,5 @@ namespace States.GameplayUIStates
             characterPlayerDiv.Add(new Label("YOU"));
             characterEnemyDiv.Add(new Label("ENEMY"));
         }
-
-        protected override void SetVisible(bool value) => Root.visible = value;
     }
 }

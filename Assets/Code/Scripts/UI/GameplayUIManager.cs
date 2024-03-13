@@ -11,7 +11,7 @@ using Zenject;
 namespace UI
 {
     [DisallowMultipleComponent]
-    public class GameplayUI : MonoBehaviour
+    public class GameplayUIManager : MonoBehaviour
     {
         public ThemeSettings ThemeSettings { get; private set; }
         public PlacingShips PlacingShips { get; private set; }

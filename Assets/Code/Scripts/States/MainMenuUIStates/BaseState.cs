@@ -1,23 +1,24 @@
 ﻿using StateMachine;
 using UI;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace States.MainMenuUIStates
 {
     public abstract class BaseState : IState
     {
-        protected readonly MainMenuUI MainMenuUIInstance;
-        public StateMachine.StateMachine StateMachine { get; }
         protected abstract VisualElement Root { get; }
+        protected MainMenuUIManager MainMenuUIManager { get; }
+        protected StateMachine.StateMachine StateMachine { get; }
         
-        protected BaseState(MainMenuUI mainMenuUI, StateMachine.StateMachine stateMachine)
+        protected BaseState(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine)
         {
-            MainMenuUIInstance = mainMenuUI;
             StateMachine = stateMachine;
+            MainMenuUIManager = mainMenuUIManager;
         }
 
         public abstract void GenerateView();
-        protected abstract void SetVisible(bool value);
+
 
         public virtual void OnEnter() => SetVisible(true);
 
@@ -26,5 +27,21 @@ namespace States.MainMenuUIStates
         public virtual void OnExit() => SetVisible(false);
         
         public virtual void OnDispose() { }
+
+        protected void SetVisible(bool value) => Root.visible = value;
+        
+        protected static VisualElement CreateDocument(string name, StyleSheet styleSheet)
+        {
+            var uiDocument = new GameObject(name).AddComponent<UIDocument>();
+            uiDocument.panelSettings = GameResources.Instance.UIDocumentPrefab.panelSettings;
+            uiDocument.visualTreeAsset = GameResources.Instance.UIDocumentPrefab.visualTreeAsset;
+            VisualElement root = uiDocument.rootVisualElement;
+
+            root.styleSheets.Add(styleSheet);
+
+            root.visible = false;
+            
+            return root;
+        }
     }
 }

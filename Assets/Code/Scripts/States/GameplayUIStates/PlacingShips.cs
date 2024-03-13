@@ -18,14 +18,9 @@ namespace States.GameplayUIStates
         private EventBinding<OnCountdownUpdated> _onCountdownUpdated;
         private EventBinding<OnBattleStateEntered> _onBattleStateEntered;
 
-        public PlacingShips(GameplayUI gameplayUI, StyleSheet styleSheet) : base(gameplayUI)
+        public PlacingShips(GameplayUIManager gameplayUIManager, StyleSheet styleSheet) : base(gameplayUIManager)
         {
-            var uiDocument = new GameObject(nameof(PlacingShips)).AddComponent<UIDocument>();
-            uiDocument.panelSettings = GameResources.Instance.UIDocumentPrefab.panelSettings;
-            uiDocument.visualTreeAsset = GameResources.Instance.UIDocumentPrefab.visualTreeAsset;
-            Root = uiDocument.rootVisualElement;
-
-            Root.styleSheets.Add(styleSheet);
+            Root = CreateDocument(nameof(PlacingShips), styleSheet);
             
             GenerateView();
         }
@@ -35,21 +30,16 @@ namespace States.GameplayUIStates
 
         public sealed override void GenerateView()
         {
-            SetVisible(false);
-            
             _container = Root.CreateChild("container");
             VisualElement center = _container.CreateChild("countdown-container", "flex-center");
             VisualElement buttons = _container.CreateChild("buttons-container", "flex-center");
 
-            _styledButton = new StyledButton(GameplayUI.ThemeSettings, buttons, "randomize-btn");
-            _readyToggle = new StyledToggle(GameplayUI.ThemeSettings, buttons, "ready-toggle");
+            _styledButton = new StyledButton(GameplayUIManager.ThemeSettings, buttons, "randomize-btn");
+            _readyToggle = new StyledToggle(GameplayUIManager.ThemeSettings, buttons, "ready-toggle");
             _countDownLabel = new Label("1") { visible = false };
 
             center.CreateChild("countdown-text", "flex-center").Add(_countDownLabel);
         }
-
-
-        protected override void SetVisible(bool value) => Root.visible = value;
 
         public override void OnEnter()
         {
