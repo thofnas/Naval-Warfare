@@ -289,7 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 61eeb9193dee6b54aa52c4687be81604, type: 2}
   _monoInstallers: []
   _installerPrefabs: []
   _autoRun: 1
@@ -355,6 +356,7 @@ MonoBehaviour:
   _mainMenuStyleSheet: {fileID: 7433441132597879392, guid: d2dc13d638c04336a17bb4c862e60588, type: 3}
   _storeStyleSheet: {fileID: 7433441132597879392, guid: 9d138b74b7aae2a41985e83b265b89ce, type: 3}
   _optionsStyleSheet: {fileID: 7433441132597879392, guid: 496f06bb748041cabfc50c4dae82a317, type: 3}
+  _storeContent: {fileID: 11400000, guid: c8475c3b5380bc349adda6129d40dac0, type: 2}
 --- !u!4 &1648346795
 Transform:
   m_ObjectHideFlags: 0

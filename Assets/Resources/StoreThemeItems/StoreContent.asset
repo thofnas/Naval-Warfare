@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1b78497e5943a2b6c5a130aa4ffb6f, type: 3}
+  m_Name: StoreContent
+  m_EditorClassIdentifier: 
+  _islandsThemeItems:
+  - {fileID: 11400000, guid: 05acabce9dbcc96478dc0046b44a8982, type: 2}
+  - {fileID: 11400000, guid: ced1e4085253d7a49a8ca3aff5a673f1, type: 2}
+  - {fileID: 11400000, guid: 5c9b803a6faaf4644843724220f7cfb9, type: 2}

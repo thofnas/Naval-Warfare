@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8ccf5ff109426ea53f53f2297a30b8, type: 3}
   m_Name: ThemeSettingInstaller
   m_EditorClassIdentifier: 
-  _playerThemeSettings: {fileID: 11400000, guid: 439e43cf03730b743ac2765028a6ea49, type: 2}
+  _selectedThemeSettings:
+    PlayerThemeSettings: {fileID: 11400000, guid: 006b3329baffab54da4a1e86e79ea0e1, type: 2}
   _shipVisualSetting:
     Ships:
       serializedKvps:

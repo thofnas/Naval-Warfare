@@ -1,4 +1,5 @@
 ﻿using StateMachine;
+using Themes;
 using UI;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,10 +12,13 @@ namespace States.MainMenuUIStates
         protected MainMenuUIManager MainMenuUIManager { get; }
         protected StateMachine.StateMachine StateMachine { get; }
         
+        protected SelectedThemeSettings SelectedThemeSettings { get; }
+        
         protected BaseState(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine)
         {
             StateMachine = stateMachine;
             MainMenuUIManager = mainMenuUIManager;
+            SelectedThemeSettings = mainMenuUIManager.SelectedThemeSettings;
         }
 
         public abstract void GenerateView();

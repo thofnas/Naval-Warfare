@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cba2b210cc20444db7b4bbc879147a4a, type: 3}
-  m_Name: Acid
+  m_Name: AI
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Tropical
-  <ThemeSettings>k__BackingField: {fileID: 11400000, guid: cffc28d7b22fd5d48868c434ce19b028, type: 2}
-  <IsPurchasable>k__BackingField: 1
-  <Price>k__BackingField: 50
-  <IslandsType>k__BackingField: 30
+  <DisplayName>k__BackingField: AI
+  <ThemeSettings>k__BackingField: {fileID: 11400000, guid: 006b3329baffab54da4a1e86e79ea0e1, type: 2}
+  <IsPurchasable>k__BackingField: 0
+  <Price>k__BackingField: 0
+  <IslandsType>k__BackingField: 10

@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Utilities
 {
@@ -49,6 +52,26 @@ namespace Utilities
                 Debug.LogWarning($"{colorFieldName} is pink (1f, 0f, 1f) in object {sender.GetType()}.", sender);
 
             return false;
+        } 
+        
+        public static void CheckForDuplicatesByProperty<T, TKey>(IEnumerable<T> items, Func<T, TKey> keySelector, string propertyName)
+        {
+            var duplicateGroups = items
+                .GroupBy(keySelector)
+                .Where(group => group.Count() > 1)
+                .ToList();
+
+            if (!duplicateGroups.Any()) return;
+            
+            var errorMessage = new StringBuilder();
+            errorMessage.AppendLine($"Duplicate items found in {propertyName}:");
+        
+            foreach (var group in duplicateGroups)
+            {
+                errorMessage.AppendLine($"- {typeof(T).Name}: {group.Key}, Count: {group.Count()}");
+            }
+
+            throw new InvalidOperationException(errorMessage.ToString());
         }
     }
 }

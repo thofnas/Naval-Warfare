@@ -1,8 +1,5 @@
-﻿using EventBus;
-using Events;
-using UI;
+﻿using UI;
 using UI.Elements;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
@@ -31,7 +28,7 @@ namespace States.MainMenuUIStates
 
             VisualElement buttonsContainer = container.CreateChild("buttons-container");
 
-            StyledButton startGameButton = new(MainMenuUIManager.ThemeSettings,
+            StyledButton startGameButton = new(SelectedThemeSettings.PlayerThemeSettings,
                 buttonsContainer,
                 () => SceneManager.LoadScene("Gameplay"),
                 "start-button")
@@ -39,7 +36,7 @@ namespace States.MainMenuUIStates
                 text = "Start Game"
             };
             
-            StyledButton storeButton = new(MainMenuUIManager.ThemeSettings, 
+            StyledButton storeButton = new(SelectedThemeSettings.PlayerThemeSettings, 
                 buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.StoreState), 
                 "start-button")
@@ -47,7 +44,7 @@ namespace States.MainMenuUIStates
                 text = "Store"
             };
 
-            StyledButton optionsButton = new(MainMenuUIManager.ThemeSettings, 
+            StyledButton optionsButton = new(SelectedThemeSettings.PlayerThemeSettings, 
                 buttonsContainer, 
                 () => StateMachine.SwitchState(MainMenuUIManager.OptionsState), 
                 "options-button")
