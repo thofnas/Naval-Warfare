@@ -10,6 +10,9 @@ namespace States.MainMenuUIStates
     public class Store : BaseState
     {
         private readonly StoreContent _storeContent;
+        private StoreItem _selectedStoreItem;
+        private VisualElement _container;
+        private VisualElement _storeItemsContainer = new();
 
         public Store(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine, StyleSheet styleSheet, StoreContent storeContent) : base(mainMenuUIManager, stateMachine)
         {
@@ -20,24 +23,53 @@ namespace States.MainMenuUIStates
         }
 
         protected sealed override VisualElement Root { get; }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
         
+            UpdateStoreContent();
+        }
+
         public sealed override void GenerateView() 
         {            
-            VisualElement container = Root.CreateChild("container");
-            VisualElement storeItemsContainer = Root.CreateChild("store-items-container");
-            VisualElement buttonsContainer = container.CreateChild("buttons-container");
-
-            foreach (IslandsThemeItem islandsThemeItem in _storeContent.IslandsThemeItems)
-            {
-                StoreItemView storeItemView = storeItemsContainer.CreateChild<StoreItemView>().Initialize(islandsThemeItem);
-                storeItemView.Clicked += view => SelectedThemeSettings.PlayerThemeSettings = view.StoreItem.ThemeSettings;
-            }
+            _container = Root.CreateChild("container");
+            _storeItemsContainer = _container.CreateChild("store-items-container");
+            UpdateStoreContent();
+            VisualElement buttonsContainer = _container.CreateChild("buttons-container");
             
             StyledButton backToMainMenuButton = new(SelectedThemeSettings.PlayerThemeSettings, buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.MainMenuState), "back-button")
             {
                 text = "Back"
             };
+        }
+
+        private void UpdateStoreContent()
+        {
+            _storeItemsContainer.Clear();
+            
+            foreach (IslandsThemeItem islandsThemeItem in _storeContent.IslandsThemeItems)
+            {
+                StoreItemView storeItemView = _storeItemsContainer.CreateChild<StoreItemView>().Initialize(islandsThemeItem);
+
+                if (islandsThemeItem.ThemeSettings == SelectedThemeSettings.PlayerThemeSettings)
+                {
+                    _selectedStoreItem = islandsThemeItem;
+                    storeItemView.LockImage.visible = false;
+                    storeItemView.SelectedImage.visible = true;
+                    Debug.Log("Selected " + islandsThemeItem.DisplayName);
+                }
+                
+                storeItemView.Clicked += view =>
+                {
+                    if (view.StoreItem != _selectedStoreItem)
+                        UpdateStoreContent();
+                    
+                    _selectedStoreItem = view.StoreItem;
+                    SelectedThemeSettings.PlayerThemeSettings = view.StoreItem.ThemeSettings;
+                };
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace States.MainMenuUIStates
             VisualElement container = Root.CreateChild("container");
 
             VisualElement titleContainer = container.CreateChild("title-container");
-            titleContainer.Add(new Label("Battleship"));
+            titleContainer.Add(new Label("Naval Warfare"));
 
             VisualElement buttonsContainer = container.CreateChild("buttons-container");
 
@@ -39,7 +39,7 @@ namespace States.MainMenuUIStates
             StyledButton storeButton = new(SelectedThemeSettings.PlayerThemeSettings, 
                 buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.StoreState), 
-                "start-button")
+                "store-button")
             {
                 text = "Store"
             };

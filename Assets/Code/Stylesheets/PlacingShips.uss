@@ -1,17 +1,5 @@
 @import url("index.uss");
 
-.unity-toggle__checkmark {
-    background-color: transparent;
-    background-image: none;
-    border-width: 0;
-}
-
-.unity-button {
-    background-color: transparent;
-    background-image: none;
-    border-width: 0;
-}
-
 .flex-center {
     display: flex;
     justify-content: center;
@@ -47,12 +35,11 @@
 .randomize-btn {
     width: 30%;
     background-size: contain;
-    background-image: url("/Assets/Art/Textures/UI/Button.png#Button_0");
 }
 
 .ready-toggle {
     width: 30%;
     --checkmark-icon: none;
     background-size: contain;
-    background-image: url("/Assets/Art/Textures/UI/CheckboxButton.png#Main");
+    background-image: url("/Assets/Art/Textures/UI/CheckboxButton.png#Base");
 }

@@ -19,6 +19,7 @@ namespace UI
         [SerializeField] private StyleSheet _optionsStyleSheet;
         [SerializeField] private StoreContent _storeContent;
         
+        
         private VisualElement _root;
         private StateMachine.StateMachine _stateMachine;
         

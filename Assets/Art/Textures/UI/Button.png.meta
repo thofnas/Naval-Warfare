@@ -123,85 +123,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button_0
+      name: Base
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
-        width: 32
-        height: 16
+        y: 64
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df017a8d7d8d5124081df94b2383cde5
+      spriteID: 574924d00ca0291449fa26d16853c6c5
       internalID: 2022701836
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Button_1
+      name: Hover
       rect:
         serializedVersion: 2
         x: 0
         y: 32
-        width: 32
-        height: 16
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc12b6109f689cf4d8d731289cc09c5a
+      spriteID: 4e3e0b328c9e1444a9daa1b2cd54904f
       internalID: -98470219
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Button_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 32
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e420aabcdb1713c49b2ac303a7eb534b
-      internalID: -1937785852
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_3
+      name: Press
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 16
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81a6b71134173a044881eeb996d11421
-      internalID: 210317846
+      spriteID: dacfb285aafb5b241b474c739ed24347
+      internalID: -1372173435
       vertices: []
       indices: 
       edges: []
@@ -217,10 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Button_0: 2022701836
-      Button_1: -98470219
-      Button_2: -1937785852
-      Button_3: 210317846
+      Base: 2022701836
+      Hover: -98470219
+      Press: -1372173435
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

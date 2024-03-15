@@ -123,16 +123,16 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CheckboxButton_0
+      name: Base
       rect:
         serializedVersion: 2
         x: 0
         y: 64
-        width: 32
-        height: 16
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 5, z: 11, w: 3}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -144,43 +144,22 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Main
+      name: Hover
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
-        width: 32
-        height: 16
+        y: 32
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46491289476fd0e419b508bd49be5c06
-      internalID: -671984983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Highlighted
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 33
-        width: 32
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 521f17d058fcc984c8a1dd411c113765
-      internalID: 1953251577
+      spriteID: 9a7fb1daf7905934d905a83a4583e983
+      internalID: -738353369
       vertices: []
       indices: 
       edges: []
@@ -190,39 +169,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 32
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a09aa88a7ed9854394eb13e916347ac
-      internalID: 1461559598
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Disabled
-      rect:
-        serializedVersion: 2
-        x: 0
         y: 0
-        width: 32
-        height: 16
+        width: 64
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10b1ea47c9e7ea9449bd76a8720a9820
-      internalID: 738121362
+      spriteID: 83b8fb84fea958349ae939ecff5466e2
+      internalID: 1461559598
       vertices: []
       indices: 
       edges: []
@@ -238,10 +196,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CheckboxButton_0: -1320957051
-      Disabled: 738121362
-      Highlighted: 1953251577
-      Main: -671984983
+      Base: -1320957051
+      Hover: -738353369
       Pressed: 1461559598
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

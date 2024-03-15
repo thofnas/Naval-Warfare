@@ -24,5 +24,5 @@ namespace Infrastructure
 [Serializable]
 public class SelectedThemeSettings
 {
-    [field: SerializeField] public ThemeSettings PlayerThemeSettings;
+    public ThemeSettings PlayerThemeSettings;
 }

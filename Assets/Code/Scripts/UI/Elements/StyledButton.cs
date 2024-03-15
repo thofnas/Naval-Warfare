@@ -1,5 +1,6 @@
 ﻿using System;
 using Themes;
+using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 
@@ -7,8 +8,6 @@ namespace UI.Elements
 {
     public class StyledButton : Button
     {
-        public readonly VisualElement Wrapper;
-
         private StyledButton()
         {
         }
@@ -25,11 +24,10 @@ namespace UI.Elements
             style.paddingBottom = 12;
             style.paddingTop = 12;
 
-            Wrapper = parent.CreateChild(wrapperClasses);
-            Wrapper.AddClass(wrapperClasses);
-            Wrapper.Add(this);
-            Wrapper.style.unityBackgroundImageTintColor = themeSettings.MainColor;
-            Wrapper.style.unityFontDefinition = new StyleFontDefinition(themeSettings.BaseFont);
+            parent.Add(this);
+            this.AddClass(wrapperClasses);
+            style.unityBackgroundImageTintColor = themeSettings.MainColor;
+            style.unityFontDefinition = new StyleFontDefinition(themeSettings.BaseFont);
         }
     }
 }
