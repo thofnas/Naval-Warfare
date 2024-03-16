@@ -13,7 +13,23 @@ Label {
     -unity-font-definition: var(--font-main);
 }
 
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .unity-toggle__checkmark {
+    display: flex;
+    background-image: url("/Assets/Art/Textures/UI/CheckmarkIcon.png");
+    background-color: transparent;
+    border-width: 0;
+    margin-left: 55%;
+    padding: 10px;
+}
+
+.unity-toggle:checked .unity-toggle__checkmark {
+    display: none;
     background-image: url("/Assets/Art/Textures/UI/CheckmarkIcon.png");
     background-color: transparent;
     border-width: 0;

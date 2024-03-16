@@ -1,4 +1,6 @@
-﻿using StateMachine;
+﻿using EventBus;
+using Events;
+using StateMachine;
 using Themes;
 using UI;
 using UnityEngine;
@@ -11,7 +13,6 @@ namespace States.MainMenuUIStates
         protected abstract VisualElement Root { get; }
         protected MainMenuUIManager MainMenuUIManager { get; }
         protected StateMachine.StateMachine StateMachine { get; }
-        
         protected SelectedThemeSettings SelectedThemeSettings { get; }
         
         protected BaseState(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine)
@@ -19,9 +20,17 @@ namespace States.MainMenuUIStates
             StateMachine = stateMachine;
             MainMenuUIManager = mainMenuUIManager;
             SelectedThemeSettings = mainMenuUIManager.SelectedThemeSettings;
+
+            _onThemeChanged = new EventBinding<OnThemeChanged>(GenerateView);
+            EventBus<OnThemeChanged>.Register(_onThemeChanged);
         }
 
-        public abstract void GenerateView();
+        private readonly EventBinding<OnThemeChanged> _onThemeChanged;
+
+        protected virtual void GenerateView()
+        {
+            Root.Clear();
+        }
 
 
         public virtual void OnEnter() => SetVisible(true);
@@ -30,7 +39,10 @@ namespace States.MainMenuUIStates
 
         public virtual void OnExit() => SetVisible(false);
         
-        public virtual void OnDispose() { }
+        public virtual void OnDispose() 
+        {   
+            EventBus<OnThemeChanged>.Deregister(_onThemeChanged);
+        }
 
         protected void SetVisible(bool value) => Root.visible = value;
         

@@ -1,4 +1,6 @@
 ﻿using System;
+using EventBus;
+using Events;
 using Ship;
 using Themes;
 using UnityEngine;
@@ -24,5 +26,15 @@ namespace Infrastructure
 [Serializable]
 public class SelectedThemeSettings
 {
-    public ThemeSettings PlayerThemeSettings;
+    [SerializeField] private ThemeSettings _playerThemeSettings;
+    
+    public ThemeSettings PlayerThemeSettings
+    {
+        get => _playerThemeSettings;
+        set
+        {
+            _playerThemeSettings = value;
+            EventBus<OnThemeChanged>.Invoke(new OnThemeChanged());
+        }
+    }
 }

@@ -1,11 +1,5 @@
 @import url("index.uss");
 
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .container {
     display: flex;
     justify-content: space-between;

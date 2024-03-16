@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Enemy
 {
-    public readonly struct AIDamagedShipSearcher
+    public class AIDamagedShipSearcher
     {
         private readonly Level _level;
 
@@ -17,43 +17,58 @@ namespace Enemy
             _level = level;
         }
 
-        public bool TrySearchForShip(CharacterType characterType, List<CellPosition> shotUndestroyedCellPositions,
-            out CellPosition selectedCellPosition)
+        public bool TrySearchForShip(CharacterType characterType, List<CellPosition> shotUndestroyedCellPositions, out CellPosition selectedCellPosition)
         {
-            List<CellPosition> result = new();
-
+            // Consolidate the search for unshot cells into a single list
+            List<CellPosition> potentialTargets = FindPotentialTargets(characterType, shotUndestroyedCellPositions);
+        
+            // If no damaged, unshot cells were found, get valid shooting positions
+            if (!potentialTargets.Any())
+            {
+                potentialTargets = shotUndestroyedCellPositions
+                    .SelectMany(pos => _level.GetValidForShootingSidesCellPositions(characterType, pos))
+                    .ToList();
+            }
+        
+            // Select a random cell from the potential targets if any exist
+            selectedCellPosition = potentialTargets.Any() ? potentialTargets.Shuffle().First() : CellPosition.Zero;
+            
+            // Return whether any potential targets were found
+            return potentialTargets.Any();
+        }
+        
+        private List<CellPosition> FindPotentialTargets(CharacterType characterType, IEnumerable<CellPosition> shotUndestroyedCellPositions)
+        {
+            var directions = new[] { Direction.Up, Direction.Right, Direction.Down, Direction.Left };
+            var result = new List<CellPosition>();
+        
             foreach (CellPosition cellPosition in shotUndestroyedCellPositions)
             {
-                if (_level.IsShipDamagedUndestroyedOnCellPosition(characterType, cellPosition.GetOnAbove()))
-                    if (TryFindUnshotCellInDirection(Direction.Up, characterType, cellPosition.GetOnAbove(),
-                            out CellPosition unshotCellPosition))
+                foreach (Direction direction in directions)
+                {
+                    CellPosition adjacentPosition = GetAdjacentPosition(cellPosition, direction);
+                    if (_level.IsShipDamagedUndestroyedOnCellPosition(characterType, adjacentPosition) && 
+                        TryFindUnshotCellInDirection(direction, characterType, adjacentPosition, out CellPosition unshotCellPosition))
+                    {
                         result.Add(unshotCellPosition);
-
-                if (_level.IsShipDamagedUndestroyedOnCellPosition(characterType, cellPosition.GetOnRight()))
-                    if (TryFindUnshotCellInDirection(Direction.Right, characterType, cellPosition.GetOnRight(),
-                            out CellPosition unshotCellPosition))
-                        result.Add(unshotCellPosition);
-
-                if (_level.IsShipDamagedUndestroyedOnCellPosition(characterType, cellPosition.GetOnBelow()))
-                    if (TryFindUnshotCellInDirection(Direction.Down, characterType, cellPosition.GetOnBelow(),
-                            out CellPosition unshotCellPosition))
-                        result.Add(unshotCellPosition);
-
-                if (_level.IsShipDamagedUndestroyedOnCellPosition(characterType, cellPosition.GetOnLeft()))
-                    if (TryFindUnshotCellInDirection(Direction.Left, characterType, cellPosition.GetOnLeft(),
-                            out CellPosition unshotCellPosition))
-                        result.Add(unshotCellPosition);
+                    }
+                }
             }
-
-            if (result.IsNullOrEmpty())
-                foreach (CellPosition cellPosition in shotUndestroyedCellPositions)
-                    result.AddRange(_level.GetValidForShootingSidesCellPositions(characterType, cellPosition));
-
-            selectedCellPosition = result.IsNullOrEmpty()
-                ? CellPosition.Zero
-                : result.Shuffle().First();
-
-            return !result.IsNullOrEmpty();
+        
+            return result;
+        }
+        
+        private static CellPosition GetAdjacentPosition(CellPosition cellPosition, Direction direction)
+        {
+            // This method assumes you have a way to compute cell positions based on direction
+            return direction switch
+            {
+                Direction.Up => cellPosition.GetOnAbove(),
+                Direction.Right => cellPosition.GetOnRight(),
+                Direction.Down => cellPosition.GetOnBelow(),
+                Direction.Left => cellPosition.GetOnLeft(),
+                _ => throw new ArgumentOutOfRangeException(nameof(direction), $"Unsupported direction: {direction}")
+            };
         }
 
         private bool TryFindUnshotCellInDirection(Direction direction, CharacterType characterType,
@@ -61,7 +76,7 @@ namespace Enemy
         {
             while (true)
             {
-                CellPosition nextCell = GetNextCellPosition(direction, checkingPosition);
+                CellPosition nextCell = GetAdjacentPosition(checkingPosition, direction);
 
                 if (_level.IsCellOutOfBounds(nextCell))
                 {
@@ -101,17 +116,6 @@ namespace Enemy
             }
         }
 
-        private static CellPosition GetNextCellPosition(Direction direction, CellPosition checkingPosition) =>
-            direction switch
-            {
-                Direction.Up => checkingPosition.GetOnAbove(),
-                Direction.Right => checkingPosition.GetOnRight(),
-                Direction.Down => checkingPosition.GetOnBelow(),
-                Direction.Left => checkingPosition.GetOnLeft(),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
-        // can be represented in degrees instead
         private enum Direction
         {
             Up = 10,

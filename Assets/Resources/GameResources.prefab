@@ -48,5 +48,5 @@ MonoBehaviour:
   _shipPrefab: {fileID: 4696477370098339059, guid: 2fe4716b0dd82fd4dbf9de4f7812b223, type: 3}
   _uiDocumentPrefab: {fileID: 1529253934327410033, guid: c2bb749dbd5af7a4d98f8db56a24b3fe, type: 3}
   _shipHitExplosionPrefab: {fileID: 980769002882980299, guid: 8f7093ecab8bd204c86b7faabb1329f9, type: 3}
-  _backgroundPrefab: {fileID: 0}
+  _backgroundPrefab: {fileID: 8738780348656839755, guid: 0e3f97054a4524b488f66787ec440a51, type: 3}
   _aiThemeSettings: {fileID: 11400000, guid: 006b3329baffab54da4a1e86e79ea0e1, type: 2}

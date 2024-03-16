@@ -1,5 +1,12 @@
 ﻿@import url("index.uss");
 
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 90%;
+}
+
 Label {
     text-shadow: 0 0 1px #6c6c6c;
 }

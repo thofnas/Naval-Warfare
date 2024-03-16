@@ -17,16 +17,17 @@ namespace States.MainMenuUIStates
 
         protected sealed override VisualElement Root { get; }
 
-        public sealed override void GenerateView()
+        protected sealed override void GenerateView() 
         {
-            SetVisible(false);
+            base.GenerateView();
             
             VisualElement container = Root.CreateChild("container");
+            VisualElement contentContainer = container.CreateChild("content-container");
 
-            VisualElement titleContainer = container.CreateChild("title-container");
+            VisualElement titleContainer = contentContainer.CreateChild("title-container", "flex-center");
             titleContainer.Add(new Label("Naval Warfare"));
 
-            VisualElement buttonsContainer = container.CreateChild("buttons-container");
+            VisualElement buttonsContainer = contentContainer.CreateChild("buttons-container");
 
             StyledButton startGameButton = new(SelectedThemeSettings.PlayerThemeSettings,
                 buttonsContainer,

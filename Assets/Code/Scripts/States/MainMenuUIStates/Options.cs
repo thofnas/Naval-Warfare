@@ -15,9 +15,11 @@ namespace States.MainMenuUIStates
         }
 
         protected override VisualElement Root { get; }
-        
-        public sealed override void GenerateView() 
-        {            
+
+        protected sealed override void GenerateView() 
+        {
+            base.GenerateView();
+            
             VisualElement container = Root.CreateChild("container");
             VisualElement buttonsContainer = container.CreateChild("buttons-container");
             

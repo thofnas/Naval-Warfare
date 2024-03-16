@@ -1,4 +1,5 @@
-﻿using Themes.Store;
+﻿using EventBus;
+using Themes.Store;
 using UI;
 using UI.Elements;
 using UnityEngine;
@@ -31,8 +32,10 @@ namespace States.MainMenuUIStates
             UpdateStoreContent();
         }
 
-        public sealed override void GenerateView() 
-        {            
+        protected sealed override void GenerateView() 
+        {
+            base.GenerateView();
+            
             _container = Root.CreateChild("container");
             _storeItemsContainer = _container.CreateChild("store-items-container");
             UpdateStoreContent();
@@ -53,14 +56,6 @@ namespace States.MainMenuUIStates
             {
                 StoreItemView storeItemView = _storeItemsContainer.CreateChild<StoreItemView>().Initialize(islandsThemeItem);
 
-                if (islandsThemeItem.ThemeSettings == SelectedThemeSettings.PlayerThemeSettings)
-                {
-                    _selectedStoreItem = islandsThemeItem;
-                    storeItemView.LockImage.visible = false;
-                    storeItemView.SelectedImage.visible = true;
-                    Debug.Log("Selected " + islandsThemeItem.DisplayName);
-                }
-                
                 storeItemView.Clicked += view =>
                 {
                     if (view.StoreItem != _selectedStoreItem)
@@ -68,7 +63,15 @@ namespace States.MainMenuUIStates
                     
                     _selectedStoreItem = view.StoreItem;
                     SelectedThemeSettings.PlayerThemeSettings = view.StoreItem.ThemeSettings;
+                    Debug.Log("Selected " + islandsThemeItem.DisplayName);
                 };
+                
+                if (islandsThemeItem.ThemeSettings == SelectedThemeSettings.PlayerThemeSettings)
+                {
+                    _selectedStoreItem = islandsThemeItem;
+                    storeItemView.LockImage.visible = false;
+                    storeItemView.SelectedImage.visible = true;
+                }
             }
         }
     }

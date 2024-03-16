@@ -13,7 +13,7 @@ namespace Infrastructure
 {
     public class GameplayEssentialsInstaller : MonoInstaller, IValidatable
     {
-        [FormerlySerializedAs("_gameplayUI")] [SerializeField] private GameplayUIManager _gameplayUIManager;
+        [SerializeField] private GameplayUIManager _gameplayUIManager;
         private ThemeSettings _playerThemeSettings;
 
         [Inject]
@@ -27,6 +27,7 @@ namespace Infrastructure
             InitExecutionOrder();
 
             CharactersThemes();
+            BackgroundAnimator();
             
             TurnSystem();
             GameManager();
@@ -44,6 +45,8 @@ namespace Infrastructure
             Difficulty();
             CameraController();
         }
+
+        private void BackgroundAnimator() => Container.BindInterfacesAndSelfTo<BackgroundAnimator>().FromComponentInNewPrefab(GameResources.Instance.BackgroundPrefab).AsSingle().NonLazy();
 
         private void CharactersThemes() => Container.Bind<CharactersThemes>().AsSingle().WithArguments(_playerThemeSettings, GameResources.Instance.AIThemeSettings).NonLazy();
 
