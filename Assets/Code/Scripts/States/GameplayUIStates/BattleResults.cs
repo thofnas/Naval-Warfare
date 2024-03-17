@@ -25,6 +25,23 @@ namespace States.GameplayUIStates
         }
 
         protected sealed override VisualElement Root { get; }
+        
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            const float dimAlphaValue = 0.8f;
+            const int durationMs = 1000;
+            Root.experimental.animation.Start(0f, dimAlphaValue, durationMs,
+                (element, value) => { element.style.backgroundColor = Color.clear.With(a: value); });
+        }
+        
+        public override void OnExit()
+        {
+            base.OnEnter();
+
+            Root.style.backgroundColor = Color.clear;
+        } 
 
         public sealed override void GenerateView()
         {

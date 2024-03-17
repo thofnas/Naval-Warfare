@@ -6,19 +6,16 @@ namespace UI.Elements
 {
     public class StyledToggle : Toggle
     {
-        public readonly VisualElement Wrapper;
-
         private StyledToggle()
         {
         }
 
         public StyledToggle(ThemeSettings themeSettings, VisualElement parent, params string[] wrapperClasses)
         {
-            Wrapper = parent.CreateChild(wrapperClasses);
-            Wrapper.AddClass(wrapperClasses);
-            Wrapper.Add(this);
-            Wrapper.style.unityBackgroundImageTintColor = themeSettings.MainColor;
-            Wrapper.style.unityFontDefinition = new StyleFontDefinition(themeSettings.BaseFont);
+            parent.Add(this);
+            this.AddClass(wrapperClasses);
+            style.unityBackgroundImageTintColor = themeSettings.MainColor;
+            style.unityFontDefinition = new StyleFontDefinition(themeSettings.BaseFont);
         }
     }
 }

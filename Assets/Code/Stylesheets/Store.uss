@@ -6,25 +6,59 @@
 
 .store-items-container {
     display: flex;
-}
-
-.item-background-image {
-    width: 60px;
-    height: 60px;
+    flex-direction: row;
 }
 
 .store-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 60px;
     height: 60px;
     margin: 2px;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 1px;
 }
 
-.item-price-text {
+.item-background-image {
+    background-size: contain;
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.item-lock-image {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+    height: 50%;
+    
+    --unity-image: url("/Assets/Art/Textures/UI/Lock.png");
+}
+
+.item-price {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: row;
+    
+    width: 100%;
+    height: 100%;
+}
+
+.item-price-coin {
+    --unity-image: url("/Assets/Art/Textures/UI/Coin.png");
+}
+
+.item-selected-image {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    
+    --unity-image: url("/Assets/Art/Textures/UI/Selected.png");
+
     width: 100%;
-    height: 100%;
 }

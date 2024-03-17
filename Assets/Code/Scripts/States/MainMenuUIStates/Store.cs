@@ -28,8 +28,17 @@ namespace States.MainMenuUIStates
         public override void OnEnter()
         {
             base.OnEnter();
-        
+
             UpdateStoreContent();
+            OnThemeChangedBinding.Add(UpdateStoreContent);
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            
+            _storeItemsContainer.Clear();
+            OnThemeChangedBinding.Remove(UpdateStoreContent);
         }
 
         protected sealed override void GenerateView() 
@@ -38,7 +47,6 @@ namespace States.MainMenuUIStates
             
             _container = Root.CreateChild("container");
             _storeItemsContainer = _container.CreateChild("store-items-container");
-            UpdateStoreContent();
             VisualElement buttonsContainer = _container.CreateChild("buttons-container");
             
             StyledButton backToMainMenuButton = new(SelectedThemeSettings.PlayerThemeSettings, buttonsContainer,
@@ -55,7 +63,7 @@ namespace States.MainMenuUIStates
             foreach (IslandsThemeItem islandsThemeItem in _storeContent.IslandsThemeItems)
             {
                 StoreItemView storeItemView = _storeItemsContainer.CreateChild<StoreItemView>().Initialize(islandsThemeItem);
-
+                
                 storeItemView.Clicked += view =>
                 {
                     if (view.StoreItem != _selectedStoreItem)
@@ -63,14 +71,13 @@ namespace States.MainMenuUIStates
                     
                     _selectedStoreItem = view.StoreItem;
                     SelectedThemeSettings.PlayerThemeSettings = view.StoreItem.ThemeSettings;
-                    Debug.Log("Selected " + islandsThemeItem.DisplayName);
                 };
                 
                 if (islandsThemeItem.ThemeSettings == SelectedThemeSettings.PlayerThemeSettings)
                 {
                     _selectedStoreItem = islandsThemeItem;
-                    storeItemView.LockImage.visible = false;
-                    storeItemView.SelectedImage.visible = true;
+                    storeItemView.Unlock();
+                    storeItemView.Select();
                 }
             }
         }

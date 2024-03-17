@@ -21,11 +21,11 @@ namespace States.MainMenuUIStates
             MainMenuUIManager = mainMenuUIManager;
             SelectedThemeSettings = mainMenuUIManager.SelectedThemeSettings;
 
-            _onThemeChanged = new EventBinding<OnThemeChanged>(GenerateView);
-            EventBus<OnThemeChanged>.Register(_onThemeChanged);
+            OnThemeChangedBinding = new EventBinding<OnThemeChanged>(GenerateView);
+            EventBus<OnThemeChanged>.Register(OnThemeChangedBinding);
         }
 
-        private readonly EventBinding<OnThemeChanged> _onThemeChanged;
+        protected readonly EventBinding<OnThemeChanged> OnThemeChangedBinding;
 
         protected virtual void GenerateView()
         {
@@ -41,7 +41,7 @@ namespace States.MainMenuUIStates
         
         public virtual void OnDispose() 
         {   
-            EventBus<OnThemeChanged>.Deregister(_onThemeChanged);
+            EventBus<OnThemeChanged>.Deregister(OnThemeChangedBinding);
         }
 
         protected void SetVisible(bool value) => Root.visible = value;

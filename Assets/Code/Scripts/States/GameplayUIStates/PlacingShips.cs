@@ -31,14 +31,20 @@ namespace States.GameplayUIStates
         public sealed override void GenerateView()
         {
             _container = Root.CreateChild("container");
-            VisualElement center = _container.CreateChild("countdown-container", "flex-center");
-            VisualElement buttons = _container.CreateChild("buttons-container", "flex-center");
+            VisualElement center = _container.CreateChild("countdown-container");
+            VisualElement buttons = _container.CreateChild("buttons-container");
 
-            _styledButton = new StyledButton(GameplayUIManager.ThemeSettings, buttons, "randomize-btn");
-            _readyToggle = new StyledToggle(GameplayUIManager.ThemeSettings, buttons, "ready-toggle");
+            _styledButton = new StyledButton(GameplayUIManager.ThemeSettings, buttons, "randomize-btn")
+            {
+                text = "Randomize"
+            };
+            _readyToggle = new StyledToggle(GameplayUIManager.ThemeSettings, buttons, "ready-toggle")
+            {
+                text = "Ready"
+            };
             _countDownLabel = new Label("1") { visible = false };
 
-            center.CreateChild("countdown-text", "flex-center").Add(_countDownLabel);
+            center.CreateChild("countdown-text").Add(_countDownLabel);
         }
 
         public override void OnEnter()

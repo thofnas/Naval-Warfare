@@ -98,4 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 8738780348656839755}
+  _backgroundBlendMaterial: {fileID: 2100000, guid: 33c8115bbed470046ae12e6de17645a6, type: 2}
   _backgroundDefaultMaterial: {fileID: 2100000, guid: 53ec9dbe40db0e94ca7be701287f4901, type: 2}
+  _vertexSprite: {fileID: 21300000, guid: 0a1b2c6361aa56044b06969322b0ff8b, type: 3}

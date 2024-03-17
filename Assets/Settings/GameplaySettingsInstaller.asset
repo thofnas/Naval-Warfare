@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameplaySettingsInstaller
   m_EditorClassIdentifier: 
   _gridSystem:
-    Width: 10
-    Height: 10
+    Width: 4
+    Height: 4
     CellGap: 1.05
   _shipsSpawner:
     ShipData:

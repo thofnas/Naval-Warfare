@@ -23,6 +23,8 @@ namespace UI.Elements
         {
             style.paddingBottom = 12;
             style.paddingTop = 12;
+            style.paddingLeft = 16;
+            style.paddingRight = 16;
 
             parent.Add(this);
             this.AddClass(wrapperClasses);
