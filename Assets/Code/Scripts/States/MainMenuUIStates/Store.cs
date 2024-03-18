@@ -59,27 +59,8 @@ namespace States.MainMenuUIStates
         private void UpdateStoreContent()
         {
             _storeItemsContainer.Clear();
-            
-            foreach (IslandsThemeItem islandsThemeItem in _storeContent.IslandsThemeItems)
-            {
-                StoreItemView storeItemView = _storeItemsContainer.CreateChild<StoreItemView>().Initialize(islandsThemeItem);
-                
-                storeItemView.Clicked += view =>
-                {
-                    if (view.StoreItem != _selectedStoreItem)
-                        UpdateStoreContent();
-                    
-                    _selectedStoreItem = view.StoreItem;
-                    SelectedThemeSettings.PlayerThemeSettings = view.StoreItem.ThemeSettings;
-                };
-                
-                if (islandsThemeItem.ThemeSettings == SelectedThemeSettings.PlayerThemeSettings)
-                {
-                    _selectedStoreItem = islandsThemeItem;
-                    storeItemView.Unlock();
-                    storeItemView.Select();
-                }
-            }
+
+            _storeItemsContainer.Add(MainMenuUIManager.StorePanelFactory.Create(_storeContent.IslandsThemeItems));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using States.MainMenuUIStates;
 using Themes.Store;
+using UI.Elements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
@@ -13,6 +14,7 @@ namespace UI
         public MainMenu MainMenuState { get; private set; }
         public Store StoreState { get; private set; }
         public Options OptionsState { get; private set; }
+        public StorePanel.Factory StorePanelFactory { get; private set; }
         
         [SerializeField] private StyleSheet _mainMenuStyleSheet;
         [SerializeField] private StyleSheet _storeStyleSheet;
@@ -24,10 +26,11 @@ namespace UI
         private StateMachine.StateMachine _stateMachine;
         
         [Inject]
-        private void Construct(StateMachine.StateMachine stateMachine, SelectedThemeSettings selectedThemeSettings)
+        private void Construct(StateMachine.StateMachine stateMachine, SelectedThemeSettings selectedThemeSettings, StorePanel.Factory storePanelFactory)
         {
             _stateMachine = stateMachine;
             SelectedThemeSettings = selectedThemeSettings;
+            StorePanelFactory = storePanelFactory;
         }
 
         private void Awake()

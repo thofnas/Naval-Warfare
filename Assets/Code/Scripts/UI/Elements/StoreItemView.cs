@@ -1,9 +1,10 @@
 ﻿using System;
+using Themes.Store;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 
-namespace Themes.Store
+namespace UI.Elements
 {
     public class StoreItemView : VisualElement
     {
@@ -18,10 +19,9 @@ namespace Themes.Store
         
         public event Action<StoreItemView> Clicked;
 
-        public StoreItemView()
+        private StoreItemView()
         {
             this.AddClass("store-item");
-            this.AddManipulator(new Clickable(_ => Clicked?.Invoke(this)));
 
             BackgroundImage = this.CreateChild<Image>("item-background-image");
             
@@ -31,22 +31,11 @@ namespace Themes.Store
             
             LockImage = this.CreateChild<Image>("item-lock-image");
             SelectedImage = this.CreateChild<Image>("item-selected-image");
-        }
-
-        public StoreItemView Initialize(StoreItem storeItem)
-        {
-            StoreItem = storeItem;
-            
-            BackgroundImage.image = storeItem.ThemeSettings.BackgroundSprites[0].texture;
-            BackgroundImage.scaleMode = ScaleMode.ScaleAndCrop;
-            PriceLabel.text = storeItem.Price > 0 ? storeItem.Price.ToString() : null;
             
             Lock();
             Deselect();
-            
-            return this;
         }
-
+        
         public void Lock()
         {
             IsLocked = true;
@@ -69,6 +58,29 @@ namespace Themes.Store
         public void Deselect()
         {
             SelectedImage.visible = false;
+        }
+
+        public static class Factory
+        {
+            public static StoreItemView Create(StoreItem storeItem, VisualElement parentContainer)
+            {
+                StoreItemView instance = new();
+                instance.AddManipulator(new Clickable(_ => instance.Clicked?.Invoke(instance)));
+                instance.StoreItem = storeItem;
+                
+                SetStyles(instance, storeItem);
+
+                parentContainer.Add(instance);
+                
+                return instance;
+            }
+
+            private static void SetStyles(StoreItemView storeItemView, StoreItem storeItem)
+            {
+                storeItemView.BackgroundImage.image = storeItem.ThemeSettings.BackgroundSprites[0].texture;
+                storeItemView.BackgroundImage.scaleMode = ScaleMode.ScaleAndCrop;
+                storeItemView.PriceLabel.text = storeItem.Price > 0 ? storeItem.Price.ToString() : null;
+            }
         }
     }
 }

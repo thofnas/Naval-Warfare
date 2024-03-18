@@ -7,7 +7,7 @@ namespace Themes.Store
     [CreateAssetMenu(fileName = nameof(StoreContent), menuName = "Store/" + nameof(StoreContent))]
     public class StoreContent : ScriptableObject
     {
-        public IReadOnlyList<IslandsThemeItem> IslandsThemeItems => _islandsThemeItems;
+        public IEnumerable<IslandsThemeItem> IslandsThemeItems => _islandsThemeItems;
         
         [SerializeField] private List<IslandsThemeItem> _islandsThemeItems;
 
