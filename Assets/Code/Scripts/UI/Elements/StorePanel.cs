@@ -22,10 +22,10 @@ namespace UI.Elements
                 
                 storeItemView.Clicked += view =>
                 {
-                    selectedThemeSettings.PlayerThemeSettings = view.StoreItem.ThemeSettings;
+                    selectedThemeSettings.PlayerTheme = view.StoreItem.Theme;
                 };
                 
-                if (storeItem.ThemeSettings == selectedThemeSettings.PlayerThemeSettings)
+                if (storeItem.Theme == selectedThemeSettings.PlayerTheme)
                 {
                     storeItemView.Unlock();
                     storeItemView.Select();

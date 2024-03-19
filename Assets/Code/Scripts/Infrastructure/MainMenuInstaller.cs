@@ -9,12 +9,12 @@ namespace Infrastructure
 {
     public class MainMenuInstaller : MonoInstaller
     {        
-        private ThemeSettings _playerThemeSettings;
+        private Theme _playerTheme;
 
         [Inject]
-        private void Construct(ThemeSettings playerThemeSettings)
+        private void Construct(Theme playerTheme)
         {
-            _playerThemeSettings = playerThemeSettings;
+            _playerTheme = playerTheme;
         }
         
         public override void InstallBindings()
@@ -29,7 +29,7 @@ namespace Infrastructure
             Container.BindFactory<IEnumerable<StoreItem>, StorePanel, StorePanel.Factory>().AsTransient();
         }
 
-        private void CharactersThemes() => Container.Bind<CharactersThemes>().AsSingle().WithArguments(_playerThemeSettings, GameResources.Instance.AIThemeSettings).NonLazy();
+        private void CharactersThemes() => Container.Bind<CharactersThemes>().AsSingle().WithArguments(_playerTheme, GameResources.Instance.AITheme).NonLazy();
         
         private void BackgroundAnimator() => Container.BindInterfacesAndSelfTo<BackgroundAnimator>().FromComponentInNewPrefab(GameResources.Instance.BackgroundPrefab).AsSingle().NonLazy();
     }

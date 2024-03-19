@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AI
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: AI
-  <ThemeSettings>k__BackingField: {fileID: 11400000, guid: 006b3329baffab54da4a1e86e79ea0e1, type: 2}
+  <Theme>k__BackingField: {fileID: 11400000, guid: 006b3329baffab54da4a1e86e79ea0e1, type: 2}
   <IsPurchasable>k__BackingField: 0
   <Price>k__BackingField: 0
   <IslandsType>k__BackingField: 10

@@ -23,7 +23,7 @@ namespace States.MainMenuUIStates
             VisualElement container = Root.CreateChild("container");
             VisualElement buttonsContainer = container.CreateChild("buttons-container");
             
-            StyledButton backToMainMenuButton = new(SelectedThemeSettings.PlayerThemeSettings, buttonsContainer,
+            StyledButton backToMainMenuButton = new(SelectedThemeSettings.PlayerTheme, buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.MainMenuState), "back-button")
             {
                 text = "Back"

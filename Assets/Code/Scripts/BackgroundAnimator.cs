@@ -47,7 +47,7 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
 
     private void Initialize()
     {
-        _player1Sprites = _selectedThemeSettings.PlayerThemeSettings.BackgroundSprites;
+        _player1Sprites = _selectedThemeSettings.PlayerTheme.BackgroundSprites;
         
         _player1SpriteIndex = (_player1SpriteIndex - 1) % _player1Sprites.Length;
         _player2SpriteIndex = (_player2SpriteIndex - 1) % _player2Sprites.Length;
@@ -71,7 +71,7 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
 
     private bool CharactersThemesAreSame()
     {
-        return _selectedThemeSettings.PlayerThemeSettings ==
+        return _selectedThemeSettings.PlayerTheme ==
                _charactersThemes.GetThemeSettings(CharacterType.Enemy);
     }
 

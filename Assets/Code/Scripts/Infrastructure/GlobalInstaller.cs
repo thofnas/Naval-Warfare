@@ -1,4 +1,5 @@
-﻿using Misc;
+﻿using Data;
+using Misc;
 using Zenject;
 
 namespace Infrastructure
@@ -10,6 +11,7 @@ namespace Infrastructure
             StateMachine();
             AsyncProcessor();
             UnityMainThread();
+            Container.Bind<PersistentData>().AsSingle();
         }
 
         private void UnityMainThread() => Container.Bind<UnityMainThread>().FromNewComponentOnNewGameObject().AsSingle();

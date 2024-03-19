@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Acid
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Acid
-  <ThemeSettings>k__BackingField: {fileID: 11400000, guid: 439e43cf03730b743ac2765028a6ea49, type: 2}
+  <Theme>k__BackingField: {fileID: 11400000, guid: 439e43cf03730b743ac2765028a6ea49, type: 2}
   <IsPurchasable>k__BackingField: 1
   <Price>k__BackingField: 50
   <IslandsType>k__BackingField: 30

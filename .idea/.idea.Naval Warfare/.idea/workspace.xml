@@ -5,16 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cf71565-e702-496e-9a67-08766235670e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/PersistentData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/PersistentData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/PlayerData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/PlayerData.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/BackgroundAnimator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/BackgroundAnimator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/GameResources.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/GameResources.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridCellVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridCellVisual.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridSystemVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridSystemVisual.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplayEssentialsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplayEssentialsInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GlobalInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GlobalInstaller.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/MainMenuInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/MainMenuInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/ThemeSettingsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/ThemeSettingsInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Misc/SceneBuildValidation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Misc/SceneBuildValidation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/BattleResults.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/BattleResults.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/PlacingShips.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/PlacingShips.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/MainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Options.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Options.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Store.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Store.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreContent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreContent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreItemView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreItemView.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/MainMenuUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/MainMenuUIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/CharactersThemes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/CharactersThemes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/IslandsThemes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/IslandsTheme.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/IslandsThemes.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/IslandsTheme.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/IslandsThemeItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/IslandsThemeItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/ThemeSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Theme.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/ThemeSettings.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Theme.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/GameplayUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/GameplayUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Attributes/Attributes.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Attributes/Attributes.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Attributes/SelfAndChildren/SelfAndChildren.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Attributes/SelfAndChildren/SelfAndChildren.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/AI.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/AI.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/Acid.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/Acid.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/Tropical.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/Tropical.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,29 +71,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\Administrator\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Administrator\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build\Naval Warfare.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="D:\Users\Administrator\Documents\MyProjects\Unity\Naval Warfare\Build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Program Files\Unity\2022.3.15f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;D:\Users\Administrator\Documents\MyProjects\Unity\Naval Warfare&quot; -debugCodeOptimization" />
@@ -89,10 +128,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="20500">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="20500" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -112,6 +151,7 @@
       <workItem from="1701899174606" duration="19000" />
       <workItem from="1710534388619" duration="7208000" />
       <workItem from="1710619978939" duration="2537000" />
+      <workItem from="1710880735722" duration="3517000" />
     </task>
     <servers />
   </component>

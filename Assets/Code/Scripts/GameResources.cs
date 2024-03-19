@@ -1,6 +1,7 @@
 ﻿using Grid;
 using Themes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 [DisallowMultipleComponent]
@@ -13,14 +14,14 @@ public class GameResources : MonoBehaviour
     public UIDocument UIDocumentPrefab => _uiDocumentPrefab;
     public Transform ShipHitExplosionPrefab => _shipHitExplosionPrefab;
     public SpriteRenderer BackgroundPrefab => _backgroundPrefab;
-    public ThemeSettings AIThemeSettings => _aiThemeSettings;
+    public Theme AITheme => _aiTheme;
 
     [SerializeField] private GridCellVisual _gridCellVisualPrefab;
     [SerializeField] private Ship.Ship _shipPrefab;
     [SerializeField] private UIDocument _uiDocumentPrefab;
     [SerializeField] private Transform _shipHitExplosionPrefab;   
     [SerializeField] private SpriteRenderer _backgroundPrefab;
-    [SerializeField] private ThemeSettings _aiThemeSettings;
+    [FormerlySerializedAs("_aiThemeSettings")] [SerializeField] private Theme _aiTheme;
 
     public static GameResources Instance
     {

@@ -4,17 +4,17 @@ namespace Themes
 {
     public class CharactersThemes
     {
-        private readonly Dictionary<CharacterType, ThemeSettings> _themeSettingsMap;
+        private readonly Dictionary<CharacterType, Theme> _themeSettingsMap;
     
-        public CharactersThemes(ThemeSettings themeSettingsPlayer1, ThemeSettings themeSettingsPlayer2)
+        public CharactersThemes(Theme themePlayer1, Theme themePlayer2)
         {
-            _themeSettingsMap = new Dictionary<CharacterType, ThemeSettings>
+            _themeSettingsMap = new Dictionary<CharacterType, Theme>
             {
-                { CharacterType.Player, themeSettingsPlayer1 },
-                { CharacterType.Enemy, themeSettingsPlayer2 }
+                { CharacterType.Player, themePlayer1 },
+                { CharacterType.Enemy, themePlayer2 }
             };
         }
  
-        public ThemeSettings GetThemeSettings(CharacterType characterType) => _themeSettingsMap[characterType];
+        public Theme GetThemeSettings(CharacterType characterType) => _themeSettingsMap[characterType];
     }
 }

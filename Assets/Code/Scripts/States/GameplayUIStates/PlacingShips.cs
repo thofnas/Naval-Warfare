@@ -34,11 +34,11 @@ namespace States.GameplayUIStates
             VisualElement center = _container.CreateChild("countdown-container");
             VisualElement buttons = _container.CreateChild("buttons-container");
 
-            _styledButton = new StyledButton(GameplayUIManager.ThemeSettings, buttons, "randomize-btn")
+            _styledButton = new StyledButton(GameplayUIManager.Theme, buttons, "randomize-btn")
             {
                 text = "Randomize"
             };
-            _readyToggle = new StyledToggle(GameplayUIManager.ThemeSettings, buttons, "ready-toggle")
+            _readyToggle = new StyledToggle(GameplayUIManager.Theme, buttons, "ready-toggle")
             {
                 text = "Ready"
             };

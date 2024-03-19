@@ -77,7 +77,7 @@ namespace UI.Elements
 
             private static void SetStyles(StoreItemView storeItemView, StoreItem storeItem)
             {
-                storeItemView.BackgroundImage.image = storeItem.ThemeSettings.BackgroundSprites[0].texture;
+                storeItemView.BackgroundImage.image = storeItem.Theme.BackgroundSprites[0].texture;
                 storeItemView.BackgroundImage.scaleMode = ScaleMode.ScaleAndCrop;
                 storeItemView.PriceLabel.text = storeItem.Price > 0 ? storeItem.Price.ToString() : null;
             }

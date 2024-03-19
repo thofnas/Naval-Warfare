@@ -13,18 +13,18 @@ namespace Grid
         [SerializeField] private SpriteRenderer _hitOrMissIcon;
         private GridCell _gridCell;
         private Color _defaultColor;
-        private ThemeSettings _themeSettings;
+        private Theme _theme;
 
         [Inject]
-        public void Construct(GridCell gridCell, Vector2 position, Transform parent, ThemeSettings themeSettings, Sprite gridCellSprite)
+        public void Construct(GridCell gridCell, Vector2 position, Transform parent, Theme theme, Sprite gridCellSprite)
         {
             _gridCell = gridCell;
-            _themeSettings = themeSettings;
-            _defaultColor = themeSettings.GridCellSpriteColor;
-            _gridCellFrame.color = themeSettings.GridCellSpriteColor;
+            _theme = theme;
+            _defaultColor = theme.GridCellSpriteColor;
+            _gridCellFrame.color = theme.GridCellSpriteColor;
             _gridCellFrame.sprite = gridCellSprite;
-            _gridCellFrame.material.SetColor(s_outlineColor, themeSettings.OutlineColor);
-            _hitOrMissIcon.material.SetColor(s_outlineColor, themeSettings.OutlineColor);
+            _gridCellFrame.material.SetColor(s_outlineColor, theme.OutlineColor);
+            _hitOrMissIcon.material.SetColor(s_outlineColor, theme.OutlineColor);
 
             transform.position = position;
             transform.SetParent(parent);
@@ -38,16 +38,16 @@ namespace Grid
             {
                 if (_gridCell.Ship.IsDestroyed())
                 {
-                    frameColor = _themeSettings.GridCellSpriteDestroyedShipColor;
+                    frameColor = _theme.GridCellSpriteDestroyedShipColor;
                 }
                 else
                 {
-                    frameColor = isEnemy ? _defaultColor : _themeSettings.GridCellSpritePlacingColor;
+                    frameColor = isEnemy ? _defaultColor : _theme.GridCellSpritePlacingColor;
                 }
             }
             else if (_gridCell.IsSelected)
             {
-                frameColor = _themeSettings.GridCellSpritePlacingColor;
+                frameColor = _theme.GridCellSpritePlacingColor;
             }
             else
             {
@@ -67,11 +67,11 @@ namespace Grid
             }
             
             _hitOrMissIcon.sprite = _gridCell.HasShip()
-                ? _themeSettings.GridCellIcons[CellIcon.ShipHit]
-                : _themeSettings.GridCellIcons[CellIcon.Miss];
+                ? _theme.GridCellIcons[CellIcon.ShipHit]
+                : _theme.GridCellIcons[CellIcon.Miss];
         }
 
-        public class Factory : PlaceholderFactory<GridCell, Vector2, Transform, ThemeSettings, Sprite, GridCellVisual>
+        public class Factory : PlaceholderFactory<GridCell, Vector2, Transform, Theme, Sprite, GridCellVisual>
         {
         }
     }
