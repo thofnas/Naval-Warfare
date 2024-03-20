@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Themes;
 using Themes.Store;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
@@ -9,6 +10,9 @@ namespace UI.Elements
     public class StorePanel : VisualElement
     {
         private List<StoreItemView> _storeItemViews = new();
+
+        private OwnedThemesChecker _ownedThemesChecker;
+        private SelectedThemeChecker _selectedThemeChecker;
         
         public StorePanel(IEnumerable<StoreItem> storeItems, SelectedThemeSettings selectedThemeSettings)
         {
@@ -18,18 +22,29 @@ namespace UI.Elements
             foreach (StoreItem storeItem in storeItems)
             {
                 StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, this);
-                _storeItemViews.Add(storeItemView);
                 
                 storeItemView.Clicked += view =>
                 {
                     selectedThemeSettings.PlayerTheme = view.StoreItem.Theme;
                 };
                 
-                if (storeItem.Theme == selectedThemeSettings.PlayerTheme)
+                _ownedThemesChecker.Visit(storeItemView.StoreItem);
+
+                if (!_ownedThemesChecker.IsOwned)
+                    storeItemView.Lock();
+                else
                 {
+                    _selectedThemeChecker.Visit(storeItemView.StoreItem);
+
+                    if (_selectedThemeChecker.IsSelected)
+                        storeItemView.Select();
+                    else
+                        storeItemView.Deselect();
+
                     storeItemView.Unlock();
-                    storeItemView.Select();
                 }
+
+                _storeItemViews.Add(storeItemView);
             }
         }
 

@@ -8,8 +8,9 @@ namespace Data
     public class PlayerData
     {
         private IslandsTheme _selectedIslandsTheme;
-
         private List<IslandsTheme> _ownedIslandsThemesList;
+        private OceanTheme _selectedOceanTheme;
+        private List<OceanTheme> _ownedOceanThemesList;
 
         private int _money;
 
@@ -19,14 +20,19 @@ namespace Data
 
             _selectedIslandsTheme = IslandsTheme.Tropical;
             _ownedIslandsThemesList = new List<IslandsTheme> { _selectedIslandsTheme };
+            _selectedOceanTheme = OceanTheme.Earth;
+            _ownedOceanThemesList = new List<OceanTheme> { _selectedOceanTheme };
+            
         }
 
         [JsonConstructor]
-        public PlayerData(IslandsTheme selectedIslandsTheme, List<IslandsTheme> ownedIslandsThemesList, int money)
+        public PlayerData(int money, IslandsTheme selectedIslandsTheme, List<IslandsTheme> ownedIslandsThemesList, OceanTheme selectedOceanTheme, List<OceanTheme> ownedOceanThemesList)
         {
+            _money = money;
             _selectedIslandsTheme = selectedIslandsTheme;
             _ownedIslandsThemesList = ownedIslandsThemesList;
-            _money = money;
+            _selectedOceanTheme = selectedOceanTheme;
+            _ownedOceanThemesList = ownedOceanThemesList;
         }
 
         public int Money
@@ -54,13 +60,35 @@ namespace Data
         }
 
         public IEnumerable<IslandsTheme> OwnedIslandsThemesList => _ownedIslandsThemesList;
-
+        
         public void OpenIslandsTheme(IslandsTheme theme)
         {
             if (_ownedIslandsThemesList.Contains(theme))
                 throw new ArgumentException(nameof(theme));
             
             _ownedIslandsThemesList.Add(theme);
+        }
+        
+        public OceanTheme SelectedOceanTheme
+        {
+            get => _selectedOceanTheme;
+            set
+            {
+                if (_ownedOceanThemesList.Contains(value) == false)
+                    throw new ArgumentException(nameof(value));
+                
+                _selectedOceanTheme = value;
+            }
+        }
+        
+        public IEnumerable<OceanTheme> OwnedOceanThemesList => _ownedOceanThemesList;
+
+        public void OpenOceanTheme(OceanTheme theme)
+        {
+            if (_ownedOceanThemesList.Contains(theme))
+                throw new ArgumentException(nameof(theme));
+            
+            _ownedOceanThemesList.Add(theme);
         }
     }
 }
