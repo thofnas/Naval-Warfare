@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using EventBus;
+using Events;
 using Themes;
 using Themes.Store;
 using UnityEngine.UIElements;
@@ -9,13 +11,12 @@ namespace UI.Elements
 {
     public class StorePanel : VisualElement
     {
-        private List<StoreItemView> _storeItemViews = new();
+        private readonly SelectedThemeSettings _selectedThemeSettings;
+        private readonly List<StoreItemView> _storeItemViews = new();
 
-        private OwnedThemesChecker _ownedThemesChecker;
-        private SelectedThemeChecker _selectedThemeChecker;
-        
-        public StorePanel(IEnumerable<StoreItem> storeItems, SelectedThemeSettings selectedThemeSettings)
+        public StorePanel(IEnumerable<StoreItem> storeItems, SelectedThemeSettings selectedThemeSettings, ThemeSelector themeSelector, ThemeUnlocker themeUnlocker, OwnedThemesChecker ownedThemesChecker, SelectedThemeChecker selectedThemeChecker)
         {
+            _selectedThemeSettings = selectedThemeSettings;
             Clear();
             this.AddClass("store-panel");
             
@@ -23,20 +24,17 @@ namespace UI.Elements
             {
                 StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, this);
                 
-                storeItemView.Clicked += view =>
-                {
-                    selectedThemeSettings.PlayerTheme = view.StoreItem.Theme;
-                };
+                storeItemView.Clicked += StoreItemView_OnClicked;
                 
-                _ownedThemesChecker.Visit(storeItemView.StoreItem);
+                ownedThemesChecker.Visit(storeItemView.StoreItem);
 
-                if (!_ownedThemesChecker.IsOwned)
+                if (!ownedThemesChecker.IsOwned)
                     storeItemView.Lock();
                 else
                 {
-                    _selectedThemeChecker.Visit(storeItemView.StoreItem);
+                    selectedThemeChecker.Visit(storeItemView.StoreItem);
 
-                    if (_selectedThemeChecker.IsSelected)
+                    if (selectedThemeChecker.IsSelected)
                         storeItemView.Select();
                     else
                         storeItemView.Deselect();
@@ -46,6 +44,12 @@ namespace UI.Elements
 
                 _storeItemViews.Add(storeItemView);
             }
+        }
+
+        private void StoreItemView_OnClicked(StoreItemView storeItemView)
+        {
+            _selectedThemeSettings.PlayerTheme = storeItemView.StoreItem.Theme;
+            EventBus<OnStoreItemViewClicked>.Invoke(new OnStoreItemViewClicked(storeItemView));
         }
 
         public class Factory : PlaceholderFactory<IEnumerable<StoreItem>, StorePanel>

@@ -1,8 +1,7 @@
-﻿using EventBus;
+﻿using Themes;
 using Themes.Store;
 using UI;
 using UI.Elements;
-using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 
@@ -15,11 +14,17 @@ namespace States.MainMenuUIStates
         private VisualElement _container;
         private VisualElement _storeItemsContainer = new();
 
-        public Store(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine, StyleSheet styleSheet, StoreContent storeContent) : base(mainMenuUIManager, stateMachine)
+        private Wallet _wallet;
+
+        public Store(MainMenuUIManager mainMenuUIManager, 
+            StateMachine.StateMachine stateMachine, 
+            StyleSheet styleSheet, StoreContent storeContent, 
+            Wallet wallet) : base(mainMenuUIManager, stateMachine)
         {
             Root = CreateDocument(nameof(Store), styleSheet);
             _storeContent = storeContent;
-            
+            _wallet = wallet;
+
             GenerateView();
         }
 
