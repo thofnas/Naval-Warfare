@@ -10,12 +10,12 @@ namespace Data
         private const string FileName = "PlayerSave";
         private const string FileExtension = ".json";
 
-        private PlayerData _playerData;
+        private PersistentData _persistentData;
 
         [Inject]
-        public LocalDataProvider(PlayerData playerData)
+        public LocalDataProvider(PersistentData persistentData)
         {
-            _playerData = playerData;
+            _persistentData = persistentData;
         }
 
         private string SavePath => Application.persistentDataPath;
@@ -24,16 +24,16 @@ namespace Data
 
         public bool TryLoad()
         {
-            if (IsDataAlreadyExists() == false)
+            if (!IsDataAlreadyExists())
                 return false;
 
-            _playerData = JsonConvert.DeserializeObject<PlayerData>(File.ReadAllText(FullPath));
+            _persistentData = JsonConvert.DeserializeObject<PersistentData>(File.ReadAllText(FullPath));
             return true;
         }
 
         public void Save()
         {
-            File.WriteAllText(FullPath, JsonConvert.SerializeObject(_playerData, Formatting.Indented, new JsonSerializerSettings()
+            File.WriteAllText(FullPath, JsonConvert.SerializeObject(_persistentData, Formatting.Indented, new JsonSerializerSettings()
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             }));

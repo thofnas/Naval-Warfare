@@ -25,6 +25,8 @@ public class Wallet
     }
 
     public int GetCurrentMoney() => _persistentData.PlayerData.Money;
+
+    public bool IsEnough(int price) => _persistentData.PlayerData.Money - price >= 0;
     
     public void SpendMoney(int amount)
     {

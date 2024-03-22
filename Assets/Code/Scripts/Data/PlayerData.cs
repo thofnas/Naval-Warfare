@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Themes;
+using UnityEngine;
 
 namespace Data
 {
     public class PlayerData
     {
         private IslandsTheme _selectedIslandsTheme;
-        private List<IslandsTheme> _ownedIslandsThemesList;
+        private readonly List<IslandsTheme> _ownedIslandsThemesList;
         private OceanTheme _selectedOceanTheme;
-        private List<OceanTheme> _ownedOceanThemesList;
+        private readonly List<OceanTheme> _ownedOceanThemesList;
 
         private int _money;
 
@@ -33,6 +34,8 @@ namespace Data
             _ownedIslandsThemesList = ownedIslandsThemesList;
             _selectedOceanTheme = selectedOceanTheme;
             _ownedOceanThemesList = ownedOceanThemesList;
+
+            Debug.Log("loaded");
         }
 
         public int Money

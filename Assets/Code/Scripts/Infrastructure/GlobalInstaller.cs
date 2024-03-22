@@ -7,26 +7,35 @@ namespace Infrastructure
 {
     public class GlobalInstaller : MonoInstaller
     {
+        private PersistentData _persistentData;
+        private LocalDataProvider _dataProvider;
+
         public override void InstallBindings()
         {
+            _persistentData = new PersistentData();
+            _dataProvider = new LocalDataProvider(_persistentData);
+
+            if (_dataProvider.TryLoad() == false)
+                _persistentData.PlayerData = new PlayerData();
+            
             StateMachine();
             AsyncProcessor();
             UnityMainThread();
-            PersistentData();
+
+            Container.Bind<PersistentData>().FromInstance(_persistentData).AsSingle();
+            Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().WithArguments(_persistentData);
             ThemeVisitors();
             Wallet();
         }
 
-        private void Wallet() => Container.Bind<Wallet>().AsSingle();
-
-        private void PersistentData() => Container.Bind<PersistentData>().AsSingle();
+        private void Wallet() => Container.Bind<Wallet>().AsSingle().WithArguments(_persistentData);
 
         private void ThemeVisitors()
         {
-            Container.Bind<ThemeSelector>().AsSingle();
-            Container.Bind<ThemeUnlocker>().AsSingle();
-            Container.Bind<SelectedThemeChecker>().AsTransient();
-            Container.Bind<OwnedThemesChecker>().AsTransient();
+            Container.Bind<ThemeSelector>().AsSingle().WithArguments(_persistentData);
+            Container.Bind<ThemeUnlocker>().AsSingle().WithArguments(_persistentData);
+            Container.Bind<SelectedThemeChecker>().AsTransient().WithArguments(_persistentData);
+            Container.Bind<OwnedThemesChecker>().AsTransient().WithArguments(_persistentData);
         }
 
         private void UnityMainThread() => Container.Bind<UnityMainThread>().FromNewComponentOnNewGameObject().AsSingle();
