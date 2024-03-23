@@ -16,23 +16,33 @@ namespace Infrastructure
             _persistentData = new PersistentData();
             _dataProvider = new LocalDataProvider(_persistentData);
 
-            if (!_dataProvider.TryLoad(out PersistentData loadedData))
-                _persistentData.PlayerData = new PlayerData();
-            else
-                _persistentData = loadedData;
+            LoadDataOrInit();
 
-            StateMachine();
-            AsyncProcessor();
-            UnityMainThread();
+            BindStateMachine();
+            BindAsyncProcessor();
+            BindUnityMainThread();
 
-            Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().NonLazy();
-            ThemeVisitors();
-            Wallet();
+            BindLocalDataProvider();
+            BindThemeVisitors();
+            BindWallet();
         }
 
-        private void Wallet() => Container.Bind<Wallet>().AsSingle().WithArguments(_persistentData);
+        private void BindLocalDataProvider() => Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().NonLazy();
 
-        private void ThemeVisitors()
+        private void LoadDataOrInit()
+        {
+            if (!_dataProvider.TryLoad(out PersistentData loadedData))
+            {
+                _persistentData.PlayerData = new PlayerData();
+                return;
+            }
+
+            _persistentData = loadedData;
+        }
+
+        private void BindWallet() => Container.Bind<Wallet>().AsSingle().WithArguments(_persistentData);
+
+        private void BindThemeVisitors()
         {
             Container.Bind<ThemeSelector>().AsSingle().WithArguments(_persistentData);
             Container.Bind<ThemeUnlocker>().AsSingle().WithArguments(_persistentData);
@@ -40,10 +50,10 @@ namespace Infrastructure
             Container.Bind<OwnedThemesChecker>().AsTransient().WithArguments(_persistentData);
         }
 
-        private void UnityMainThread() => Container.Bind<UnityMainThread>().FromNewComponentOnNewGameObject().AsSingle();
+        private void BindUnityMainThread() => Container.Bind<UnityMainThread>().FromNewComponentOnNewGameObject().AsSingle();
 
-        private void StateMachine() => Container.BindInterfacesAndSelfTo<StateMachine.StateMachine>().AsTransient();
+        private void BindStateMachine() => Container.BindInterfacesAndSelfTo<StateMachine.StateMachine>().AsTransient();
         
-        private void AsyncProcessor() => Container.Bind<AsyncProcessor>().FromNewComponentOnNewGameObject().AsSingle();
+        private void BindAsyncProcessor() => Container.Bind<AsyncProcessor>().FromNewComponentOnNewGameObject().AsSingle();
     }
 }
