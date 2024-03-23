@@ -1,6 +1,7 @@
 ﻿using Data;
 using Misc;
 using Themes;
+using UnityEngine;
 using Zenject;
 
 namespace Infrastructure
@@ -15,15 +16,16 @@ namespace Infrastructure
             _persistentData = new PersistentData();
             _dataProvider = new LocalDataProvider(_persistentData);
 
-            if (_dataProvider.TryLoad() == false)
+            if (!_dataProvider.TryLoad(out PersistentData loadedData))
                 _persistentData.PlayerData = new PlayerData();
-            
+            else
+                _persistentData = loadedData;
+
             StateMachine();
             AsyncProcessor();
             UnityMainThread();
 
-            Container.Bind<PersistentData>().FromInstance(_persistentData).AsSingle();
-            Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().WithArguments(_persistentData);
+            Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().NonLazy();
             ThemeVisitors();
             Wallet();
         }

@@ -1,7 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
-using Zenject;
 
 namespace Data
 {
@@ -12,7 +12,6 @@ namespace Data
 
         private PersistentData _persistentData;
 
-        [Inject]
         public LocalDataProvider(PersistentData persistentData)
         {
             _persistentData = persistentData;
@@ -22,12 +21,16 @@ namespace Data
         
         private string FullPath => Path.Combine(SavePath, $"{FileName}{FileExtension}");
 
-        public bool TryLoad()
+        public bool TryLoad(out PersistentData loadedData)
         {
+            loadedData = null;
+            
             if (!IsDataAlreadyExists())
                 return false;
 
             _persistentData = JsonConvert.DeserializeObject<PersistentData>(File.ReadAllText(FullPath));
+
+            loadedData = _persistentData;
             return true;
         }
 

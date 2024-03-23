@@ -73,6 +73,14 @@ namespace UI.Elements
         {
             // EventBus<OnStoreItemViewClicked>.Invoke(new OnStoreItemViewClicked(storeItemView));
 
+            _ownedThemesChecker.Visit(storeItemView.StoreItem);
+
+            if (_ownedThemesChecker.IsOwned)
+                return;
+
+            if (_selectedThemeChecker.IsSelected)
+                return;
+            
             if (_wallet.IsEnough(storeItemView.StoreItem.Price))
             {
                 _wallet.SpendMoney(storeItemView.StoreItem.Price);

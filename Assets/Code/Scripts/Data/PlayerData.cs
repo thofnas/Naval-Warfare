@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Themes;
 using UnityEngine;
+using Utilities.Extensions;
 
 namespace Data
 {
@@ -34,8 +35,6 @@ namespace Data
             _ownedIslandsThemesList = ownedIslandsThemesList;
             _selectedOceanTheme = selectedOceanTheme;
             _ownedOceanThemesList = ownedOceanThemesList;
-
-            Debug.Log("loaded");
         }
 
         public int Money

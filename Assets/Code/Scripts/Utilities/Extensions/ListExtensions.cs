@@ -15,6 +15,16 @@ namespace Utilities.Extensions
 
             return messages;
         }
+        
+        public static IEnumerable<T> Log<T>(this IEnumerable<T> messages)
+        {
+            IEnumerable<T> enumerable = messages.ToList();
+            foreach (T message in enumerable)
+                Debug.Log(message);
+
+            return enumerable;
+        }
+        
 
         /// <summary>
         ///     Determines whether a collection is null or has no elements
