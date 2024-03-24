@@ -27,7 +27,7 @@ namespace Infrastructure
 [Serializable]
 public class SelectedThemeSettings
 {
-    [FormerlySerializedAs("_playerThemeSettings")] [SerializeField] private Theme _playerTheme;
+    [SerializeField] private Theme _playerTheme;
     
     public Theme PlayerTheme
     {

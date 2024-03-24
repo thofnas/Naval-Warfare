@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Themes;
-using UnityEngine;
-using Utilities.Extensions;
 
 namespace Data
 {

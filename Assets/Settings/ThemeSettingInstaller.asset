@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ThemeSettingInstaller
   m_EditorClassIdentifier: 
   _selectedThemeSettings:
-    _playerThemeSettings: {fileID: 11400000, guid: cffc28d7b22fd5d48868c434ce19b028, type: 2}
+    _playerTheme: {fileID: 11400000, guid: cffc28d7b22fd5d48868c434ce19b028, type: 2}
   _shipVisualSetting:
     Ships:
       serializedKvps:

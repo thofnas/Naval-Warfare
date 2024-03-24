@@ -31,7 +31,14 @@ namespace UI
         private StateMachine.StateMachine _stateMachine;
 
         [Inject]
-        private void Construct(StateMachine.StateMachine stateMachine, SelectedThemeSettings selectedThemeSettings, StorePanel.Factory storePanelFactory, Wallet wallet, ThemeSelector themeSelector, ThemeUnlocker theme, OwnedThemesChecker ownedThemesChecker, SelectedThemeChecker selectedThemeChecker)
+        private void Construct(StateMachine.StateMachine stateMachine, 
+            SelectedThemeSettings selectedThemeSettings,
+            StorePanel.Factory storePanelFactory, 
+            Wallet wallet, 
+            ThemeSelector themeSelector, 
+            ThemeUnlocker theme, 
+            OwnedThemesChecker ownedThemesChecker, 
+            SelectedThemeChecker selectedThemeChecker)
         {
             _stateMachine = stateMachine;
             SelectedThemeSettings = selectedThemeSettings;

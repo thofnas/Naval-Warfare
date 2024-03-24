@@ -18,7 +18,8 @@ namespace States.MainMenuUIStates
 
         public Store(MainMenuUIManager mainMenuUIManager, 
             StateMachine.StateMachine stateMachine, 
-            StyleSheet styleSheet, StoreContent storeContent, 
+            StyleSheet styleSheet, 
+            StoreContent storeContent, 
             Wallet wallet) : base(mainMenuUIManager, stateMachine)
         {
             Root = CreateDocument(nameof(Store), styleSheet);
