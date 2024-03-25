@@ -15,6 +15,7 @@ namespace States.MainMenuUIStates
         private VisualElement _storeItemsContainer = new();
 
         private Wallet _wallet;
+        private Label _moneyLabel;
 
         public Store(MainMenuUIManager mainMenuUIManager, 
             StateMachine.StateMachine stateMachine, 
@@ -54,6 +55,12 @@ namespace States.MainMenuUIStates
             _container = Root.CreateChild("container");
             _storeItemsContainer = _container.CreateChild("store-items-container");
             VisualElement buttonsContainer = _container.CreateChild("buttons-container");
+
+            VisualElement moneyContainer = _container.CreateChild("money-container");
+            VisualElement moneyIcon = moneyContainer.CreateChild("money-icon");
+            _moneyLabel = moneyContainer.CreateChild<Label>("money-text");
+
+            _moneyLabel.text = _wallet.GetCurrentMoney().ToString();
             
             StyledButton backToMainMenuButton = new(SelectedThemeSettings.PlayerTheme, buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.MainMenuState), "back-button")

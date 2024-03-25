@@ -76,7 +76,9 @@ namespace UI.Elements
             _ownedThemesChecker.Visit(storeItemView.StoreItem);
 
             if (_selectedThemeChecker.IsSelected)
+            {
                 return;
+            }
             
             if (_ownedThemesChecker.IsOwned)
             {
