@@ -4,6 +4,7 @@ using EventBus;
 using Events;
 using Themes;
 using Themes.Store;
+using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 using Zenject;
@@ -54,9 +55,12 @@ namespace UI.Elements
                 else
                 {
                     selectedThemeChecker.Visit(storeItemView.StoreItem);
-
+                    
                     if (selectedThemeChecker.IsSelected)
+                    {
+                        _themeSelector.Visit(storeItemView.StoreItem);
                         storeItemView.Select();
+                    }
                     else
                         storeItemView.Deselect();
 
@@ -67,18 +71,24 @@ namespace UI.Elements
             }
         }
         
-        private void SelectTheme(StoreItemView storeItemView) => _selectedThemeSettings.PlayerTheme = storeItemView.StoreItem.Theme;
+        private void SelectTheme(StoreItemView storeItemView)
+        {
+            _themeSelector.Visit(storeItemView.StoreItem);
+            storeItemView.Select();
+            _localDataProvider.Save();
+            _selectedThemeSettings.PlayerTheme = storeItemView.StoreItem.Theme;
+        }
 
         private void StoreItemView_OnClicked(StoreItemView storeItemView)
         {
-            // EventBus<OnStoreItemViewClicked>.Invoke(new OnStoreItemViewClicked(storeItemView));
-
-            _ownedThemesChecker.Visit(storeItemView.StoreItem);
+            _selectedThemeChecker.Visit(storeItemView.StoreItem);
 
             if (_selectedThemeChecker.IsSelected)
             {
                 return;
             }
+
+            _ownedThemesChecker.Visit(storeItemView.StoreItem);
             
             if (_ownedThemesChecker.IsOwned)
             {
@@ -95,8 +105,6 @@ namespace UI.Elements
                 SelectTheme(storeItemView);
                 
                 storeItemView.Unlock();
-                
-                _localDataProvider.Save();
             }
         }
 

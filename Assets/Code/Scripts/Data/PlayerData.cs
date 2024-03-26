@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Themes;
+using UnityEngine;
 
 namespace Data
 {
@@ -22,7 +23,6 @@ namespace Data
             _ownedIslandsThemesList = new List<IslandsTheme> { _selectedIslandsTheme };
             _selectedOceanTheme = OceanTheme.Earth;
             _ownedOceanThemesList = new List<OceanTheme> { _selectedOceanTheme };
-            
         }
 
         [JsonConstructor]

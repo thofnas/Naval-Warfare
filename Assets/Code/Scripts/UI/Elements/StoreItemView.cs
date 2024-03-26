@@ -41,6 +41,7 @@ namespace UI.Elements
             IsLocked = true;
             LockImage.visible = IsLocked;
             PriceLabel.visible = true;
+            PriceCoin.visible = true;
         }
 
         public void Unlock()
@@ -48,6 +49,7 @@ namespace UI.Elements
             IsLocked = false;
             LockImage.visible = IsLocked;
             PriceLabel.visible = false;
+            PriceCoin.visible = false;
         }
 
         public void Select()
