@@ -4,7 +4,6 @@ using Events;
 using Ship;
 using Themes;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Infrastructure
@@ -12,11 +11,13 @@ namespace Infrastructure
     [CreateAssetMenu(fileName = "ThemeSettingInstaller", menuName = "Installers/ThemeSettingsInstaller")]
     public class ThemeSettingsInstaller : ScriptableObjectInstaller<ThemeSettingsInstaller>
     {
+        [SerializeField] private ThemeLibrary _themeLibrary;
         [SerializeField] private SelectedThemeSettings _selectedThemeSettings;
         [SerializeField] private ShipVisual.Settings _shipVisualSetting;
 
         public override void InstallBindings()
         {
+            Container.BindInstance(_themeLibrary);
             Container.BindInstance(_selectedThemeSettings);
             Container.BindInstance(_selectedThemeSettings.PlayerTheme);
             Container.BindInstance(_shipVisualSetting);

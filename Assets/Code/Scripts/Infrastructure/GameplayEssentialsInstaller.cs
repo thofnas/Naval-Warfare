@@ -26,7 +26,6 @@ namespace Infrastructure
         {
             InitExecutionOrder();
 
-            CharactersThemes();
             BackgroundAnimator();
             
             TurnSystem();
@@ -47,8 +46,6 @@ namespace Infrastructure
         }
 
         private void BackgroundAnimator() => Container.BindInterfacesAndSelfTo<BackgroundAnimator>().FromComponentInNewPrefab(GameResources.Instance.BackgroundPrefab).AsSingle().NonLazy();
-
-        private void CharactersThemes() => Container.Bind<CharactersThemes>().AsSingle().WithArguments(_playerTheme, GameResources.Instance.AITheme).NonLazy();
 
         private void CameraController() => Container.BindInterfacesAndSelfTo<CameraController>().FromNew().AsSingle();
 

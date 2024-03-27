@@ -24,6 +24,8 @@ namespace Infrastructure
             BindLocalDataProvider();
             BindThemeVisitors();
             BindWallet();
+
+            Container.BindInstance(_persistentData);
         }
 
         private void BindLocalDataProvider() => Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().NonLazy();

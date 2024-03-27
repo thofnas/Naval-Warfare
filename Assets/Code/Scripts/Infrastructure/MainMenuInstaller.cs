@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Themes;
 using Themes.Store;
-using UI;
 using UI.Elements;
 using Zenject;
 
@@ -19,7 +18,6 @@ namespace Infrastructure
         
         public override void InstallBindings()
         {
-            CharactersThemes();
             BackgroundAnimator();
             StorePanelFactory();
         }
@@ -29,8 +27,6 @@ namespace Infrastructure
             Container.BindFactory<IEnumerable<StoreItem>, StorePanel, StorePanel.Factory>().AsTransient();
         }
 
-        private void CharactersThemes() => Container.Bind<CharactersThemes>().AsSingle().WithArguments(_playerTheme, GameResources.Instance.AITheme).NonLazy();
-        
         private void BackgroundAnimator() => Container.BindInterfacesAndSelfTo<BackgroundAnimator>().FromComponentInNewPrefab(GameResources.Instance.BackgroundPrefab).AsSingle().NonLazy();
     }
 }

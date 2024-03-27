@@ -1,4 +1,5 @@
 ﻿using System;
+using Data;
 using EventBus;
 using Events;
 using Themes;
@@ -23,18 +24,19 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
     private Sprite[] _player2Sprites;
     private int _player1SpriteIndex;
     private int _player2SpriteIndex;
-    private SelectedThemeSettings _selectedThemeSettings;
-    private CharactersThemes _charactersThemes;
+    private PersistentData _persistentData;
+    private ThemeLibrary _themeLibrary;
 
     private EventBinding<OnThemeChanged> _onThemeChanged;
     private IDisposable _observableInterval;
 
     [Inject]
-    private void Construct(SelectedThemeSettings selectedThemeSettings, CharactersThemes charactersThemes)
+    private void Construct(PersistentData persistentData, ThemeLibrary themeLibrary)
     {
-        _selectedThemeSettings = selectedThemeSettings;
-        _charactersThemes = charactersThemes;
-        _player2Sprites = _charactersThemes.GetThemeSettings(CharacterType.Enemy).BackgroundSprites;
+        _persistentData = persistentData;
+        _themeLibrary = themeLibrary;
+
+        _player2Sprites = themeLibrary.GetTheme(IslandsTheme.AI).BackgroundSprites;
 
         _onThemeChanged = new EventBinding<OnThemeChanged>(Initialize);
         EventBus<OnThemeChanged>.Register(_onThemeChanged);
@@ -47,7 +49,7 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
 
     private void Initialize()
     {
-        _player1Sprites = _selectedThemeSettings.PlayerTheme.BackgroundSprites;
+        _player1Sprites = _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme).BackgroundSprites;
         
         _player1SpriteIndex = (_player1SpriteIndex - 1) % _player1Sprites.Length;
         _player2SpriteIndex = (_player2SpriteIndex - 1) % _player2Sprites.Length;
@@ -71,8 +73,7 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
 
     private bool CharactersThemesAreSame()
     {
-        return _selectedThemeSettings.PlayerTheme ==
-               _charactersThemes.GetThemeSettings(CharacterType.Enemy);
+        return _persistentData.PlayerData.SelectedIslandsTheme == IslandsTheme.AI;
     }
 
     private void StartPeriodicTextureChange(Action changeAction)
