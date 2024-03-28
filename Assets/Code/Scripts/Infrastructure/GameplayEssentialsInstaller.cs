@@ -68,8 +68,8 @@ namespace Infrastructure
 
         private void InitExecutionOrder()
         {
-            Container.BindExecutionOrder<TurnSystem>(-60);
             Container.BindExecutionOrder<GameManager>(-50);
+            Container.BindExecutionOrder<TurnSystem>(-40);
             Container.BindExecutionOrder<Level>(-20);
         }
 

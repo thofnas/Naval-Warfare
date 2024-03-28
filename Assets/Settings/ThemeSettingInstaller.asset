@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8ccf5ff109426ea53f53f2297a30b8, type: 3}
   m_Name: ThemeSettingInstaller
   m_EditorClassIdentifier: 
+  _themeLibrary: {fileID: 11400000, guid: 3f0c939c2c550b14cbec7188073d6682, type: 2}
   _selectedThemeSettings:
     _playerTheme: {fileID: 11400000, guid: cffc28d7b22fd5d48868c434ce19b028, type: 2}
   _shipVisualSetting:

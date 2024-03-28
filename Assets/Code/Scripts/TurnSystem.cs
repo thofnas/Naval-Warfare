@@ -4,36 +4,40 @@ using Events;
 
 public class TurnSystem : IDisposable
 {
-    private readonly EventBinding<OnCellHit> _onShipHitBinding;
-
+    private readonly GameManager _gameManager;
     private readonly CharacterType _whoseFirstTurn;
-    private bool _isPlacingShips;
     private CharacterType _whoseCurrentTurn;
+    
+    private readonly EventBinding<OnCellHit> _onShipHit;
+    private readonly EventBinding<OnBattleStateEntered> _onBattleStateEntered;
 
-    public TurnSystem(CharacterType whoseFirstTurn)
+    public TurnSystem(CharacterType whoseFirstTurn, GameManager gameManager)
     {
+        _gameManager = gameManager;
         _whoseFirstTurn = whoseFirstTurn;
         _whoseCurrentTurn = whoseFirstTurn;
-        _isPlacingShips = true;
 
         _whoseCurrentTurn = CharacterType.Player;
 
-        _onShipHitBinding = new EventBinding<OnCellHit>(NextTurn);
-
-        EventBus<OnCellHit>.Register(_onShipHitBinding);
+        _onShipHit = new EventBinding<OnCellHit>(NextTurn);
+        _onBattleStateEntered = new EventBinding<OnBattleStateEntered>(NextTurn);
+        
+        EventBus<OnCellHit>.Register(_onShipHit);
+        EventBus<OnBattleStateEntered>.Register(_onBattleStateEntered);
     }
 
-    public int TurnCount { get; private set; }
-
-    public void Dispose() => EventBus<OnCellHit>.Deregister(_onShipHitBinding);
-
-    public void NextTurn()
+    public void Dispose()
     {
-        if (_isPlacingShips)
-        {
-            CompletePlacing();
+        EventBus<OnCellHit>.Deregister(_onShipHit);
+        EventBus<OnBattleStateEntered>.Deregister(_onBattleStateEntered);
+    }
+
+    private int TurnCount { get; set; }
+
+    private void NextTurn()
+    {
+        if (IsPlacingShips())
             return;
-        }
 
         TurnCount++;
         _whoseCurrentTurn = _whoseCurrentTurn == CharacterType.Player
@@ -53,7 +57,7 @@ public class TurnSystem : IDisposable
         return TurnCount / 2;
     }
 
-    public bool IsPlacingShips() => _isPlacingShips;
+    public bool IsPlacingShips() => _gameManager.IsCurrentState(_gameManager.PlacingShips);
 
     public CharacterType WhoseCurrentTurn() => _whoseCurrentTurn;
 
@@ -61,6 +65,4 @@ public class TurnSystem : IDisposable
         _whoseCurrentTurn == CharacterType.Enemy
             ? CharacterType.Player
             : CharacterType.Enemy;
-
-    private void CompletePlacing() => _isPlacingShips = false;
 }
