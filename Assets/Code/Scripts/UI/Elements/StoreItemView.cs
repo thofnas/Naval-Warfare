@@ -9,11 +9,11 @@ namespace UI.Elements
     public class StoreItemView : VisualElement
     {
         public readonly Image BackgroundImage;
-        public readonly Label PriceLabel;
+        public readonly VisualElement PriceWrapper;
         public readonly Image LockImage;
         public readonly Image SelectedImage;
-        public readonly Image PriceCoin;
-        
+        public readonly Label PriceLabel;
+
         public StoreItem StoreItem { get; private set; }
         public bool IsLocked { get; private set; }
         
@@ -25,8 +25,9 @@ namespace UI.Elements
 
             BackgroundImage = this.CreateChild<Image>("item-background-image");
             
-            VisualElement priceContainer = this.CreateChild("item-price");
-            PriceCoin = priceContainer.CreateChild<Image>("item-price-coin");
+            PriceWrapper = this.CreateChild("item-price-wrapper");
+            VisualElement priceContainer = PriceWrapper.CreateChild("item-price");
+            Image priceCoin = priceContainer.CreateChild<Image>("item-price-coin");
             PriceLabel = priceContainer.CreateChild<Label>("item-price-text");
             
             LockImage = this.CreateChild<Image>("item-lock-image");
@@ -35,21 +36,19 @@ namespace UI.Elements
             Lock();
             Deselect();
         }
-        
+
         public void Lock()
         {
             IsLocked = true;
             LockImage.visible = IsLocked;
-            PriceLabel.visible = true;
-            PriceCoin.visible = true;
+            PriceWrapper.visible = true;
         }
 
         public void Unlock()
         {
             IsLocked = false;
-            LockImage.visible = IsLocked;
-            PriceLabel.visible = false;
-            PriceCoin.visible = false;
+            LockImage.visible = IsLocked;       
+            PriceWrapper.visible = false;
         }
 
         public void Select()

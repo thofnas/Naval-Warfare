@@ -50,12 +50,10 @@ namespace UI.Elements
                 
                 ownedThemesChecker.Visit(storeItemView.StoreItem);
 
-                if (!ownedThemesChecker.IsOwned)
-                    storeItemView.Lock();
-                else
+                if (ownedThemesChecker.IsOwned)
                 {
                     selectedThemeChecker.Visit(storeItemView.StoreItem);
-                    
+
                     if (selectedThemeChecker.IsSelected)
                     {
                         _themeSelector.Visit(storeItemView.StoreItem);
@@ -65,6 +63,16 @@ namespace UI.Elements
                         storeItemView.Deselect();
 
                     storeItemView.Unlock();
+                }
+                else
+                {
+                    if (!storeItem.IsPurchasable)
+                    {
+                        Remove(storeItemView);
+                        return;
+                    }
+                    
+                    storeItemView.Lock();
                 }
 
                 _storeItemViews.Add(storeItemView);
