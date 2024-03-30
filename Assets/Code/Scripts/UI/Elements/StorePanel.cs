@@ -4,7 +4,6 @@ using EventBus;
 using Events;
 using Themes;
 using Themes.Store;
-using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 using Zenject;
@@ -20,7 +19,7 @@ namespace UI.Elements
         private readonly OwnedThemesChecker _ownedThemesChecker;
         private readonly SelectedThemeChecker _selectedThemeChecker;
         private readonly Wallet _wallet;
-        private readonly List<StoreItemView> _storeItemViews = new();
+        private List<StoreItemView> _storeItemViews;
 
         public StorePanel(IEnumerable<StoreItem> storeItems, 
             SelectedThemeSettings selectedThemeSettings,
@@ -39,8 +38,16 @@ namespace UI.Elements
             _selectedThemeChecker = selectedThemeChecker;
             _wallet = wallet;
             
-            Clear();
             this.AddClass("store-panel");
+            
+            RegenerateContent(storeItems);
+        }
+
+        private void RegenerateContent(IEnumerable<StoreItem> storeItems)
+        {
+            Clear();
+            
+            _storeItemViews = new List<StoreItemView>();
             
             foreach (StoreItem storeItem in storeItems)
             {
@@ -48,13 +55,13 @@ namespace UI.Elements
                 
                 storeItemView.Clicked += StoreItemView_OnClicked;
                 
-                ownedThemesChecker.Visit(storeItemView.StoreItem);
+                _ownedThemesChecker.Visit(storeItemView.StoreItem);
 
-                if (ownedThemesChecker.IsOwned)
+                if (_ownedThemesChecker.IsOwned)
                 {
-                    selectedThemeChecker.Visit(storeItemView.StoreItem);
+                    _selectedThemeChecker.Visit(storeItemView.StoreItem);
 
-                    if (selectedThemeChecker.IsSelected)
+                    if (_selectedThemeChecker.IsSelected)
                     {
                         _themeSelector.Visit(storeItemView.StoreItem);
                         storeItemView.Select();
@@ -78,7 +85,7 @@ namespace UI.Elements
                 _storeItemViews.Add(storeItemView);
             }
         }
-        
+
         private void SelectTheme(StoreItemView storeItemView)
         {
             _themeSelector.Visit(storeItemView.StoreItem);

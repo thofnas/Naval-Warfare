@@ -1,4 +1,7 @@
-﻿using States.MainMenuUIStates;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
+using States.MainMenuUIStates;
 using Themes;
 using Themes.Store;
 using UI.Elements;
@@ -16,6 +19,8 @@ namespace UI
         public Store StoreState { get; private set; }
         public Options OptionsState { get; private set; }
         public StorePanel.Factory StorePanelFactory { get; private set; }
+
+        public ThemeUnlocker ThemeUnlocker { get; set; }
         public ThemeSelector ThemeSelector { get; set; }
         public ThemeUnlocker Theme { get; set; }
         public OwnedThemesChecker OwnedThemesChecker { get; set; }
@@ -35,6 +40,7 @@ namespace UI
             SelectedThemeSettings selectedThemeSettings,
             StorePanel.Factory storePanelFactory, 
             Wallet wallet, 
+            ThemeUnlocker themeUnlocker,
             ThemeSelector themeSelector, 
             ThemeUnlocker theme, 
             OwnedThemesChecker ownedThemesChecker, 
@@ -44,6 +50,7 @@ namespace UI
             SelectedThemeSettings = selectedThemeSettings;
             StorePanelFactory = storePanelFactory;
             _wallet = wallet;
+            ThemeUnlocker = themeUnlocker;
             ThemeSelector = themeSelector;
             Theme = theme;
             OwnedThemesChecker = ownedThemesChecker;

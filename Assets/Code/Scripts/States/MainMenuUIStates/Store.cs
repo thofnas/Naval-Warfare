@@ -1,7 +1,9 @@
-﻿using Themes;
+﻿using EventBus;
+using Events;
 using Themes.Store;
 using UI;
 using UI.Elements;
+using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 
@@ -13,9 +15,11 @@ namespace States.MainMenuUIStates
         private StoreItem _selectedStoreItem;
         private VisualElement _container;
         private VisualElement _storeItemsContainer = new();
-
-        private Wallet _wallet;
         private Label _moneyLabel;
+
+        private readonly Wallet _wallet;
+
+        private EventBinding<OnStoreItemUnlocked> _onStoreItemUnlocked;
 
         public Store(MainMenuUIManager mainMenuUIManager, 
             StateMachine.StateMachine stateMachine, 
@@ -38,6 +42,9 @@ namespace States.MainMenuUIStates
 
             UpdateStoreContent();
             OnThemeChangedBinding.Add(UpdateStoreContent);
+            
+            _onStoreItemUnlocked = new EventBinding<OnStoreItemUnlocked>(OnStoreItemUnlocked);
+            EventBus<OnStoreItemUnlocked>.Register(_onStoreItemUnlocked);
         }
 
         public override void OnExit()
@@ -46,6 +53,8 @@ namespace States.MainMenuUIStates
             
             _storeItemsContainer.Clear();
             OnThemeChangedBinding.Remove(UpdateStoreContent);
+            
+            EventBus<OnStoreItemUnlocked>.Deregister(_onStoreItemUnlocked);
         }
 
         protected sealed override void GenerateView() 
@@ -73,7 +82,16 @@ namespace States.MainMenuUIStates
         {
             _storeItemsContainer.Clear();
 
-            _storeItemsContainer.Add(MainMenuUIManager.StorePanelFactory.Create(_storeContent.IslandsThemeItems));
+            StorePanel storePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.IslandsThemeItems);
+
+            _storeItemsContainer.Add(storePanel);
+        }
+        
+        private void OnStoreItemUnlocked(OnStoreItemUnlocked e)
+        {
+            if (e.IsPurchasable) return;
+            
+            UpdateStoreContent();
         }
     }
 }

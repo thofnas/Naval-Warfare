@@ -1,5 +1,7 @@
 ﻿using Data;
+using Events;
 using Themes.Store;
+using EventBus;
 using Zenject;
 
 namespace Themes
@@ -14,7 +16,12 @@ namespace Themes
             _persistentData = persistentData;
         }
 
-        public void Visit(StoreItem storeItem) => Visit((dynamic)storeItem);
+        public void Visit(StoreItem storeItem)
+        {
+            Visit((dynamic)storeItem);
+            
+            EventBus<OnStoreItemUnlocked>.Invoke(new OnStoreItemUnlocked(isPurchasable: storeItem.IsPurchasable));
+        }
 
         public void Visit(IslandsThemeItem islandsThemeItem) => _persistentData.PlayerData.OpenIslandsTheme(islandsThemeItem.IslandsType);
 
