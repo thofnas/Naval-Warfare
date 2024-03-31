@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DG.Tweening;
-using States.MainMenuUIStates;
+﻿using States.MainMenuUIStates;
 using Themes;
 using Themes.Store;
 using UI.Elements;

@@ -1,6 +1,7 @@
 using System;
 using EventBus;
 using Events;
+using UnityEngine;
 
 public class TurnSystem : IDisposable
 {
@@ -9,7 +10,6 @@ public class TurnSystem : IDisposable
     private CharacterType _whoseCurrentTurn;
     
     private readonly EventBinding<OnCellHit> _onShipHit;
-    private readonly EventBinding<OnBattleStateEntered> _onBattleStateEntered;
 
     public TurnSystem(CharacterType whoseFirstTurn, GameManager gameManager)
     {
@@ -20,16 +20,13 @@ public class TurnSystem : IDisposable
         _whoseCurrentTurn = CharacterType.Player;
 
         _onShipHit = new EventBinding<OnCellHit>(NextTurn);
-        _onBattleStateEntered = new EventBinding<OnBattleStateEntered>(NextTurn);
         
         EventBus<OnCellHit>.Register(_onShipHit);
-        EventBus<OnBattleStateEntered>.Register(_onBattleStateEntered);
     }
 
     public void Dispose()
     {
         EventBus<OnCellHit>.Deregister(_onShipHit);
-        EventBus<OnBattleStateEntered>.Deregister(_onBattleStateEntered);
     }
 
     private int TurnCount { get; set; }
@@ -37,6 +34,9 @@ public class TurnSystem : IDisposable
     private void NextTurn()
     {
         if (IsPlacingShips())
+            return;
+        
+        if (_gameManager.IsCurrentState(_gameManager.BattleResults))
             return;
 
         TurnCount++;

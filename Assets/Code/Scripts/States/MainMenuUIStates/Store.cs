@@ -3,7 +3,6 @@ using Events;
 using Themes.Store;
 using UI;
 using UI.Elements;
-using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 

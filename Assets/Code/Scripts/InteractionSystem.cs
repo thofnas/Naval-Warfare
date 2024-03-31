@@ -16,13 +16,25 @@ public class InteractionSystem : ITickable
     { CharacterType.Enemy, CellPosition.Zero }
     };
 
+    private GameManager _gameManager;
+
+    [Inject]
+    private void Construct(TurnSystem turnSystem, Level level, GameManager gameManager)
+    {
+        _turnSystem = turnSystem;
+        _level = level;
+        _gameManager = gameManager;
+    }
+
     public void Tick()
     {
         if (_turnSystem.IsPlacingShips()) return;
+        
+        if (_gameManager.IsCurrentState(_gameManager.BattleResults))
+            return;
 
-        // TODO: better to have a sender and then check if the sender has the right to shoot 
         if (_turnSystem.WhoseCurrentTurn() == CharacterType.Enemy) return;
-
+        
         const float interactedCellMaxDistance = 1.5f;
 
         if (!Input.GetMouseButtonDown(0)) return;
@@ -41,15 +53,11 @@ public class InteractionSystem : ITickable
             SetSelectedCell(cellPosition);
     }
 
-    [Inject]
-    private void Construct(TurnSystem turnSystem, Level level)
-    {
-        _turnSystem = turnSystem;
-        _level = level;
-    }
-
     public void SetSelectedCell(CellPosition cellPosition)
     {
+        if (_gameManager.IsCurrentState(_gameManager.BattleResults))
+            return;
+        
         CharacterType whoWillTakeAHit = _turnSystem.WhoWillTakeAHit();
         
         if (_selectedCellPosition[whoWillTakeAHit] != cellPosition)
@@ -61,7 +69,11 @@ public class InteractionSystem : ITickable
 
     public void Shoot()
     {
-        if (_turnSystem.IsPlacingShips()) return;
+        if (_turnSystem.IsPlacingShips()) 
+            return;        
+        
+        if (_gameManager.IsCurrentState(_gameManager.BattleResults))
+            return;
 
         EventBus<OnShoot>.Invoke(new OnShoot(_turnSystem.WhoWillTakeAHit(), _selectedCellPosition[_turnSystem.WhoWillTakeAHit()]));
     }
