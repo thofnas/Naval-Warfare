@@ -13,7 +13,7 @@ namespace UI
     [DisallowMultipleComponent]
     public class GameplayUIManager : MonoBehaviour
     {
-        public Theme Theme { get; private set; }
+        public ThemeSettings ThemeSettings { get; private set; }
         public PlacingShips PlacingShips { get; private set; }
         public Battle Battle { get; private set; }
         public BattleResults BattleResults { get; private set; }
@@ -29,11 +29,11 @@ namespace UI
 
         [Inject]
         private void Construct(GameManager gameManager, Level level, StateMachine.StateMachine stateMachine,
-            Theme theme)
+            ThemeSettings themeSettings)
         {
             _gameManager = gameManager;
             _stateMachine = stateMachine;
-            Theme = theme;
+            ThemeSettings = themeSettings;
         }
 
         private void Awake()

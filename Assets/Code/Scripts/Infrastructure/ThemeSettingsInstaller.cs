@@ -4,6 +4,7 @@ using Events;
 using Ship;
 using Themes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Infrastructure
@@ -19,7 +20,7 @@ namespace Infrastructure
         {
             Container.BindInstance(_themeLibrary);
             Container.BindInstance(_selectedThemeSettings);
-            Container.BindInstance(_selectedThemeSettings.PlayerTheme);
+            Container.BindInstance(_selectedThemeSettings.PlayerThemeSettings);
             Container.BindInstance(_shipVisualSetting);
         }
     }
@@ -28,14 +29,14 @@ namespace Infrastructure
 [Serializable]
 public class SelectedThemeSettings
 {
-    [SerializeField] private Theme _playerTheme;
+    [FormerlySerializedAs("_playerTheme")] [SerializeField] private ThemeSettings _playerThemeSettings;
     
-    public Theme PlayerTheme
+    public ThemeSettings PlayerThemeSettings
     {
-        get => _playerTheme;
+        get => _playerThemeSettings;
         set
         {
-            _playerTheme = value;
+            _playerThemeSettings = value;
             EventBus<OnThemeChanged>.Invoke(new OnThemeChanged());
         }
     }

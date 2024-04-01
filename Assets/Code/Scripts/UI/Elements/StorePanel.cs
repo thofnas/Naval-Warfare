@@ -91,7 +91,7 @@ namespace UI.Elements
             _themeSelector.Visit(storeItemView.StoreItem);
             storeItemView.Select();
             _localDataProvider.Save();
-            _selectedThemeSettings.PlayerTheme = storeItemView.StoreItem.Theme;
+            _selectedThemeSettings.PlayerThemeSettings = storeItemView.StoreItem.ThemeSettings;
         }
 
         private void StoreItemView_OnClicked(StoreItemView storeItemView)

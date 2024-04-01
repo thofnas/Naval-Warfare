@@ -29,7 +29,7 @@ namespace States.MainMenuUIStates
 
             VisualElement buttonsContainer = contentContainer.CreateChild("buttons-container");
 
-            StyledButton startGameButton = new(SelectedThemeSettings.PlayerTheme,
+            StyledButton startGameButton = new(SelectedThemeSettings.PlayerThemeSettings,
                 buttonsContainer,
                 () => SceneManager.LoadScene("Gameplay"),
                 "start-button")
@@ -37,7 +37,7 @@ namespace States.MainMenuUIStates
                 text = "Start Game"
             };
             
-            StyledButton storeButton = new(SelectedThemeSettings.PlayerTheme, 
+            StyledButton storeButton = new(SelectedThemeSettings.PlayerThemeSettings, 
                 buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.StoreState), 
                 "store-button")
@@ -45,7 +45,7 @@ namespace States.MainMenuUIStates
                 text = "Store"
             };
 
-            StyledButton optionsButton = new(SelectedThemeSettings.PlayerTheme, 
+            StyledButton optionsButton = new(SelectedThemeSettings.PlayerThemeSettings, 
                 buttonsContainer, 
                 () => StateMachine.SwitchState(MainMenuUIManager.OptionsState), 
                 "options-button")

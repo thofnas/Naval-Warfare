@@ -6,8 +6,8 @@ using VInspector;
 
 namespace Themes
 {
-    [CreateAssetMenu(fileName = nameof(Theme))]
-    public class Theme : ScriptableObject
+    [CreateAssetMenu(fileName = nameof(ThemeSettings))]
+    public class ThemeSettings : ScriptableObject
     {
         public Color MainColor;
         public Color OutlineColor;

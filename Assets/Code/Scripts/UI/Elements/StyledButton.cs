@@ -12,12 +12,12 @@ namespace UI.Elements
         {
         }
 
-        public StyledButton(Theme theme, VisualElement parent, params string[] wrapperClasses) : this(
-            theme, parent, null, wrapperClasses)
+        public StyledButton(ThemeSettings themeSettings, VisualElement parent, params string[] wrapperClasses) : this(
+            themeSettings, parent, null, wrapperClasses)
         {
         }
 
-        public StyledButton(Theme theme, VisualElement parent, Action clickEvent,
+        public StyledButton(ThemeSettings themeSettings, VisualElement parent, Action clickEvent,
             params string[] wrapperClasses) :
             base(clickEvent)
         {
@@ -28,8 +28,8 @@ namespace UI.Elements
 
             parent.Add(this);
             this.AddClass(wrapperClasses);
-            style.unityBackgroundImageTintColor = theme.MainColor;
-            style.unityFontDefinition = new StyleFontDefinition(theme.BaseFont);
+            style.unityBackgroundImageTintColor = themeSettings.MainColor;
+            style.unityFontDefinition = new StyleFontDefinition(themeSettings.BaseFont);
         }
     }
 }

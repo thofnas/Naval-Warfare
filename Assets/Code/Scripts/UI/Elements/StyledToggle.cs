@@ -10,12 +10,12 @@ namespace UI.Elements
         {
         }
 
-        public StyledToggle(Theme theme, VisualElement parent, params string[] wrapperClasses)
+        public StyledToggle(ThemeSettings themeSettings, VisualElement parent, params string[] wrapperClasses)
         {
             parent.Add(this);
             this.AddClass(wrapperClasses);
-            style.unityBackgroundImageTintColor = theme.MainColor;
-            style.unityFontDefinition = new StyleFontDefinition(theme.BaseFont);
+            style.unityBackgroundImageTintColor = themeSettings.MainColor;
+            style.unityFontDefinition = new StyleFontDefinition(themeSettings.BaseFont);
         }
     }
 }

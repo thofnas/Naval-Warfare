@@ -14,14 +14,14 @@ public class GameResources : MonoBehaviour
     public UIDocument UIDocumentPrefab => _uiDocumentPrefab;
     public Transform ShipHitExplosionPrefab => _shipHitExplosionPrefab;
     public SpriteRenderer BackgroundPrefab => _backgroundPrefab;
-    public Theme AITheme => _aiTheme;
+    public ThemeSettings AIThemeSettings => _aiThemeSettings;
 
     [SerializeField] private GridCellVisual _gridCellVisualPrefab;
     [SerializeField] private Ship.Ship _shipPrefab;
     [SerializeField] private UIDocument _uiDocumentPrefab;
     [SerializeField] private Transform _shipHitExplosionPrefab;   
     [SerializeField] private SpriteRenderer _backgroundPrefab;
-    [FormerlySerializedAs("_aiThemeSettings")] [SerializeField] private Theme _aiTheme;
+    [FormerlySerializedAs("_aiTheme")] [SerializeField] private ThemeSettings _aiThemeSettings;
 
     public static GameResources Instance
     {

@@ -70,7 +70,7 @@ namespace States.MainMenuUIStates
 
             _moneyLabel.text = _wallet.GetCurrentMoney().ToString();
             
-            StyledButton backToMainMenuButton = new(SelectedThemeSettings.PlayerTheme, buttonsContainer,
+            StyledButton backToMainMenuButton = new(SelectedThemeSettings.PlayerThemeSettings, buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.MainMenuState), "back-button")
             {
                 text = "Back"

@@ -17,7 +17,7 @@ namespace Grid
         private Vector2 _gridCenter;
         private GridSystem _gridSystem;
         private Transform _parent;
-        private Theme _theme;
+        private ThemeSettings _themeSettings;
         
         // Events
         private EventBinding<OnCellHit> _onHit;
@@ -27,13 +27,13 @@ namespace Grid
         private EventBinding<OnShipPlacementPreviewMoved> _onShipValidPlacementPositionsChanged;
 
         [Inject]
-        private void Construct(GridSystem gridSystem, Vector3 battlePosition, Theme theme,
+        private void Construct(GridSystem gridSystem, Vector3 battlePosition, ThemeSettings themeSettings,
             GridCellVisual.Factory gridCellVisualFactory)
         {
             _parent = gridSystem.Parent.transform;
             transform.SetParent(_parent);
 
-            _theme = theme;
+            _themeSettings = themeSettings;
             _gridCellVisualFactory = gridCellVisualFactory;
             _gridSystem = gridSystem;
             _characterType = gridSystem.GetCharacterType();
@@ -51,8 +51,8 @@ namespace Grid
                     _gridCellVisualFactory.Create(gridSystem.GetGridCell(new CellPosition(x, y)), 
                         GetWorldCellPosition(new CellPosition(x, y)), 
                         transform, 
-                        theme, 
-                        GetCellSprite(x, y, theme.GridCellSprites));
+                        themeSettings, 
+                        GetCellSprite(x, y, themeSettings.GridCellSprites));
 
                 _gridCellVisuals[x, y] = gridCellVisual;
             }
@@ -114,7 +114,7 @@ namespace Grid
 
         public Vector2 GetOffset() => _parent.position;
 
-        public Sprite GetIcon(CellIcon cellIcon) => _theme.GridCellIcons[cellIcon];
+        public Sprite GetIcon(CellIcon cellIcon) => _themeSettings.GridCellIcons[cellIcon];
 
         private static Vector2 CalculateGridCenter(int width, int height, float cellSize) =>
             new(
@@ -167,7 +167,7 @@ namespace Grid
             _gridCellVisuals[e.HitCellPosition.x, e.HitCellPosition.y].UpdateFrameSprite();
         }
 
-        public class Factory : PlaceholderFactory<GridSystem, Vector3, Theme, GridSystemVisual>
+        public class Factory : PlaceholderFactory<GridSystem, Vector3, ThemeSettings, GridSystemVisual>
         {
         }
     }

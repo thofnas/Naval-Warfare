@@ -7,9 +7,9 @@ namespace Themes
     [CreateAssetMenu(fileName = nameof(ThemeLibrary))]
     public class ThemeLibrary : ScriptableObject
     {
-        [SerializeField] private SerializedDictionary<IslandsTheme, Theme> _islandsThemes = new();
+        [SerializeField] private SerializedDictionary<IslandsTheme, ThemeSettings> _islandsThemes = new();
 
-        public Theme GetTheme(IslandsTheme islandsTheme) => _islandsThemes[islandsTheme];
+        public ThemeSettings GetTheme(IslandsTheme islandsTheme) => _islandsThemes[islandsTheme];
 
         private void OnValidate()
         {
