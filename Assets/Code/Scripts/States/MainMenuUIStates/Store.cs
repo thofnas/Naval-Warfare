@@ -81,9 +81,10 @@ namespace States.MainMenuUIStates
         {
             _storeItemsContainer.Clear();
 
-            StorePanel storePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.IslandsThemeItems);
-
-            _storeItemsContainer.Add(storePanel);
+            StorePanel islandsStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.IslandsThemeItems);
+            _storeItemsContainer.Add(islandsStorePanel);
+            StorePanel oceanStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.OceanThemeItems);
+            _storeItemsContainer.Add(oceanStorePanel);
         }
         
         private void OnStoreItemUnlocked(OnStoreItemUnlocked e)

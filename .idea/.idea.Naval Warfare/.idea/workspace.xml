@@ -6,31 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2cf71565-e702-496e-9a67-08766235670e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/GameResources.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/GameResources.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridCellVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridCellVisual.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridSystemSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridSystemSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridSystemVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Grid/GridSystemVisual.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplayEssentialsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplayEssentialsInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/MainMenuInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/MainMenuInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/ThemeSettingsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/ThemeSettingsInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/BattleResults.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/BattleResults.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/PlacingShips.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/PlacingShips.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/MainMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Options.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Options.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Store.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Store.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/IslandsThemeItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/IslandsThemeItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Theme.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/ThemeSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Theme.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/ThemeSettings.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreContent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreContent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/ThemeLibrary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/ThemeLibrary.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/GameplayUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/GameplayUIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/AI.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/AI.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/Acid.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/Acid.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/Tropical.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/Tropical.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/StoreContent.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/StoreContent.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ThemeLibrary.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ThemeLibrary.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +22,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/03/a76c5d3b/Enum.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/08/e6973f8a/Func`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/b9/fdc729de/Action`2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/df/a8174638/Action`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444499f4996a3e6af79cf6c1fdb574b98/f7/5635bac4/Action.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5879d8d225474494bcffdfe64965038e174000/24/3dda1313/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b3502c626dd433da43ca50f8c32f6ba175a00/37/996087f6/VisualElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b3502c626dd433da43ca50f8c32f6ba175a00/e8/60e14958/ITransitionAnimations.cs" root0="SKIP_HIGHLIGHTING" />
@@ -150,6 +134,8 @@
       <workItem from="1711816165743" duration="3789000" />
       <workItem from="1711916058643" duration="1619000" />
       <workItem from="1712001988153" duration="2514000" />
+      <workItem from="1712051224876" duration="2246000" />
+      <workItem from="1712074396808" duration="2556000" />
     </task>
     <servers />
   </component>
