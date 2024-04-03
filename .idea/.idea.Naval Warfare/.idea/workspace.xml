@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2cf71565-e702-496e-9a67-08766235670e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Store.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Store.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreContent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreContent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/ThemeLibrary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/ThemeLibrary.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/BackgroundAnimator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/BackgroundAnimator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/OceanTheme.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/OceanTheme.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Ocean/Earth.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Ocean/Earth.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/StoreContent.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/StoreContent.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/ThemeLibrary.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ThemeLibrary.asset" afterDir="false" />
     </list>
@@ -135,7 +135,7 @@
       <workItem from="1711916058643" duration="1619000" />
       <workItem from="1712001988153" duration="2514000" />
       <workItem from="1712051224876" duration="2246000" />
-      <workItem from="1712074396808" duration="2556000" />
+      <workItem from="1712074396808" duration="3479000" />
     </task>
     <servers />
   </component>

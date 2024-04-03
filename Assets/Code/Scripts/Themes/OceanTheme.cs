@@ -2,6 +2,7 @@
 {
     public enum OceanTheme
     {
-        Earth
+        AI = 10,
+        Earth = 20,
     }
 }

@@ -29,8 +29,12 @@ MonoBehaviour:
     dividerPos: 0.33
   _oceanThemes:
     serializedKvps:
-    - Key: 0
-      Value: {fileID: 11400000, guid: c0f196e83fe616c4eabb11907a890772, type: 2}
+    - Key: 10
+      Value: {fileID: 11400000, guid: f8f73393de7f56e429d144de31e82226, type: 2}
       index: 0
+      isKeyRepeated: 0
+    - Key: 20
+      Value: {fileID: 11400000, guid: c0f196e83fe616c4eabb11907a890772, type: 2}
+      index: 1
       isKeyRepeated: 0
     dividerPos: 0.33
