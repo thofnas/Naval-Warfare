@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Levels;
 using Newtonsoft.Json;
 using Themes;
 using UnityEngine;
@@ -8,6 +10,7 @@ namespace Data
 {
     public class PlayerData
     {
+        private Level<ThemeSettings> _selectedLevel;
         private IslandsTheme _selectedIslandsTheme;
         private readonly List<IslandsTheme> _ownedIslandsThemesList;
         private OceanTheme _selectedOceanTheme;
@@ -15,10 +18,9 @@ namespace Data
 
         private int _money;
 
-        public PlayerData()
+        public PlayerData(ThemeLibrary themeLibrary)
         {
             _money = 50;
-
             _selectedIslandsTheme = IslandsTheme.Tropical;
             _ownedIslandsThemesList = new List<IslandsTheme> { _selectedIslandsTheme };
             _selectedOceanTheme = OceanTheme.Earth;

@@ -2,6 +2,7 @@
 using Data;
 using EventBus;
 using Events;
+using Levels;
 using Themes;
 using UniRx;
 using UnityEngine;
@@ -25,18 +26,18 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
     private int _player1SpriteIndex;
     private int _player2SpriteIndex;
     private PersistentData _persistentData;
-    private ThemeLibrary _themeLibrary;
 
     private EventBinding<OnThemeChanged> _onThemeChanged;
     private IDisposable _observableInterval;
+    private Level<ThemeSettings> _level;
 
     [Inject]
-    private void Construct(PersistentData persistentData, ThemeLibrary themeLibrary)
+    private void Construct(PersistentData persistentData, Level<ThemeSettings> level)
     {
+        _level = level;
         _persistentData = persistentData;
-        _themeLibrary = themeLibrary;
 
-        _player2Sprites = themeLibrary.GetTheme(IslandsTheme.AI).BackgroundSprites;
+        _player2Sprites = level.GetAITheme().BackgroundSprites;
 
         _onThemeChanged = new EventBinding<OnThemeChanged>(Initialize);
         EventBus<OnThemeChanged>.Register(_onThemeChanged);
@@ -49,7 +50,7 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
 
     private void Initialize()
     {
-        _player1Sprites = _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme).BackgroundSprites;
+        _player1Sprites = _level.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme).BackgroundSprites;
         
         _player1SpriteIndex = (_player1SpriteIndex - 1) % _player1Sprites.Length;
         _player2SpriteIndex = (_player2SpriteIndex - 1) % _player2Sprites.Length;

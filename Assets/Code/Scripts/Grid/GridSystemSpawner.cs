@@ -1,4 +1,5 @@
 using Data;
+using Levels;
 using Themes;
 using UnityEngine;
 using Zenject;
@@ -11,24 +12,24 @@ namespace Grid
         private GridSystem.Factory _gridSystemFactory;
         private GridSystemVisual.Factory _gridSystemVisualFactory;
         private PersistentData _persistentData;
-        private ThemeLibrary _themeLibrary;
+        private Level<ThemeSettings> _level;
 
         [Inject]
-        private void Construct(PersistentData persistentData, ThemeLibrary themeLibrary, GridSystem.Factory gridSystemFactory, GridSystemVisual.Factory gridSystemVisualFactory,
-            DebugSettings debugSettings)
+        private void Construct(PersistentData persistentData, GridSystem.Factory gridSystemFactory, GridSystemVisual.Factory gridSystemVisualFactory,
+            DebugSettings debugSettings, Level<ThemeSettings> level)
         {
             _persistentData = persistentData;
-            _themeLibrary = themeLibrary;
             _gridSystemFactory = gridSystemFactory;
             _gridSystemVisualFactory = gridSystemVisualFactory;
             _debugSettings = debugSettings;
+            _level = level;
         }
 
         public GridSystem Spawn(CharacterType characterType, Vector2 firstGridPosition)
         {
             ThemeSettings themeSettings = characterType == CharacterType.Enemy
-                ? _themeLibrary.GetTheme(IslandsTheme.AI)
-                : _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme);
+                ? _level.GetAITheme()
+                : _level.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme);
             GridSystem gridSystem = _gridSystemFactory.Create(characterType);
             GridSystemVisual gridSystemVisual = _gridSystemVisualFactory.Create(gridSystem, firstGridPosition, themeSettings);
             

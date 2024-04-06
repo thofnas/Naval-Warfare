@@ -1,22 +1,23 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using Utilities;
-using VInspector;
 
 namespace Themes
 {
-    [CreateAssetMenu(fileName = nameof(ThemeLibrary))]
-    public class ThemeLibrary : ScriptableObject
+    [Serializable]
+    public class ThemeLibrary
     {
-        [SerializeField] private SerializedDictionary<IslandsTheme, ThemeSettings> _islandsThemes = new();
-        [SerializeField] private SerializedDictionary<OceanTheme, ThemeSettings> _oceanThemes = new();
+        [SerializeField] private List<IslandsThemeSettings> _islandsThemes = new();
+        [SerializeField] private List<OceanThemeSetting> _oceanThemes = new();
 
-        public ThemeSettings GetTheme(IslandsTheme islandsTheme) => _islandsThemes[islandsTheme];
-        public ThemeSettings GetTheme(OceanTheme oceanTheme) => _oceanThemes[oceanTheme];
+        public IReadOnlyList<IslandsThemeSettings> IslandsThemes => _islandsThemes;
+        public IReadOnlyList<OceanThemeSetting> OceanThemes => _oceanThemes;
 
         private void OnValidate()
         {
-            Validation.CheckIfEmpty(this, _islandsThemes, nameof(_islandsThemes));
-            Validation.CheckIfEmpty(this, _oceanThemes, nameof(_oceanThemes));
+            Validation.CheckIfEmpty(null, _islandsThemes, nameof(_islandsThemes));
+            Validation.CheckIfEmpty(null, _oceanThemes, nameof(_oceanThemes));
         }
     }
 }
