@@ -9,18 +9,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e27760f96f39441dbf90bb5bfcf5c2c9, type: 3}
+  m_Script: {fileID: 11500000, guid: ef3f38cca9814b779f490995f9f4c423, type: 3}
   m_Name: Acid
   m_EditorClassIdentifier: 
-  MainColor: {r: 0, g: 0, b: 0, a: 0}
-  OutlineColor: {r: 0, g: 0, b: 0, a: 0}
-  BackgroundSprites: []
-  BaseFont: {fileID: 0}
-  GridCellSprites: []
-  GridCellSpriteColor: {r: 1, g: 1, b: 1, a: 1}
-  GridCellSpritePlacingColor: {r: 1, g: 1, b: 1, a: 1}
-  GridCellSpriteDestroyedShipColor: {r: 1, g: 0, b: 0, a: 1}
+  MainColor: {r: 0.40871805, g: 0.8207547, b: 0.24390352, a: 1}
+  OutlineColor: {r: 0.57018024, g: 0.6509434, b: 0.5557583, a: 1}
+  BackgroundSprites:
+  - {fileID: 21300000, guid: 256c1a15ac78d834a96be176df63af74, type: 3}
+  - {fileID: 21300000, guid: c21e2bb678fcf3944af40c609bd1de5d, type: 3}
+  BaseFont: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
+  GridCellSprites:
+  - {fileID: 1810070231, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
+  - {fileID: 1642896885, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
+  - {fileID: -420802148, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
+  - {fileID: -686416011, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
+  - {fileID: -65330500, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
+  - {fileID: 397587049, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
+  - {fileID: -983451538, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
+  - {fileID: -315657877, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
+  - {fileID: -303899553, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
+  GridCellSpriteColor: {r: 0.5727818, g: 0.7830189, b: 0.40258992, a: 1}
+  GridCellSpritePlacingColor: {r: 0.8773585, g: 0.7442104, b: 0.48420256, a: 1}
+  GridCellSpriteDestroyedShipColor: {r: 0.9245283, g: 0.43173724, b: 0.43173724, a: 1}
   GridCellIcons:
-    serializedKvps: []
+    serializedKvps:
+    - Key: 0
+      Value: {fileID: 200349901, guid: f9c056fc38733944b8f7e3dde24a9ff1, type: 3}
+      index: 0
+      isKeyRepeated: 0
+    - Key: 1
+      Value: {fileID: -722098857, guid: f9c056fc38733944b8f7e3dde24a9ff1, type: 3}
+      index: 1
+      isKeyRepeated: 0
     dividerPos: 0.33
-  IslandsTheme: 0

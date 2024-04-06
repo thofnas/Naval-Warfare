@@ -1,6 +1,5 @@
 ﻿using EventBus;
 using Events;
-using Infrastructure;
 using StateMachine;
 using Themes;
 using UI;
@@ -14,13 +13,13 @@ namespace States.MainMenuUIStates
         protected abstract VisualElement Root { get; }
         protected MainMenuUIManager MainMenuUIManager { get; }
         protected StateMachine.StateMachine StateMachine { get; }
-        protected SelectedSettings SelectedSettings { get; }
+        protected SelectedThemeSettings SelectedThemeSettings { get; }
         
         protected BaseState(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine)
         {
             StateMachine = stateMachine;
             MainMenuUIManager = mainMenuUIManager;
-            SelectedSettings = mainMenuUIManager.SelectedSettings;
+            SelectedThemeSettings = mainMenuUIManager.SelectedThemeSettings;
 
             OnThemeChangedBinding = new EventBinding<OnThemeChanged>(GenerateView);
             EventBus<OnThemeChanged>.Register(OnThemeChangedBinding);

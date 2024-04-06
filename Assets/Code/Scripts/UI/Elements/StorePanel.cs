@@ -2,7 +2,6 @@
 using Data;
 using EventBus;
 using Events;
-using Infrastructure;
 using Themes;
 using Themes.Store;
 using UnityEngine.UIElements;
@@ -13,7 +12,7 @@ namespace UI.Elements
 {
     public class StorePanel : VisualElement
     {
-        private readonly SelectedSettings _selectedSettings;
+        private readonly SelectedThemeSettings _selectedThemeSettings;
         private readonly LocalDataProvider _localDataProvider;
         private readonly ThemeSelector _themeSelector;
         private readonly ThemeUnlocker _themeUnlocker;
@@ -23,7 +22,7 @@ namespace UI.Elements
         private List<StoreItemView> _storeItemViews;
 
         public StorePanel(IEnumerable<StoreItem> storeItems, 
-            SelectedSettings selectedSettings,
+            SelectedThemeSettings selectedThemeSettings,
             LocalDataProvider localDataProvider,
             ThemeSelector themeSelector, 
             ThemeUnlocker themeUnlocker,
@@ -31,7 +30,7 @@ namespace UI.Elements
             SelectedThemeChecker selectedThemeChecker, 
             Wallet wallet)
         {
-            _selectedSettings = selectedSettings;
+            _selectedThemeSettings = selectedThemeSettings;
             _localDataProvider = localDataProvider;
             _themeSelector = themeSelector;
             _themeUnlocker = themeUnlocker;
@@ -92,7 +91,7 @@ namespace UI.Elements
             _themeSelector.Visit(storeItemView.StoreItem);
             storeItemView.Select();
             _localDataProvider.Save();
-            _selectedSettings.PlayerThemeSettings = storeItemView.StoreItem.ThemeSettings;
+            _selectedThemeSettings.PlayerThemeSettings = storeItemView.StoreItem.ThemeSettings;
         }
 
         private void StoreItemView_OnClicked(StoreItemView storeItemView)
