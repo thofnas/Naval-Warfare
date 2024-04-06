@@ -18,7 +18,7 @@ public class GameManager : IInitializable, IDisposable
     private EventBinding<OnReadyUIButtonToggled> _readyToggleBinding;
 
     [Inject]
-    private GameManager(StateMachine.StateMachine stateMachine, Level level)
+    private GameManager(StateMachine.StateMachine stateMachine, LevelManager levelManager)
     {
         _stateMachine = stateMachine;
 
@@ -26,7 +26,7 @@ public class GameManager : IInitializable, IDisposable
 
         // creating states
         PlacingShips = new PlacingShips(stateMachine);
-        Battle = new Battle(level, stateMachine, () => IsBattleEnded = true);
+        Battle = new Battle(levelManager, stateMachine, () => IsBattleEnded = true);
         BattleResults = new BattleResults(stateMachine);
 
         _stateMachine.SetState(PlacingShips);

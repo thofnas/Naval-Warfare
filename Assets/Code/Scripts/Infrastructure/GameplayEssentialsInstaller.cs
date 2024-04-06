@@ -70,7 +70,7 @@ namespace Infrastructure
         {
             Container.BindExecutionOrder<GameManager>(-50);
             Container.BindExecutionOrder<TurnSystem>(-40);
-            Container.BindExecutionOrder<Level>(-20);
+            Container.BindExecutionOrder<LevelManager>(-20);
         }
 
         private void InteractionSystem() =>
@@ -84,7 +84,7 @@ namespace Infrastructure
             Container.BindInterfacesAndSelfTo<TurnSystem>().AsSingle()
                 .WithArguments(CharacterType.Player);
 
-        private void Level() => Container.BindInterfacesAndSelfTo<Level>().AsSingle();
+        private void Level() => Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle();
 
         private void Difficulty()
         {

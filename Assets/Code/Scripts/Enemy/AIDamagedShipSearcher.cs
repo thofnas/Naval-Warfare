@@ -9,12 +9,12 @@ namespace Enemy
 {
     public class AIDamagedShipSearcher
     {
-        private readonly Level _level;
+        private readonly LevelManager _levelManager;
 
         [Inject]
-        private AIDamagedShipSearcher(Level level)
+        private AIDamagedShipSearcher(LevelManager levelManager)
         {
-            _level = level;
+            _levelManager = levelManager;
         }
 
         public bool TrySearchForShip(CharacterType characterType, List<CellPosition> shotUndestroyedCellPositions, out CellPosition selectedCellPosition)
@@ -26,7 +26,7 @@ namespace Enemy
             if (!potentialTargets.Any())
             {
                 potentialTargets = shotUndestroyedCellPositions
-                    .SelectMany(pos => _level.GetValidForShootingSidesCellPositions(characterType, pos))
+                    .SelectMany(pos => _levelManager.GetValidForShootingSidesCellPositions(characterType, pos))
                     .ToList();
             }
         
@@ -47,7 +47,7 @@ namespace Enemy
                 foreach (Direction direction in directions)
                 {
                     CellPosition adjacentPosition = GetAdjacentPosition(cellPosition, direction);
-                    if (_level.IsShipDamagedUndestroyedOnCellPosition(characterType, adjacentPosition) && 
+                    if (_levelManager.IsShipDamagedUndestroyedOnCellPosition(characterType, adjacentPosition) && 
                         TryFindUnshotCellInDirection(direction, characterType, adjacentPosition, out CellPosition unshotCellPosition))
                     {
                         result.Add(unshotCellPosition);
@@ -78,35 +78,35 @@ namespace Enemy
             {
                 CellPosition nextCell = GetAdjacentPosition(checkingPosition, direction);
 
-                if (_level.IsCellOutOfBounds(nextCell))
+                if (_levelManager.IsCellOutOfBounds(nextCell))
                 {
                     unshotCell = CellPosition.Zero;
                     return false;
                 }
 
-                if (_level.IsShipDestroyedOnCellPosition(characterType, nextCell))
+                if (_levelManager.IsShipDestroyedOnCellPosition(characterType, nextCell))
                 {
                     unshotCell = CellPosition.Zero;
                     return false;
                 }
 
                 // skip if was hit and no ship in there (missed)
-                if (!_level.IsCellPositionUnshot(characterType, nextCell) &&
-                    !_level.HasShipOnCellPosition(characterType, nextCell))
+                if (!_levelManager.IsCellPositionUnshot(characterType, nextCell) &&
+                    !_levelManager.HasShipOnCellPosition(characterType, nextCell))
                 {
                     unshotCell = CellPosition.Zero;
                     return false;
                 }
 
                 //skip damaged grid cell with a ship
-                if (_level.IsShipDamagedOnCellPosition(characterType, nextCell))
+                if (_levelManager.IsShipDamagedOnCellPosition(characterType, nextCell))
                 {
                     checkingPosition = nextCell;
                     continue;
                 }
 
 
-                if (_level.IsCellPositionValidForShooting(characterType, nextCell))
+                if (_levelManager.IsCellPositionValidForShooting(characterType, nextCell))
                 {
                     unshotCell = nextCell;
                     return true;

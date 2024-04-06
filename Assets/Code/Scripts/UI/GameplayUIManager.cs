@@ -28,7 +28,7 @@ namespace UI
         private EventBinding<OnBattleResultStateEntered> _onBattleResultStateEntered;
 
         [Inject]
-        private void Construct(GameManager gameManager, Level level, StateMachine.StateMachine stateMachine,
+        private void Construct(GameManager gameManager, LevelManager levelManager, StateMachine.StateMachine stateMachine,
             ThemeSettings themeSettings)
         {
             _gameManager = gameManager;

@@ -19,7 +19,7 @@ namespace Ship
         private int _health;
         private bool _isDestroyed;
         private bool _isHorizontal;
-        private Level _level;
+        private LevelManager _levelManager;
         private Vector3 _mouseOffset;
         private List<CellPosition> _occupiedCellPositions = new();
 
@@ -57,17 +57,17 @@ namespace Ship
         {
             if (!CanDragAndPlace()) return;
 
-            if (!_level.TryGetValidGridCellPositions(_characterType, transform.position, this,
+            if (!_levelManager.TryGetValidGridCellPositions(_characterType, transform.position, this,
                     out List<CellPosition> cellPositions)) return;
 
             TrySetNewShipPositions(cellPositions);
         }
 
         [Inject]
-        private void Construct(GameManager gameManager, Level level)
+        private void Construct(GameManager gameManager, LevelManager levelManager)
         {
             _gameManager = gameManager;
-            _level = level;
+            _levelManager = levelManager;
         }
 
         public Ship Init(CharacterType characterType, int shipLength)
@@ -91,10 +91,10 @@ namespace Ship
 
         public bool TrySetNewShipPositions(List<CellPosition> newCellPositions)
         {
-            if (!_level.CanPlaceShipAt(_characterType, newCellPositions[0], this))
+            if (!_levelManager.CanPlaceShipAt(_characterType, newCellPositions[0], this))
                 return false;
 
-            transform.position = (Vector3)_level.GetWorldCellPosition(_characterType, newCellPositions[0]) +
+            transform.position = (Vector3)_levelManager.GetWorldCellPosition(_characterType, newCellPositions[0]) +
                                  GetSpriteOffset();
 
             EventBus<OnShipMoved>.Invoke(
@@ -118,7 +118,7 @@ namespace Ship
         {
             _isHorizontal = !_isHorizontal;
 
-            if (!_level.TryGetValidGridCellPositions(_characterType, transform.position, this,
+            if (!_levelManager.TryGetValidGridCellPositions(_characterType, transform.position, this,
                     out List<CellPosition> cellPositions))
             {
                 _isHorizontal = !_isHorizontal;
@@ -157,7 +157,7 @@ namespace Ship
         {
             // search for damaged cells
             foreach (CellPosition cellPosition in _occupiedCellPositions.Where(cellPosition =>
-                         _level.WasGridCellHit(_characterType, cellPosition)))
+                         _levelManager.WasGridCellHit(_characterType, cellPosition)))
             {
                 damagedCellPosition = cellPosition;
                 return true;
@@ -169,8 +169,8 @@ namespace Ship
 
         public Vector3 GetSpriteOffset() =>
             IsHorizontal()
-                ? new Vector3(_level.GetCellSize(_characterType) * (_shipLength - 1) * 0.5f, 0f, 0f)
-                : new Vector3(0f, _level.GetCellSize(_characterType) * (_shipLength - 1) * 0.5f, 0f);
+                ? new Vector3(_levelManager.GetCellSize(_characterType) * (_shipLength - 1) * 0.5f, 0f, 0f)
+                : new Vector3(0f, _levelManager.GetCellSize(_characterType) * (_shipLength - 1) * 0.5f, 0f);
 
         public float GetZRotation() =>
             IsHorizontal()

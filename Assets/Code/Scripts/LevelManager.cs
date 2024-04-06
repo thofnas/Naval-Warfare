@@ -5,7 +5,7 @@ using Grid;
 using UnityEngine;
 using Zenject;
 
-public class Level : IInitializable, IDisposable
+public class LevelManager : IInitializable, IDisposable
 {
     private readonly Dictionary<CharacterType, GridSystem> _gridSystems = new();
     private GridSystemSpawner _gridSystemSpawner;

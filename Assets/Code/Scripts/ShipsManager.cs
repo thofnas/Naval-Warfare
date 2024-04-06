@@ -10,15 +10,15 @@ using Random = UnityEngine.Random;
 public class ShipsManager : IInitializable, IDisposable
 {
     private Dictionary<CharacterType, List<Ship.Ship>> _allShips;
-    private Level _level;
+    private LevelManager _levelManager;
     private EventBinding<OnRandomizeButtonClicked> _onRandomizeButtonClicked;
     private EventBinding<OnShipDestroyed> _shipDestroyedEventBinding;
     private EventBinding<OnShipSpawned> _shipSpawnedEventBinding;
 
     [Inject]
-    private void Construct(Level level)
+    private void Construct(LevelManager levelManager)
     {
-        _level = level;
+        _levelManager = levelManager;
 
         _allShips = new Dictionary<CharacterType, List<Ship.Ship>>
         {
@@ -73,18 +73,18 @@ public class ShipsManager : IInitializable, IDisposable
     {
         foreach (Ship.Ship ship in ships)
         {
-            ship.TrySetNewShipPositions(_level.GetValidRandomCellPositions(ship));
+            ship.TrySetNewShipPositions(_levelManager.GetValidRandomCellPositions(ship));
             if (Random.value > 0.5f) ship.TryRotate();
         }
     }
     
     private void PlaceShipsOnGrid(Ship.Ship ship, CharacterType characterType)
     {
-        for (var x = 0; x < _level.GetGridSystemWidth(characterType); x++)
-        for (var y = 0; y < _level.GetGridSystemHeight(characterType); y++)
+        for (var x = 0; x < _levelManager.GetGridSystemWidth(characterType); x++)
+        for (var y = 0; y < _levelManager.GetGridSystemHeight(characterType); y++)
         {
-            if (!_level.TryGetValidGridCellPositions(characterType,
-                    _level.GetWorldCellPosition(characterType, new CellPosition(x, y)), ship,
+            if (!_levelManager.TryGetValidGridCellPositions(characterType,
+                    _levelManager.GetWorldCellPosition(characterType, new CellPosition(x, y)), ship,
                     out List<CellPosition> validCellPositions))
                 continue;
 

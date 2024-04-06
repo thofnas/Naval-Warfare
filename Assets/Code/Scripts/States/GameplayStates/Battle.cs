@@ -6,13 +6,13 @@ namespace States.GameplayStates
 {
     public class Battle : BaseState
     {
-        private readonly Level _level;
+        private readonly LevelManager _levelManager;
         private readonly Action _onStateExit;
         private EventBinding<OnCameraOrthographicSizeChanged> _onCameraOrthographicSizeChanged;
 
-        public Battle(Level level, StateMachine.StateMachine stateMachine, Action onStateExit) : base(stateMachine)
+        public Battle(LevelManager levelManager, StateMachine.StateMachine stateMachine, Action onStateExit) : base(stateMachine)
         {
-            _level = level;
+            _levelManager = levelManager;
             _onStateExit = onStateExit;
         }
 
@@ -21,9 +21,9 @@ namespace States.GameplayStates
             base.OnEnter();
             EventBus<OnBattleStateEntered>.Invoke(new OnBattleStateEntered());
 
-            _level.MoveGridsToBattle();
+            _levelManager.MoveGridsToBattle();
             
-            _onCameraOrthographicSizeChanged = new EventBinding<OnCameraOrthographicSizeChanged>(_level.MoveGridsToBattle);
+            _onCameraOrthographicSizeChanged = new EventBinding<OnCameraOrthographicSizeChanged>(_levelManager.MoveGridsToBattle);
             EventBus<OnCameraOrthographicSizeChanged>.Register(_onCameraOrthographicSizeChanged);
         }
 

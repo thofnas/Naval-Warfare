@@ -23,7 +23,7 @@ namespace Ship
         [SerializeField] [SelfAndChildren] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Material _spriteOutline;
         [SerializeField] private Material _spriteFlash;
-        private Level _level;
+        private LevelManager _levelManager;
         private EventBinding<OnCellHit> _onCellHit;
         private SpriteRenderer _placementPreviewRenderer;
         private List<CellPosition> _previewCellPositions = new();
@@ -52,7 +52,7 @@ namespace Ship
         {
             if (!_ship.CanDragAndPlace()) return;
 
-            if (!_level.TryGetValidGridCellPositions(_ship.GetCharacterType(), transform.position, _ship,
+            if (!_levelManager.TryGetValidGridCellPositions(_ship.GetCharacterType(), transform.position, _ship,
                     out List<CellPosition> cellPositions))
                 return;
 
@@ -62,7 +62,7 @@ namespace Ship
                 new OnShipPlacementPreviewMoved(_ship, _previewCellPositions, cellPositions));
             _placementPreviewRenderer.transform
                 .DOMove(
-                    (Vector3)_level.GetWorldCellPosition(_ship.GetCharacterType(), cellPositions.First()) +
+                    (Vector3)_levelManager.GetWorldCellPosition(_ship.GetCharacterType(), cellPositions.First()) +
                     _ship.GetSpriteOffset(), 0.2f).SetEase(Ease.InCubic);
             _previewCellPositions = cellPositions;
         }
@@ -85,9 +85,9 @@ namespace Ship
         }
 
         [Inject]
-        private void Construct(Level level, Settings settings)
+        private void Construct(LevelManager levelManager, Settings settings)
         {
-            _level = level;
+            _levelManager = levelManager;
             _settings = settings;
         }
 
@@ -153,7 +153,7 @@ namespace Ship
             flashSequence.Append(spriteFlashMaterial.DOFloat(0f, s_flashAmount,
                 _settings.SpriteFlashDuration));
             
-            Instantiate(GameResources.Instance.ShipHitExplosionPrefab, _level.GetWorldCellPosition(e.WoundedCharacterType, e.HitCellPosition), Quaternion.identity);
+            Instantiate(GameResources.Instance.ShipHitExplosionPrefab, _levelManager.GetWorldCellPosition(e.WoundedCharacterType, e.HitCellPosition), Quaternion.identity);
         }
 
         [Serializable]

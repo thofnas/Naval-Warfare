@@ -8,16 +8,16 @@ namespace Enemy.Difficulties
     {
         private readonly AIDamagedShipSearcher _aiDamagedShipSearcher;
         private readonly DebugSettings _debugSettings;
-        private readonly Level _level;
+        private readonly LevelManager _levelManager;
         private readonly ShipsManager _shipsManager;
         private readonly TurnSystem _turnSystem;
 
-        public Easy(ShipsManager shipsManager, TurnSystem turnSystem, Level level,
+        public Easy(ShipsManager shipsManager, TurnSystem turnSystem, LevelManager levelManager,
             AIDamagedShipSearcher aiDamagedShipSearcher, DebugSettings debugSettings)
         {
             _shipsManager = shipsManager;
             _turnSystem = turnSystem;
-            _level = level;
+            _levelManager = levelManager;
             _aiDamagedShipSearcher = aiDamagedShipSearcher;
             _debugSettings = debugSettings;
         }
@@ -37,11 +37,11 @@ namespace Enemy.Difficulties
 
             if (_shipsManager.HasUndestroyedShip())
                 if (_aiDamagedShipSearcher.TrySearchForShip(characterType,
-                        _level.GetHitUndestroyedCellPositions(characterType),
+                        _levelManager.GetHitUndestroyedCellPositions(characterType),
                         out CellPosition selectedCellPosition))
                     return new List<EnemyAIAction> { new(selectedCellPosition, 2) };
 
-            CellPosition cellPosition = _level.GetRandomUnshotCellPosition(characterType);
+            CellPosition cellPosition = _levelManager.GetRandomUnshotCellPosition(characterType);
 
             return new List<EnemyAIAction> { new(cellPosition, 2) };
         }

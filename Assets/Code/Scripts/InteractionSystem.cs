@@ -8,7 +8,7 @@ using Zenject;
 
 public class InteractionSystem : ITickable
 {
-    private Level _level;
+    private LevelManager _levelManager;
     private TurnSystem _turnSystem;
     // ugly
     private readonly Dictionary<CharacterType, CellPosition> _selectedCellPosition = new() {
@@ -19,10 +19,10 @@ public class InteractionSystem : ITickable
     private GameManager _gameManager;
 
     [Inject]
-    private void Construct(TurnSystem turnSystem, Level level, GameManager gameManager)
+    private void Construct(TurnSystem turnSystem, LevelManager levelManager, GameManager gameManager)
     {
         _turnSystem = turnSystem;
-        _level = level;
+        _levelManager = levelManager;
         _gameManager = gameManager;
     }
 
@@ -41,10 +41,10 @@ public class InteractionSystem : ITickable
 
         CharacterType characterType = _turnSystem.WhoWillTakeAHit();
         Vector2 mousePos = MouseWorld2D.GetPosition();
-        CellPosition cellPosition = _level.GetCellPosition(characterType, mousePos);
+        CellPosition cellPosition = _levelManager.GetCellPosition(characterType, mousePos);
 
-        if (Vector2.Distance(mousePos, _level.GetWorldCellPosition(characterType, cellPosition)) >
-            _level.GetCellSize(characterType) * interactedCellMaxDistance)
+        if (Vector2.Distance(mousePos, _levelManager.GetWorldCellPosition(characterType, cellPosition)) >
+            _levelManager.GetCellSize(characterType) * interactedCellMaxDistance)
             return;
 
         if (_selectedCellPosition[_turnSystem.WhoWillTakeAHit()] == cellPosition)
