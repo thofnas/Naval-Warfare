@@ -13,5 +13,13 @@ MonoBehaviour:
   m_Name: MapLibrary
   m_EditorClassIdentifier: 
   _maps:
-    serializedKvps: []
+    serializedKvps:
+    - Key: 10
+      Value: {fileID: 11400000, guid: ed9d1591222306f4787afdc27e89fe4d, type: 2}
+      index: 0
+      isKeyRepeated: 0
+    - Key: 20
+      Value: {fileID: 11400000, guid: 6c94fbd4fee73fa42a070a412b25fe32, type: 2}
+      index: 1
+      isKeyRepeated: 0
     dividerPos: 0.33

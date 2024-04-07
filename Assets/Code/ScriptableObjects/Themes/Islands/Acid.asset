@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: -983451538, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
   - {fileID: -315657877, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
   - {fileID: -303899553, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
-  GridCellSpriteColor: {r: 0.5727818, g: 0.7830189, b: 0.40258992, a: 1}
+  GridCellSpriteColor: {r: 0.5652358, g: 0.7735849, b: 0.3977394, a: 1}
   GridCellSpritePlacingColor: {r: 0.8773585, g: 0.7442104, b: 0.48420256, a: 1}
   GridCellSpriteDestroyedShipColor: {r: 0.9245283, g: 0.43173724, b: 0.43173724, a: 1}
   GridCellIcons:

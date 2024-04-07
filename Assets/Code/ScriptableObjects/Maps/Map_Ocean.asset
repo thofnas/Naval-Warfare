@@ -16,3 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f8f73393de7f56e429d144de31e82226, type: 2}
   - {fileID: 11400000, guid: c0f196e83fe616c4eabb11907a890772, type: 2}
   AITheme: {fileID: 11400000, guid: f8f73393de7f56e429d144de31e82226, type: 2}
+  MapType: 20
