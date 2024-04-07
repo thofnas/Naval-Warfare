@@ -2,6 +2,7 @@
 using Data;
 using EventBus;
 using Events;
+using Infrastructure;
 using Themes;
 using Themes.Store;
 using UnityEngine.UIElements;
@@ -91,7 +92,7 @@ namespace UI.Elements
             _themeSelector.Visit(storeItemView.StoreItem);
             storeItemView.Select();
             _localDataProvider.Save();
-            _selectedThemeSettings.PlayerThemeSettings = storeItemView.StoreItem.ThemeSettings;
+            _selectedThemeSettings.PlayerTheme = storeItemView.StoreItem.Theme;
         }
 
         private void StoreItemView_OnClicked(StoreItemView storeItemView)

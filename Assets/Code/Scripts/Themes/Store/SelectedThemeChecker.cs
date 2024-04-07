@@ -1,8 +1,7 @@
 ﻿using Data;
-using Themes.Store;
 using Zenject;
 
-namespace Themes
+namespace Themes.Store
 {
     public class SelectedThemeChecker : IStoreItemVisitor
     {

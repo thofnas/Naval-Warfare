@@ -8,12 +8,12 @@ namespace Infrastructure
 {
     public class MainMenuInstaller : MonoInstaller
     {        
-        private ThemeSettings _playerThemeSettings;
+        private Theme _playerTheme;
 
         [Inject]
-        private void Construct(ThemeSettings playerThemeSettings)
+        private void Construct(Theme playerTheme)
         {
-            _playerThemeSettings = playerThemeSettings;
+            _playerTheme = playerTheme;
         }
         
         public override void InstallBindings()

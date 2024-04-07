@@ -7,11 +7,11 @@ namespace Themes
     [CreateAssetMenu(fileName = nameof(ThemeLibrary))]
     public class ThemeLibrary : ScriptableObject
     {
-        [SerializeField] private SerializedDictionary<IslandsTheme, ThemeSettings> _islandsThemes = new();
-        [SerializeField] private SerializedDictionary<OceanTheme, ThemeSettings> _oceanThemes = new();
+        [SerializeField] private SerializedDictionary<IslandsTheme, Theme> _islandsThemes = new();
+        [SerializeField] private SerializedDictionary<OceanTheme, Theme> _oceanThemes = new();
 
-        public ThemeSettings GetTheme(IslandsTheme islandsTheme) => _islandsThemes[islandsTheme];
-        public ThemeSettings GetTheme(OceanTheme oceanTheme) => _oceanThemes[oceanTheme];
+        public Theme GetTheme(IslandsTheme islandsTheme) => _islandsThemes[islandsTheme];
+        public Theme GetTheme(OceanTheme oceanTheme) => _oceanThemes[oceanTheme];
 
         private void OnValidate()
         {

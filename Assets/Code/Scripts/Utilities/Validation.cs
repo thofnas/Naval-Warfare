@@ -73,5 +73,28 @@ namespace Utilities
 
             throw new InvalidOperationException(errorMessage.ToString());
         }
+        
+        public static void CheckDictionaryByProperty<TKey, TValue>(
+            Dictionary<TKey, TValue> dictionary,
+            Func<KeyValuePair<TKey, TValue>, bool> condition,
+            string propertyName)
+        {
+            var invalidEntries = dictionary
+                .Where(pair => !condition(pair))
+                .ToList();
+
+            if (invalidEntries.Any())
+            {
+                var errorMessage = new StringBuilder();
+                errorMessage.AppendLine($"Invalid entries found in {propertyName}:");
+
+                foreach (var entry in invalidEntries)
+                {
+                    errorMessage.AppendLine($"- Key: {entry.Key}, Value: {entry.Value}");
+                }
+
+                throw new InvalidOperationException(errorMessage.ToString());
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Earth
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Earth
-  <ThemeSettings>k__BackingField: {fileID: 11400000, guid: c0f196e83fe616c4eabb11907a890772, type: 2}
+  <Theme>k__BackingField: {fileID: 11400000, guid: c0f196e83fe616c4eabb11907a890772, type: 2}
   <IsPurchasable>k__BackingField: 0
   <Price>k__BackingField: 0
   <OceanType>k__BackingField: 20

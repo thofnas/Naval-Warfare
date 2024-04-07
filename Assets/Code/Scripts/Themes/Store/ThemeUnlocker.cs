@@ -1,10 +1,9 @@
 ﻿using Data;
-using Events;
-using Themes.Store;
 using EventBus;
+using Events;
 using Zenject;
 
-namespace Themes
+namespace Themes.Store
 {
     public class ThemeUnlocker : IStoreItemVisitor
     {

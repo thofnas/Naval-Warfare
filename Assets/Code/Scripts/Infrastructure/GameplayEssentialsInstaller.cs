@@ -14,12 +14,12 @@ namespace Infrastructure
     public class GameplayEssentialsInstaller : MonoInstaller, IValidatable
     {
         [SerializeField] private GameplayUIManager _gameplayUIManager;
-        private ThemeSettings _playerThemeSettings;
+        private Theme _playerTheme;
 
         [Inject]
-        private void Construct(ThemeSettings playerThemeSettings)
+        private void Construct(Theme playerTheme)
         {
-            _playerThemeSettings = playerThemeSettings;
+            _playerTheme = playerTheme;
         }
         
         public override void InstallBindings()
@@ -53,12 +53,12 @@ namespace Infrastructure
 
         private void GridSystemVisualFactory() =>
             Container
-                .BindFactory<GridSystem, Vector3, ThemeSettings, GridSystemVisual, GridSystemVisual.Factory>()
+                .BindFactory<GridSystem, Vector3, Theme, GridSystemVisual, GridSystemVisual.Factory>()
                 .FromNewComponentOnNewGameObject();
 
         private void GridCellVisualFactory() =>
             Container
-                .BindFactory<GridCell, Vector2, Transform, ThemeSettings, Sprite, GridCellVisual, GridCellVisual.Factory>()
+                .BindFactory<GridCell, Vector2, Transform, Theme, Sprite, GridCellVisual, GridCellVisual.Factory>()
                 .FromComponentInNewPrefab(GameResources.Instance.GridCellVisualPrefab);
 
         private void GridSystemFactory() =>

@@ -1,10 +1,8 @@
 ﻿using System.Linq;
 using Data;
-using Themes.Store;
-using UnityEngine;
 using Zenject;
 
-namespace Themes
+namespace Themes.Store
 {
     public class OwnedThemesChecker : IStoreItemVisitor
     {

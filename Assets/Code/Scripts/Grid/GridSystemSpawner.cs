@@ -26,11 +26,11 @@ namespace Grid
 
         public GridSystem Spawn(CharacterType characterType, Vector2 firstGridPosition)
         {
-            ThemeSettings themeSettings = characterType == CharacterType.Enemy
+            Theme theme = characterType == CharacterType.Enemy
                 ? _themeLibrary.GetTheme(IslandsTheme.AI)
                 : _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme);
             GridSystem gridSystem = _gridSystemFactory.Create(characterType);
-            GridSystemVisual gridSystemVisual = _gridSystemVisualFactory.Create(gridSystem, firstGridPosition, themeSettings);
+            GridSystemVisual gridSystemVisual = _gridSystemVisualFactory.Create(gridSystem, firstGridPosition, theme);
             
             gridSystem.SetGridSystemVisual(gridSystemVisual);
 

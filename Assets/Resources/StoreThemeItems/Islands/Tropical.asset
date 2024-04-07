@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tropical
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Tropical
-  <ThemeSettings>k__BackingField: {fileID: 11400000, guid: cffc28d7b22fd5d48868c434ce19b028, type: 2}
+  <Theme>k__BackingField: {fileID: 11400000, guid: cffc28d7b22fd5d48868c434ce19b028, type: 2}
   <IsPurchasable>k__BackingField: 1
   <Price>k__BackingField: 0
   <IslandsType>k__BackingField: 20

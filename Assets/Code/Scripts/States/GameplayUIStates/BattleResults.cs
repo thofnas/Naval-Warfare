@@ -51,13 +51,13 @@ namespace States.GameplayUIStates
             _resultsLabel = new Label();
             containerResults.Add(_resultsLabel);
 
-            StyledButton restartButton = new(GameplayUIManager.ThemeSettings, containerButtons,
+            StyledButton restartButton = new(GameplayUIManager.Theme, containerButtons,
                 () => SceneManager.LoadScene("Gameplay"))
             {
                 text = "Restart"
             };
 
-            StyledButton goToMainMenuButton = new(GameplayUIManager.ThemeSettings, containerButtons,
+            StyledButton goToMainMenuButton = new(GameplayUIManager.Theme, containerButtons,
                 () => SceneManager.LoadScene("MainMenu"))
             {
                 text = "Main menu"

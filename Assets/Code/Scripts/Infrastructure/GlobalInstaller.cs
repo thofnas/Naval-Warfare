@@ -1,12 +1,15 @@
 ﻿using Data;
 using Misc;
 using Themes;
+using Themes.Store;
+using UnityEngine;
 using Zenject;
 
 namespace Infrastructure
 {
     public class GlobalInstaller : MonoInstaller
     {
+        [SerializeField] private ThemeLibrary _themeLibrary;
         private PersistentData _persistentData;
         private LocalDataProvider _dataProvider;
 
@@ -25,8 +28,14 @@ namespace Infrastructure
             BindThemeVisitors();
             BindWallet();
 
-            Container.BindInstance(_persistentData);
+            BindPersistentData();
+            
+            var selectedThemeSettings = new SelectedThemeSettings(_themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme));
+            Container.BindInstance(selectedThemeSettings);
+            Container.BindInstance(selectedThemeSettings.PlayerTheme);
         }
+
+        private void BindPersistentData() => Container.BindInstance(_persistentData);
 
         private void BindLocalDataProvider() => Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().NonLazy();
 

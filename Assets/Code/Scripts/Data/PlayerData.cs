@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Map;
 using Newtonsoft.Json;
 using Themes;
-using UnityEngine;
 
 namespace Data
 {
     public class PlayerData
     {
+        private MapType _selectedMapType;
         private IslandsTheme _selectedIslandsTheme;
         private readonly List<IslandsTheme> _ownedIslandsThemesList;
         private OceanTheme _selectedOceanTheme;
@@ -18,7 +19,8 @@ namespace Data
         public PlayerData()
         {
             _money = 50;
-
+            _selectedMapType = MapType.Islands;
+            
             _selectedIslandsTheme = IslandsTheme.Tropical;
             _ownedIslandsThemesList = new List<IslandsTheme> { _selectedIslandsTheme };
             _selectedOceanTheme = OceanTheme.Earth;
@@ -26,13 +28,14 @@ namespace Data
         }
 
         [JsonConstructor]
-        public PlayerData(int money, IslandsTheme selectedIslandsTheme, List<IslandsTheme> ownedIslandsThemesList, OceanTheme selectedOceanTheme, List<OceanTheme> ownedOceanThemesList)
+        public PlayerData(int money, IslandsTheme selectedIslandsTheme, List<IslandsTheme> ownedIslandsThemesList, OceanTheme selectedOceanTheme, List<OceanTheme> ownedOceanThemesList, MapType selectedMapType)
         {
             _money = money;
             _selectedIslandsTheme = selectedIslandsTheme;
             _ownedIslandsThemesList = ownedIslandsThemesList;
             _selectedOceanTheme = selectedOceanTheme;
             _ownedOceanThemesList = ownedOceanThemesList;
+            _selectedMapType = selectedMapType;
         }
 
         public int Money
