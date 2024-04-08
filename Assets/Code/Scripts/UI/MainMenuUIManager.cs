@@ -12,7 +12,7 @@ namespace UI
     [DisallowMultipleComponent]
     public class MainMenuUIManager : MonoBehaviour
     {
-        public SelectedThemeSettings SelectedThemeSettings { get; private set; }
+        public SelectedTheme SelectedTheme { get; private set; }
         public MainMenu MainMenuState { get; private set; }
         public Store StoreState { get; private set; }
         public Options OptionsState { get; private set; }
@@ -35,7 +35,7 @@ namespace UI
 
         [Inject]
         private void Construct(StateMachine.StateMachine stateMachine, 
-            SelectedThemeSettings selectedThemeSettings,
+            SelectedTheme selectedTheme,
             StorePanel.Factory storePanelFactory, 
             Wallet wallet, 
             ThemeUnlocker themeUnlocker,
@@ -45,7 +45,7 @@ namespace UI
             SelectedThemeChecker selectedThemeChecker)
         {
             _stateMachine = stateMachine;
-            SelectedThemeSettings = selectedThemeSettings;
+            SelectedTheme = selectedTheme;
             StorePanelFactory = storePanelFactory;
             _wallet = wallet;
             ThemeUnlocker = themeUnlocker;

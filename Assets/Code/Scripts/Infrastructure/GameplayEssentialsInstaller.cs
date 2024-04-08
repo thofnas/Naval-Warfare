@@ -26,8 +26,6 @@ namespace Infrastructure
         {
             InitExecutionOrder();
 
-            BackgroundAnimator();
-            
             TurnSystem();
             GameManager();
             ShipsManager();
@@ -43,6 +41,7 @@ namespace Infrastructure
             AIDamagedShipSearcher();
             Difficulty();
             CameraController();
+            BackgroundAnimator();
         }
 
         private void BackgroundAnimator() => Container.BindInterfacesAndSelfTo<BackgroundAnimator>().FromComponentInNewPrefab(GameResources.Instance.BackgroundPrefab).AsSingle().NonLazy();

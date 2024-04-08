@@ -14,13 +14,13 @@ namespace States.MainMenuUIStates
         protected abstract VisualElement Root { get; }
         protected MainMenuUIManager MainMenuUIManager { get; }
         protected StateMachine.StateMachine StateMachine { get; }
-        protected SelectedThemeSettings SelectedThemeSettings { get; }
+        protected SelectedTheme SelectedTheme { get; }
         
         protected BaseState(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine)
         {
             StateMachine = stateMachine;
             MainMenuUIManager = mainMenuUIManager;
-            SelectedThemeSettings = mainMenuUIManager.SelectedThemeSettings;
+            SelectedTheme = mainMenuUIManager.SelectedTheme;
 
             OnThemeChangedBinding = new EventBinding<OnThemeChanged>(GenerateView);
             EventBus<OnThemeChanged>.Register(OnThemeChangedBinding);

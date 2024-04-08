@@ -4,11 +4,11 @@ using Themes;
 
 namespace Infrastructure
 {
-    public class SelectedThemeSettings
+    public class SelectedTheme
     {
         private Theme _playerTheme;
 
-        public SelectedThemeSettings(Theme startingTheme)
+        public SelectedTheme(Theme startingTheme)
         {
             _playerTheme = startingTheme;
         }

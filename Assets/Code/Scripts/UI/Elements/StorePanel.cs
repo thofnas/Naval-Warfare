@@ -13,7 +13,7 @@ namespace UI.Elements
 {
     public class StorePanel : VisualElement
     {
-        private readonly SelectedThemeSettings _selectedThemeSettings;
+        private readonly SelectedTheme _selectedTheme;
         private readonly LocalDataProvider _localDataProvider;
         private readonly ThemeSelector _themeSelector;
         private readonly ThemeUnlocker _themeUnlocker;
@@ -23,7 +23,7 @@ namespace UI.Elements
         private List<StoreItemView> _storeItemViews;
 
         public StorePanel(IEnumerable<StoreItem> storeItems, 
-            SelectedThemeSettings selectedThemeSettings,
+            SelectedTheme selectedTheme,
             LocalDataProvider localDataProvider,
             ThemeSelector themeSelector, 
             ThemeUnlocker themeUnlocker,
@@ -31,7 +31,7 @@ namespace UI.Elements
             SelectedThemeChecker selectedThemeChecker, 
             Wallet wallet)
         {
-            _selectedThemeSettings = selectedThemeSettings;
+            _selectedTheme = selectedTheme;
             _localDataProvider = localDataProvider;
             _themeSelector = themeSelector;
             _themeUnlocker = themeUnlocker;
@@ -92,7 +92,7 @@ namespace UI.Elements
             _themeSelector.Visit(storeItemView.StoreItem);
             storeItemView.Select();
             _localDataProvider.Save();
-            _selectedThemeSettings.PlayerTheme = storeItemView.StoreItem.Theme;
+            _selectedTheme.PlayerTheme = storeItemView.StoreItem.Theme;
         }
 
         private void StoreItemView_OnClicked(StoreItemView storeItemView)

@@ -1,4 +1,6 @@
-﻿using Data;
+﻿using System;
+using Data;
+using Map;
 using Misc;
 using Themes;
 using Themes.Store;
@@ -10,6 +12,7 @@ namespace Infrastructure
     public class GlobalInstaller : MonoInstaller
     {
         [SerializeField] private ThemeLibrary _themeLibrary;
+        [SerializeField] private MapLibrary _mapLibrary;
         private PersistentData _persistentData;
         private LocalDataProvider _dataProvider;
 
@@ -30,9 +33,10 @@ namespace Infrastructure
 
             BindPersistentData();
             
-            var selectedThemeSettings = new SelectedThemeSettings(_themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme));
-            Container.BindInstance(selectedThemeSettings);
-            Container.BindInstance(selectedThemeSettings.PlayerTheme);
+            SelectedTheme();
+
+            Container.BindInstance(_mapLibrary);
+            Container.BindInstance(_themeLibrary);
         }
 
         private void BindPersistentData() => Container.BindInstance(_persistentData);
@@ -65,5 +69,21 @@ namespace Infrastructure
         private void BindStateMachine() => Container.BindInterfacesAndSelfTo<StateMachine.StateMachine>().AsTransient();
         
         private void BindAsyncProcessor() => Container.Bind<AsyncProcessor>().FromNewComponentOnNewGameObject().AsSingle();
+
+        private void SelectedTheme()
+        {
+            Theme test = _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme);
+            
+            Theme theme = _persistentData.PlayerData.SelectedMapType switch
+            {
+                MapType.Islands => _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme),
+                MapType.Ocean => _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedOceanTheme),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            
+            var selectedTheme = new SelectedTheme(theme);
+            Container.BindInstance(selectedTheme);
+            Container.BindInstance(selectedTheme.PlayerTheme);
+        }
     }
 }

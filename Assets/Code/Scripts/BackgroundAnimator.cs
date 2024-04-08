@@ -2,6 +2,7 @@
 using Data;
 using EventBus;
 using Events;
+using Map;
 using Themes;
 using UniRx;
 using UnityEngine;
@@ -25,18 +26,20 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
     private int _player1SpriteIndex;
     private int _player2SpriteIndex;
     private PersistentData _persistentData;
+    private MapLibrary _mapLibrary;
     private ThemeLibrary _themeLibrary;
 
     private EventBinding<OnThemeChanged> _onThemeChanged;
     private IDisposable _observableInterval;
 
     [Inject]
-    private void Construct(PersistentData persistentData, ThemeLibrary themeLibrary)
+    private void Construct(PersistentData persistentData, MapLibrary mapLibrary, ThemeLibrary themeLibrary)
     {
         _persistentData = persistentData;
+        _mapLibrary = mapLibrary;
         _themeLibrary = themeLibrary;
 
-        _player2Sprites = themeLibrary.GetTheme(IslandsTheme.AI).BackgroundSprites;
+        _player2Sprites = mapLibrary.Maps[persistentData.PlayerData.SelectedMapType].AITheme.BackgroundSprites;
 
         _onThemeChanged = new EventBinding<OnThemeChanged>(Initialize);
         EventBus<OnThemeChanged>.Register(_onThemeChanged);
