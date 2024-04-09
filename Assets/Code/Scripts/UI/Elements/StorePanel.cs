@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Data;
-using EventBus;
-using Events;
 using Infrastructure;
+using Map;
 using Themes;
 using Themes.Store;
 using UnityEngine.UIElements;
@@ -20,16 +19,20 @@ namespace UI.Elements
         private readonly OwnedThemesChecker _ownedThemesChecker;
         private readonly SelectedThemeChecker _selectedThemeChecker;
         private readonly Wallet _wallet;
+        private readonly MapType _mapType;
+        private readonly MapSelector _mapSelector;
         private List<StoreItemView> _storeItemViews;
 
-        public StorePanel(IEnumerable<StoreItem> storeItems, 
+        public StorePanel(IEnumerable<StoreItem> storeItems,
+            MapType mapType, 
             SelectedTheme selectedTheme,
             LocalDataProvider localDataProvider,
             ThemeSelector themeSelector, 
             ThemeUnlocker themeUnlocker,
             OwnedThemesChecker ownedThemesChecker, 
             SelectedThemeChecker selectedThemeChecker, 
-            Wallet wallet)
+            Wallet wallet, 
+            MapSelector mapSelector)
         {
             _selectedTheme = selectedTheme;
             _localDataProvider = localDataProvider;
@@ -38,7 +41,9 @@ namespace UI.Elements
             _ownedThemesChecker = ownedThemesChecker;
             _selectedThemeChecker = selectedThemeChecker;
             _wallet = wallet;
-            
+            _mapSelector = mapSelector;
+            _mapType = mapType;
+
             this.AddClass("store-panel");
             
             RegenerateContent(storeItems);
@@ -52,9 +57,7 @@ namespace UI.Elements
             
             foreach (StoreItem storeItem in storeItems)
             {
-                StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, this);
-                
-                storeItemView.Clicked += StoreItemView_OnClicked;
+                StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, _mapType, this, StoreItemView_OnClicked);
                 
                 _ownedThemesChecker.Visit(storeItemView.StoreItem);
 
@@ -103,6 +106,8 @@ namespace UI.Elements
             {
                 return;
             }
+            
+            _mapSelector.Select(_mapType);
 
             _ownedThemesChecker.Visit(storeItemView.StoreItem);
             
@@ -124,7 +129,7 @@ namespace UI.Elements
             }
         }
 
-        public class Factory : PlaceholderFactory<IEnumerable<StoreItem>, StorePanel>
+        public class Factory : PlaceholderFactory<IEnumerable<StoreItem>, MapType, StorePanel>
         {
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Map;
 using Themes;
 using Themes.Store;
 using UI.Elements;
@@ -12,13 +13,16 @@ namespace Infrastructure
         {
             BackgroundAnimator();
             StorePanelFactory();
+            MapSelector();
         }
-        
-        private void BackgroundAnimator() => Container.BindInterfacesAndSelfTo<BackgroundAnimator>().FromComponentInNewPrefab(GameResources.Instance.BackgroundPrefab).AsSingle().NonLazy();
 
-        private void StorePanelFactory()
-        {
-            Container.BindFactory<IEnumerable<StoreItem>, StorePanel, StorePanel.Factory>().AsTransient();
-        }
+        private void MapSelector() => 
+            Container.Bind<MapSelector>().AsSingle().NonLazy();
+        
+        private void BackgroundAnimator() => 
+            Container.BindInterfacesAndSelfTo<BackgroundAnimator>().FromComponentInNewPrefab(GameResources.Instance.BackgroundPrefab).AsSingle().NonLazy();
+
+        private void StorePanelFactory() => 
+            Container.BindFactory<IEnumerable<StoreItem>, MapType, StorePanel, StorePanel.Factory>().AsTransient();
     }
 }

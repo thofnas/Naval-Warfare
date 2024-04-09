@@ -32,8 +32,7 @@ namespace States.MainMenuUIStates
         {
             Root.Clear();
         }
-
-
+        
         public virtual void OnEnter() => SetVisible(true);
 
         public virtual void Update() { }

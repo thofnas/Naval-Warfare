@@ -30,6 +30,7 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
     private ThemeLibrary _themeLibrary;
 
     private EventBinding<OnThemeChanged> _onThemeChanged;
+    private EventBinding<OnNewMapTypeSelected> _onNewMapTypeSelected;
     private IDisposable _observableInterval;
 
     [Inject]
@@ -39,10 +40,10 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
         _mapLibrary = mapLibrary;
         _themeLibrary = themeLibrary;
 
-        _player2Sprites = mapLibrary.Maps[persistentData.PlayerData.SelectedMapType].AITheme.BackgroundSprites;
-
         _onThemeChanged = new EventBinding<OnThemeChanged>(Initialize);
         EventBus<OnThemeChanged>.Register(_onThemeChanged);
+        _onNewMapTypeSelected = new EventBinding<OnNewMapTypeSelected>(Initialize);
+        EventBus<OnNewMapTypeSelected>.Register(_onNewMapTypeSelected);
     }
 
     private void Start()
@@ -53,6 +54,7 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
     private void Initialize()
     {
         _player1Sprites = _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme).BackgroundSprites;
+        _player2Sprites = _mapLibrary.Maps[_persistentData.PlayerData.SelectedMapType].AITheme.BackgroundSprites;
         
         _player1SpriteIndex = (_player1SpriteIndex - 1) % _player1Sprites.Length;
         _player2SpriteIndex = (_player2SpriteIndex - 1) % _player2Sprites.Length;

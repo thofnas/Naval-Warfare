@@ -1,4 +1,7 @@
 ﻿using System;
+using EventBus;
+using Events;
+using Map;
 using Themes.Store;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,8 +19,6 @@ namespace UI.Elements
 
         public StoreItem StoreItem { get; private set; }
         public bool IsLocked { get; private set; }
-        
-        public event Action<StoreItemView> Clicked;
 
         private StoreItemView()
         {
@@ -63,10 +64,11 @@ namespace UI.Elements
 
         public static class Factory
         {
-            public static StoreItemView Create(StoreItem storeItem, VisualElement parentContainer)
+            public static StoreItemView Create(StoreItem storeItem, MapType mapType, VisualElement parentContainer, Action<StoreItemView> onClick)
             {
                 StoreItemView instance = new();
-                instance.AddManipulator(new Clickable(_ => instance.Clicked?.Invoke(instance)));
+                instance.AddManipulator(new Clickable(_ => onClick?.Invoke(instance)));
+                
                 instance.StoreItem = storeItem;
                 
                 SetStyles(instance, storeItem);

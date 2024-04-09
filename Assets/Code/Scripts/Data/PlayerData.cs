@@ -59,8 +59,8 @@ namespace Data
             {
                 bool hasOwnedThemes = value switch
                 {
-                    MapType.Islands => _ownedIslandsThemesList.IsEmpty(),
-                    MapType.Ocean => _ownedOceanThemesList.IsEmpty(),
+                    MapType.Islands => !_ownedIslandsThemesList.IsEmpty(),
+                    MapType.Ocean => !_ownedOceanThemesList.IsEmpty(),
                     // Add additional cases for new map types here
                     _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
                 };

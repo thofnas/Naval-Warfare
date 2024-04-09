@@ -1,5 +1,6 @@
 ﻿using EventBus;
 using Events;
+using Map;
 using Themes.Store;
 using UI;
 using UI.Elements;
@@ -81,9 +82,9 @@ namespace States.MainMenuUIStates
         {
             _storeItemsContainer.Clear();
 
-            StorePanel islandsStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.IslandsThemeItems);
+            StorePanel islandsStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.IslandsThemeItems, MapType.Islands);
             _storeItemsContainer.Add(islandsStorePanel);
-            StorePanel oceanStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.OceanThemeItems);
+            StorePanel oceanStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.OceanThemeItems, MapType.Ocean);
             _storeItemsContainer.Add(oceanStorePanel);
         }
         
