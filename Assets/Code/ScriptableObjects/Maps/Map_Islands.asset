@@ -12,8 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36dbeb5b11840e4be5648b0f0b65858, type: 3}
   m_Name: Map_Islands
   m_EditorClassIdentifier: 
+  MapType: 10
   ThemeSettings:
   - {fileID: 11400000, guid: 439e43cf03730b743ac2765028a6ea49, type: 2}
   - {fileID: 11400000, guid: 006b3329baffab54da4a1e86e79ea0e1, type: 2}
   - {fileID: 11400000, guid: cffc28d7b22fd5d48868c434ce19b028, type: 2}
   AITheme: {fileID: 11400000, guid: 006b3329baffab54da4a1e86e79ea0e1, type: 2}
+  Music:
+    Guid:
+      Data1: -88097465
+      Data2: 1200362749
+      Data3: 778875019
+      Data4: -201569106
+    Path: event:/BGM/IslandsBattleMusic
+  ShipHitSound:
+    Guid:
+      Data1: 1301742970
+      Data2: 1106160763
+      Data3: 246152577
+      Data4: -1532990303
+    Path: event:/SFX/ShipHit

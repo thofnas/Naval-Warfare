@@ -12,8 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36dbeb5b11840e4be5648b0f0b65858, type: 3}
   m_Name: Map_Ocean
   m_EditorClassIdentifier: 
+  MapType: 20
   ThemeSettings:
   - {fileID: 11400000, guid: f8f73393de7f56e429d144de31e82226, type: 2}
   - {fileID: 11400000, guid: c0f196e83fe616c4eabb11907a890772, type: 2}
   AITheme: {fileID: 11400000, guid: f8f73393de7f56e429d144de31e82226, type: 2}
-  MapType: 20
+  Music:
+    Guid:
+      Data1: 239652791
+      Data2: 1256422105
+      Data3: 51659395
+      Data4: 260752800
+    Path: event:/BGM/OceanBattleMusic
+  ShipHitSound:
+    Guid:
+      Data1: 1301742970
+      Data2: 1106160763
+      Data3: 246152577
+      Data4: -1532990303
+    Path: event:/SFX/ShipHit

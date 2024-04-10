@@ -1,27 +1,30 @@
-﻿using Enemy;
+﻿using Audio;
+using Data;
+using Enemy;
 using Enemy.Difficulties;
 using Grid;
+using Map;
 using Themes;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
 
 namespace Infrastructure
 {
-    public class GameplayEssentialsInstaller : MonoInstaller, IValidatable
+    public class GameplayEssentialsInstaller : MonoInstaller
     {
         [SerializeField] private GameplayUIManager _gameplayUIManager;
-        private Theme _playerTheme;
 
         [Inject]
-        private void Construct(Theme playerTheme)
+        private void Construct(PersistentData persistentData, MapLibrary mapLibrary)
         {
-            _playerTheme = playerTheme;
+            Container.Bind<Map.Map>().FromInstance(mapLibrary.Maps[persistentData.PlayerData.SelectedMapType]).AsSingle();
+            Container.BindInterfacesAndSelfTo<BattleSfxManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BattleMusicManager>().AsSingle();
         }
-        
+
         public override void InstallBindings()
         {
             InitExecutionOrder();
@@ -101,6 +104,5 @@ namespace Infrastructure
         private void ShipSpawner() => Container.Bind<ShipsSpawner>().AsSingle();
 
         private void GridSystemSpawner() => Container.Bind<GridSystemSpawner>().AsSingle();
-        public void Validate() => throw new System.NotImplementedException();
     }
 }

@@ -86,7 +86,7 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
 
     private bool CharactersThemesAreSame()
     {
-        return _persistentData.PlayerData.SelectedIslandsThemeType == IslandsThemeType.AI;
+        return _mapLibrary.Maps[_persistentData.PlayerData.SelectedMapType].AITheme == _selectedTheme.PlayerTheme;
     }
 
     private void StartPeriodicTextureChange(Action changeAction)
