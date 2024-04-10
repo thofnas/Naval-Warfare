@@ -2,6 +2,7 @@
 using Data;
 using EventBus;
 using Events;
+using Infrastructure;
 using Map;
 using Themes;
 using UniRx;
@@ -27,18 +28,18 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
     private int _player2SpriteIndex;
     private PersistentData _persistentData;
     private MapLibrary _mapLibrary;
-    private ThemeLibrary _themeLibrary;
 
     private EventBinding<OnThemeChanged> _onThemeChanged;
     private EventBinding<OnNewMapTypeSelected> _onNewMapTypeSelected;
     private IDisposable _observableInterval;
+    private SelectedTheme _selectedTheme;
 
     [Inject]
-    private void Construct(PersistentData persistentData, MapLibrary mapLibrary, ThemeLibrary themeLibrary)
+    private void Construct(PersistentData persistentData, MapLibrary mapLibrary, SelectedTheme selectedTheme)
     {
         _persistentData = persistentData;
         _mapLibrary = mapLibrary;
-        _themeLibrary = themeLibrary;
+        _selectedTheme = selectedTheme;
 
         _onThemeChanged = new EventBinding<OnThemeChanged>(Initialize);
         EventBus<OnThemeChanged>.Register(_onThemeChanged);
@@ -46,14 +47,16 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
         EventBus<OnNewMapTypeSelected>.Register(_onNewMapTypeSelected);
     }
 
-    private void Start()
+    public void Dispose()
     {
-        Initialize();
+        EventBus<OnThemeChanged>.Deregister(_onThemeChanged);
+        EventBus<OnNewMapTypeSelected>.Deregister(_onNewMapTypeSelected);
+        _observableInterval.Dispose();
     }
 
     private void Initialize()
     {
-        _player1Sprites = _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme).BackgroundSprites;
+        _player1Sprites = _selectedTheme.PlayerTheme.BackgroundSprites;
         _player2Sprites = _mapLibrary.Maps[_persistentData.PlayerData.SelectedMapType].AITheme.BackgroundSprites;
         
         _player1SpriteIndex = (_player1SpriteIndex - 1) % _player1Sprites.Length;
@@ -76,9 +79,14 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
         }
     }
 
+    private void Start()
+    {
+        Initialize();
+    }
+
     private bool CharactersThemesAreSame()
     {
-        return _persistentData.PlayerData.SelectedIslandsTheme == IslandsTheme.AI;
+        return _persistentData.PlayerData.SelectedIslandsThemeType == IslandsThemeType.AI;
     }
 
     private void StartPeriodicTextureChange(Action changeAction)
@@ -103,11 +111,5 @@ public class BackgroundAnimator : MonoBehaviour, IDisposable
     {
         _spriteRenderer.sprite = _player1Sprites[_player1SpriteIndex];
         _player1SpriteIndex = (_player1SpriteIndex + 1) % _player1Sprites.Length;
-    }
-
-    public void Dispose()
-    {
-        EventBus<OnThemeChanged>.Deregister(_onThemeChanged);
-        _observableInterval.Dispose();
     }
 }

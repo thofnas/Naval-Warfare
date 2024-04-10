@@ -1,4 +1,6 @@
 using Data;
+using Infrastructure;
+using Map;
 using Themes;
 using UnityEngine;
 using Zenject;
@@ -11,14 +13,16 @@ namespace Grid
         private GridSystem.Factory _gridSystemFactory;
         private GridSystemVisual.Factory _gridSystemVisualFactory;
         private PersistentData _persistentData;
-        private ThemeLibrary _themeLibrary;
+        private MapLibrary _mapLibrary;
+        private SelectedTheme _selectedTheme;
 
         [Inject]
-        private void Construct(PersistentData persistentData, ThemeLibrary themeLibrary, GridSystem.Factory gridSystemFactory, GridSystemVisual.Factory gridSystemVisualFactory,
+        private void Construct(PersistentData persistentData, MapLibrary mapLibrary, SelectedTheme selectedTheme, GridSystem.Factory gridSystemFactory, GridSystemVisual.Factory gridSystemVisualFactory,
             DebugSettings debugSettings)
         {
             _persistentData = persistentData;
-            _themeLibrary = themeLibrary;
+            _mapLibrary = mapLibrary;
+            _selectedTheme = selectedTheme;
             _gridSystemFactory = gridSystemFactory;
             _gridSystemVisualFactory = gridSystemVisualFactory;
             _debugSettings = debugSettings;
@@ -27,8 +31,8 @@ namespace Grid
         public GridSystem Spawn(CharacterType characterType, Vector2 firstGridPosition)
         {
             Theme theme = characterType == CharacterType.Enemy
-                ? _themeLibrary.GetTheme(IslandsTheme.AI)
-                : _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme);
+                ? _mapLibrary.Maps[_persistentData.PlayerData.SelectedMapType].AITheme
+                : _selectedTheme.PlayerTheme;
             GridSystem gridSystem = _gridSystemFactory.Create(characterType);
             GridSystemVisual gridSystemVisual = _gridSystemVisualFactory.Create(gridSystem, firstGridPosition, theme);
             

@@ -36,7 +36,6 @@ namespace Infrastructure
             SelectedTheme();
 
             Container.BindInstance(_mapLibrary);
-            Container.BindInstance(_themeLibrary);
         }
 
         private void BindPersistentData() => Container.BindInstance(_persistentData);
@@ -72,12 +71,10 @@ namespace Infrastructure
 
         private void SelectedTheme()
         {
-            Theme test = _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme);
-            
             Theme theme = _persistentData.PlayerData.SelectedMapType switch
             {
-                MapType.Islands => _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsTheme),
-                MapType.Ocean => _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedOceanTheme),
+                MapType.Islands => _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedIslandsThemeType),
+                MapType.Ocean => _themeLibrary.GetTheme(_persistentData.PlayerData.SelectedOceanThemeType),
                 _ => throw new ArgumentOutOfRangeException()
             };
             

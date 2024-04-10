@@ -12,31 +12,31 @@ namespace Data
         private int _money;
         private MapType _selectedMapType;
         
-        private IslandsTheme _selectedIslandsTheme;
-        private readonly List<IslandsTheme> _ownedIslandsThemesList;
-        private OceanTheme _selectedOceanTheme;
-        private readonly List<OceanTheme> _ownedOceanThemesList;
+        private IslandsThemeType _selectedIslandsThemeType;
+        private OceanThemeType _selectedOceanThemeType;
+        private readonly List<IslandsThemeType> _ownedIslandsThemesList;
+        private readonly List<OceanThemeType> _ownedOceanThemesList;
 
         public PlayerData()
         {
             _money = 50;
             _selectedMapType = MapType.Islands;
             
-            _selectedIslandsTheme = IslandsTheme.Tropical;
-            _ownedIslandsThemesList = new List<IslandsTheme> { _selectedIslandsTheme };
-            _selectedOceanTheme = OceanTheme.Earth;
-            _ownedOceanThemesList = new List<OceanTheme> { _selectedOceanTheme };
+            _selectedIslandsThemeType = IslandsThemeType.Tropical;
+            _ownedIslandsThemesList = new List<IslandsThemeType> { _selectedIslandsThemeType };
+            _selectedOceanThemeType = OceanThemeType.Earth;
+            _ownedOceanThemesList = new List<OceanThemeType> { _selectedOceanThemeType };
         }
 
         [JsonConstructor]
-        public PlayerData(int money, IslandsTheme selectedIslandsTheme, List<IslandsTheme> ownedIslandsThemesList, OceanTheme selectedOceanTheme, List<OceanTheme> ownedOceanThemesList, MapType selectedMapType)
+        public PlayerData(int money, IslandsThemeType selectedIslandsThemeType, List<IslandsThemeType> ownedIslandsThemesList, OceanThemeType selectedOceanThemeType, List<OceanThemeType> ownedOceanThemesList, MapType selectedMapType)
         {
             _money = money;
             _selectedMapType = selectedMapType;
             
-            _selectedIslandsTheme = selectedIslandsTheme;
+            _selectedIslandsThemeType = selectedIslandsThemeType;
             _ownedIslandsThemesList = ownedIslandsThemesList;
-            _selectedOceanTheme = selectedOceanTheme;
+            _selectedOceanThemeType = selectedOceanThemeType;
             _ownedOceanThemesList = ownedOceanThemesList;
         }
 
@@ -72,48 +72,48 @@ namespace Data
             }
         }
 
-        public IslandsTheme SelectedIslandsTheme
+        public IslandsThemeType SelectedIslandsThemeType
         {
-            get => _selectedIslandsTheme;
+            get => _selectedIslandsThemeType;
             set
             {
                 if (_ownedIslandsThemesList.Contains(value) == false)
                     throw new ArgumentException(nameof(value));
                 
-                _selectedIslandsTheme = value;
+                _selectedIslandsThemeType = value;
             }
         }
 
-        public IEnumerable<IslandsTheme> OwnedIslandsThemesList => _ownedIslandsThemesList;
+        public IEnumerable<IslandsThemeType> OwnedIslandsThemesList => _ownedIslandsThemesList;
         
-        public void OpenIslandsTheme(IslandsTheme theme)
+        public void OpenIslandsTheme(IslandsThemeType themeType)
         {
-            if (_ownedIslandsThemesList.Contains(theme))
-                throw new ArgumentException(nameof(theme));
+            if (_ownedIslandsThemesList.Contains(themeType))
+                throw new ArgumentException(nameof(themeType));
             
-            _ownedIslandsThemesList.Add(theme);
+            _ownedIslandsThemesList.Add(themeType);
         }
         
-        public OceanTheme SelectedOceanTheme
+        public OceanThemeType SelectedOceanThemeType
         {
-            get => _selectedOceanTheme;
+            get => _selectedOceanThemeType;
             set
             {
                 if (_ownedOceanThemesList.Contains(value) == false)
                     throw new ArgumentException(nameof(value));
                 
-                _selectedOceanTheme = value;
+                _selectedOceanThemeType = value;
             }
         }
         
-        public IEnumerable<OceanTheme> OwnedOceanThemesList => _ownedOceanThemesList;
+        public IEnumerable<OceanThemeType> OwnedOceanThemesList => _ownedOceanThemesList;
 
-        public void OpenOceanTheme(OceanTheme theme)
+        public void OpenOceanTheme(OceanThemeType themeType)
         {
-            if (_ownedOceanThemesList.Contains(theme))
-                throw new ArgumentException(nameof(theme));
+            if (_ownedOceanThemesList.Contains(themeType))
+                throw new ArgumentException(nameof(themeType));
             
-            _ownedOceanThemesList.Add(theme);
+            _ownedOceanThemesList.Add(themeType);
         }
     }
 }

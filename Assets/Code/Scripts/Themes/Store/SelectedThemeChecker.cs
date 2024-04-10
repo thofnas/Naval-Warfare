@@ -17,8 +17,8 @@ namespace Themes.Store
 
         public void Visit(StoreItem storeItem) => Visit((dynamic)storeItem);
 
-        public void Visit(IslandsThemeItem islandsThemeItem) => IsSelected = _persistentData.PlayerData.SelectedIslandsTheme == islandsThemeItem.IslandsType;
+        public void Visit(IslandsThemeItem islandsThemeItem) => IsSelected = _persistentData.PlayerData.SelectedIslandsThemeType == islandsThemeItem.IslandsType;
 
-        public void Visit(OceanThemeItem oceanThemeItem) => IsSelected = _persistentData.PlayerData.SelectedOceanTheme == oceanThemeItem.OceanType;
+        public void Visit(OceanThemeItem oceanThemeItem) => IsSelected = _persistentData.PlayerData.SelectedOceanThemeType == oceanThemeItem.OceanType;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Themes
 {
-    public enum IslandsTheme
+    public enum IslandsThemeType
     {
         AI = 10,
         Tropical = 20,
