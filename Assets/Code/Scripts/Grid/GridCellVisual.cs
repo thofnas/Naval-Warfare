@@ -30,11 +30,15 @@ namespace Grid
             transform.SetParent(parent);
         }
 
-        public void UpdateFrameSprite(bool isEnemy = false)
+        public void UpdateFrameSpriteColor(bool isEnemy = false)
         {
             Color frameColor;
 
-            if (_gridCell.HasShip())
+            if (_gridCell.IsSelected)
+            {
+                frameColor = _theme.GridCellSpritePlacingColor;
+            }
+            else if (_gridCell.HasShip())
             {
                 if (_gridCell.Ship.IsDestroyed())
                 {
@@ -44,10 +48,6 @@ namespace Grid
                 {
                     frameColor = isEnemy ? _defaultColor : _theme.GridCellSpritePlacingColor;
                 }
-            }
-            else if (_gridCell.IsSelected)
-            {
-                frameColor = _theme.GridCellSpritePlacingColor;
             }
             else
             {

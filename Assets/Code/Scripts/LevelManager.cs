@@ -8,18 +8,22 @@ using Zenject;
 public class LevelManager : IInitializable, IDisposable
 {
     private readonly Dictionary<CharacterType, GridSystem> _gridSystems = new();
-    private GridSystemSpawner _gridSystemSpawner;
-    private ShipsSpawner _shipsSpawner;
+    private readonly GridSystemSpawner _gridSystemSpawner;
+    private readonly ShipsSpawner _shipsSpawner;
     private Vector2 _firstPlayerGridPosition;
     private Vector2 _firstEnemyGridPosition;
-
-    public void Dispose()
+    
+    [Inject]
+    private LevelManager(GridSystemSpawner gridSystemSpawner, ShipsSpawner shipsSpawner)
     {
-        foreach (KeyValuePair<CharacterType, GridSystem> keyValuePair in _gridSystems) keyValuePair.Value.Dispose();
+        _gridSystemSpawner = gridSystemSpawner;
+        _shipsSpawner = shipsSpawner;
     }
 
     public void Initialize()
     {
+        _gridSystems.Clear();
+        
         Vector2[] firstGridPositions = CameraController.GetHalvesCenterPositions();
         _firstPlayerGridPosition = firstGridPositions[0];
         _firstEnemyGridPosition = firstGridPositions[1];
@@ -37,12 +41,11 @@ public class LevelManager : IInitializable, IDisposable
         _gridSystems.Add(CharacterType.Player, playerGrid);
         _gridSystems.Add(CharacterType.Enemy, enemyGrid);
     }
-    
-    [Inject]
-    private void Construct(GridSystemSpawner gridSystemSpawner, ShipsSpawner shipsSpawner)
+
+    public void Dispose()
     {
-        _gridSystemSpawner = gridSystemSpawner;
-        _shipsSpawner = shipsSpawner;
+        foreach (KeyValuePair<CharacterType, GridSystem> keyValuePair in _gridSystems) 
+            keyValuePair.Value.Dispose();
     }
 
     public void MoveGridsToBattle()
@@ -93,7 +96,7 @@ public class LevelManager : IInitializable, IDisposable
                !gridCell.Ship.IsDestroyed();
     }
 
-    public Vector2 GetWorldCellPosition(CharacterType characterType, CellPosition cellPosition) =>
+    public Vector2 GetWorldCellPosition(CharacterType characterType, CellPosition cellPosition) => 
         _gridSystems[characterType].GetWorldCellPosition(cellPosition);
 
     public CellPosition GetCellPosition(CharacterType characterType, Vector2 worldPosition) =>

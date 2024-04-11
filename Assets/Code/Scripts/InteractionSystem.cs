@@ -2,6 +2,7 @@
 using EventBus;
 using Events;
 using Grid;
+using States.GameplayStates;
 using UnityEngine;
 using Utilities;
 using Zenject;
@@ -30,7 +31,7 @@ public class InteractionSystem : ITickable
     {
         if (_turnSystem.IsPlacingShips()) return;
         
-        if (_gameManager.IsCurrentState(_gameManager.BattleResults))
+        if (_gameManager.IsCurrentState(typeof(BattleResults)))
             return;
 
         if (_turnSystem.WhoseCurrentTurn() == CharacterType.Enemy) return;
@@ -55,7 +56,7 @@ public class InteractionSystem : ITickable
 
     public void SetSelectedCell(CellPosition cellPosition)
     {
-        if (_gameManager.IsCurrentState(_gameManager.BattleResults))
+        if (_gameManager.IsCurrentState(typeof(BattleResults)))
             return;
         
         CharacterType whoWillTakeAHit = _turnSystem.WhoWillTakeAHit();
@@ -72,7 +73,7 @@ public class InteractionSystem : ITickable
         if (_turnSystem.IsPlacingShips()) 
             return;        
         
-        if (_gameManager.IsCurrentState(_gameManager.BattleResults))
+        if (_gameManager.IsCurrentState(typeof(BattleResults)))
             return;
 
         EventBus<OnShoot>.Invoke(new OnShoot(_turnSystem.WhoWillTakeAHit(), _selectedCellPosition[_turnSystem.WhoWillTakeAHit()]));

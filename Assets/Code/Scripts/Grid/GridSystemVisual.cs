@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using EventBus;
 using Events;
@@ -57,26 +58,6 @@ namespace Grid
                 _gridCellVisuals[x, y] = gridCellVisual;
             }
         }
-        
-        private Sprite GetCellSprite(int x, int y, IReadOnlyList<Sprite> gridSprites)
-        {
-            bool isLeft = x == 0;
-            bool isRight = x == _gridSystem.Width - 1;
-            bool isTop = y == 0;
-            bool isBottom = y == _gridSystem.Height - 1;
-
-            if (isLeft && isBottom) return gridSprites[0];  // left bottom corner
-            if (isRight && isBottom) return gridSprites[2]; // right bottom corner
-            if (isLeft && isTop) return gridSprites[6];     // left top corner
-            if (isRight && isTop) return gridSprites[8];    // right top corner
-
-            if (!isLeft && !isRight && isBottom) return gridSprites[1]; // bottom side
-            if (!isLeft && !isRight && isTop) return gridSprites[7];    // top side
-            if (isLeft && !isTop && !isBottom) return gridSprites[3];   // left side
-            if (isRight && !isTop && !isBottom) return gridSprites[5];  // right side
-
-            return gridSprites[4]; // center
-        }
 
         private void OnEnable()
         {
@@ -102,6 +83,26 @@ namespace Grid
             EventBus<OnShipDestroyed>.Deregister(_onShipDestroyed);
             EventBus<OnGridCellSelected>.Deregister(_onNewGridCellSelected);
         }
+        
+        private Sprite GetCellSprite(int x, int y, IReadOnlyList<Sprite> gridSprites)
+        {
+            bool isLeft = x == 0;
+            bool isRight = x == _gridSystem.Width - 1;
+            bool isTop = y == 0;
+            bool isBottom = y == _gridSystem.Height - 1;
+
+            if (isLeft && isBottom) return gridSprites[0];  // left bottom corner
+            if (isRight && isBottom) return gridSprites[2]; // right bottom corner
+            if (isLeft && isTop) return gridSprites[6];     // left top corner
+            if (isRight && isTop) return gridSprites[8];    // right top corner
+
+            if (!isLeft && !isRight && isBottom) return gridSprites[1]; // bottom side
+            if (!isLeft && !isRight && isTop) return gridSprites[7];    // top side
+            if (isLeft && !isTop && !isBottom) return gridSprites[3];   // left side
+            if (isRight && !isTop && !isBottom) return gridSprites[5];  // right side
+
+            return gridSprites[4]; // center
+        }
 
         public Vector2 GetWorldCellPosition(CellPosition cellPosition) =>
             new Vector2(cellPosition.x, cellPosition.y) * _gridSystem.CellSize + GetOffset();
@@ -126,8 +127,8 @@ namespace Grid
         {
             if (e.CharacterType != _characterType) return;
             
-            _gridCellVisuals[e.From.x, e.From.y].UpdateFrameSprite(isEnemy: e.CharacterType == CharacterType.Enemy);
-            _gridCellVisuals[e.To.x, e.To.y].UpdateFrameSprite(isEnemy: e.CharacterType == CharacterType.Enemy);
+            _gridCellVisuals[e.From.x, e.From.y].UpdateFrameSpriteColor(isEnemy: e.CharacterType == CharacterType.Enemy);
+            _gridCellVisuals[e.To.x, e.To.y].UpdateFrameSpriteColor(isEnemy: e.CharacterType == CharacterType.Enemy);
         }
 
         private void Ship_OnChangedPosition(OnShipMoved e)
@@ -135,9 +136,9 @@ namespace Grid
             if (_characterType == CharacterType.Enemy) return;
             if (e.Ship.GetCharacterType() == CharacterType.Enemy) return;
 
-            e.From.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSprite());
+            e.From.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSpriteColor());
 
-            e.To.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSprite());
+            e.To.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSpriteColor());
         }
 
         private void Ship_OnPlacementPreviewPositionsChanged(OnShipPlacementPreviewMoved e)
@@ -145,9 +146,9 @@ namespace Grid
             if (_characterType == CharacterType.Enemy) return;
             if (e.Ship.GetCharacterType() == CharacterType.Enemy) return;
 
-            e.From.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSprite());
+            e.From.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSpriteColor());
 
-            e.To.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSprite());
+            e.To.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSpriteColor());
         }
 
         private void Ship_OnDestroyed(OnShipDestroyed e)
@@ -156,7 +157,7 @@ namespace Grid
 
             foreach (CellPosition shipCellPosition in e.ShipCellPositions)
                 _gridCellVisuals[shipCellPosition.x, shipCellPosition.y]
-                    .UpdateFrameSprite();
+                    .UpdateFrameSpriteColor();
         }
 
         private void GridCell_OnShipHit(OnCellHit e)
@@ -164,7 +165,7 @@ namespace Grid
             if (e.WoundedCharacterType != _characterType) return;
 
             _gridCellVisuals[e.HitCellPosition.x, e.HitCellPosition.y].UpdateIconSprite();
-            _gridCellVisuals[e.HitCellPosition.x, e.HitCellPosition.y].UpdateFrameSprite();
+            _gridCellVisuals[e.HitCellPosition.x, e.HitCellPosition.y].UpdateFrameSpriteColor();
         }
 
         public class Factory : PlaceholderFactory<GridSystem, Vector3, Theme, GridSystemVisual>

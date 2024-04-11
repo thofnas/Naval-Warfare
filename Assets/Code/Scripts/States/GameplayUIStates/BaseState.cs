@@ -27,7 +27,7 @@ namespace States.GameplayUIStates
         public abstract void GenerateView();
 
         
-        public virtual void OnDispose() { }        
+        public virtual void Dispose() { }        
         
         protected void SetVisible(bool value) => Root.visible = value;
         

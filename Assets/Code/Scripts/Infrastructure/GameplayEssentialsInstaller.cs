@@ -16,13 +16,14 @@ namespace Infrastructure
     public class GameplayEssentialsInstaller : MonoInstaller
     {
         [SerializeField] private GameplayUIManager _gameplayUIManager;
+        private PersistentData _persistentData;
+        private MapLibrary _mapLibrary;
 
         [Inject]
         private void Construct(PersistentData persistentData, MapLibrary mapLibrary)
         {
-            Container.Bind<Map.Map>().FromInstance(mapLibrary.Maps[persistentData.PlayerData.SelectedMapType]).AsSingle();
-            Container.BindInterfacesAndSelfTo<BattleSfxManager>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BattleMusicManager>().AsSingle();
+            _persistentData = persistentData;
+            _mapLibrary = mapLibrary;
         }
 
         public override void InstallBindings()
@@ -45,6 +46,10 @@ namespace Infrastructure
             Difficulty();
             CameraController();
             BackgroundAnimator();
+            
+            Container.Bind<Map.Map>().FromInstance(_mapLibrary.Maps[_persistentData.PlayerData.SelectedMapType]).AsSingle();
+            Container.BindInterfacesTo<BattleSfxManager>().AsSingle();
+            Container.BindInterfacesTo<BattleMusicManager>().AsSingle();
         }
 
         private void BackgroundAnimator() => Container.BindInterfacesAndSelfTo<BackgroundAnimator>().FromComponentInNewPrefab(GameResources.Instance.BackgroundPrefab).AsSingle().NonLazy();

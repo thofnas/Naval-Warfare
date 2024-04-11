@@ -39,7 +39,7 @@ namespace States.MainMenuUIStates
 
         public virtual void OnExit() => SetVisible(false);
         
-        public virtual void OnDispose() 
+        public virtual void Dispose() 
         {   
             EventBus<OnThemeChanged>.Deregister(OnThemeChangedBinding);
         }

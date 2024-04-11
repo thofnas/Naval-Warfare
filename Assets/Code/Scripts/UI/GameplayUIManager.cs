@@ -7,6 +7,7 @@ using Themes;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
+using BaseState = States.GameplayStates.BaseState;
 
 namespace UI
 {
@@ -21,17 +22,14 @@ namespace UI
         [SerializeField] private StyleSheet _placingShipsStyleSheet;
         [SerializeField] private StyleSheet _battleStyleSheet;
         [SerializeField] private StyleSheet _battleResultsStyleSheet;
-        private GameManager _gameManager;
         private StateMachine.StateMachine _stateMachine;
         
-        private EventBinding<OnBattleStateEntered> _onBattleStateEntered;
-        private EventBinding<OnBattleResultStateEntered> _onBattleResultStateEntered;
+        private EventBinding<OnGameplayStateChanged> _onGameplayStateChanged;
 
         [Inject]
-        private void Construct(GameManager gameManager, LevelManager levelManager, StateMachine.StateMachine stateMachine,
+        private void Construct(LevelManager levelManager, StateMachine.StateMachine stateMachine,
             Theme theme)
         {
-            _gameManager = gameManager;
             _stateMachine = stateMachine;
             Theme = theme;
         }
@@ -49,17 +47,22 @@ namespace UI
 
         private void Start()
         {
-            _onBattleStateEntered = new EventBinding<OnBattleStateEntered>(_ => _stateMachine.SwitchState(Battle));
-            EventBus<OnBattleStateEntered>.Register(_onBattleStateEntered);
-            _onBattleResultStateEntered =
-                new EventBinding<OnBattleResultStateEntered>(_ => _stateMachine.SwitchState(BattleResults));
-            EventBus<OnBattleResultStateEntered>.Register(_onBattleResultStateEntered);
+            _onGameplayStateChanged =
+                new EventBinding<OnGameplayStateChanged>(e =>
+                {
+                    if (e.NewState == typeof(States.GameplayStates.Battle))
+                        _stateMachine.SwitchState(Battle);
+                    
+                    if (e.NewState == typeof(States.GameplayStates.BattleResults))
+                        _stateMachine.SwitchState(BattleResults);
+                });
+            
+            EventBus<OnGameplayStateChanged>.Register(_onGameplayStateChanged);
         }
 
         private void OnDestroy()
         {
-            EventBus<OnBattleStateEntered>.Deregister(_onBattleStateEntered);
-            EventBus<OnBattleResultStateEntered>.Deregister(_onBattleResultStateEntered);
+            EventBus<OnGameplayStateChanged>.Deregister(_onGameplayStateChanged);
         }
     }
 }

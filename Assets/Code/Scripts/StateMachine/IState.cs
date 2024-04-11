@@ -5,7 +5,6 @@
         public void OnEnter();
         public void Update();
         public void OnExit();
-
-        public void OnDispose();
+        public void Dispose();
     }
 }

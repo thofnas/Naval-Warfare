@@ -24,6 +24,7 @@ public class CameraController : IInitializable, ITickable, IDisposable
     private CameraController(GridSystem.Settings gridSystemSettings)
     {
         _gridSystemSettings = gridSystemSettings;
+
         Camera.main.orthographicSize = Mathf.Min(MaxOrthographicSize, Mathf.Max(_gridSystemSettings.Height, _gridSystemSettings.Width) + 1 * _gridSystemSettings.CellGap);
         SetHalvesCenterPositions(Camera.main);
     }

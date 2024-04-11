@@ -8,11 +8,5 @@ namespace States.GameplayStates
         public BattleResults(StateMachine.StateMachine stateMachine) : base(stateMachine)
         {
         }
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            EventBus<OnBattleResultStateEntered>.Invoke(new OnBattleResultStateEntered());
-        }
     }
 }

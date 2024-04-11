@@ -3,6 +3,7 @@ using System.Linq;
 using EventBus;
 using Events;
 using Grid;
+using States.GameplayStates;
 using UnityEngine;
 using Utilities;
 using Utilities.Extensions;
@@ -145,7 +146,7 @@ namespace Ship
             if (_gameManager.CountdownTimer.IsActive)
                 return false;
 
-            if (!_gameManager.IsCurrentState(_gameManager.PlacingShips))
+            if (!_gameManager.IsCurrentState(typeof(PlacingShips)))
                 return false;
 
             return true;

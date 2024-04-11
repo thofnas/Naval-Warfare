@@ -11,6 +11,7 @@ namespace Audio
     {
         private readonly Map.Map _selectedMap;
         private readonly LevelManager _levelManager;
+        private EventBinding<OnCellHit> _onCellHit;
 
         private BattleSfxManager(Map.Map selectedMap, LevelManager levelManager)
         {
@@ -20,12 +21,13 @@ namespace Audio
 
         public void Initialize()
         {
-            EventBus<OnCellHit>.Register(new EventBinding<OnCellHit>(OnShipHit));
+            _onCellHit = new EventBinding<OnCellHit>(OnShipHit);
+            EventBus<OnCellHit>.Register(_onCellHit);
         }
 
         public void Dispose()
         {
-            EventBus<OnCellHit>.Deregister(new EventBinding<OnCellHit>(OnShipHit));
+            EventBus<OnCellHit>.Deregister(_onCellHit);
         }
 
         private static void PlayOneShot(EventReference sound, Vector2 worldPosition) => 

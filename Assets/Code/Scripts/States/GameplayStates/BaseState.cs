@@ -24,6 +24,6 @@ namespace States.GameplayStates
         {
         }
         
-        public virtual void OnDispose() { }
+        public virtual void Dispose() { }
     }
 }

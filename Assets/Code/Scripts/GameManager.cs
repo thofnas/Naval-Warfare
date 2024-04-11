@@ -28,6 +28,8 @@ public class GameManager : IInitializable, IDisposable
         PlacingShips = new PlacingShips(stateMachine);
         Battle = new Battle(levelManager, stateMachine, () => IsBattleEnded = true);
         BattleResults = new BattleResults(stateMachine);
+            
+        _stateMachine.OnStateChanged += StateMachine_OnStateChanged;
 
         _stateMachine.SetState(PlacingShips);
     }
@@ -44,6 +46,8 @@ public class GameManager : IInitializable, IDisposable
     {
         EventBus<OnAllCharactersShipsDestroyed>.Deregister(_onAllCharactersShipsDestroyed);
         EventBus<OnReadyUIButtonToggled>.Deregister(_readyToggleBinding);
+        
+        _stateMachine.OnStateChanged -= StateMachine_OnStateChanged;
     }
 
     public void Initialize()
@@ -54,11 +58,11 @@ public class GameManager : IInitializable, IDisposable
         EventBus<OnReadyUIButtonToggled>.Register(_readyToggleBinding);
     }
 
-    public bool IsCurrentState(IState state) => _stateMachine.IsCurrentState(state);
+    public bool IsCurrentState(Type stateType) => _stateMachine.IsCurrentState(stateType);
     
     private void ReadyToggle_OnClick(OnReadyUIButtonToggled e)
     {
-        if (!IsCurrentState(PlacingShips)) return;
+        if (!IsCurrentState(PlacingShips.GetType())) return;
 
         // if toggle is OFF, just cancel it
         if (!e.IsOn)
@@ -80,4 +84,7 @@ public class GameManager : IInitializable, IDisposable
     {
         _stateMachine.SwitchState(BattleResults);
     }
+
+    private void StateMachine_OnStateChanged(IState from, IState to) => 
+        EventBus<OnGameplayStateChanged>.Invoke(new OnGameplayStateChanged(from as BaseState, to as BaseState));
 }

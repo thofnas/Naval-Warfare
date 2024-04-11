@@ -1,6 +1,7 @@
 using System;
 using EventBus;
 using Events;
+using States.GameplayStates;
 using UnityEngine;
 
 public class TurnSystem : IDisposable
@@ -36,7 +37,7 @@ public class TurnSystem : IDisposable
         if (IsPlacingShips())
             return;
         
-        if (_gameManager.IsCurrentState(_gameManager.BattleResults))
+        if (_gameManager.IsCurrentState(typeof(BattleResults)))
             return;
 
         TurnCount++;
@@ -57,7 +58,7 @@ public class TurnSystem : IDisposable
         return TurnCount / 2;
     }
 
-    public bool IsPlacingShips() => _gameManager.IsCurrentState(_gameManager.PlacingShips);
+    public bool IsPlacingShips() => _gameManager.IsCurrentState(typeof(PlacingShips));
 
     public CharacterType WhoseCurrentTurn() => _whoseCurrentTurn;
 

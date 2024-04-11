@@ -8,28 +8,39 @@ namespace StateMachine
         private StateMachine()
         { }
 
-        public IState CurrentState { get; private set; }
+        public event Action<IState, IState> OnStateChanged;
 
-        public void Tick()
-        {
-            CurrentState?.Update();
-        }
+        private IState _currentState;
+        
+        public void Tick() => 
+            _currentState?.Update();
 
         public void SwitchState(IState to)
         {
-            CurrentState?.OnExit();
-            CurrentState = to;
-            CurrentState.OnEnter();
+            if (to == null)
+                throw new ArgumentNullException(nameof(to), "Cannot switch to a null state.");
+
+            IState oldState = _currentState;
+
+            oldState?.OnExit();
+
+            to.OnEnter();
+
+            _currentState = to;
+
+            OnStateChanged?.Invoke(oldState, _currentState);
         }
 
-        public void SetState(IState state) => SwitchState(state);
+        public void SetState(IState state) => 
+            SwitchState(state);
 
-        public bool IsCurrentState(IState state) => CurrentState == state;
+        public bool IsCurrentState(Type stateType) =>
+            _currentState?.GetType() == stateType;
         
         public void Dispose()
         {
-            CurrentState?.OnExit();
-            CurrentState?.OnDispose();
+            _currentState?.OnExit();
+            _currentState?.Dispose();
         }
     }
 }
