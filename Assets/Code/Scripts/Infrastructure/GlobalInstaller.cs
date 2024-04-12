@@ -1,10 +1,14 @@
 ﻿using System;
+using Audio;
 using Data;
+using FMODUnity;
 using Map;
 using Misc;
 using Themes;
 using Themes.Store;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Infrastructure
@@ -13,8 +17,10 @@ namespace Infrastructure
     {
         [SerializeField] private ThemeLibrary _themeLibrary;
         [SerializeField] private MapLibrary _mapLibrary;
+        [SerializeField] private EventReference _mainMenuMusic;
         private PersistentData _persistentData;
         private LocalDataProvider _dataProvider;
+        
 
         public override void InstallBindings()
         {
@@ -36,6 +42,8 @@ namespace Infrastructure
             SelectedTheme();
 
             Container.BindInstance(_mapLibrary);
+            
+            Container.BindInterfacesTo<MainMenuMusicManager>().AsSingle().WithArguments(_mainMenuMusic);
         }
 
         private void BindPersistentData() => Container.BindInstance(_persistentData);

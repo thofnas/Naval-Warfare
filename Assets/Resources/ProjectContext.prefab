@@ -76,3 +76,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _themeLibrary: {fileID: 11400000, guid: 3f0c939c2c550b14cbec7188073d6682, type: 2}
   _mapLibrary: {fileID: 11400000, guid: 5b7ddfddf6b621d419cfa8f4d5a57de8, type: 2}
+  _mainMenuMusic:
+    Guid:
+      Data1: 1155329633
+      Data2: 1107270119
+      Data3: 537044922
+      Data4: -1194883120
+    Path: event:/BGM/MainMenu

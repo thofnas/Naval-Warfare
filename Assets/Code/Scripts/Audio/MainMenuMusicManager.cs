@@ -1,6 +1,7 @@
 ﻿using System;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.SceneManagement;
 using Zenject;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
@@ -18,8 +19,22 @@ namespace Audio
         
         public void Initialize()
         {
+            SceneManager.activeSceneChanged += SceneManager_OnActiveSceneChanged;
+            
             _musicInstance = RuntimeManager.CreateInstance(_music);
             _musicInstance.start();
+        }
+
+        private void SceneManager_OnActiveSceneChanged(Scene current, Scene next)
+        {
+            if (next.name == SceneManager.GetSceneByBuildIndex(0).name) {
+                _musicInstance.start();
+            }
+            else
+            {
+                _musicInstance.stop(STOP_MODE.ALLOWFADEOUT);
+                _musicInstance.release();
+            }
         }
 
         public void Dispose()

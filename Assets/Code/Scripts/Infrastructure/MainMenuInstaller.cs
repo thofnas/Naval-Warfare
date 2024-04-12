@@ -12,15 +12,11 @@ namespace Infrastructure
 {
     public class MainMenuInstaller : MonoInstaller
     {
-        [SerializeField] private EventReference _backgroundMusic;
-        
         public override void InstallBindings()
         {
             BackgroundAnimator();
             StorePanelFactory();
             MapSelector();
-
-            Container.BindInterfacesAndSelfTo<MainMenuMusicManager>().AsSingle().WithArguments(_backgroundMusic);
         }
 
         private void MapSelector() => 
