@@ -27,13 +27,13 @@ namespace Audio
 
         private void SceneManager_OnActiveSceneChanged(Scene current, Scene next)
         {
-            if (next.name == SceneManager.GetSceneByBuildIndex(0).name) {
+            if (next.name == SceneManager.GetSceneByBuildIndex(0).name) 
+            {
                 _musicInstance.start();
             }
             else
             {
-                _musicInstance.stop(STOP_MODE.ALLOWFADEOUT);
-                _musicInstance.release();
+                _musicInstance.stop(STOP_MODE.IMMEDIATE);
             }
         }
 
