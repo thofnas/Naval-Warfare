@@ -16,6 +16,9 @@ MonoBehaviour:
   OutlineColor: {r: 0.26072443, g: 0.485404, b: 0.5943396, a: 1}
   BackgroundSprites:
   - {fileID: 21300000, guid: 209bd435b3f6b82438df771e846acb80, type: 3}
+  - {fileID: 21300000, guid: 87e9e31702d3d234c8b32d903f36fcbd, type: 3}
+  - {fileID: 21300000, guid: e9423cdae150ae54a8427e5eef469a7c, type: 3}
+  - {fileID: 21300000, guid: 7f0f35f13d771b3428397e8e4ee66f2c, type: 3}
   BaseFont: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
   GridCellSprites:
   - {fileID: 1810070231, guid: 70740506b48c87a42bb0c0444a59e753, type: 3}
