@@ -4,9 +4,29 @@
     width: 100%;
 }
 
-.store-items-container {
+.store-panels-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.store-panel {
     display: flex;
     flex-direction: row;
+}
+
+.panel-name-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+}
+
+.panel-items-container {
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
 }
 
 .store-item {

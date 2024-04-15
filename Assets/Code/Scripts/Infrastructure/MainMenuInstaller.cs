@@ -26,6 +26,6 @@ namespace Infrastructure
             Container.BindInterfacesAndSelfTo<BackgroundAnimator>().FromComponentInNewPrefab(GameResources.Instance.BackgroundPrefab).AsSingle().NonLazy();
 
         private void StorePanelFactory() => 
-            Container.BindFactory<IEnumerable<StoreItem>, MapType, StorePanel, StorePanel.Factory>().AsTransient();
+            Container.BindFactory<IEnumerable<StoreItem>, MapType, string, StorePanel, StorePanel.Factory>().AsTransient();
     }
 }

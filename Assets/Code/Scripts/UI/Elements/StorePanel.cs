@@ -24,7 +24,8 @@ namespace UI.Elements
         private List<StoreItemView> _storeItemViews;
 
         public StorePanel(IEnumerable<StoreItem> storeItems,
-            MapType mapType, 
+            MapType mapType,
+            string mapTypeName,
             SelectedTheme selectedTheme,
             LocalDataProvider localDataProvider,
             ThemeSelector themeSelector, 
@@ -52,6 +53,12 @@ namespace UI.Elements
         private void RegenerateContent(IEnumerable<StoreItem> storeItems)
         {
             Clear();
+            
+            VisualElement nameContainer = this.CreateChild("panel-name-container");
+            VisualElement itemsContainer = this.CreateChild("panel-items-container");
+
+            Label nameLabel = nameContainer.CreateChild<Label>();
+            nameLabel.text = _mapType.ToString();
             
             _storeItemViews = new List<StoreItemView>();
             
@@ -129,7 +136,7 @@ namespace UI.Elements
             }
         }
 
-        public class Factory : PlaceholderFactory<IEnumerable<StoreItem>, MapType, StorePanel>
+        public class Factory : PlaceholderFactory<IEnumerable<StoreItem>, MapType, string, StorePanel>
         {
         }
     }

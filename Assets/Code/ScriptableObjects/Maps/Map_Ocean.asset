@@ -23,7 +23,7 @@ MonoBehaviour:
       Data2: 1256422105
       Data3: 51659395
       Data4: 260752800
-    Path: event:/BGM/OceanBattleMusic
+    Path: event:/BGM/OceanBattle
   ShipHitSound:
     Guid:
       Data1: 1301742970

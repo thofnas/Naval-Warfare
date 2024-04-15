@@ -24,7 +24,7 @@ MonoBehaviour:
       Data2: 1200362749
       Data3: 778875019
       Data4: -201569106
-    Path: event:/BGM/IslandsBattleMusic
+    Path: event:/BGM/IslandsBattle
   ShipHitSound:
     Guid:
       Data1: 1301742970
