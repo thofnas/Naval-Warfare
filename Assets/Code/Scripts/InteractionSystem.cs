@@ -17,21 +17,21 @@ public class InteractionSystem : ITickable
     { CharacterType.Enemy, CellPosition.Zero }
     };
 
-    private GameManager _gameManager;
+    private GameplayManager _gameplayManager;
 
     [Inject]
-    private void Construct(TurnSystem turnSystem, LevelManager levelManager, GameManager gameManager)
+    private void Construct(TurnSystem turnSystem, LevelManager levelManager, GameplayManager gameplayManager)
     {
         _turnSystem = turnSystem;
         _levelManager = levelManager;
-        _gameManager = gameManager;
+        _gameplayManager = gameplayManager;
     }
 
     public void Tick()
     {
         if (_turnSystem.IsPlacingShips()) return;
         
-        if (_gameManager.IsCurrentState(typeof(BattleResults)))
+        if (_gameplayManager.IsCurrentState(typeof(BattleResults)))
             return;
 
         if (_turnSystem.WhoseCurrentTurn() == CharacterType.Enemy) return;
@@ -56,7 +56,7 @@ public class InteractionSystem : ITickable
 
     public void SetSelectedCell(CellPosition cellPosition)
     {
-        if (_gameManager.IsCurrentState(typeof(BattleResults)))
+        if (_gameplayManager.IsCurrentState(typeof(BattleResults)))
             return;
         
         CharacterType whoWillTakeAHit = _turnSystem.WhoWillTakeAHit();
@@ -73,7 +73,7 @@ public class InteractionSystem : ITickable
         if (_turnSystem.IsPlacingShips()) 
             return;        
         
-        if (_gameManager.IsCurrentState(typeof(BattleResults)))
+        if (_gameplayManager.IsCurrentState(typeof(BattleResults)))
             return;
 
         EventBus<OnShoot>.Invoke(new OnShoot(_turnSystem.WhoWillTakeAHit(), _selectedCellPosition[_turnSystem.WhoWillTakeAHit()]));

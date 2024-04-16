@@ -16,7 +16,7 @@ namespace Ship
     public class Ship : MonoBehaviour
     {
         private CharacterType _characterType;
-        private GameManager _gameManager;
+        private GameplayManager _gameplayManager;
         private int _health;
         private bool _isDestroyed;
         private bool _isHorizontal;
@@ -65,9 +65,9 @@ namespace Ship
         }
 
         [Inject]
-        private void Construct(GameManager gameManager, LevelManager levelManager)
+        private void Construct(GameplayManager gameplayManager, LevelManager levelManager)
         {
-            _gameManager = gameManager;
+            _gameplayManager = gameplayManager;
             _levelManager = levelManager;
         }
 
@@ -143,10 +143,10 @@ namespace Ship
             if (_characterType == CharacterType.Enemy)
                 return false;
 
-            if (_gameManager.CountdownTimer.IsActive)
+            if (_gameplayManager.CountdownTimer.IsActive)
                 return false;
 
-            if (!_gameManager.IsCurrentState(typeof(PlacingShips)))
+            if (!_gameplayManager.IsCurrentState(typeof(PlacingShips)))
                 return false;
 
             return true;

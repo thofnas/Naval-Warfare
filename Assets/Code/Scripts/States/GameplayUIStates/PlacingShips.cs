@@ -13,7 +13,7 @@ namespace States.GameplayUIStates
         private VisualElement _container;
 
         private Label _countDownLabel;
-        private Toggle _readyToggle;
+        private StyledToggle _readyToggle;
         private StyledButton _styledButton;
         private EventBinding<OnCountdownUpdated> _onCountdownUpdated;
         private EventBinding<OnBattleStateEntered> _onBattleStateEntered;
@@ -54,7 +54,7 @@ namespace States.GameplayUIStates
             _onCountdownUpdated = new EventBinding<OnCountdownUpdated>(Countdown_OnSecondPassed);
             EventBus<OnCountdownUpdated>.Register(_onCountdownUpdated);
 
-            _readyToggle.RegisterCallback<MouseUpEvent>(_ => ReadyToggle_OnValueChanged(_readyToggle.value));
+            _readyToggle.RegisterValueChangedCallback(_ => ReadyToggle_OnValueChanged(_readyToggle.value));
 
             _styledButton.clicked += () => EventBus<OnRandomizeButtonClicked>.Invoke(new OnRandomizeButtonClicked());
         }
@@ -65,7 +65,7 @@ namespace States.GameplayUIStates
 
             EventBus<OnCountdownUpdated>.Deregister(_onCountdownUpdated);
             EventBus<OnBattleStateEntered>.Deregister(_onBattleStateEntered);
-            _readyToggle.UnregisterCallback<MouseUpEvent>(_ => ReadyToggle_OnValueChanged(_readyToggle.value));
+            _readyToggle.UnregisterValueChangedCallback(_ => ReadyToggle_OnValueChanged(_readyToggle.value));
         }
 
         private void Countdown_OnSecondPassed(OnCountdownUpdated e)

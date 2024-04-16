@@ -25,7 +25,6 @@ namespace UI.Elements
 
         public StorePanel(IEnumerable<StoreItem> storeItems,
             MapType mapType,
-            string mapTypeName,
             SelectedTheme selectedTheme,
             LocalDataProvider localDataProvider,
             ThemeSelector themeSelector, 
@@ -55,8 +54,14 @@ namespace UI.Elements
             Clear();
             
             VisualElement nameContainer = this.CreateChild("panel-name-container");
-            VisualElement itemsContainer = this.CreateChild("panel-items-container");
+            ScrollView itemsContainer = this.CreateChild<ScrollView>("panel-items-container");
 
+            itemsContainer.mode = ScrollViewMode.Horizontal;
+            itemsContainer.elasticity = 1;
+            itemsContainer.touchScrollBehavior = ScrollView.TouchScrollBehavior.Elastic;
+            itemsContainer.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+            itemsContainer.scrollDecelerationRate = 1;
+            
             Label nameLabel = nameContainer.CreateChild<Label>();
             nameLabel.text = _mapType.ToString();
             
@@ -64,7 +69,7 @@ namespace UI.Elements
             
             foreach (StoreItem storeItem in storeItems)
             {
-                StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, _mapType, this, StoreItemView_OnClicked);
+                StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, _mapType, itemsContainer, StoreItemView_OnClicked);
                 
                 _ownedThemesChecker.Visit(storeItemView.StoreItem);
 
@@ -86,7 +91,40 @@ namespace UI.Elements
                 {
                     if (!storeItem.IsPurchasable)
                     {
-                        Remove(storeItemView);
+                        //Remove(storeItemView);
+                        return;
+                    }
+                    
+                    storeItemView.Lock();
+                }
+
+                _storeItemViews.Add(storeItemView);
+            } 
+            foreach (StoreItem storeItem in storeItems)
+            {
+                StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, _mapType, itemsContainer, StoreItemView_OnClicked);
+                
+                _ownedThemesChecker.Visit(storeItemView.StoreItem);
+
+                if (_ownedThemesChecker.IsOwned)
+                {
+                    _selectedThemeChecker.Visit(storeItemView.StoreItem);
+
+                    if (_selectedThemeChecker.IsSelected)
+                    {
+                        _themeSelector.Visit(storeItemView.StoreItem);
+                        storeItemView.Select();
+                    }
+                    else
+                        storeItemView.Deselect();
+
+                    storeItemView.Unlock();
+                }
+                else
+                {
+                    if (!storeItem.IsPurchasable)
+                    {
+                        // Remove(storeItemView);
                         return;
                     }
                     
@@ -101,8 +139,10 @@ namespace UI.Elements
         {
             _themeSelector.Visit(storeItemView.StoreItem);
             storeItemView.Select();
-            _localDataProvider.Save();
+            _mapSelector.Select(_mapType);
             _selectedTheme.PlayerTheme = storeItemView.StoreItem.Theme;
+            
+            _localDataProvider.Save();
         }
 
         private void StoreItemView_OnClicked(StoreItemView storeItemView)
@@ -111,10 +151,9 @@ namespace UI.Elements
 
             if (_selectedThemeChecker.IsSelected)
             {
+                SelectTheme(storeItemView);
                 return;
             }
-            
-            _mapSelector.Select(_mapType);
 
             _ownedThemesChecker.Visit(storeItemView.StoreItem);
             
@@ -136,7 +175,7 @@ namespace UI.Elements
             }
         }
 
-        public class Factory : PlaceholderFactory<IEnumerable<StoreItem>, MapType, string, StorePanel>
+        public class Factory : PlaceholderFactory<IEnumerable<StoreItem>, MapType, StorePanel>
         {
         }
     }

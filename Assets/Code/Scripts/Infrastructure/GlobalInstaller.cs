@@ -20,10 +20,11 @@ namespace Infrastructure
         [SerializeField] private EventReference _mainMenuMusic;
         private PersistentData _persistentData;
         private LocalDataProvider _dataProvider;
-        
 
         public override void InstallBindings()
         {
+            Application.targetFrameRate = 60;
+            
             _persistentData = new PersistentData();
             _dataProvider = new LocalDataProvider(_persistentData);
 

@@ -82,9 +82,9 @@ namespace States.MainMenuUIStates
         {
             _storePanelsContainer.Clear();
 
-            StorePanel islandsStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.IslandsThemeItems, MapType.Islands, "Islands");
+            StorePanel islandsStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.IslandsThemeItems, MapType.Islands);
             _storePanelsContainer.Add(islandsStorePanel);
-            StorePanel oceanStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.OceanThemeItems, MapType.Ocean, "Ocean");
+            StorePanel oceanStorePanel = MainMenuUIManager.StorePanelFactory.Create(_storeContent.OceanThemeItems, MapType.Ocean);
             _storePanelsContainer.Add(oceanStorePanel);
         }
         

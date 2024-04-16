@@ -1,7 +1,7 @@
 ﻿@import url("index.uss");
 
 .container {
-    width: 100%;
+    width: 320px;
 }
 
 .store-panels-container {
@@ -16,16 +16,18 @@
 
 .panel-name-container {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 60px;
     width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
 }
 
 .panel-items-container {
     display: flex;
     flex-direction: row;
+    
     overflow: scroll;
 }
 
@@ -35,6 +37,8 @@
     justify-content: center;
     width: 60px;
     height: 60px;
+    min-width: 60px;
+    min-height: 60px;
     margin: 2px;
     border-width: 1px;
     border-color: black;

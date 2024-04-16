@@ -75,7 +75,7 @@ namespace Infrastructure
 
         private void InitExecutionOrder()
         {
-            Container.BindExecutionOrder<GameManager>(-50);
+            Container.BindExecutionOrder<GameplayManager>(-50);
             Container.BindExecutionOrder<TurnSystem>(-40);
             Container.BindExecutionOrder<LevelManager>(-20);
         }
@@ -85,7 +85,7 @@ namespace Infrastructure
 
         private void ShipsManager() => Container.BindInterfacesAndSelfTo<ShipsManager>().AsSingle();
 
-        private void GameManager() => Container.BindInterfacesAndSelfTo<GameManager>().AsSingle();
+        private void GameManager() => Container.BindInterfacesAndSelfTo<GameplayManager>().AsSingle();
 
         private void TurnSystem() =>
             Container.BindInterfacesAndSelfTo<TurnSystem>().AsSingle()

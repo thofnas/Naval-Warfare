@@ -343,13 +343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e933c6b32b14fde955c02eb54b32ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _backgroundMusic:
-    Guid:
-      Data1: 1155329633
-      Data2: 1107270119
-      Data3: 537044922
-      Data4: -1194883120
-    Path: event:/BGM/MainMenu
 --- !u!1 &1648346793
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,11 @@ using Events;
 using Misc;
 using StateMachine;
 using States.GameplayStates;
+using UnityEngine;
 using Utilities;
 using Zenject;
 
-public class GameManager : IInitializable, IDisposable
+public class GameplayManager : IInitializable, IDisposable
 {
     private const int CountdownSeconds = 1;
     private const float CountdownWaitSecondsBeforeComplete = 0.95f;
@@ -18,7 +19,7 @@ public class GameManager : IInitializable, IDisposable
     private EventBinding<OnReadyUIButtonToggled> _readyToggleBinding;
 
     [Inject]
-    private GameManager(StateMachine.StateMachine stateMachine, LevelManager levelManager)
+    private GameplayManager(StateMachine.StateMachine stateMachine, LevelManager levelManager)
     {
         _stateMachine = stateMachine;
 
@@ -42,20 +43,21 @@ public class GameManager : IInitializable, IDisposable
     public Battle Battle { get; }
     public BattleResults BattleResults { get; }
 
+    public void Initialize()
+    {
+        _onAllCharactersShipsDestroyed = new EventBinding<OnAllCharactersShipsDestroyed>(Ships_OnOneSideDestroyed);
+        EventBus<OnAllCharactersShipsDestroyed>.Register(_onAllCharactersShipsDestroyed);
+        
+        _readyToggleBinding = new EventBinding<OnReadyUIButtonToggled>(ReadyToggle_OnClick);
+        EventBus<OnReadyUIButtonToggled>.Register(_readyToggleBinding);
+    }
+
     public void Dispose()
     {
         EventBus<OnAllCharactersShipsDestroyed>.Deregister(_onAllCharactersShipsDestroyed);
         EventBus<OnReadyUIButtonToggled>.Deregister(_readyToggleBinding);
         
         _stateMachine.OnStateChanged -= StateMachine_OnStateChanged;
-    }
-
-    public void Initialize()
-    {
-        _onAllCharactersShipsDestroyed = new EventBinding<OnAllCharactersShipsDestroyed>(Ships_OnOneSideDestroyed);
-        EventBus<OnAllCharactersShipsDestroyed>.Register(_onAllCharactersShipsDestroyed);
-        _readyToggleBinding = new EventBinding<OnReadyUIButtonToggled>(ReadyToggle_OnClick);
-        EventBus<OnReadyUIButtonToggled>.Register(_readyToggleBinding);
     }
 
     public bool IsCurrentState(Type stateType) => _stateMachine.IsCurrentState(stateType);
