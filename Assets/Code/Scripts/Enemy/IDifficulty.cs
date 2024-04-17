@@ -5,5 +5,7 @@ namespace Enemy
     public interface IDifficulty
     {
         List<EnemyAIAction> CalculateActions();
+
+        public int GetWinMoneyAmount();
     }
 }

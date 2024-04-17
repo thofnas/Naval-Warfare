@@ -45,5 +45,7 @@ namespace Enemy.Difficulties
 
             return new List<EnemyAIAction> { new(cellPosition, 2) };
         }
+
+        public int GetWinMoneyAmount() => 10;
     }
 }

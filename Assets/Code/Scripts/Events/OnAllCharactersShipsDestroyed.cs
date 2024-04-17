@@ -4,11 +4,11 @@ namespace Events
 {
     public struct OnAllCharactersShipsDestroyed : IEvent
     {
-        public readonly CharacterType LostCharacterType;
+        public readonly CharacterType LoserCharacterType;
 
-        public OnAllCharactersShipsDestroyed(CharacterType lostCharacterType)
+        public OnAllCharactersShipsDestroyed(CharacterType loserCharacterType)
         {
-            LostCharacterType = lostCharacterType;
+            LoserCharacterType = loserCharacterType;
         }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
+using Enemy;
 using EventBus;
 using Events;
-using Misc;
 using StateMachine;
 using States.GameplayStates;
-using UnityEngine;
 using Utilities;
 using Zenject;
 
 public class GameplayManager : IInitializable, IDisposable
 {
+    public CharacterType LoserCharacterType { get; private set; }
+    
     private const int CountdownSeconds = 1;
     private const float CountdownWaitSecondsBeforeComplete = 0.95f;
     private readonly ShipsManager _shipsManager;
@@ -19,7 +20,7 @@ public class GameplayManager : IInitializable, IDisposable
     private EventBinding<OnReadyUIButtonToggled> _readyToggleBinding;
 
     [Inject]
-    private GameplayManager(StateMachine.StateMachine stateMachine, LevelManager levelManager)
+    private GameplayManager(StateMachine.StateMachine stateMachine, LevelManager levelManager, Wallet wallet, IDifficulty difficulty)
     {
         _stateMachine = stateMachine;
 
@@ -28,7 +29,7 @@ public class GameplayManager : IInitializable, IDisposable
         // creating states
         PlacingShips = new PlacingShips(stateMachine);
         Battle = new Battle(levelManager, stateMachine, () => IsBattleEnded = true);
-        BattleResults = new BattleResults(stateMachine);
+        BattleResults = new BattleResults(this, stateMachine, wallet, difficulty);
             
         _stateMachine.OnStateChanged += StateMachine_OnStateChanged;
 
@@ -82,8 +83,9 @@ public class GameplayManager : IInitializable, IDisposable
             });
     }
 
-    private void Ships_OnOneSideDestroyed(OnAllCharactersShipsDestroyed obj)
+    private void Ships_OnOneSideDestroyed(OnAllCharactersShipsDestroyed e)
     {
+        LoserCharacterType = e.LoserCharacterType;
         _stateMachine.SwitchState(BattleResults);
     }
 

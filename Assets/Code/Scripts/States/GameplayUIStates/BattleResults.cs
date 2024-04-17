@@ -64,8 +64,8 @@ namespace States.GameplayUIStates
             };
         }
 
-        private void OnAllCharactersShipsDestroyed(OnAllCharactersShipsDestroyed obj) =>
-            _resultsLabel.text = obj.LostCharacterType == CharacterType.Enemy
+        private void OnAllCharactersShipsDestroyed(OnAllCharactersShipsDestroyed e) =>
+            _resultsLabel.text = e.LoserCharacterType == CharacterType.Enemy
                 ? "You won"
                 : "You lost";
     }

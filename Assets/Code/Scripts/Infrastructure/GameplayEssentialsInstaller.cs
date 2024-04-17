@@ -31,7 +31,7 @@ namespace Infrastructure
             InitExecutionOrder();
 
             TurnSystem();
-            GameManager();
+            GameplayManager();
             ShipsManager();
             InteractionSystem();
             GridSystemSpawner();
@@ -85,7 +85,7 @@ namespace Infrastructure
 
         private void ShipsManager() => Container.BindInterfacesAndSelfTo<ShipsManager>().AsSingle();
 
-        private void GameManager() => Container.BindInterfacesAndSelfTo<GameplayManager>().AsSingle();
+        private void GameplayManager() => Container.BindInterfacesAndSelfTo<GameplayManager>().AsSingle();
 
         private void TurnSystem() =>
             Container.BindInterfacesAndSelfTo<TurnSystem>().AsSingle()
