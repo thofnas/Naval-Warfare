@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: GameplaySettingsInstaller
   m_EditorClassIdentifier: 
   _gridSystem:
-    Width: 7
-    Height: 7
-    CellGap: 1.05
+    Width: 4
+    Height: 4
+    CellGap: 1.04
   _shipsSpawner:
     ShipData:
-    - ShipLength: 2
     - ShipLength: 3
-    - ShipLength: 4
   _debugSettings:
     FirstCellPositionsAIWillShoot: []
     CreateDebugObjects: 0

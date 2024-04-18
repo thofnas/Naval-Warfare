@@ -1,7 +1,10 @@
-﻿using EventBus;
+﻿using System;
+using Enemy;
+using EventBus;
 using Events;
 using UI;
 using UI.Elements;
+using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -11,10 +14,21 @@ namespace States.GameplayUIStates
 {
     public class BattleResults : BaseState
     {
-        private Label _resultsLabel;
+        private readonly Wallet _wallet;
+        private readonly IDifficulty _difficulty;
+        
+        private Label _totalMoneyLabel;
+        private Label _winLoseLabel;
+        private Label _moneyResultsLabel;
+        private StyledButton _goToMainMenuButton;
+        private StyledButton _restartButton;
+        private IDisposable _buttonsActivator;
 
-        public BattleResults(GameplayUIManager gameplayUIManager, StyleSheet styleSheet) : base(gameplayUIManager)
+        public BattleResults(GameplayUIManager gameplayUIManager, StyleSheet styleSheet, Wallet wallet, IDifficulty difficulty) : base(gameplayUIManager)
         {
+            _wallet = wallet;
+            _difficulty = difficulty;
+            
             Root = CreateDocument(nameof(BattleResults), styleSheet);
 
             GenerateView();
@@ -22,6 +36,42 @@ namespace States.GameplayUIStates
             var onAllCharactersShipsDestroyed =
                 new EventBinding<OnAllCharactersShipsDestroyed>(OnAllCharactersShipsDestroyed);
             EventBus<OnAllCharactersShipsDestroyed>.Register(onAllCharactersShipsDestroyed);
+
+            var onMoneyChanged = new EventBinding<OnMoneyChanged>(OnMoneyChanged);
+            EventBus<OnMoneyChanged>.Register(onMoneyChanged);
+        }
+
+        public sealed override void GenerateView()
+        {
+            VisualElement container = Root.CreateChild("container");
+            
+            VisualElement moneyContainer = container.CreateChild("money-container");
+            VisualElement moneyIconTotal = moneyContainer.CreateChild("money-icon");
+            
+            _totalMoneyLabel = moneyContainer.CreateChild<Label>("money-text");
+            _totalMoneyLabel.text = _wallet.GetCurrentMoney().ToString();
+            
+            VisualElement containerResults = container.CreateChild("container-results");
+            
+            _winLoseLabel = containerResults.CreateChild<Label>();
+            
+            VisualElement resultsMoneyContainer = container.CreateChild("money-container-results"); 
+            resultsMoneyContainer.CreateChild("money-icon");
+            _moneyResultsLabel = resultsMoneyContainer.CreateChild<Label>();
+            _moneyResultsLabel.visible = false;
+            _moneyResultsLabel.text = _difficulty.GetWinMoneyAmount().ToString();
+            
+            VisualElement containerButtons = container.CreateChild("container-buttons");
+
+            _restartButton = new StyledButton(GameplayUIManager.Theme, containerButtons)
+            {
+                text = "Restart"
+            };
+
+            _goToMainMenuButton = new StyledButton(GameplayUIManager.Theme, containerButtons)
+            {
+                text = "Main menu"
+            };
         }
 
         protected sealed override VisualElement Root { get; }
@@ -34,39 +84,41 @@ namespace States.GameplayUIStates
             const int durationMs = 1000;
             Root.experimental.animation.Start(0f, dimAlphaValue, durationMs,
                 (element, value) => { element.style.backgroundColor = Color.clear.With(a: value); });
+
+            _buttonsActivator = Observable.Timer(TimeSpan.FromMilliseconds(3000))
+                .Subscribe(_ => SetButtonEvents());
         }
-        
+
         public override void OnExit()
         {
             base.OnEnter();
 
             Root.style.backgroundColor = Color.clear;
+            
+            _buttonsActivator.Dispose();
         } 
 
-        public sealed override void GenerateView()
+        private void SetButtonEvents()
         {
-            VisualElement container = Root.CreateChild("container");
-            VisualElement containerResults = container.CreateChild("container-results");
-            VisualElement containerButtons = container.CreateChild("container-buttons");
-            _resultsLabel = new Label();
-            containerResults.Add(_resultsLabel);
-
-            StyledButton restartButton = new(GameplayUIManager.Theme, containerButtons,
-                () => SceneManager.LoadScene("Gameplay"))
-            {
-                text = "Restart"
-            };
-
-            StyledButton goToMainMenuButton = new(GameplayUIManager.Theme, containerButtons,
-                () => SceneManager.LoadScene("MainMenu"))
-            {
-                text = "Main menu"
-            };
+            _restartButton.clicked += () => SceneManager.LoadScene("Gameplay");
+            _goToMainMenuButton.clicked += () => SceneManager.LoadScene("MainMenu");
         }
 
-        private void OnAllCharactersShipsDestroyed(OnAllCharactersShipsDestroyed e) =>
-            _resultsLabel.text = e.LoserCharacterType == CharacterType.Enemy
-                ? "You won"
-                : "You lost";
+        private void OnMoneyChanged(OnMoneyChanged e)
+        {
+            _totalMoneyLabel.text = e.To.ToString();
+        }
+
+        private void OnAllCharactersShipsDestroyed(OnAllCharactersShipsDestroyed e)
+        {
+            if (e.LoserCharacterType == CharacterType.Enemy)
+            {
+                _winLoseLabel.text = "You won";
+
+                _moneyResultsLabel.visible = true;
+            }
+            else
+                _winLoseLabel.text = "You lost";
+        }
     }
 }

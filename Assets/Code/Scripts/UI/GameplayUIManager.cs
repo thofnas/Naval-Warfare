@@ -1,13 +1,11 @@
-using System;
+using Enemy;
 using EventBus;
 using Events;
-using StateMachine;
 using States.GameplayUIStates;
 using Themes;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
-using BaseState = States.GameplayStates.BaseState;
 
 namespace UI
 {
@@ -23,15 +21,19 @@ namespace UI
         [SerializeField] private StyleSheet _battleStyleSheet;
         [SerializeField] private StyleSheet _battleResultsStyleSheet;
         private StateMachine.StateMachine _stateMachine;
+        private Wallet _wallet;
+        private IDifficulty _difficulty;
         
         private EventBinding<OnGameplayStateChanged> _onGameplayStateChanged;
 
         [Inject]
         private void Construct(LevelManager levelManager, StateMachine.StateMachine stateMachine,
-            Theme theme)
+            Theme theme, Wallet wallet, IDifficulty difficulty)
         {
             _stateMachine = stateMachine;
             Theme = theme;
+            _wallet = wallet;
+            _difficulty = difficulty;
         }
 
         private void Awake()
@@ -39,7 +41,7 @@ namespace UI
             // defining states
             PlacingShips = new PlacingShips(this, _placingShipsStyleSheet);
             Battle = new Battle(this, _battleStyleSheet);
-            BattleResults = new BattleResults(this, _battleResultsStyleSheet);
+            BattleResults = new BattleResults(this, _battleResultsStyleSheet, _wallet, _difficulty);
 
             // set first state
             _stateMachine.SetState(PlacingShips);

@@ -1,4 +1,5 @@
 ﻿using System;
+using Data;
 using Enemy;
 using EventBus;
 using Events;
@@ -20,7 +21,7 @@ public class GameplayManager : IInitializable, IDisposable
     private EventBinding<OnReadyUIButtonToggled> _readyToggleBinding;
 
     [Inject]
-    private GameplayManager(StateMachine.StateMachine stateMachine, LevelManager levelManager, Wallet wallet, IDifficulty difficulty)
+    private GameplayManager(StateMachine.StateMachine stateMachine, LevelManager levelManager, Wallet wallet, IDifficulty difficulty, LocalDataProvider localDataProvider)
     {
         _stateMachine = stateMachine;
 
@@ -29,7 +30,7 @@ public class GameplayManager : IInitializable, IDisposable
         // creating states
         PlacingShips = new PlacingShips(stateMachine);
         Battle = new Battle(levelManager, stateMachine, () => IsBattleEnded = true);
-        BattleResults = new BattleResults(this, stateMachine, wallet, difficulty);
+        BattleResults = new BattleResults(this, stateMachine, wallet, difficulty, localDataProvider);
             
         _stateMachine.OnStateChanged += StateMachine_OnStateChanged;
 

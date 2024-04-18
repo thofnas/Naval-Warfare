@@ -29,7 +29,8 @@ public class InteractionSystem : ITickable
 
     public void Tick()
     {
-        if (_turnSystem.IsPlacingShips()) return;
+        if (_gameplayManager.IsCurrentState(typeof(PlacingShips))) 
+            return;
         
         if (_gameplayManager.IsCurrentState(typeof(BattleResults)))
             return;
@@ -70,7 +71,7 @@ public class InteractionSystem : ITickable
 
     public void Shoot()
     {
-        if (_turnSystem.IsPlacingShips()) 
+        if (_gameplayManager.IsCurrentState(typeof(PlacingShips))) 
             return;        
         
         if (_gameplayManager.IsCurrentState(typeof(BattleResults)))

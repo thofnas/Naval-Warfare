@@ -6,13 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="2cf71565-e702-496e-9a67-08766235670e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/Difficulties/Easy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/Difficulties/Easy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/IDifficulty.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/IDifficulty.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Events/OnAllCharactersShipsDestroyed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Events/OnAllCharactersShipsDestroyed.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/GameplayManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/GameplayManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplayEssentialsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplayEssentialsInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/InteractionSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/InteractionSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayStates/BattleResults.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayStates/BattleResults.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/BattleResults.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/BattleResults.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/TurnSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/TurnSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/GameplayUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/GameplayUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/BattleResults.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/BattleResults.uss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/Store.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/Store.uss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/GameplaySettingsInstaller.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/GameplaySettingsInstaller.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +40,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b3502c626dd433da43ca50f8c32f6ba175a00/ec/25107b0f/ITransform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/31/4ce483ac/VisualElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/79/c6725257/Toggle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/d0/a311fe8b/StyleEnum`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Code/Scripts/Themes/Theme.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -161,7 +165,9 @@
       <workItem from="1713212596435" duration="1468000" />
       <workItem from="1713269464669" duration="11641000" />
       <workItem from="1713375013996" duration="185000" />
-      <workItem from="1713382802098" duration="1010000" />
+      <workItem from="1713382802098" duration="1097000" />
+      <workItem from="1713447201355" duration="4376000" />
+      <workItem from="1713470914533" duration="1279000" />
     </task>
     <servers />
   </component>

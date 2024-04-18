@@ -6,15 +6,13 @@ using UnityEngine;
 
 public class TurnSystem : IDisposable
 {
-    private readonly GameplayManager _gameplayManager;
     private readonly CharacterType _whoseFirstTurn;
     private CharacterType _whoseCurrentTurn;
     
     private readonly EventBinding<OnCellHit> _onShipHit;
 
-    public TurnSystem(CharacterType whoseFirstTurn, GameplayManager gameplayManager)
+    public TurnSystem(CharacterType whoseFirstTurn)
     {
-        _gameplayManager = gameplayManager;
         _whoseFirstTurn = whoseFirstTurn;
         _whoseCurrentTurn = whoseFirstTurn;
 
@@ -34,12 +32,6 @@ public class TurnSystem : IDisposable
 
     private void NextTurn()
     {
-        if (IsPlacingShips())
-            return;
-        
-        if (_gameplayManager.IsCurrentState(typeof(BattleResults)))
-            return;
-
         TurnCount++;
         _whoseCurrentTurn = _whoseCurrentTurn == CharacterType.Player
             ? CharacterType.Enemy
@@ -57,8 +49,6 @@ public class TurnSystem : IDisposable
         // If false or if the characterType is not the one who starts first, return TurnCount / 2 turns.
         return TurnCount / 2;
     }
-
-    public bool IsPlacingShips() => _gameplayManager.IsCurrentState(typeof(PlacingShips));
 
     public CharacterType WhoseCurrentTurn() => _whoseCurrentTurn;
 
