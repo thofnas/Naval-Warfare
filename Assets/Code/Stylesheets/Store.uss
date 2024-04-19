@@ -100,5 +100,6 @@
     justify-content: flex-end;
     --unity-image: url("/Assets/Art/Textures/UI/Selected.png");
 
-    width: 100%;
+    height: 50%;
+    width: 85%;
 }

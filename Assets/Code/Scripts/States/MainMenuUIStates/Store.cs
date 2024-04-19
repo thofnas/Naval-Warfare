@@ -30,7 +30,7 @@ namespace States.MainMenuUIStates
             Root = CreateDocument(nameof(Store), styleSheet);
             _storeContent = storeContent;
             _wallet = wallet;
-
+            
             GenerateView();
         }
 

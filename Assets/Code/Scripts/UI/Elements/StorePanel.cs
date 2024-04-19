@@ -92,7 +92,12 @@ namespace UI.Elements
                     if (!storeItem.IsPurchasable)
                     {
                         //Remove(storeItemView);
-                        return;
+                        //return;
+                    }
+                    
+                    if (!_wallet.IsEnough(storeItem.Price))
+                    {
+                        storeItemView.SetNotEnoughMoneyStyles();
                     }
                     
                     storeItemView.Lock();
@@ -100,39 +105,6 @@ namespace UI.Elements
 
                 _storeItemViews.Add(storeItemView);
             } 
-            foreach (StoreItem storeItem in storeItems)
-            {
-                StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, _mapType, itemsContainer, StoreItemView_OnClicked);
-                
-                _ownedThemesChecker.Visit(storeItemView.StoreItem);
-
-                if (_ownedThemesChecker.IsOwned)
-                {
-                    _selectedThemeChecker.Visit(storeItemView.StoreItem);
-
-                    if (_selectedThemeChecker.IsSelected)
-                    {
-                        _themeSelector.Visit(storeItemView.StoreItem);
-                        storeItemView.Select();
-                    }
-                    else
-                        storeItemView.Deselect();
-
-                    storeItemView.Unlock();
-                }
-                else
-                {
-                    if (!storeItem.IsPurchasable)
-                    {
-                        // Remove(storeItemView);
-                        return;
-                    }
-                    
-                    storeItemView.Lock();
-                }
-
-                _storeItemViews.Add(storeItemView);
-            }
         }
 
         private void SelectTheme(StoreItemView storeItemView)
@@ -172,6 +144,10 @@ namespace UI.Elements
                 SelectTheme(storeItemView);
                 
                 storeItemView.Unlock();
+            }
+            else
+            {
+                storeItemView.AnimateNotEnoughMoney();
             }
         }
 

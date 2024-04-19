@@ -5,34 +5,38 @@ using Map;
 using Themes.Store;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UIElements.Experimental;
 using Utilities.Extensions;
 
 namespace UI.Elements
 {
     public class StoreItemView : VisualElement
     {
-        public readonly Image BackgroundImage;
-        public readonly VisualElement PriceWrapper;
-        public readonly Image LockImage;
-        public readonly Image SelectedImage;
-        public readonly Label PriceLabel;
+        private static readonly Color s_notEnoughMoneyColor = new(1f,0.5f,0.4f);
 
+        private readonly Image _backgroundImage;
+        private readonly VisualElement _priceWrapper;
+        private readonly Image _lockImage;
+        private readonly Image _selectedImage;
+        private readonly Label _priceLabel;
+
+        private bool _isLocked;
+        
         public StoreItem StoreItem { get; private set; }
-        public bool IsLocked { get; private set; }
 
         private StoreItemView()
         {
             this.AddClass("store-item");
 
-            BackgroundImage = this.CreateChild<Image>("item-background-image");
+            _backgroundImage = this.CreateChild<Image>("item-background-image");
             
-            PriceWrapper = this.CreateChild("item-price-wrapper");
-            VisualElement priceContainer = PriceWrapper.CreateChild("item-price");
+            _priceWrapper = this.CreateChild("item-price-wrapper");
+            VisualElement priceContainer = _priceWrapper.CreateChild("item-price");
             Image priceCoin = priceContainer.CreateChild<Image>("item-price-coin");
-            PriceLabel = priceContainer.CreateChild<Label>("item-price-text");
+            _priceLabel = priceContainer.CreateChild<Label>("item-price-text");
             
-            LockImage = this.CreateChild<Image>("item-lock-image");
-            SelectedImage = this.CreateChild<Image>("item-selected-image");
+            _lockImage = this.CreateChild<Image>("item-lock-image");
+            _selectedImage = this.CreateChild<Image>("item-selected-image");
             
             Lock();
             Deselect();
@@ -40,26 +44,53 @@ namespace UI.Elements
 
         public void Lock()
         {
-            IsLocked = true;
-            LockImage.visible = IsLocked;
-            PriceWrapper.visible = true;
+            _isLocked = true;
+            _lockImage.visible = _isLocked;
+            _priceWrapper.visible = true;
         }
 
         public void Unlock()
         {
-            IsLocked = false;
-            LockImage.visible = IsLocked;       
-            PriceWrapper.visible = false;
+            _isLocked = false;
+            _lockImage.visible = _isLocked;       
+            _priceWrapper.visible = false;
         }
 
         public void Select()
         {
-            SelectedImage.visible = true;
+            _backgroundImage.style.opacity = 1f;
+            _selectedImage.visible = true;
         }
 
         public void Deselect()
         {
-            SelectedImage.visible = false;
+            _backgroundImage.style.opacity = 0.8f;
+            _selectedImage.visible = false;
+        }
+        
+        public void SetNotEnoughMoneyStyles()
+        {
+            _priceLabel.style.color = s_notEnoughMoneyColor;
+        }
+
+        public void AnimateNotEnoughMoney()
+        {
+            const int durationMs = 100;
+            
+            StyleValues blinkLabelStyles = new()
+            {
+                color = s_notEnoughMoneyColor.gamma.gamma
+            };
+            
+            StyleValues originalLabelStyles = new()
+            {
+                color = s_notEnoughMoneyColor
+            };
+
+            _priceLabel.experimental.animation.Start(blinkLabelStyles, durationMs).onAnimationCompleted += () =>
+                _priceLabel.experimental.animation.Start(originalLabelStyles, durationMs).onAnimationCompleted += () => 
+                    _priceLabel.experimental.animation.Start(blinkLabelStyles, durationMs).onAnimationCompleted += () =>
+                        _priceLabel.experimental.animation.Start(originalLabelStyles, durationMs);
         }
 
         public static class Factory
@@ -80,9 +111,9 @@ namespace UI.Elements
 
             private static void SetStyles(StoreItemView storeItemView, StoreItem storeItem)
             {
-                storeItemView.BackgroundImage.image = storeItem.Theme.BackgroundSprites[0].texture;
-                storeItemView.BackgroundImage.scaleMode = ScaleMode.ScaleAndCrop;
-                storeItemView.PriceLabel.text = storeItem.Price > 0 ? storeItem.Price.ToString() : null;
+                storeItemView._backgroundImage.image = storeItem.Theme.BackgroundSprites[0].texture;
+                storeItemView._backgroundImage.scaleMode = ScaleMode.ScaleAndCrop;
+                storeItemView._priceLabel.text = storeItem.Price > 0 ? storeItem.Price.ToString() : null;
             }
         }
     }

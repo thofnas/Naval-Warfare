@@ -19,10 +19,10 @@ namespace States.GameplayUIStates
         
         private Label _totalMoneyLabel;
         private Label _winLoseLabel;
-        private Label _moneyResultsLabel;
         private StyledButton _goToMainMenuButton;
         private StyledButton _restartButton;
         private IDisposable _buttonsActivator;
+        private VisualElement _resultsMoneyContainer;
 
         public BattleResults(GameplayUIManager gameplayUIManager, StyleSheet styleSheet, Wallet wallet, IDifficulty difficulty) : base(gameplayUIManager)
         {
@@ -55,11 +55,11 @@ namespace States.GameplayUIStates
             
             _winLoseLabel = containerResults.CreateChild<Label>();
             
-            VisualElement resultsMoneyContainer = container.CreateChild("money-container-results"); 
-            resultsMoneyContainer.CreateChild("money-icon");
-            _moneyResultsLabel = resultsMoneyContainer.CreateChild<Label>();
-            _moneyResultsLabel.visible = false;
-            _moneyResultsLabel.text = _difficulty.GetWinMoneyAmount().ToString();
+            _resultsMoneyContainer = container.CreateChild("money-container-results"); 
+            _resultsMoneyContainer.CreateChild("money-icon");
+            Label moneyResultsLabel = _resultsMoneyContainer.CreateChild<Label>();
+            moneyResultsLabel.visible = false;
+            moneyResultsLabel.text = _difficulty.GetWinMoneyAmount().ToString();
             
             VisualElement containerButtons = container.CreateChild("container-buttons");
 
@@ -115,7 +115,7 @@ namespace States.GameplayUIStates
             {
                 _winLoseLabel.text = "You won";
 
-                _moneyResultsLabel.visible = true;
+                _resultsMoneyContainer.visible = true;
             }
             else
                 _winLoseLabel.text = "You lost";
