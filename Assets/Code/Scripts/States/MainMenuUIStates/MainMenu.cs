@@ -47,7 +47,7 @@ namespace States.MainMenuUIStates
 
             StyledButton optionsButton = new(SelectedTheme.PlayerTheme, 
                 buttonsContainer, 
-                () => StateMachine.SwitchState(MainMenuUIManager.OptionsState), 
+                () => StateMachine.SwitchState(MainMenuUIManager.SettingsState), 
                 "options-button")
             {
                 text = "Options"

@@ -15,7 +15,7 @@ namespace UI
         public SelectedTheme SelectedTheme { get; private set; }
         public MainMenu MainMenuState { get; private set; }
         public Store StoreState { get; private set; }
-        public Options OptionsState { get; private set; }
+        public Settings SettingsState { get; private set; }
         public StorePanel.Factory StorePanelFactory { get; private set; }
 
         public ThemeUnlocker ThemeUnlocker { get; set; }
@@ -32,6 +32,7 @@ namespace UI
         private Wallet _wallet;
 
         private StateMachine.StateMachine _stateMachine;
+        private GameSettings _gameSettings;
 
         [Inject]
         private void Construct(StateMachine.StateMachine stateMachine, 
@@ -42,7 +43,8 @@ namespace UI
             ThemeSelector themeSelector, 
             ThemeUnlocker theme, 
             OwnedThemesChecker ownedThemesChecker, 
-            SelectedThemeChecker selectedThemeChecker)
+            SelectedThemeChecker selectedThemeChecker,
+            GameSettings gameSettings)
         {
             _stateMachine = stateMachine;
             SelectedTheme = selectedTheme;
@@ -53,13 +55,14 @@ namespace UI
             Theme = theme;
             OwnedThemesChecker = ownedThemesChecker;
             SelectedThemeChecker = selectedThemeChecker;
+            _gameSettings = gameSettings;
         }
 
         private void Awake()
         {
             MainMenuState = new MainMenu(this, _stateMachine, _mainMenuStyleSheet);
             StoreState = new Store(this, _stateMachine, _storeStyleSheet, _storeContent, _wallet);
-            OptionsState = new Options(this, _stateMachine, _optionsStyleSheet);
+            SettingsState = new Settings(this, _stateMachine, _optionsStyleSheet, _gameSettings);
                 
             _stateMachine.SetState(MainMenuState);
         }

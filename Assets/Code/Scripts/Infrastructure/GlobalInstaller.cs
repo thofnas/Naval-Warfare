@@ -23,8 +23,6 @@ namespace Infrastructure
 
         public override void InstallBindings()
         {
-            Application.targetFrameRate = 60;
-            
             _persistentData = new PersistentData();
             _dataProvider = new LocalDataProvider(_persistentData);
 
@@ -45,6 +43,8 @@ namespace Infrastructure
             Container.BindInstance(_mapLibrary);
             
             Container.BindInterfacesTo<MainMenuMusicManager>().AsSingle().WithArguments(_mainMenuMusic);
+
+            Container.BindInterfacesAndSelfTo<GameSettings>().AsSingle().NonLazy();
         }
 
         private void BindPersistentData() => Container.BindInstance(_persistentData);
