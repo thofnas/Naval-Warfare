@@ -1,5 +1,8 @@
-﻿using UI;
+﻿using System;
+using System.Collections.Generic;
+using UI;
 using UI.Elements;
+using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 
@@ -7,6 +10,8 @@ namespace States.MainMenuUIStates
 {
     public class Settings : BaseState
     {
+        private static readonly List<string> s_radioButtonChoices = new() { "30", "60", "120" };
+        
         private readonly GameSettings _gameSettings;
 
         public Settings(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine, StyleSheet styleSheet, GameSettings gameSettings) : base(mainMenuUIManager, stateMachine)
@@ -28,21 +33,10 @@ namespace States.MainMenuUIStates
             VisualElement settingsContainer = container.CreateChild("settings-container");
             VisualElement fpsContainer = settingsContainer.CreateChild("fps-container");
 
-            StyledButton fps30Button =
-                new(SelectedTheme.PlayerTheme, fpsContainer, () => _gameSettings.SetFrameRate(30))
-                {
-                    text = "30 fps"
-                };
-            StyledButton fps60Button =
-                new(SelectedTheme.PlayerTheme, fpsContainer, () => _gameSettings.SetFrameRate(60))
-                {
-                    text = "60 fps"
-                };
-            StyledButton fps120Button =
-                new(SelectedTheme.PlayerTheme, fpsContainer, () => _gameSettings.SetFrameRate(120))
-                {
-                    text = "120 fps"
-                };
+            RadioButtonGroup radioButtonGroup = new("Frames Per Second", s_radioButtonChoices);
+            radioButtonGroup.RegisterValueChangedCallback(e => _gameSettings.SetFrameRate(int.Parse(s_radioButtonChoices[e.newValue])));
+            radioButtonGroup.Focus();
+            settingsContainer.Add(radioButtonGroup);
             
             VisualElement buttonsContainer = container.CreateChild("buttons-container");
             

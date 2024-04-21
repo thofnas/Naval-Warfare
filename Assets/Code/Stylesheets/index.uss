@@ -1,10 +1,11 @@
 :root {
+    --main-text-color: #f5f5f5;
+    --font-main: url("project:/Assets/ThirdParty/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf");
+    
     justify-content: center;
     align-items: center;
     padding: 8px;
-    color: #f5f5f5;
-    
-    --font-main: url("project:/Assets/ThirdParty/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf");
+    color: var(--main-text-color);
 }
 
 Label {
@@ -17,6 +18,10 @@ Label {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.unity-base-field__label {
+    color: var(--main-text-color);
 }
 
 .unity-toggle {
@@ -72,6 +77,21 @@ Label {
 
 .unity-button:active {
     background-image: url("/Assets/Art/Textures/UI/Button.png#Press");
+}
+
+.unity-radio-button .unity-radio-button__input{
+    background-image: url("/Assets/Art/Textures/UI/Button.png#Base");
+}
+.unity-radio-button:hover  .unity-radio-button__input{
+    background-image: url("/Assets/Art/Textures/UI/Button.png#Hover");
+}
+
+.unity-radio-button:checked .unity-radio-button__input{
+    background-image: url("/Assets/Art/Textures/UI/Button.png#Press");
+}
+
+.unity-radio-button__checkmark-background {
+    display: none;
 }
 
 .money-container {

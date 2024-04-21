@@ -1,0 +1,11 @@
+﻿@import url("index.uss");
+
+.unity-radio-button-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.unity-radio-button-group__container {
+    display: flex;
+    flex-direction: row;
+}

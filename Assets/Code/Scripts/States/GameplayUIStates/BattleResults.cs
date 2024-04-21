@@ -14,6 +14,8 @@ namespace States.GameplayUIStates
 {
     public class BattleResults : BaseState
     {
+        private const int TimeToActivateNavigationButtonsInMs = 500;
+        
         private readonly Wallet _wallet;
         private readonly IDifficulty _difficulty;
         
@@ -45,10 +47,10 @@ namespace States.GameplayUIStates
         {
             VisualElement container = Root.CreateChild("container");
             
-            VisualElement moneyContainer = container.CreateChild("money-container");
-            VisualElement moneyIconTotal = moneyContainer.CreateChild("money-icon");
+            VisualElement totalMoneyContainer = container.CreateChild("money-container");
+            VisualElement moneyIconTotal = totalMoneyContainer.CreateChild("money-icon");
             
-            _totalMoneyLabel = moneyContainer.CreateChild<Label>("money-text");
+            _totalMoneyLabel = totalMoneyContainer.CreateChild<Label>("money-text");
             _totalMoneyLabel.text = _wallet.GetCurrentMoney().ToString();
             
             VisualElement containerResults = container.CreateChild("container-results");
@@ -56,9 +58,9 @@ namespace States.GameplayUIStates
             _winLoseLabel = containerResults.CreateChild<Label>();
             
             _resultsMoneyContainer = container.CreateChild("money-container-results"); 
+            _resultsMoneyContainer.visible = false;
             _resultsMoneyContainer.CreateChild("money-icon");
             Label moneyResultsLabel = _resultsMoneyContainer.CreateChild<Label>();
-            moneyResultsLabel.visible = false;
             moneyResultsLabel.text = _difficulty.GetWinMoneyAmount().ToString();
             
             VisualElement containerButtons = container.CreateChild("container-buttons");
@@ -85,7 +87,7 @@ namespace States.GameplayUIStates
             Root.experimental.animation.Start(0f, dimAlphaValue, durationMs,
                 (element, value) => { element.style.backgroundColor = Color.clear.With(a: value); });
 
-            _buttonsActivator = Observable.Timer(TimeSpan.FromMilliseconds(3000))
+            _buttonsActivator = Observable.Timer(TimeSpan.FromMilliseconds(TimeToActivateNavigationButtonsInMs))
                 .Subscribe(_ => SetButtonEvents());
         }
 
