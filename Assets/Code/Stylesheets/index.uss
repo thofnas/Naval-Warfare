@@ -94,6 +94,11 @@ Label {
     display: none;
 }
 
+.unity-group-box {
+    display: flex;
+    flex-direction: row;
+}
+
 .money-container {
     position: absolute;
     display: flex;
