@@ -41,15 +41,15 @@ namespace States.MainMenuUIStates
             
             GroupBox fpsGroupBox = fpsContainer.CreateChild<GroupBox>("fps-groupbox");
             
-            StyledRadioButton fps30RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "30" };
+            StyledRadioButton fps30RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { label = "30" };
             fps30RadioButton.RegisterValueChangedCallback(_ => _gameSettings.SetFrameRate(30));
             fpsGroupBox.Add(fps30RadioButton);
             
-            StyledRadioButton fps60RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "60" };
+            StyledRadioButton fps60RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { label = "60" };
             fps60RadioButton.RegisterValueChangedCallback(_ => _gameSettings.SetFrameRate(60));
             fpsGroupBox.Add(fps60RadioButton);
             
-            StyledRadioButton fps120RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "120" };
+            StyledRadioButton fps120RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { label = "120" };
             fps120RadioButton.RegisterValueChangedCallback(_ => _gameSettings.SetFrameRate(120));
             fpsGroupBox.Add(fps120RadioButton);
 

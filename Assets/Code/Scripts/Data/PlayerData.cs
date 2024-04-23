@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Achievements;
 using Map;
 using ModestTree;
 using Newtonsoft.Json;
@@ -16,6 +17,7 @@ namespace Data
         private OceanThemeType _selectedOceanThemeType;
         private readonly List<IslandsThemeType> _ownedIslandsThemesList;
         private readonly List<OceanThemeType> _ownedOceanThemesList;
+        private readonly List<AchievementType> _unlockedAchievements;
 
         public PlayerData()
         {
@@ -26,10 +28,11 @@ namespace Data
             _ownedIslandsThemesList = new List<IslandsThemeType> { _selectedIslandsThemeType };
             _selectedOceanThemeType = OceanThemeType.Earth;
             _ownedOceanThemesList = new List<OceanThemeType> { _selectedOceanThemeType };
+            _unlockedAchievements = new List<AchievementType>();
         }
 
         [JsonConstructor]
-        public PlayerData(int money, IslandsThemeType selectedIslandsThemeType, List<IslandsThemeType> ownedIslandsThemesList, OceanThemeType selectedOceanThemeType, List<OceanThemeType> ownedOceanThemesList, MapType selectedMapType)
+        public PlayerData(int money, IslandsThemeType selectedIslandsThemeType, List<IslandsThemeType> ownedIslandsThemesList, OceanThemeType selectedOceanThemeType, List<OceanThemeType> ownedOceanThemesList, MapType selectedMapType, List<AchievementType> unlockedAchievements)
         {
             _money = money;
             _selectedMapType = selectedMapType;
@@ -38,6 +41,7 @@ namespace Data
             _ownedIslandsThemesList = ownedIslandsThemesList;
             _selectedOceanThemeType = selectedOceanThemeType;
             _ownedOceanThemesList = ownedOceanThemesList;
+            _unlockedAchievements = unlockedAchievements;
         }
 
         public int Money
@@ -114,6 +118,16 @@ namespace Data
                 throw new ArgumentException(nameof(themeType));
             
             _ownedOceanThemesList.Add(themeType);
+        }
+
+        public IEnumerable<AchievementType> UnlockedAchievements => _unlockedAchievements;
+
+        public void UnlockAchievement(AchievementType achievementType)
+        {
+            if (_unlockedAchievements.Contains(achievementType))
+                throw new ArgumentException(nameof(achievementType));
+            
+            _unlockedAchievements.Add(achievementType);
         }
     }
 }
