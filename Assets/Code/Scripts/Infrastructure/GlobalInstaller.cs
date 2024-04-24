@@ -1,4 +1,5 @@
 ﻿using System;
+using Achievements;
 using Audio;
 using Data;
 using FMODUnity;
@@ -7,8 +8,6 @@ using Misc;
 using Themes;
 using Themes.Store;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Infrastructure
@@ -45,6 +44,15 @@ namespace Infrastructure
             Container.BindInterfacesTo<MainMenuMusicManager>().AsSingle().WithArguments(_mainMenuMusic);
 
             Container.BindInterfacesAndSelfTo<GameSettings>().AsSingle().NonLazy();
+
+            Achievements();
+        }
+
+        private void Achievements()
+        {
+            FirstMapBought firstMapBought = new(_persistentData, "91dfcd2c-715e-41dc-9808-c106e42f6127");
+
+            Container.Bind<FirstMapBought>().FromInstance(firstMapBought).AsSingle().NonLazy();
         }
 
         private void BindPersistentData() => Container.BindInstance(_persistentData);

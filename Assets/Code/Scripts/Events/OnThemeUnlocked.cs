@@ -2,11 +2,11 @@
 
 namespace Events
 {
-    public struct OnStoreItemUnlocked : IEvent
+    public struct OnThemeUnlocked : IEvent
     {
         public readonly bool IsPurchasable;
 
-        public OnStoreItemUnlocked(bool isPurchasable)
+        public OnThemeUnlocked(bool isPurchasable)
         {
             IsPurchasable = isPurchasable;
         }

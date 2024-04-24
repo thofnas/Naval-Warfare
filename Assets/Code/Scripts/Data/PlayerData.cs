@@ -10,29 +10,31 @@ namespace Data
 {
     public class PlayerData
     {
-        private int _money;
-        private MapType _selectedMapType;
+        private int _money = 50;
+        private MapType _selectedMapType = MapType.Islands;
         
-        private IslandsThemeType _selectedIslandsThemeType;
-        private OceanThemeType _selectedOceanThemeType;
+        private IslandsThemeType _selectedIslandsThemeType = IslandsThemeType.Tropical;
         private readonly List<IslandsThemeType> _ownedIslandsThemesList;
+        private OceanThemeType _selectedOceanThemeType = OceanThemeType.Earth;
         private readonly List<OceanThemeType> _ownedOceanThemesList;
-        private readonly List<AchievementType> _unlockedAchievements;
 
+        private readonly List<Guid> _unlockedAchievements = new();
+        
         public PlayerData()
         {
-            _money = 50;
-            _selectedMapType = MapType.Islands;
-            
-            _selectedIslandsThemeType = IslandsThemeType.Tropical;
             _ownedIslandsThemesList = new List<IslandsThemeType> { _selectedIslandsThemeType };
-            _selectedOceanThemeType = OceanThemeType.Earth;
             _ownedOceanThemesList = new List<OceanThemeType> { _selectedOceanThemeType };
-            _unlockedAchievements = new List<AchievementType>();
         }
 
         [JsonConstructor]
-        public PlayerData(int money, IslandsThemeType selectedIslandsThemeType, List<IslandsThemeType> ownedIslandsThemesList, OceanThemeType selectedOceanThemeType, List<OceanThemeType> ownedOceanThemesList, MapType selectedMapType, List<AchievementType> unlockedAchievements)
+        public PlayerData(
+            int money, 
+            IslandsThemeType selectedIslandsThemeType, 
+            List<IslandsThemeType> ownedIslandsThemesList, 
+            OceanThemeType selectedOceanThemeType, 
+            List<OceanThemeType> ownedOceanThemesList, 
+            MapType selectedMapType, 
+            List<Guid> unlockedAchievements)
         {
             _money = money;
             _selectedMapType = selectedMapType;
@@ -41,7 +43,9 @@ namespace Data
             _ownedIslandsThemesList = ownedIslandsThemesList;
             _selectedOceanThemeType = selectedOceanThemeType;
             _ownedOceanThemesList = ownedOceanThemesList;
-            _unlockedAchievements = unlockedAchievements;
+            
+            if (unlockedAchievements is not null)
+                _unlockedAchievements = unlockedAchievements;
         }
 
         public int Money
@@ -120,14 +124,14 @@ namespace Data
             _ownedOceanThemesList.Add(themeType);
         }
 
-        public IEnumerable<AchievementType> UnlockedAchievements => _unlockedAchievements;
+        public IEnumerable<Guid> UnlockedAchievements => _unlockedAchievements;
 
-        public void UnlockAchievement(AchievementType achievementType)
+        public void UnlockAchievement(Guid guid)
         {
-            if (_unlockedAchievements.Contains(achievementType))
-                throw new ArgumentException(nameof(achievementType));
+            if (_unlockedAchievements.Contains(guid))
+                throw new ArgumentException(nameof(guid));
             
-            _unlockedAchievements.Add(achievementType);
+            _unlockedAchievements.Add(guid);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace States.MainMenuUIStates
 
         private readonly Wallet _wallet;
 
-        private EventBinding<OnStoreItemUnlocked> _onStoreItemUnlocked;
+        private EventBinding<OnThemeUnlocked> _onStoreItemUnlocked;
 
         public Store(MainMenuUIManager mainMenuUIManager, 
             StateMachine.StateMachine stateMachine, 
@@ -43,8 +43,8 @@ namespace States.MainMenuUIStates
             UpdateStoreContent();
             OnThemeChangedBinding.Add(UpdateStoreContent);
             
-            _onStoreItemUnlocked = new EventBinding<OnStoreItemUnlocked>(OnStoreItemUnlocked);
-            EventBus<OnStoreItemUnlocked>.Register(_onStoreItemUnlocked);
+            _onStoreItemUnlocked = new EventBinding<OnThemeUnlocked>(OnStoreItemUnlocked);
+            EventBus<OnThemeUnlocked>.Register(_onStoreItemUnlocked);
         }
 
         public override void OnExit()
@@ -54,7 +54,7 @@ namespace States.MainMenuUIStates
             _storePanelsContainer.Clear();
             OnThemeChangedBinding.Remove(UpdateStoreContent);
             
-            EventBus<OnStoreItemUnlocked>.Deregister(_onStoreItemUnlocked);
+            EventBus<OnThemeUnlocked>.Deregister(_onStoreItemUnlocked);
         }
 
         protected sealed override void GenerateView() 
@@ -88,7 +88,7 @@ namespace States.MainMenuUIStates
             _storePanelsContainer.Add(oceanStorePanel);
         }
         
-        private void OnStoreItemUnlocked(OnStoreItemUnlocked e)
+        private void OnStoreItemUnlocked(OnThemeUnlocked e)
         {
             if (e.IsPurchasable) return;
             

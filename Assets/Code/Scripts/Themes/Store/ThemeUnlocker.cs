@@ -19,7 +19,7 @@ namespace Themes.Store
         {
             Visit((dynamic)storeItem);
             
-            EventBus<OnStoreItemUnlocked>.Invoke(new OnStoreItemUnlocked(isPurchasable: storeItem.IsPurchasable));
+            EventBus<OnThemeUnlocked>.Invoke(new OnThemeUnlocked(isPurchasable: storeItem.IsPurchasable));
         }
 
         public void Visit(IslandsThemeItem islandsThemeItem) => _persistentData.PlayerData.OpenIslandsTheme(islandsThemeItem.IslandsType);
