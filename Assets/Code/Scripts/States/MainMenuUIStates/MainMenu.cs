@@ -48,9 +48,17 @@ namespace States.MainMenuUIStates
             StyledButton optionsButton = new(SelectedTheme.PlayerTheme, 
                 buttonsContainer, 
                 () => StateMachine.SwitchState(MainMenuUIManager.SettingsState), 
-                "options-button")
+                "settings-button")
             {
-                text = "Options"
+                text = "Settings"
+            };
+            
+            StyledButton achievementsButton = new(SelectedTheme.PlayerTheme, 
+                buttonsContainer, 
+                () => StateMachine.SwitchState(MainMenuUIManager.AchievementsState), 
+                "achievements-button")
+            {
+                text = "Achievements"
             };
         }
     }

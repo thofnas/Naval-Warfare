@@ -1,5 +1,4 @@
-﻿using System;
-using Data;
+﻿using Data;
 using Events;
 using UnityEngine;
 
@@ -7,18 +6,16 @@ namespace Achievements
 {
     public class FirstMapBought : Achievement<OnThemeUnlocked>
     {
-        public override string Condition { get; protected set; } = "Buy your first map";
-        public override string Description { get; protected set; } = "";
+        public override string Name => "First purchase";
+        public override string UnlockCondition => "Buy your first map";
 
         public FirstMapBought(PersistentData persistentData, string guid) : base(persistentData, guid)
         {
         }
-
-        protected override void CheckUnlockConditions(OnThemeUnlocked e)
+ 
+        protected override bool AreConditionsMet(OnThemeUnlocked eventArgs)
         {
-            if (!e.IsPurchasable) return;
-            
-            Unlock();
+            return eventArgs.IsPurchasable;
         }
 
         protected override void OnUnlock()

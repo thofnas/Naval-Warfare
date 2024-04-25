@@ -21,10 +21,10 @@ namespace UI.Elements
             params string[] wrapperClasses) :
             base(clickEvent)
         {
-            style.paddingBottom = 12;
-            style.paddingTop = 12;
-            style.paddingLeft = 16;
-            style.paddingRight = 16;
+            style.paddingBottom = 10;
+            style.paddingTop = 10;
+            style.paddingLeft = 14;
+            style.paddingRight = 14;
 
             parent.Add(this);
             this.AddClass(wrapperClasses);

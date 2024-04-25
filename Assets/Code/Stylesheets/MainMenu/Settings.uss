@@ -1,4 +1,8 @@
-﻿@import url("index.uss");
+﻿@import url("../index.uss");
+
+.container {
+    width: 100%;
+}
 
 .unity-radio-button-group {
     display: flex;

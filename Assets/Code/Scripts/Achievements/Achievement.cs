@@ -5,36 +5,36 @@ using EventBus;
 
 namespace Achievements
 {
-    public abstract class Achievement<T> where T : IEvent
+    public abstract class Achievement<T> : IAchievement where T : IEvent
     {
-        public abstract string Condition { get; protected set; }
-        public abstract string Description { get; protected set; }
-        private readonly PersistentData _persistentData;
-        public readonly Guid Guid;
+        public abstract string Name { get; }
+        public abstract string UnlockCondition { get; }
+        public Guid Guid { get; }
         public bool IsUnlocked { get; private set; }
         
-        private readonly EventBinding<T> _eventBinding;
+        private readonly PersistentData _persistentData;
+        
+        private readonly EventBinding<T> _checkEvent;
 
         protected Achievement(PersistentData persistentData, string guid)
         {
-            Guid = new Guid(guid);
-            
-            if (!persistentData.PlayerData.UnlockedAchievements.Contains(Guid))
-            {
-                _eventBinding = new EventBinding<T>(CheckUnlockConditions);
-                EventBus<T>.Register(_eventBinding);
-            }
-            else
-                IsUnlocked = true;
-
             _persistentData = persistentData;
+            Guid = new Guid(guid);
+
+            if (persistentData.PlayerData.UnlockedAchievements.Contains(Guid))
+                IsUnlocked = true;
+            else
+            {
+                _checkEvent = new EventBinding<T>(CheckUnlockConditions);
+                EventBus<T>.Register(_checkEvent);
+            }
         }
 
-        protected abstract void CheckUnlockConditions(T e);
+        protected abstract bool AreConditionsMet(T eventArgs);
 
         protected abstract void OnUnlock();
 
-        protected void Unlock()
+        private void Unlock()
         {
             if (IsUnlocked) return;
             
@@ -42,9 +42,15 @@ namespace Achievements
             
             IsUnlocked = true;
             
-            EventBus<T>.Deregister(_eventBinding);
+            EventBus<T>.Deregister(_checkEvent);
             
             OnUnlock();
+        }
+
+        private void CheckUnlockConditions(T eventArgs)
+        {
+            if (AreConditionsMet(eventArgs))
+                Unlock();
         }
     }
 }

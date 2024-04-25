@@ -1,17 +1,23 @@
-﻿@import url("index.uss");
+﻿@import url("../index.uss");
 
 .container {
+    display: flex;
+    justify-content: space-between;
     width: 320px;
+    height: 100%;
 }
 
 .store-panels-container {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    overflow: scroll;
 }
 
 .store-panel {
     display: flex;
     flex-direction: row;
+    height: auto;
 }
 
 .panel-name-container {

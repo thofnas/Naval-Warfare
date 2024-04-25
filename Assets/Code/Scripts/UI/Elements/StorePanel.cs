@@ -10,7 +10,7 @@ using Zenject;
 
 namespace UI.Elements
 {
-    public class StorePanel : VisualElement
+    public class StorePanel : StyledPanel
     {
         private readonly SelectedTheme _selectedTheme;
         private readonly LocalDataProvider _localDataProvider;
@@ -32,7 +32,7 @@ namespace UI.Elements
             OwnedThemesChecker ownedThemesChecker, 
             SelectedThemeChecker selectedThemeChecker, 
             Wallet wallet, 
-            MapSelector mapSelector)
+            MapSelector mapSelector) : base(selectedTheme.PlayerTheme)
         {
             _selectedTheme = selectedTheme;
             _localDataProvider = localDataProvider;

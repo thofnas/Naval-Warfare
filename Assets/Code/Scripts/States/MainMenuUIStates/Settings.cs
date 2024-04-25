@@ -9,8 +9,6 @@ namespace States.MainMenuUIStates
 {
     public class Settings : BaseState
     {
-        private static readonly List<string> s_radioButtonChoices = new() { "30", "60", "120" };
-
         private readonly MainMenuUIManager _mainMenuUIManager;
         private readonly GameSettings _gameSettings;
         
@@ -32,7 +30,9 @@ namespace States.MainMenuUIStates
             base.GenerateView();
             
             VisualElement container = Root.CreateChild("container");
-            VisualElement settingsContainer = container.CreateChild("settings-container");
+
+            StyledPanel settingsContainer = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, "settings-container");
+            container.Add(settingsContainer);
             VisualElement fpsContainer = settingsContainer.CreateChild("fps-container");
 
 
@@ -41,15 +41,15 @@ namespace States.MainMenuUIStates
             
             GroupBox fpsGroupBox = fpsContainer.CreateChild<GroupBox>("fps-groupbox");
             
-            StyledRadioButton fps30RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { label = "30" };
+            StyledRadioButton fps30RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "30" };
             fps30RadioButton.RegisterValueChangedCallback(_ => _gameSettings.SetFrameRate(30));
             fpsGroupBox.Add(fps30RadioButton);
             
-            StyledRadioButton fps60RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { label = "60" };
+            StyledRadioButton fps60RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "60" };
             fps60RadioButton.RegisterValueChangedCallback(_ => _gameSettings.SetFrameRate(60));
             fpsGroupBox.Add(fps60RadioButton);
             
-            StyledRadioButton fps120RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { label = "120" };
+            StyledRadioButton fps120RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "120" };
             fps120RadioButton.RegisterValueChangedCallback(_ => _gameSettings.SetFrameRate(120));
             fpsGroupBox.Add(fps120RadioButton);
 

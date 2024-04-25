@@ -1,0 +1,21 @@
+﻿@import url("../index.uss");
+
+.container {
+    width: 100%;
+}
+
+.achievements-container {
+    padding: 5px;
+    width: 100%;
+}
+
+.achievement-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-width: 1px;
+    border-color: #000000;
+    border-radius: 1px;
+    padding: 5px;
+}

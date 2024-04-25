@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Achievements;
 using Audio;
 using Data;
+using EventBus;
 using FMODUnity;
 using Map;
 using Misc;
@@ -52,7 +54,10 @@ namespace Infrastructure
         {
             FirstMapBought firstMapBought = new(_persistentData, "91dfcd2c-715e-41dc-9808-c106e42f6127");
 
-            Container.Bind<FirstMapBought>().FromInstance(firstMapBought).AsSingle().NonLazy();
+            AchievementStorage achievementStorage = new(firstMapBought);
+
+            Container.Bind<FirstMapBought>().FromInstance(firstMapBought).AsSingle();
+            Container.Bind<AchievementStorage>().FromInstance(achievementStorage).AsSingle().NonLazy();
         }
 
         private void BindPersistentData() => Container.BindInstance(_persistentData);
