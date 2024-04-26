@@ -1,7 +1,7 @@
-﻿using Audio;
+﻿using AI;
+using AI.Difficulties;
+using Audio;
 using Data;
-using Enemy;
-using Enemy.Difficulties;
 using Grid;
 using Map;
 using Themes;

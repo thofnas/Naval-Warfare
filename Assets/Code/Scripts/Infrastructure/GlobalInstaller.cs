@@ -69,6 +69,7 @@ namespace Infrastructure
             if (!_dataProvider.TryLoad(out PersistentData loadedData))
             {
                 _persistentData.PlayerData = new PlayerData();
+                _persistentData.PlayerStatistics = new PlayerStatistics();
                 return;
             }
 

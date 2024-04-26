@@ -1,5 +1,5 @@
 ﻿using System;
-using Enemy;
+using AI;
 using EventBus;
 using Events;
 using UI;

@@ -1,6 +1,6 @@
 ﻿using Grid;
 
-namespace Enemy
+namespace AI
 {
     public class EnemyAIAction
     {

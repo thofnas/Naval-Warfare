@@ -5,60 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cf71565-e702-496e-9a67-08766235670e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/statistic.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Textures/UI/Panel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Textures/UI/Panel.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Achievements/AchievementStorage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Achievements/AchievementStorage.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Achievements/IAchievement.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Achievements/IAchievement.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Achievements.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Achievements.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledPanel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledPanel.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/Battle.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/Battle/Battle.uss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/Battle/Battle.uss.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/Battle/BattleResults.uss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/Battle/BattleResults.uss.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/Battle/PlacingShips.uss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/Battle/PlacingShips.uss.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Achievements.uss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Achievements.uss.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/MainMenuScreen.uss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/MainMenuScreen.uss.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Settings.uss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Settings.uss.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Store.uss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Store.uss.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/PLayerStatistics.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/PlayerStatistics.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Textures/UI/Coin.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Textures/UI/Coin.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Achievements/Achievement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Achievements/Achievement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Achievements/FirstMapBought.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Achievements/FirstMapBought.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Data/PersistentData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/PersistentData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/AIDamagedShipSearcher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/AIDamagedShipSearcher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/AIDamagedShipSearcher.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/AIDamagedShipSearcher.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/Difficulties.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/Difficulties.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/Difficulties/Easy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/Difficulties/Easy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/Difficulties/Easy.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/Difficulties/Easy.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/EnemyAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/EnemyAI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/EnemyAI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/EnemyAI.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/EnemyAIAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/EnemyAIAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/EnemyAIAction.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/EnemyAIAction.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/IDifficulty.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/IDifficulty.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Enemy/IDifficulty.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/IDifficulty.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/GameplayManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/GameplayManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplayEssentialsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplayEssentialsInstaller.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GlobalInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GlobalInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/MainMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Settings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Settings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledRadioButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledRadioButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/MainMenuUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/MainMenuUIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/Battle.uss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/Battle.uss.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/BattleResults.uss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/BattleResults.uss.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenuScreen.uss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenuScreen.uss.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/PlacingShips.uss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/PlacingShips.uss.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/Settings.uss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/Settings.uss.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/Store.uss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/Store.uss.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/AI.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/AI.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayStates/BattleResults.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayStates/BattleResults.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/BattleResults.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/GameplayUIStates/BattleResults.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/GameplayUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/GameplayUIManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +90,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.statistic.project.settings",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -230,6 +198,7 @@
       <workItem from="1713901704270" duration="3641000" />
       <workItem from="1713971045739" duration="11035000" />
       <workItem from="1714039779230" duration="14089000" />
+      <workItem from="1714163374582" duration="1474000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,6 @@
 ﻿using System;
+using AI;
 using Data;
-using Enemy;
 using EventBus;
 using Events;
 using StateMachine;

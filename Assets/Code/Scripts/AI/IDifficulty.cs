@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Enemy
+namespace AI
 {
     public interface IDifficulty
     {

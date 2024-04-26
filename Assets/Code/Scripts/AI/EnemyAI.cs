@@ -7,7 +7,7 @@ using Grid;
 using UnityEngine;
 using Zenject;
 
-namespace Enemy
+namespace AI
 {
     public class EnemyAI : MonoBehaviour
     {

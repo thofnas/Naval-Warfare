@@ -5,7 +5,7 @@ using Grid;
 using Utilities.Extensions;
 using Zenject;
 
-namespace Enemy
+namespace AI
 {
     public class AIDamagedShipSearcher
     {

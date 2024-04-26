@@ -1,4 +1,4 @@
-using Enemy;
+using AI;
 using EventBus;
 using Events;
 using States.GameplayUIStates;

@@ -2,7 +2,7 @@
 using Grid;
 using UnityEngine;
 
-namespace Enemy.Difficulties
+namespace AI.Difficulties
 {
     public class Easy : IDifficulty
     {
