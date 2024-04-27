@@ -1,4 +1,4 @@
-﻿using Achievements;
+﻿using AchievementSystem;
 using UI;
 using UI.Elements;
 using UnityEngine.UIElements;
@@ -37,12 +37,14 @@ namespace States.MainMenuUIStates
             {
                 VisualElement achievementItem = achievementsContainer.CreateChild("achievement-item");
                 VisualElement achievementInfo = achievementItem.CreateChild("achievement-info");
-                achievementInfo.Add(new Label(achievement.Name));
-                achievementInfo.Add(new Label(achievement.UnlockCondition));
+                achievementInfo.Add(new Label(achievement.Info.Name));
+                achievementInfo.Add(new Label(achievement.Info.UnlockCondition));
                 
                 VisualElement achievementStatus = achievementItem.CreateChild("achievement-status");
-                if (achievement.IsUnlocked) 
-                    achievementStatus.Add(new Label("unlocked"));
+                
+                achievementStatus.Add(achievement.IsUnlocked
+                    ? new Label("unlocked")
+                    : new Label($"{achievement.Reward.Amount} {(string)achievement.Reward.Name}"));
             }
             
             VisualElement buttonsContainer = container.CreateChild("buttons-container");

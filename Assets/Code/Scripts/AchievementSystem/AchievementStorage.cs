@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Achievements
+namespace AchievementSystem
 {
     public class AchievementStorage
     {

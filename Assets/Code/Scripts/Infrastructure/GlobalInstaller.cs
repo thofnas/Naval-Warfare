@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Achievements;
+using AchievementSystem;
+using AchievementSystem.Achievements;
 using Audio;
 using Data;
 using EventBus;
 using FMODUnity;
 using Map;
 using Misc;
+using Rewards;
 using Themes;
 using Themes.Store;
 using UnityEngine;
@@ -21,6 +23,7 @@ namespace Infrastructure
         [SerializeField] private EventReference _mainMenuMusic;
         private PersistentData _persistentData;
         private LocalDataProvider _dataProvider;
+        private Wallet _wallet;
 
         public override void InstallBindings()
         {
@@ -29,30 +32,30 @@ namespace Infrastructure
 
             LoadDataOrInit();
 
-            BindStateMachine();
-            BindAsyncProcessor();
-            BindUnityMainThread();
+            StateMachine();
+            AsyncProcessor();
+            UnityMainThread();
 
-            BindLocalDataProvider();
-            BindThemeVisitors();
-            BindWallet();
-
-            BindPersistentData();
-            
+            LocalDataProvider();
+            ThemeVisitors();
+            Wallet();
+            PersistentData();
             SelectedTheme();
-
-            Container.BindInstance(_mapLibrary);
-            
-            Container.BindInterfacesTo<MainMenuMusicManager>().AsSingle().WithArguments(_mainMenuMusic);
-
-            Container.BindInterfacesAndSelfTo<GameSettings>().AsSingle().NonLazy();
-
+            MapLibrary();
+            MainMenuMusicManager();
+            GameSettings();
             Achievements();
         }
 
+        private void GameSettings() => Container.BindInterfacesAndSelfTo<GameSettings>().AsSingle().NonLazy();
+
+        private void MainMenuMusicManager() => Container.BindInterfacesTo<MainMenuMusicManager>().AsSingle().WithArguments(_mainMenuMusic);
+
+        private void MapLibrary() => Container.BindInstance(_mapLibrary);
+
         private void Achievements()
         {
-            FirstMapBought firstMapBought = new(_persistentData, "91dfcd2c-715e-41dc-9808-c106e42f6127");
+            FirstMapBought firstMapBought = new(_persistentData, "91dfcd2c-715e-41dc-9808-c106e42f6127", _wallet);
 
             AchievementStorage achievementStorage = new(firstMapBought);
 
@@ -60,9 +63,9 @@ namespace Infrastructure
             Container.Bind<AchievementStorage>().FromInstance(achievementStorage).AsSingle().NonLazy();
         }
 
-        private void BindPersistentData() => Container.BindInstance(_persistentData);
+        private void PersistentData() => Container.BindInstance(_persistentData);
 
-        private void BindLocalDataProvider() => Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().NonLazy();
+        private void LocalDataProvider() => Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().NonLazy();
 
         private void LoadDataOrInit()
         {
@@ -76,9 +79,13 @@ namespace Infrastructure
             _persistentData = loadedData;
         }
 
-        private void BindWallet() => Container.Bind<Wallet>().AsSingle().WithArguments(_persistentData);
+        private void Wallet()
+        {
+            _wallet = new Wallet(_persistentData);
+            Container.Bind<Wallet>().FromInstance(_wallet).AsSingle();
+        }
 
-        private void BindThemeVisitors()
+        private void ThemeVisitors()
         {
             Container.Bind<ThemeSelector>().AsSingle().WithArguments(_persistentData);
             Container.Bind<ThemeUnlocker>().AsSingle().WithArguments(_persistentData);
@@ -86,11 +93,11 @@ namespace Infrastructure
             Container.Bind<OwnedThemesChecker>().AsTransient().WithArguments(_persistentData);
         }
 
-        private void BindUnityMainThread() => Container.Bind<UnityMainThread>().FromNewComponentOnNewGameObject().AsSingle();
+        private void UnityMainThread() => Container.Bind<UnityMainThread>().FromNewComponentOnNewGameObject().AsSingle();
 
-        private void BindStateMachine() => Container.BindInterfacesAndSelfTo<StateMachine.StateMachine>().AsTransient();
+        private void StateMachine() => Container.BindInterfacesAndSelfTo<StateMachine.StateMachine>().AsTransient();
         
-        private void BindAsyncProcessor() => Container.Bind<AsyncProcessor>().FromNewComponentOnNewGameObject().AsSingle();
+        private void AsyncProcessor() => Container.Bind<AsyncProcessor>().FromNewComponentOnNewGameObject().AsSingle();
 
         private void SelectedTheme()
         {

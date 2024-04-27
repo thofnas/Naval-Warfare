@@ -1,27 +1,27 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Data;
 using EventBus;
+using Rewards;
 
-namespace Achievements
+namespace AchievementSystem
 {
     public abstract class Achievement<T> : IAchievement where T : IEvent
     {
-        public abstract string Name { get; }
-        public abstract string UnlockCondition { get; }
-        public Guid Guid { get; }
+        public abstract AchievementInfo Info { get; }
+        public abstract IReward Reward { get; }
+        public AchievementID ID { get; }
         public bool IsUnlocked { get; private set; }
-        
+
         private readonly PersistentData _persistentData;
         
         private readonly EventBinding<T> _checkEvent;
 
-        protected Achievement(PersistentData persistentData, string guid)
+        protected Achievement(PersistentData persistentData, AchievementID id)
         {
             _persistentData = persistentData;
-            Guid = new Guid(guid);
+            ID = id;
 
-            if (persistentData.PlayerData.UnlockedAchievements.Contains(Guid))
+            if (persistentData.PlayerData.UnlockedAchievements.Contains(ID))
                 IsUnlocked = true;
             else
             {
@@ -38,11 +38,13 @@ namespace Achievements
         {
             if (IsUnlocked) return;
             
-            _persistentData.PlayerData.UnlockAchievement(Guid);
+            _persistentData.PlayerData.UnlockAchievement(ID);
             
             IsUnlocked = true;
             
             EventBus<T>.Deregister(_checkEvent);
+            
+            Reward.Award();
             
             OnUnlock();
         }

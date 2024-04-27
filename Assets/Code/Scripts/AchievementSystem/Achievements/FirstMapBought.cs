@@ -1,16 +1,19 @@
 ﻿using Data;
 using Events;
+using Rewards;
 using UnityEngine;
 
-namespace Achievements
+namespace AchievementSystem.Achievements
 {
     public class FirstMapBought : Achievement<OnThemeUnlocked>
     {
-        public override string Name => "First purchase";
-        public override string UnlockCondition => "Buy your first map";
+        public override AchievementInfo Info { get; } 
+        public override IReward Reward { get; }
 
-        public FirstMapBought(PersistentData persistentData, string guid) : base(persistentData, guid)
+        public FirstMapBought(PersistentData persistentData, AchievementID id, Wallet wallet) : base(persistentData, id)
         {
+            Info = new AchievementInfo("First purchase", "Buy your first map");
+            Reward = new MoneyReward(10, wallet);
         }
  
         protected override bool AreConditionsMet(OnThemeUnlocked eventArgs)

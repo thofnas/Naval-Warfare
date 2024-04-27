@@ -9,7 +9,7 @@ public class Wallet
     private readonly PersistentData _persistentData;
     
     [Inject]
-    private Wallet(PersistentData persistentData)
+    public Wallet(PersistentData persistentData)
     {
         _persistentData = persistentData;
     }

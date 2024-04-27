@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Achievements;
+using AchievementSystem;
 using Map;
 using ModestTree;
 using Newtonsoft.Json;
@@ -126,7 +126,7 @@ namespace Data
 
         public IEnumerable<Guid> UnlockedAchievements => _unlockedAchievements;
 
-        public void UnlockAchievement(Guid guid)
+        public void UnlockAchievement(AchievementID guid)
         {
             if (_unlockedAchievements.Contains(guid))
                 throw new ArgumentException(nameof(guid));
