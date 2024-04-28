@@ -4,6 +4,7 @@ using FMODUnity;
 using UnityEngine;
 using Zenject;
 using EventBus;
+using FMOD.Studio;
 
 namespace Audio
 {
@@ -12,6 +13,7 @@ namespace Audio
         private readonly Map.Map _selectedMap;
         private readonly LevelManager _levelManager;
         private EventBinding<OnCellHit> _onCellHit;
+        private EventDescription _shipHitEventDescription;
 
         private BattleSfxManager(Map.Map selectedMap, LevelManager levelManager)
         {
@@ -21,12 +23,16 @@ namespace Audio
 
         public void Initialize()
         {
+            _shipHitEventDescription = RuntimeManager.GetEventDescription(_selectedMap.ShipHitSound);
+            _shipHitEventDescription.loadSampleData();
+            
             _onCellHit = new EventBinding<OnCellHit>(OnShipHit);
             EventBus<OnCellHit>.Register(_onCellHit);
         }
 
         public void Dispose()
         {
+            _shipHitEventDescription.unloadSampleData();
             EventBus<OnCellHit>.Deregister(_onCellHit);
         }
 

@@ -13,7 +13,6 @@ namespace UI.Elements
     public class StorePanel : StyledPanel
     {
         private readonly SelectedTheme _selectedTheme;
-        private readonly LocalDataProvider _localDataProvider;
         private readonly ThemeSelector _themeSelector;
         private readonly ThemeUnlocker _themeUnlocker;
         private readonly OwnedThemesChecker _ownedThemesChecker;
@@ -26,7 +25,6 @@ namespace UI.Elements
         public StorePanel(IEnumerable<StoreItem> storeItems,
             MapType mapType,
             SelectedTheme selectedTheme,
-            LocalDataProvider localDataProvider,
             ThemeSelector themeSelector, 
             ThemeUnlocker themeUnlocker,
             OwnedThemesChecker ownedThemesChecker, 
@@ -35,7 +33,6 @@ namespace UI.Elements
             MapSelector mapSelector) : base(selectedTheme.PlayerTheme)
         {
             _selectedTheme = selectedTheme;
-            _localDataProvider = localDataProvider;
             _themeSelector = themeSelector;
             _themeUnlocker = themeUnlocker;
             _ownedThemesChecker = ownedThemesChecker;
@@ -113,8 +110,6 @@ namespace UI.Elements
             storeItemView.Select();
             _mapSelector.Select(_mapType);
             _selectedTheme.PlayerTheme = storeItemView.StoreItem.Theme;
-            
-            _localDataProvider.Save();
         }
 
         private void StoreItemView_OnClicked(StoreItemView storeItemView)

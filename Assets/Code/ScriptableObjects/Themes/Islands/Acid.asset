@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3f38cca9814b779f490995f9f4c423, type: 3}
   m_Name: Acid
   m_EditorClassIdentifier: 
-  MainColor: {r: 0.40871805, g: 0.8207547, b: 0.24390352, a: 1}
-  OutlineColor: {r: 0.57018024, g: 0.6509434, b: 0.5557583, a: 1}
+  MainColor: {r: 0.43269074, g: 0.9056604, b: 0.24350302, a: 1}
+  OutlineColor: {r: 0.3530301, g: 0.745283, b: 0.2988163, a: 1}
   BackgroundSprites:
   - {fileID: 21300000, guid: 256c1a15ac78d834a96be176df63af74, type: 3}
   - {fileID: 21300000, guid: c21e2bb678fcf3944af40c609bd1de5d, type: 3}

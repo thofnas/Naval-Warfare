@@ -73,12 +73,12 @@ namespace UI
             StoreState = new Store(this, _stateMachine, _storeStyleSheet, _storeContent, _wallet);
             SettingsState = new Settings(this, _stateMachine, _optionsStyleSheet, _gameSettings);
             AchievementsState =
-                new States.MainMenuUIStates.Achievements(this, _stateMachine, _achievementsStyleSheet,
+                new Achievements(this, _stateMachine, _achievementsStyleSheet,
                     _achievementStorage);
                 
             _stateMachine.SetState(MainMenuState);
         }
 
-        public States.MainMenuUIStates.Achievements AchievementsState { get; set; }
+        public Achievements AchievementsState { get; set; }
     }
 }

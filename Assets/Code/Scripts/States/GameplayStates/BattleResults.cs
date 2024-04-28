@@ -1,5 +1,7 @@
 ﻿using AI;
 using Data;
+using EventBus;
+using Events;
 
 namespace States.GameplayStates
 {
@@ -8,25 +10,23 @@ namespace States.GameplayStates
         private readonly GameplayManager _gameplayManager;
         private readonly Wallet _wallet;
         private readonly IDifficulty _difficulty;
-        private readonly LocalDataProvider _localDataProvider;
 
-        public BattleResults(GameplayManager gameplayManager, StateMachine.StateMachine stateMachine, Wallet wallet, IDifficulty difficulty, LocalDataProvider localDataProvider) : base(stateMachine)
+        public BattleResults(GameplayManager gameplayManager, StateMachine.StateMachine stateMachine, Wallet wallet, IDifficulty difficulty) : base(stateMachine)
         {
             _gameplayManager = gameplayManager;
             _wallet = wallet;
             _difficulty = difficulty;
-            _localDataProvider = localDataProvider;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
+            
+            EventBus<OnBattleEnded>.Invoke(new OnBattleEnded(_gameplayManager.LoserCharacterType == CharacterType.Enemy));
 
             if (_gameplayManager.LoserCharacterType != CharacterType.Enemy) return;
             
-            
             _wallet.AddMoney(_difficulty.GetWinMoneyAmount());
-            _localDataProvider.Save();
         }
     }
 }

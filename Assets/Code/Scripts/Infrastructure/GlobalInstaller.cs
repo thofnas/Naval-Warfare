@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using AchievementSystem;
 using AchievementSystem.Achievements;
 using Audio;
 using Data;
-using EventBus;
 using FMODUnity;
 using Map;
 using Misc;
-using Rewards;
 using Themes;
 using Themes.Store;
 using UnityEngine;
@@ -29,14 +26,15 @@ namespace Infrastructure
         {
             _persistentData = new PersistentData();
             _dataProvider = new LocalDataProvider(_persistentData);
-
+            new DataSaver(_dataProvider);
+            
             LoadDataOrInit();
+            DataLoader();
 
             StateMachine();
             AsyncProcessor();
             UnityMainThread();
 
-            LocalDataProvider();
             ThemeVisitors();
             Wallet();
             PersistentData();
@@ -65,7 +63,7 @@ namespace Infrastructure
 
         private void PersistentData() => Container.BindInstance(_persistentData);
 
-        private void LocalDataProvider() => Container.Bind<LocalDataProvider>().FromInstance(_dataProvider).AsSingle().NonLazy();
+        private void DataLoader() => Container.Bind<IDataLoader>().FromInstance(_dataProvider).AsSingle().NonLazy();
 
         private void LoadDataOrInit()
         {

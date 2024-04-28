@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Data
 {
-    public class LocalDataProvider
+    public class LocalDataProvider : IDataLoader
     {
         private const string FileName = "PlayerSave";
         private const string FileExtension = ".json";

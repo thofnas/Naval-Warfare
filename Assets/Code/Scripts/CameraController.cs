@@ -69,8 +69,8 @@ public class CameraController : IInitializable, ITickable, IDisposable
         Vector3 center = camera.transform.position;
 
         var halvesCenters = new Vector2[2];
-        halvesCenters[0] = new Vector2(center.x - halfWidth, center.y); // Left half
-        halvesCenters[1] = new Vector2(center.x + halfWidth, center.y); // Right half
+        halvesCenters[0] = new Vector2(center.x - halfWidth - 0.5f, center.y); // Left half
+        halvesCenters[1] = new Vector2(center.x + halfWidth + 0.5f, center.y); // Right half
 
         s_halvesCenterPositions = halvesCenters;
     }
