@@ -16,7 +16,7 @@ public class GameSettings : IInitializable
 
     public void SetFrameRate(int frameRate)
     {
-        if (frameRate <= 0)
+        if (frameRate is 0 or < -1)
             throw new ArgumentException(nameof(frameRate), "Wrong value " + frameRate);
         
         Application.targetFrameRate = frameRate;

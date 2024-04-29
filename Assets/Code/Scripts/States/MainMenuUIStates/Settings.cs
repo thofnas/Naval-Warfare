@@ -53,6 +53,11 @@ namespace States.MainMenuUIStates
             fps120RadioButton.RegisterValueChangedCallback(_ => _gameSettings.SetFrameRate(120));
             fpsGroupBox.Add(fps120RadioButton);
 
+            StyledRadioButton fpsUnlimitedButton =
+                new StyledRadioButton(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "Unlimited" };
+            fpsUnlimitedButton.RegisterValueChangedCallback(_ => _gameSettings.SetFrameRate(-1));
+            fpsGroupBox.Add(fpsUnlimitedButton);
+
             VisualElement buttonsContainer = container.CreateChild("buttons-container");
             
             StyledButton backToMainMenuButton = new(SelectedTheme.PlayerTheme, buttonsContainer,
