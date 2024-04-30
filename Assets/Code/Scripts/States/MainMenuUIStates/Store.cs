@@ -1,10 +1,12 @@
 ﻿using EventBus;
 using Events;
 using Map;
+using Misc;
 using Themes.Store;
 using UI;
 using UI.Elements;
 using UnityEngine.UIElements;
+using Utilities;
 using Utilities.Extensions;
 
 namespace States.MainMenuUIStates
@@ -27,11 +29,11 @@ namespace States.MainMenuUIStates
             StoreContent storeContent, 
             Wallet wallet) : base(mainMenuUIManager, stateMachine)
         {
-            Root = CreateDocument(nameof(Store), styleSheet);
+            Root = VisualElementHelper.CreateDocument(nameof(Store), styleSheet);
             _storeContent = storeContent;
             _wallet = wallet;
             
-            GenerateView();
+            GenerateUI();
         }
 
         protected sealed override VisualElement Root { get; }
@@ -57,10 +59,8 @@ namespace States.MainMenuUIStates
             EventBus<OnThemeUnlocked>.Deregister(_onStoreItemUnlocked);
         }
 
-        protected sealed override void GenerateView() 
+        protected sealed override void GenerateUI() 
         {
-            base.GenerateView();
-            
             _container = Root.CreateChild("container");
             _storePanelsContainer = _container.CreateChild("store-panels-container");
             VisualElement buttonsContainer = _container.CreateChild("buttons-container");
@@ -74,7 +74,7 @@ namespace States.MainMenuUIStates
             StyledButton backToMainMenuButton = new(SelectedTheme.PlayerTheme, buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.MainMenuState), "back-button")
             {
-                text = "Back"
+                text = TextData.BackButton
             };
         }
 

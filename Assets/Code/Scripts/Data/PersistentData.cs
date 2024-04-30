@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Data
+﻿namespace Data
 {
     public class PersistentData
     {

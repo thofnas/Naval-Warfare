@@ -1,4 +1,5 @@
 ﻿using AchievementSystem;
+using Data;
 using Infrastructure;
 using States.MainMenuUIStates;
 using Themes;
@@ -14,6 +15,8 @@ namespace UI
     public class MainMenuUIManager : MonoBehaviour
     {
         public SelectedTheme SelectedTheme { get; private set; }
+
+        public LanguageData LanguageData { get; private set; }
         public StorePanel.Factory StorePanelFactory { get; private set; }
 
         public ThemeUnlocker ThemeUnlocker { get; set; }
@@ -44,6 +47,7 @@ namespace UI
         [Inject]
         private void Construct(StateMachine.StateMachine stateMachine, 
             SelectedTheme selectedTheme,
+            LanguageData languageData,
             StorePanel.Factory storePanelFactory, 
             Wallet wallet, 
             ThemeUnlocker themeUnlocker,
@@ -56,6 +60,7 @@ namespace UI
         {
             _stateMachine = stateMachine;
             SelectedTheme = selectedTheme;
+            LanguageData = languageData;
             StorePanelFactory = storePanelFactory;
             _wallet = wallet;
             ThemeUnlocker = themeUnlocker;

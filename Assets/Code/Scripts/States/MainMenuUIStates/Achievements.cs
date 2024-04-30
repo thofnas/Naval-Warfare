@@ -1,7 +1,9 @@
 ﻿using AchievementSystem;
+using Misc;
 using UI;
 using UI.Elements;
 using UnityEngine.UIElements;
+using Utilities;
 using Utilities.Extensions;
 
 namespace States.MainMenuUIStates
@@ -14,20 +16,18 @@ namespace States.MainMenuUIStates
         {
             _achievementStorage = achievementStorage;
             
-            Root = CreateDocument(nameof(Settings), styleSheet);
+            Root = VisualElementHelper.CreateDocument(nameof(Settings), styleSheet);
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            
-            GenerateView();
+
+            ClearAndGenerateUI();
         }
 
-        protected sealed override void GenerateView()
+        protected sealed override void GenerateUI()
         {
-            base.GenerateView();
-            
             VisualElement container = Root.CreateChild("container");
             
             StyledPanel achievementsContainer = new(MainMenuUIManager.SelectedTheme.PlayerTheme, "achievements-container");
@@ -43,7 +43,7 @@ namespace States.MainMenuUIStates
                 VisualElement achievementStatus = achievementItem.CreateChild("achievement-status");
                 
                 achievementStatus.Add(achievement.IsUnlocked
-                    ? new Label("unlocked")
+                    ? new Label(TextData.Unlocked)
                     : new Label($"{achievement.Reward.Amount} {(string)achievement.Reward.Name}"));
             }
             
@@ -52,7 +52,7 @@ namespace States.MainMenuUIStates
             StyledButton backToMainMenuButton = new(SelectedTheme.PlayerTheme, buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.MainMenuState), "back-button")
             {
-                text = "Back"
+                text = TextData.BackButton
             };
         }
 

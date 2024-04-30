@@ -1,10 +1,10 @@
-﻿using EventBus;
+﻿using Data;
+using EventBus;
 using Events;
 using Infrastructure;
 using StateMachine;
 using Themes;
 using UI;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace States.MainMenuUIStates
@@ -13,25 +13,27 @@ namespace States.MainMenuUIStates
     {
         protected abstract VisualElement Root { get; }
         protected MainMenuUIManager MainMenuUIManager { get; }
+        protected TextData TextData => MainMenuUIManager.LanguageData.TextData;
         protected StateMachine.StateMachine StateMachine { get; }
         protected SelectedTheme SelectedTheme { get; }
-        
+
+        protected readonly EventBinding<OnThemeChanged> OnThemeChangedBinding;
+        private readonly EventBinding<OnLanguageLoaded> _onLanguageLoaded;
+
         protected BaseState(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine)
         {
             StateMachine = stateMachine;
             MainMenuUIManager = mainMenuUIManager;
             SelectedTheme = mainMenuUIManager.SelectedTheme;
-
-            OnThemeChangedBinding = new EventBinding<OnThemeChanged>(GenerateView);
+            
+            OnThemeChangedBinding = new EventBinding<OnThemeChanged>(ClearAndGenerateUI);
             EventBus<OnThemeChanged>.Register(OnThemeChangedBinding);
+
+            _onLanguageLoaded = new EventBinding<OnLanguageLoaded>(ClearAndGenerateUI);
+            EventBus<OnLanguageLoaded>.Register(_onLanguageLoaded);
         }
 
-        protected readonly EventBinding<OnThemeChanged> OnThemeChangedBinding;
-
-        protected virtual void GenerateView()
-        {
-            Root.Clear();
-        }
+        protected abstract void GenerateUI();
         
         public virtual void OnEnter() => SetVisible(true);
 
@@ -42,22 +44,16 @@ namespace States.MainMenuUIStates
         public virtual void Dispose() 
         {   
             EventBus<OnThemeChanged>.Deregister(OnThemeChangedBinding);
+            EventBus<OnLanguageLoaded>.Deregister(_onLanguageLoaded);
         }
 
         protected void SetVisible(bool value) => Root.visible = value;
-        
-        protected static VisualElement CreateDocument(string name, StyleSheet styleSheet)
+
+        protected void ClearAndGenerateUI()
         {
-            var uiDocument = new GameObject(name).AddComponent<UIDocument>();
-            uiDocument.panelSettings = GameResources.Instance.UIDocumentPrefab.panelSettings;
-            uiDocument.visualTreeAsset = GameResources.Instance.UIDocumentPrefab.visualTreeAsset;
-            VisualElement root = uiDocument.rootVisualElement;
-
-            root.styleSheets.Add(styleSheet);
-
-            root.visible = false;
+            Root.Clear();
             
-            return root;
+            GenerateUI();
         }
     }
 }

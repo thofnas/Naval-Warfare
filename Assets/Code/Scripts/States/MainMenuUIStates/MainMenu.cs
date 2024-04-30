@@ -1,7 +1,10 @@
-﻿using UI;
+﻿using Misc;
+using UI;
 using UI.Elements;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Utilities;
 using Utilities.Extensions;
 
 namespace States.MainMenuUIStates
@@ -10,22 +13,20 @@ namespace States.MainMenuUIStates
     {
         public MainMenu(MainMenuUIManager mainMenuUIManager, StateMachine.StateMachine stateMachine, StyleSheet styleSheet) : base(mainMenuUIManager, stateMachine)
         {
-            Root = CreateDocument(nameof(MainMenu), styleSheet);
+            Root = VisualElementHelper.CreateDocument(nameof(MainMenu), styleSheet);
 
-            GenerateView();
+            GenerateUI();
         }
 
         protected sealed override VisualElement Root { get; }
 
-        protected sealed override void GenerateView() 
+        protected sealed override void GenerateUI() 
         {
-            base.GenerateView();
-            
             VisualElement container = Root.CreateChild("container");
             VisualElement contentContainer = container.CreateChild("content-container");
 
             VisualElement titleContainer = contentContainer.CreateChild("title-container", "flex-center");
-            titleContainer.Add(new Label("Naval Warfare"));
+            titleContainer.Add(new Label(TextData.Title));
 
             VisualElement buttonsContainer = contentContainer.CreateChild("buttons-container");
 
@@ -34,15 +35,15 @@ namespace States.MainMenuUIStates
                 () => SceneManager.LoadScene("Gameplay"),
                 "start-button")
             {
-                text = "Start Game"
+                text = TextData.StartGameButtonButton
             };
-            
+
             StyledButton storeButton = new(SelectedTheme.PlayerTheme, 
                 buttonsContainer,
                 () => StateMachine.SwitchState(MainMenuUIManager.StoreState), 
                 "store-button")
             {
-                text = "Store"
+                text = TextData.StoreButton
             };
 
             StyledButton optionsButton = new(SelectedTheme.PlayerTheme, 
@@ -50,7 +51,7 @@ namespace States.MainMenuUIStates
                 () => StateMachine.SwitchState(MainMenuUIManager.SettingsState), 
                 "settings-button")
             {
-                text = "Settings"
+                text = TextData.SettingsButton
             };
             
             StyledButton achievementsButton = new(SelectedTheme.PlayerTheme, 
@@ -58,7 +59,7 @@ namespace States.MainMenuUIStates
                 () => StateMachine.SwitchState(MainMenuUIManager.AchievementsState), 
                 "achievements-button")
             {
-                text = "Achievements"
+                text = TextData.AchievementsButton
             };
         }
     }

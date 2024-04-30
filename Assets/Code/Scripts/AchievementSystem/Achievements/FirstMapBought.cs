@@ -7,15 +7,17 @@ namespace AchievementSystem.Achievements
 {
     public class FirstMapBought : Achievement<OnThemeUnlocked>
     {
-        public override AchievementInfo Info { get; } 
+        public sealed override AchievementInfo Info { get; protected set; } 
         public override IReward Reward { get; }
 
-        public FirstMapBought(PersistentData persistentData, AchievementID id, Wallet wallet) : base(persistentData, id)
+        public FirstMapBought(PersistentData persistentData, AchievementID id, Wallet wallet, LanguageData languageData) : base(persistentData, id, languageData)
         {
-            Info = new AchievementInfo("First purchase", "Buy your first map");
+            UpdateAchievementInfo();
             Reward = new MoneyReward(10, wallet);
         }
- 
+
+        protected sealed override void UpdateAchievementInfo() => Info = new AchievementInfo(TextData.FirstPurchase, TextData.BuyYourFirstMap);
+
         protected override bool AreConditionsMet(OnThemeUnlocked eventArgs)
         {
             return eventArgs.IsPurchasable;

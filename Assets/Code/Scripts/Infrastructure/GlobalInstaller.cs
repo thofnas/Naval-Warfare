@@ -10,6 +10,7 @@ using Themes;
 using Themes.Store;
 using UnityEngine;
 using Zenject;
+// ReSharper disable Unity.PerformanceCriticalCodeInvocation
 
 namespace Infrastructure
 {
@@ -19,16 +20,25 @@ namespace Infrastructure
         [SerializeField] private MapLibrary _mapLibrary;
         [SerializeField] private EventReference _mainMenuMusic;
         private PersistentData _persistentData;
-        private LocalDataProvider _dataProvider;
+        private LocalDataProvider _localDataProvider;
         private Wallet _wallet;
+        private LanguageProvider _languageProvider;
+        private LanguageData _languageData;
 
         public override void InstallBindings()
         {
             _persistentData = new PersistentData();
-            _dataProvider = new LocalDataProvider(_persistentData);
-            new DataSaver(_dataProvider);
+            _languageProvider = new LanguageProvider();
+            _languageData = new LanguageData(_languageProvider);
+            _localDataProvider = new LocalDataProvider(_persistentData);
+            new DataSaver(_localDataProvider);
             
             LoadDataOrInit();
+            Bind();
+        }
+
+        private void Bind()
+        {
             DataLoader();
 
             StateMachine();
@@ -38,12 +48,15 @@ namespace Infrastructure
             ThemeVisitors();
             Wallet();
             PersistentData();
+            LanguageData();
             SelectedTheme();
             MapLibrary();
             MainMenuMusicManager();
             GameSettings();
             Achievements();
         }
+
+        private void LanguageData() => Container.BindInstance(_languageData);
 
         private void GameSettings() => Container.BindInterfacesAndSelfTo<GameSettings>().AsSingle().NonLazy();
 
@@ -53,7 +66,7 @@ namespace Infrastructure
 
         private void Achievements()
         {
-            FirstMapBought firstMapBought = new(_persistentData, "91dfcd2c-715e-41dc-9808-c106e42f6127", _wallet);
+            FirstMapBought firstMapBought = new(_persistentData, "91dfcd2c-715e-41dc-9808-c106e42f6127", _wallet, _languageData);
 
             AchievementStorage achievementStorage = new(firstMapBought);
 
@@ -63,11 +76,11 @@ namespace Infrastructure
 
         private void PersistentData() => Container.BindInstance(_persistentData);
 
-        private void DataLoader() => Container.Bind<IDataLoader>().FromInstance(_dataProvider).AsSingle().NonLazy();
+        private void DataLoader() => Container.Bind<ILocalDataLoader>().FromInstance(_localDataProvider).AsSingle().NonLazy();
 
         private void LoadDataOrInit()
         {
-            if (!_dataProvider.TryLoad(out PersistentData loadedData))
+            if (!_localDataProvider.TryLoad(out PersistentData loadedData))
             {
                 _persistentData.PlayerData = new PlayerData();
                 _persistentData.PlayerStatistics = new PlayerStatistics();

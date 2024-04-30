@@ -1,6 +1,6 @@
 ﻿namespace Data
 {
-    public interface IDataLoader
+    public interface ILocalDataLoader
     {
         public bool TryLoad(out PersistentData loadedData);
     }

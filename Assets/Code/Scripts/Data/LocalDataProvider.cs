@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Data
 {
-    public class LocalDataProvider : IDataLoader
+    public class LocalDataProvider : ILocalDataLoader
     {
         private const string FileName = "PlayerSave";
         private const string FileExtension = ".json";
@@ -16,9 +16,9 @@ namespace Data
             _persistentData = persistentData;
         }
 
-        private string SavePath => Application.persistentDataPath;
+        private static string SavePath => Application.persistentDataPath;
         
-        private string FullPath => Path.Combine(SavePath, $"{FileName}{FileExtension}");
+        private static string FullPath => Path.Combine(SavePath, $"{FileName}{FileExtension}");
 
         public bool TryLoad(out PersistentData loadedData)
         {
