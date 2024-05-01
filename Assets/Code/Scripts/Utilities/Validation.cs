@@ -9,7 +9,7 @@ namespace Utilities
 {
     public static class Validation
     {
-        public static bool CheckForNull(Object sender, object obj, string fieldName)
+        public static bool CheckIfNull(Object sender, object obj, string fieldName)
         {
             if (obj != null)
                 return true;
@@ -24,7 +24,7 @@ namespace Utilities
         
         public static bool CheckIfEmpty<T>(Object sender, IEnumerable<T> collection, string collectionName)
         {
-            if (!CheckForNull(sender, collection, collectionName)) return false;
+            if (!CheckIfNull(sender, collection, collectionName)) return false;
             
             if (collection.Any())
                 return true;
@@ -39,7 +39,7 @@ namespace Utilities
         
         public static bool CheckColor(Object sender, Color color, string colorFieldName)
         {
-            if (!CheckForNull(sender, color, colorFieldName)) return false;
+            if (!CheckIfNull(sender, color, colorFieldName)) return false;
             
             Color pink = new(1f, 0f, 1f);
 

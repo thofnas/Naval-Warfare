@@ -18,14 +18,16 @@ namespace Map
         [Header("Audio")] 
         public EventReference Music;
         public EventReference ShipHitSound;
+        public EventReference ShipMissedSound;
 
         private void OnValidate()
         {
             Validation.CheckIfEmpty(this, ThemeSettings, nameof(ThemeSettings));
-            Validation.CheckForNull(this, AITheme, nameof(AITheme));
+            Validation.CheckIfNull(this, AITheme, nameof(AITheme));
             
-            Validation.CheckForNull(this, Music, nameof(Music));
-            Validation.CheckForNull(this, ShipHitSound, nameof(ShipHitSound));
+            Validation.CheckIfNull(this, Music, nameof(Music));
+            Validation.CheckIfNull(this, ShipHitSound, nameof(ShipHitSound));
+            Validation.CheckIfNull(this, ShipMissedSound, nameof(ShipMissedSound));
         }
     }
 }

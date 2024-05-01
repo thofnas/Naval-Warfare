@@ -12,8 +12,10 @@ namespace Misc
                 ? value.Trim() 
                 : throw new ArgumentException("Value cannot be null or white space", nameof(value));
         }
+
+        public string ToUpper() => _value.ToUpper();
         
         public static implicit operator NonEmptyString(string value) => new(value);
-        public static implicit operator string(NonEmptyString value) => value._value;
+        public static implicit operator string(NonEmptyString value) => (string)value._value;
     }
 }

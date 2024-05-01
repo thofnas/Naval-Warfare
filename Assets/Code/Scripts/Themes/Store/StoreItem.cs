@@ -14,8 +14,8 @@ namespace Themes.Store
 
         private void OnValidate()
         {
-            Validation.CheckForNull(this, DisplayName, nameof(DisplayName));
-            Validation.CheckForNull(this, Theme, nameof(Theme));
+            Validation.CheckIfNull(this, DisplayName, nameof(DisplayName));
+            Validation.CheckIfNull(this, Theme, nameof(Theme));
         }
     }
 }

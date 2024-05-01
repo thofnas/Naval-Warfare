@@ -18,7 +18,6 @@ namespace UI.Elements
                 this.AddClass(wrapperClasses);
 
             style.unityBackgroundImageTintColor = theme.MainColor;
-            style.unityFontDefinition = new StyleFontDefinition(theme.BaseFont);
         }
     }
 }

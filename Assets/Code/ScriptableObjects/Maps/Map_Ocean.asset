@@ -31,3 +31,10 @@ MonoBehaviour:
       Data3: 246152577
       Data4: -1532990303
     Path: event:/SFX/ShipHit
+  ShipMissedSound:
+    Guid:
+      Data1: -1306187163
+      Data2: 1166434059
+      Data3: 1640266174
+      Data4: 1951610978
+    Path: event:/SFX/ShotMissed_water

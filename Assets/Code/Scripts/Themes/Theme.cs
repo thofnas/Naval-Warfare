@@ -12,7 +12,6 @@ namespace Themes
         public Color MainColor;
         public Color OutlineColor;
         public Sprite[] BackgroundSprites;
-        public Font BaseFont;
 
         public Sprite[] GridCellSprites;
         public Color GridCellSpriteColor;
@@ -26,8 +25,7 @@ namespace Themes
         {
             Validation.CheckColor(this, MainColor, nameof(MainColor));
             Validation.CheckColor(this, OutlineColor, nameof(OutlineColor));
-            Validation.CheckForNull(this, BackgroundSprites, nameof(BackgroundSprites));
-            Validation.CheckForNull(this, BaseFont, nameof(BaseFont));
+            Validation.CheckIfNull(this, BackgroundSprites, nameof(BackgroundSprites));
             Validation.CheckColor(this, GridCellSpriteColor, nameof(GridCellSpriteColor));
             Validation.CheckColor(this, GridCellSpritePlacingColor, nameof(GridCellSpritePlacingColor));
             Validation.CheckColor(this, GridCellSpriteDestroyedShipColor, nameof(GridCellSpriteDestroyedShipColor));

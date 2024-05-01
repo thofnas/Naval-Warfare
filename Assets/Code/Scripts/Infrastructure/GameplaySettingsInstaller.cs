@@ -22,9 +22,9 @@ namespace Infrastructure
 
         public void Validate()
         {
-            if (!Validation.CheckForNull(this, _gridSystem, nameof(_gridSystem)) ||
-                !Validation.CheckForNull(this, _shipsSpawner, nameof(_shipsSpawner)) ||
-                !Validation.CheckForNull(this, _debugSettings, nameof(_debugSettings))) return;
+            if (!Validation.CheckIfNull(this, _gridSystem, nameof(_gridSystem)) ||
+                !Validation.CheckIfNull(this, _shipsSpawner, nameof(_shipsSpawner)) ||
+                !Validation.CheckIfNull(this, _debugSettings, nameof(_debugSettings))) return;
             
             int totalAmountOfCells = _gridSystem.Width * _gridSystem.Height;
             int biggestAxis = Mathf.Max(_gridSystem.Height, _gridSystem.Width);

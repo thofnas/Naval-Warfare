@@ -79,9 +79,9 @@ namespace Ship
 
         private void OnValidate()
         {
-            Validation.CheckForNull(this, _spriteRenderer, nameof(_spriteRenderer));
-            Validation.CheckForNull(this, _spriteFlash, nameof(_spriteFlash));
-            Validation.CheckForNull(this, _spriteOutline, nameof(_spriteOutline));
+            Validation.CheckIfNull(this, _spriteRenderer, nameof(_spriteRenderer));
+            Validation.CheckIfNull(this, _spriteFlash, nameof(_spriteFlash));
+            Validation.CheckIfNull(this, _spriteOutline, nameof(_spriteOutline));
         }
 
         [Inject]

@@ -87,14 +87,14 @@ namespace Audio
             private const int BattleParamIndex = 1;
             private const int BattleResultsParamIndex = 2;
         
-            private static readonly Dictionary<Type, int> s_mapTypeToThemeType = new()
-            {
-                { typeof(PlacingShips), PlacingShipsParamIndex },
-                { typeof(Battle), BattleParamIndex },
-                { typeof(BattleResults), BattleResultsParamIndex }
-            };
-
-            public static int GetIndex (Type type) => s_mapTypeToThemeType[type];
+            public static int GetIndex(Type type) =>
+                type switch
+                {
+                    not null when type == typeof(PlacingShips) => PlacingShipsParamIndex,
+                    not null when type == typeof(Battle) => BattleParamIndex,
+                    not null when type == typeof(BattleResults) => BattleResultsParamIndex,
+                    _ => throw new ArgumentException("Unsupported type", nameof(type))
+                };
         }
     }
 }

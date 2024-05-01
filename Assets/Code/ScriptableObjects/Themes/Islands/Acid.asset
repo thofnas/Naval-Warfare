@@ -17,7 +17,7 @@ MonoBehaviour:
   BackgroundSprites:
   - {fileID: 21300000, guid: 256c1a15ac78d834a96be176df63af74, type: 3}
   - {fileID: 21300000, guid: c21e2bb678fcf3944af40c609bd1de5d, type: 3}
-  BaseFont: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
+  BaseFont: {fileID: 12800000, guid: 1b234937abc523c428419e14633c1927, type: 3}
   GridCellSprites:
   - {fileID: 1810070231, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}
   - {fileID: 1642896885, guid: 47c1bac6732521f4fba62e7554224a57, type: 3}

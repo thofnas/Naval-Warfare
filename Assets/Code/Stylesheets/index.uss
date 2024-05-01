@@ -1,11 +1,13 @@
 :root {
     --main-text-color: #f5f5f5;
-    --font-main: url("project:/Assets/ThirdParty/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf");
-    
+    --font-main: url("project:/Assets/Resources/Fonts/Hardpixel.otf");
+
+    font-size: 12px;
     justify-content: center;
     align-items: center;
     padding: 8px;
     color: var(--main-text-color);
+    -unity-font-definition: var(--font-main);
 }
 
 .styled-panel {
