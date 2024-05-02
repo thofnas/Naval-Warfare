@@ -35,7 +35,7 @@ namespace States.MainMenuUIStates
                 () => SceneManager.LoadScene("Gameplay"),
                 "start-button")
             {
-                text = TextData.StartGameButtonButton
+                text = TextData.PlayButton
             };
 
             StyledButton storeButton = new(SelectedTheme.PlayerTheme, 

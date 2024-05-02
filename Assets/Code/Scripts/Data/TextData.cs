@@ -6,7 +6,7 @@ namespace Data
     public class TextData
     {
         public readonly NonEmptyString Title;
-        public readonly NonEmptyString StartGameButtonButton;
+        public readonly NonEmptyString PlayButton;
         public readonly NonEmptyString StoreButton;
         public readonly NonEmptyString SettingsButton;
         public readonly NonEmptyString AchievementsButton;
@@ -19,10 +19,10 @@ namespace Data
 
 
         [JsonConstructor]
-        public TextData(NonEmptyString title, NonEmptyString startGameButton, NonEmptyString storeButton, NonEmptyString settingsButton, NonEmptyString achievementsButton, NonEmptyString backButton, NonEmptyString framesPerSecond, NonEmptyString language, NonEmptyString firstPurchase, NonEmptyString buyYourFirstMap, NonEmptyString unlocked)
+        public TextData(NonEmptyString title, NonEmptyString playButton, NonEmptyString storeButton, NonEmptyString settingsButton, NonEmptyString achievementsButton, NonEmptyString backButton, NonEmptyString framesPerSecond, NonEmptyString language, NonEmptyString firstPurchase, NonEmptyString buyYourFirstMap, NonEmptyString unlocked)
         {
             Title = title;
-            StartGameButtonButton = startGameButton;
+            PlayButton = playButton;
             StoreButton = storeButton;
             SettingsButton = settingsButton;
             AchievementsButton = achievementsButton;

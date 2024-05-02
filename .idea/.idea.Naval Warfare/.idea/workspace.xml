@@ -6,29 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2cf71565-e702-496e-9a67-08766235670e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Maps/Map_Islands.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Maps/Map_Islands.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Maps/Map_Ocean.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Maps/Map_Ocean.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Islands/AI.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Islands/AI.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Islands/Acid.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Islands/Acid.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Islands/Tropical.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Islands/Tropical.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Ocean/AI.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Ocean/AI.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Ocean/Earth.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/ScriptableObjects/Themes/Ocean/Earth.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/BattleMusicManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/BattleMusicManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/BattleSfxManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/BattleSfxManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Data/TextData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/TextData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplaySettingsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GameplaySettingsInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Map/Map.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Map/Map.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Misc/NonEmptyString.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Misc/NonEmptyString.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Ship/ShipVisual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Ship/ShipVisual.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Store/StoreItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Theme.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Themes/Theme.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledPanel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledRadioButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledRadioButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Validation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Validation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/MainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/MainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StorePanel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/AI.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Islands/AI.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Ocean/AI.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/StoreThemeItems/Ocean/AI.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/lang/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/lang/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/lang/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/lang/ru.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +93,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.sync",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -224,7 +208,8 @@
       <workItem from="1714406938994" duration="2979000" />
       <workItem from="1714469989203" duration="12470000" />
       <workItem from="1714495527654" duration="7500000" />
-      <workItem from="1714556558606" duration="6557000" />
+      <workItem from="1714556558606" duration="6604000" />
+      <workItem from="1714677701802" duration="805000" />
     </task>
     <servers />
   </component>

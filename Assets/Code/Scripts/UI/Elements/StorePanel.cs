@@ -43,10 +43,10 @@ namespace UI.Elements
 
             this.AddClass("store-panel");
             
-            RegenerateContent(storeItems);
+            RenderStoreItems(storeItems);
         }
 
-        private void RegenerateContent(IEnumerable<StoreItem> storeItems)
+        private void RenderStoreItems(IEnumerable<StoreItem> storeItems)
         {
             Clear();
             
@@ -66,17 +66,22 @@ namespace UI.Elements
             
             foreach (StoreItem storeItem in storeItems)
             {
-                StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, _mapType, itemsContainer, StoreItemView_OnClicked);
+                _ownedThemesChecker.Visit(storeItem);
                 
-                _ownedThemesChecker.Visit(storeItemView.StoreItem);
+                if (!storeItem.IsPurchasable && !_ownedThemesChecker.IsOwned)
+                {
+                    continue;
+                }
+                
+                StoreItemView storeItemView = StoreItemView.Factory.Create(storeItem, _mapType, itemsContainer, StoreItemView_OnClicked);
 
                 if (_ownedThemesChecker.IsOwned)
                 {
-                    _selectedThemeChecker.Visit(storeItemView.StoreItem);
+                    _selectedThemeChecker.Visit(storeItem);
 
                     if (_selectedThemeChecker.IsSelected)
                     {
-                        _themeSelector.Visit(storeItemView.StoreItem);
+                        _themeSelector.Visit(storeItem);
                         storeItemView.Select();
                     }
                     else
@@ -86,12 +91,6 @@ namespace UI.Elements
                 }
                 else
                 {
-                    if (!storeItem.IsPurchasable)
-                    {
-                        //Remove(storeItemView);
-                        //return;
-                    }
-                    
                     if (!_wallet.IsEnough(storeItem.Price))
                     {
                         storeItemView.SetNotEnoughMoneyStyles();
