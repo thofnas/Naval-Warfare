@@ -5,7 +5,6 @@ using Map;
 using Themes;
 using Themes.Store;
 using UI.Elements;
-using UnityEngine;
 using Zenject;
 
 namespace Infrastructure

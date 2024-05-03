@@ -13,13 +13,14 @@ namespace Data
         public readonly NonEmptyString BackButton;
         public readonly NonEmptyString FramesPerSecond;
         public readonly NonEmptyString Language;
+        public readonly NonEmptyString Unlocked;
         public readonly NonEmptyString FirstPurchase;
         public readonly NonEmptyString BuyYourFirstMap;
-        public readonly NonEmptyString Unlocked;
+        public readonly NonEmptyString WinTenTimes;
 
 
         [JsonConstructor]
-        public TextData(NonEmptyString title, NonEmptyString playButton, NonEmptyString storeButton, NonEmptyString settingsButton, NonEmptyString achievementsButton, NonEmptyString backButton, NonEmptyString framesPerSecond, NonEmptyString language, NonEmptyString firstPurchase, NonEmptyString buyYourFirstMap, NonEmptyString unlocked)
+        public TextData(NonEmptyString title, NonEmptyString playButton, NonEmptyString storeButton, NonEmptyString settingsButton, NonEmptyString achievementsButton, NonEmptyString backButton, NonEmptyString framesPerSecond, NonEmptyString language, NonEmptyString firstPurchase, NonEmptyString buyYourFirstMap, NonEmptyString unlocked, NonEmptyString winTenTimes)
         {
             Title = title;
             PlayButton = playButton;
@@ -32,6 +33,7 @@ namespace Data
             FirstPurchase = firstPurchase;
             BuyYourFirstMap = buyYourFirstMap;
             Unlocked = unlocked;
+            WinTenTimes = winTenTimes;
         }
     }
 }

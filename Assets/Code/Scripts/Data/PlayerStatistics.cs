@@ -1,4 +1,5 @@
-﻿using EventBus;
+﻿using System;
+using EventBus;
 using Events;
 using Newtonsoft.Json;
 
@@ -14,6 +15,7 @@ namespace Data
 
         [JsonIgnore] private EventBinding<OnCellHit> _onCellHit;
         [JsonIgnore] private EventBinding<OnBattleEnded> _onBattleEnded;
+        [JsonIgnore] private readonly Action<PlayerStatistics> _onChanged = e => EventBus<OnPlayerStatisticsChanged>.Invoke(new OnPlayerStatisticsChanged(e));
 
         public PlayerStatistics()
         {
@@ -42,6 +44,8 @@ namespace Data
             else Loses++;
 
             TotalBattles++;
+
+            _onChanged(this);
         }
 
         private void OnCellHit(OnCellHit e)
@@ -52,6 +56,8 @@ namespace Data
                 Hits++;
 
             Shots++;
+
+            _onChanged(this);
         }
     }
 }

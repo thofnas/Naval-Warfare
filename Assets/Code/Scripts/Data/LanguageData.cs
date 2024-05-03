@@ -1,6 +1,7 @@
-﻿using System.Data;
+﻿using System;
 using EventBus;
 using Events;
+using JetBrains.Annotations;
 
 namespace Data
 {
@@ -10,20 +11,24 @@ namespace Data
 
         public LanguageData(LanguageProvider languageProvider)
         {
-            SetLanguage(languageProvider);
+            SetTextData(languageProvider, () => EventBus<OnLanguageLoaded>.Invoke(new OnLanguageLoaded()));
 
-            EventBinding<OnPlayerPrefsLanguageChanged> onLanguageChanged = new(_ => SetLanguage(languageProvider));
+            EventBinding<OnPlayerPrefsLanguageChanged> onLanguageChanged = new(_ => SetTextData(languageProvider, () => EventBus<OnLanguageLoaded>.Invoke(new OnLanguageLoaded())));
             EventBus<OnPlayerPrefsLanguageChanged>.Register(onLanguageChanged);
         }
 
-        private void SetLanguage(LanguageProvider languageProvider)
+        private void SetTextData(LanguageProvider languageProvider, [CanBeNull] Action onComplete)
         {
-            if (!languageProvider.TryLoad(GameSettings.GetLanguage(), out TextData textData))
-                GameSettings.ResetLanguage();
-
-            TextData = textData;
+            TextData = GetTextData(languageProvider, GameSettings.GetLanguage());
             
-            EventBus<OnLanguageLoaded>.Invoke(new OnLanguageLoaded());
+            onComplete?.Invoke();
+        }
+
+        private TextData GetTextData(LanguageProvider languageProvider, string language)
+        {
+            languageProvider.TryLoad(language, out TextData textData);
+
+            return textData;
         }
     }
 }

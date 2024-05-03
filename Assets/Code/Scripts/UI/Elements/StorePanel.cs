@@ -77,9 +77,7 @@ namespace UI.Elements
 
                 if (_ownedThemesChecker.IsOwned)
                 {
-                    _selectedThemeChecker.Visit(storeItem);
-
-                    if (_selectedThemeChecker.IsSelected)
+                    if (IsStoreItemSelected(storeItem))
                     {
                         _themeSelector.Visit(storeItem);
                         storeItemView.Select();
@@ -101,6 +99,12 @@ namespace UI.Elements
 
                 _storeItemViews.Add(storeItemView);
             } 
+        }
+
+        private bool IsStoreItemSelected(StoreItem storeItem)
+        {
+            _selectedThemeChecker.Visit(storeItem);
+            return _selectedThemeChecker.IsSelected;
         }
 
         private void SelectTheme(StoreItemView storeItemView)

@@ -24,6 +24,14 @@ namespace Infrastructure
         private Wallet _wallet;
         private LanguageProvider _languageProvider;
         private LanguageData _languageData;
+        private readonly StoreContent _storeContent;
+        private ThemeUnlocker _themeUnlocker;
+
+        [Inject]
+        private GlobalInstaller(StoreContent storeContent)
+        {
+            _storeContent = storeContent;
+        }
 
         public override void InstallBindings()
         {
@@ -67,10 +75,12 @@ namespace Infrastructure
         private void Achievements()
         {
             FirstMapBought firstMapBought = new(_persistentData, "91dfcd2c-715e-41dc-9808-c106e42f6127", _wallet, _languageData);
-
-            AchievementStorage achievementStorage = new(firstMapBought);
+            WinTenTimes winTenTimes = new(_persistentData, "c74397d2-9fa4-452f-aadc-13ad8f47576b", _languageData, _storeContent, _themeUnlocker);
+            
+            AchievementStorage achievementStorage = new(firstMapBought, winTenTimes);
 
             Container.Bind<FirstMapBought>().FromInstance(firstMapBought).AsSingle();
+            Container.Bind<WinTenTimes>().FromInstance(winTenTimes).AsSingle();
             Container.Bind<AchievementStorage>().FromInstance(achievementStorage).AsSingle().NonLazy();
         }
 
@@ -98,8 +108,10 @@ namespace Infrastructure
 
         private void ThemeVisitors()
         {
+            _themeUnlocker = new ThemeUnlocker(_persistentData);
+            
             Container.Bind<ThemeSelector>().AsSingle().WithArguments(_persistentData);
-            Container.Bind<ThemeUnlocker>().AsSingle().WithArguments(_persistentData);
+            Container.Bind<ThemeUnlocker>().FromInstance(_themeUnlocker);
             Container.Bind<SelectedThemeChecker>().AsTransient().WithArguments(_persistentData);
             Container.Bind<OwnedThemesChecker>().AsTransient().WithArguments(_persistentData);
         }
