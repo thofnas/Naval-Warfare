@@ -27,7 +27,7 @@ namespace AchievementSystem.Achievements
 
         protected override void OnUnlock()
         {
-            Debug.Log($"Unlocked {nameof(FirstMapBought)} achievement");
+            Debug.Log($"Unlocked {nameof(WinTenTimes)} achievement");
         }
     }
 }

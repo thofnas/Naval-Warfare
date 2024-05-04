@@ -21,8 +21,8 @@ namespace UI.Elements
             params string[] wrapperClasses) :
             base(clickEvent)
         {
-            style.paddingBottom = 10;
-            style.paddingTop = 10;
+            style.paddingBottom = 8;
+            style.paddingTop = 8;
             style.paddingLeft = 14;
             style.paddingRight = 14;
 

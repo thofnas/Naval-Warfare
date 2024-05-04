@@ -1,21 +1,23 @@
 ﻿using System.Collections.Generic;
-using Audio;
-using FMODUnity;
 using Map;
-using Themes;
 using Themes.Store;
+using UI;
 using UI.Elements;
+using UnityEngine;
 using Zenject;
 
 namespace Infrastructure
 {
     public class MainMenuInstaller : MonoInstaller
     {
+        [SerializeField] private MainMenuUIManager _mainMenuUIManager;
+
         public override void InstallBindings()
         {
             BackgroundAnimator();
             StorePanelFactory();
             MapSelector();
+            Container.InstantiatePrefab(_mainMenuUIManager);
         }
 
         private void MapSelector() => 

@@ -83,3 +83,4 @@ MonoBehaviour:
       Data3: 537044922
       Data4: -1194883120
     Path: event:/BGM/MainMenu
+  _storeContent: {fileID: 11400000, guid: c8475c3b5380bc349adda6129d40dac0, type: 2}

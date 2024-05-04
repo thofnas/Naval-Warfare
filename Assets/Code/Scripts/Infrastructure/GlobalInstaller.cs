@@ -18,20 +18,15 @@ namespace Infrastructure
     {
         [SerializeField] private ThemeLibrary _themeLibrary;
         [SerializeField] private MapLibrary _mapLibrary;
+        [SerializeField] private StoreContent _storeContent;
         [SerializeField] private EventReference _mainMenuMusic;
         private PersistentData _persistentData;
         private LocalDataProvider _localDataProvider;
         private Wallet _wallet;
         private LanguageProvider _languageProvider;
         private LanguageData _languageData;
-        private readonly StoreContent _storeContent;
         private ThemeUnlocker _themeUnlocker;
 
-        [Inject]
-        private GlobalInstaller(StoreContent storeContent)
-        {
-            _storeContent = storeContent;
-        }
 
         public override void InstallBindings()
         {
@@ -61,6 +56,7 @@ namespace Infrastructure
             MapLibrary();
             MainMenuMusicManager();
             GameSettings();
+            
             Achievements();
         }
 
