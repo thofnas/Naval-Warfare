@@ -51,8 +51,10 @@ namespace States.MainMenuUIStates
                 if (cultureInfo == null)
                     continue;
 
-                StyledRadioButton radioButton = new(SelectedTheme.PlayerTheme, languageGroupBox)
+                StyledRadioButton radioButton = new(SelectedTheme.PlayerTheme, languageGroupBox, "settings-radio-button")
                     { text = cultureInfo.NativeName };
+
+                radioButton.value = textAsset.name == GameSettings.GetLanguage();
 
                 radioButton.RegisterValueChangedCallback(_ => GameSettings.SetLanguage(cultureInfo));
             }
@@ -77,15 +79,19 @@ namespace States.MainMenuUIStates
             
             StyledRadioButton fps30RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "30" };
             fps30RadioButton.RegisterValueChangedCallback(_ => GameSettings.SetFrameRate(30));
+            fps30RadioButton.value = 30 == GameSettings.GetTargetFrameRate();
             
             StyledRadioButton fps60RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "60" };
             fps60RadioButton.RegisterValueChangedCallback(_ => GameSettings.SetFrameRate(60));
+            fps60RadioButton.value = 60 == GameSettings.GetTargetFrameRate();
             
             StyledRadioButton fps120RadioButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "120" };
             fps120RadioButton.RegisterValueChangedCallback(_ => GameSettings.SetFrameRate(120));
+            fps120RadioButton.value = 120 == GameSettings.GetTargetFrameRate();
 
             StyledRadioButton fpsUnlimitedButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "Unlimited" };
             fpsUnlimitedButton.RegisterValueChangedCallback(_ => GameSettings.SetFrameRate(-1));
+            fpsUnlimitedButton.value = -1 == GameSettings.GetTargetFrameRate();
         }
     }
 }

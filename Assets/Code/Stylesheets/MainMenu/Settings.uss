@@ -4,6 +4,14 @@
     width: 100%;
 }
 
+.settings-container {
+    padding: 8px;
+}
+
+.unity-base-field__input {
+    padding: 4px 12px;
+}
+
 .unity-radio-button-group {
     display: flex;
     flex-direction: column;

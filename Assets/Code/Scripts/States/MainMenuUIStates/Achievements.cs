@@ -35,7 +35,8 @@ namespace States.MainMenuUIStates
             
             foreach (IAchievement achievement in _achievementStorage.Achievements)
             {
-                VisualElement achievementItem = achievementsContainer.CreateChild("achievement-item");
+                StyledPanel achievementItem = new(MainMenuUIManager.SelectedTheme.PlayerTheme, "achievement-item");
+                achievementsContainer.Add(achievementItem);
                 VisualElement achievementInfo = achievementItem.CreateChild("achievement-info");
                 achievementInfo.Add(new Label(achievement.Info.Name));
                 achievementInfo.Add(new Label(achievement.Info.UnlockCondition));

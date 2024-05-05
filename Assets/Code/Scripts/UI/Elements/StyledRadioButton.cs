@@ -10,18 +10,16 @@ namespace UI.Elements
         {
         }
         
-        public StyledRadioButton(Theme theme, VisualElement parent, params string[] wrapperClasses) : this(
-            theme, parent, null, wrapperClasses)
-        {
-        }
-        
-        public StyledRadioButton(Theme theme, VisualElement parent, string label,
+        public StyledRadioButton(Theme theme, VisualElement parent,
             params string[] wrapperClasses) :
-            base(label)
+            base(null)
         {
             parent.Add(this);
+            
+            foreach (VisualElement visualElement in Children()) 
+                visualElement.style.unityBackgroundImageTintColor = theme.MainColor;
+            
             this.AddClass(wrapperClasses);
-            style.unityBackgroundImageTintColor = theme.MainColor;
         }
     }
 }

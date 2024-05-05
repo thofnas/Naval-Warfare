@@ -6,7 +6,6 @@ using Themes.Store;
 using UI;
 using UI.Elements;
 using UnityEngine.UIElements;
-using Utilities;
 using Utilities.Extensions;
 
 namespace States.MainMenuUIStates

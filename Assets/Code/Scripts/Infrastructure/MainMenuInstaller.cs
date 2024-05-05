@@ -8,17 +8,23 @@ using Zenject;
 
 namespace Infrastructure
 {
-    public class MainMenuInstaller : MonoInstaller
+    public class MainMenuInstaller : MonoInstaller, IInitializable
     {
         [SerializeField] private MainMenuUIManager _mainMenuUIManager;
 
+        public void Initialize() => Container.InstantiatePrefab(_mainMenuUIManager);
+
         public override void InstallBindings()
         {
+            This();
+            
             BackgroundAnimator();
             StorePanelFactory();
             MapSelector();
-            Container.InstantiatePrefab(_mainMenuUIManager);
         }
+
+        private void This() => 
+            Container.BindInterfacesTo<MainMenuInstaller>().FromInstance(this).AsSingle();
 
         private void MapSelector() => 
             Container.Bind<MapSelector>().AsSingle().NonLazy();
