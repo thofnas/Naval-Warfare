@@ -2,6 +2,7 @@
 using EventBus;
 using Events;
 using Map;
+using Themes;
 using Themes.Store;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,7 +11,7 @@ using Utilities.Extensions;
 
 namespace UI.Elements
 {
-    public class StoreItemView : VisualElement
+    public class StoreItemView : StyledPanel
     {
         private static readonly Color s_notEnoughMoneyColor = new(1f,0.5f,0.4f);
 
@@ -24,7 +25,7 @@ namespace UI.Elements
         
         public StoreItem StoreItem { get; private set; }
 
-        private StoreItemView()
+        private StoreItemView(Theme theme) : base(theme)
         {
             this.AddClass("store-item");
 
@@ -97,7 +98,7 @@ namespace UI.Elements
         {
             public static StoreItemView Create(StoreItem storeItem, MapType mapType, VisualElement parentContainer, Action<StoreItemView> onClick)
             {
-                StoreItemView instance = new();
+                StoreItemView instance = new(storeItem.Theme);
                 instance.AddManipulator(new Clickable(_ => onClick?.Invoke(instance)));
                 
                 instance.StoreItem = storeItem;

@@ -6,14 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2cf71565-e702-496e-9a67-08766235670e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/MainMenuInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/MainMenuInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Achievements.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Achievements.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Settings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Settings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Store.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Store.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledRadioButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledRadioButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Achievements.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Achievements.uss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Settings.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Settings.uss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/AchievementSystem/Achievements/FirstMapBought.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AchievementSystem/Achievements/FirstMapBought.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/AchievementSystem/Achievements/WinTenTimes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AchievementSystem/Achievements/WinTenTimes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Data/TextData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/TextData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Store.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Store.uss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/lang/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/lang/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/lang/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/lang/ru.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +213,9 @@
       <workItem from="1714749667134" duration="6923000" />
       <workItem from="1714843178328" duration="3312000" />
       <workItem from="1714936045223" duration="2816000" />
-      <workItem from="1714939868288" duration="1597000" />
+      <workItem from="1714939868288" duration="2890000" />
+      <workItem from="1714988380063" duration="1942000" />
+      <workItem from="1715023137816" duration="627000" />
     </task>
     <servers />
   </component>

@@ -16,7 +16,8 @@ namespace AchievementSystem.Achievements
             Reward = new MoneyReward(10, wallet);
         }
 
-        protected sealed override void UpdateAchievementInfo() => Info = new AchievementInfo(TextData.FirstPurchase, TextData.BuyYourFirstMap);
+        protected sealed override void UpdateAchievementInfo() => 
+            Info = new AchievementInfo(TextData.FirstMapBought_Name, TextData.FirstMapBought_UnlockCondition);
 
         protected override bool AreConditionsMet(OnThemeUnlocked eventArgs)
         {

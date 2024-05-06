@@ -7,8 +7,9 @@
   "BackButton": "Назад",
   "FramesPerSecond": "Кадры в секунду",
   "Language": "Язык",
-  "FirstPurchase": "Первая покупка",
-  "BuyYourFirstMap": "Купи свою первую тему.",
   "Unlocked": "Открыто",
-  "WinTenTimes": "Победи 10 раз"
+  "FirstMapBought_Name": "Первая покупка",
+  "FirstMapBought_UnlockCondition": "Купи свою первую тему",
+  "WinTenTimes_Name": "Победы подряд: Islands",
+  "WinTenTimes_UnlockCondition": "Победи 10 раз на карте Islands против компьютера"
 }

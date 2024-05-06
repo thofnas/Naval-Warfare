@@ -1,26 +1,32 @@
 ﻿using Misc;
 using Newtonsoft.Json;
+// ReSharper disable InconsistentNaming
 
 namespace Data
 {
     public class TextData
     {
-        public readonly NonEmptyString Title;
-        public readonly NonEmptyString PlayButton;
-        public readonly NonEmptyString StoreButton;
-        public readonly NonEmptyString SettingsButton;
-        public readonly NonEmptyString AchievementsButton;
-        public readonly NonEmptyString BackButton;
-        public readonly NonEmptyString FramesPerSecond;
-        public readonly NonEmptyString Language;
-        public readonly NonEmptyString Unlocked;
-        public readonly NonEmptyString FirstPurchase;
-        public readonly NonEmptyString BuyYourFirstMap;
-        public readonly NonEmptyString WinTenTimes;
-
+        public readonly string Title;
+        public readonly string PlayButton;
+        public readonly string StoreButton;
+        public readonly string SettingsButton;
+        public readonly string AchievementsButton;
+        public readonly string BackButton;
+        public readonly string FramesPerSecond;
+        public readonly string Language;
+        public readonly string Unlocked;
+        public readonly string FirstMapBought_Name;
+        public readonly string FirstMapBought_UnlockCondition;
+        public readonly string WinTenTimes_Name;
+        public readonly string WinTenTimes_UnlockCondition;
+ 
 
         [JsonConstructor]
-        public TextData(NonEmptyString title, NonEmptyString playButton, NonEmptyString storeButton, NonEmptyString settingsButton, NonEmptyString achievementsButton, NonEmptyString backButton, NonEmptyString framesPerSecond, NonEmptyString language, NonEmptyString firstPurchase, NonEmptyString buyYourFirstMap, NonEmptyString unlocked, NonEmptyString winTenTimes)
+        public TextData(string title, string playButton, string storeButton,
+            string settingsButton, string achievementsButton, string backButton,
+            string framesPerSecond, string language, string unlocked, 
+            string firstMapBought_Name, string firstMapBought_UnlockCondition, string winTenTimes_Name, 
+            string winTenTimes_UnlockCondition)
         {
             Title = title;
             PlayButton = playButton;
@@ -30,10 +36,11 @@ namespace Data
             BackButton = backButton;
             FramesPerSecond = framesPerSecond;
             Language = language;
-            FirstPurchase = firstPurchase;
-            BuyYourFirstMap = buyYourFirstMap;
             Unlocked = unlocked;
-            WinTenTimes = winTenTimes;
+            FirstMapBought_Name = firstMapBought_Name;
+            FirstMapBought_UnlockCondition = firstMapBought_UnlockCondition;
+            WinTenTimes_Name = winTenTimes_Name;
+            WinTenTimes_UnlockCondition = winTenTimes_UnlockCondition;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace AchievementSystem.Achievements
             Reward = new IslandsThemeReward(themeType: IslandsThemeType.AI, storeContent, themeUnlocker);
         }
 
-        protected sealed override void UpdateAchievementInfo() => Info = new AchievementInfo(TextData.WinTenTimes, TextData.WinTenTimes);
+        protected sealed override void UpdateAchievementInfo() => Info = new AchievementInfo(TextData.WinTenTimes_Name, TextData.WinTenTimes_UnlockCondition);
 
         protected override bool AreConditionsMet(OnPlayerStatisticsChanged eventArgs)
         {

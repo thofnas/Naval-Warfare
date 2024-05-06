@@ -7,8 +7,9 @@
   "BackButton": "Back",
   "FramesPerSecond": "Frames Per Second",
   "Language": "Language",
-  "FirstPurchase": "First Purchase",
-  "BuyYourFirstMap": "Buy your first map.",
   "Unlocked": "Unlocked",
-  "WinTenTimes": "Win 10 times"
+  "FirstMapBought_Name": "First Purchase",
+  "FirstMapBought_UnlockCondition": "Buy your first map",
+  "WinTenTimes_Name": "Consecutive wins: Islands",
+  "WinTenTimes_UnlockCondition": "Win 10 times on the Islands map against computer"
 }
