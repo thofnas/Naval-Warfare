@@ -11,7 +11,7 @@ using Utilities.Extensions;
 
 namespace UI.Elements
 {
-    public class StoreItemView : StyledPanel
+    public class StoreItemView : VisualElement
     {
         private static readonly Color s_notEnoughMoneyColor = new(1f,0.5f,0.4f);
 
@@ -25,11 +25,16 @@ namespace UI.Elements
         
         public StoreItem StoreItem { get; private set; }
 
-        private StoreItemView(Theme theme) : base(theme)
+        private StoreItemView(Theme theme)
         {
             this.AddClass("store-item");
 
-            _backgroundImage = this.CreateChild<Image>("item-background-image");
+            
+            VisualElement imageWrapper = this.CreateChild("item-image-wrapper");
+            _backgroundImage = imageWrapper.CreateChild<Image>("item-image");
+            
+            StyledPanel styledPanel = new(theme, false);
+            Add(styledPanel);
             
             _priceWrapper = this.CreateChild("item-price-wrapper");
             VisualElement priceContainer = _priceWrapper.CreateChild("item-price");

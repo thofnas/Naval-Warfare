@@ -16,6 +16,10 @@
     overflow: visible;
 }
 
+.styled-panel .transparent {
+    background-image: url("/Assets/Art/Textures/UI/Panel-transparent.png");
+}
+
 Label {
     margin: 0;
     text-shadow: 0.5px 0.5px 1px #000000;

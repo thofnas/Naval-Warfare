@@ -20,7 +20,6 @@ namespace UI.Elements
         private readonly Wallet _wallet;
         private readonly MapType _mapType;
         private readonly MapSelector _mapSelector;
-        private List<StoreItemView> _storeItemViews;
 
         public StorePanel(IEnumerable<StoreItem> storeItems,
             MapType mapType,
@@ -62,8 +61,6 @@ namespace UI.Elements
             Label nameLabel = nameContainer.CreateChild<Label>();
             nameLabel.text = _mapType.ToString();
             
-            _storeItemViews = new List<StoreItemView>();
-            
             foreach (StoreItem storeItem in storeItems)
             {
                 _ownedThemesChecker.Visit(storeItem);
@@ -96,8 +93,6 @@ namespace UI.Elements
                     
                     storeItemView.Lock();
                 }
-
-                _storeItemViews.Add(storeItemView);
             } 
         }
 

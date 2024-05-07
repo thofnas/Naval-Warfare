@@ -13,7 +13,6 @@
     flex-direction: column;
     height: 100%;
     width: 320px;
-    overflow: scroll;
 }
 
 .buttons-container {
@@ -54,17 +53,30 @@
     min-width: 60px;
     min-height: 60px;
     margin: 2px;
+    padding-right: 2px;
     border-width: 1px;
     border-radius: 1px;
     overflow: hidden;
 }
 
-.item-background-image {
+.store-item .styled-panel {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.item-image-wrapper {
+    width: 53.8px;
+    height: 54px;
+    overflow: hidden;
+    margin-top: -2px;
+}
+
+.item-image {
     background-size: contain;
-    scale: 5;
-    width: 200%;
-    height: 200%;
-    -unity-background-scale-mode: scale-and-crop;
+    scale: 4;
+    width: 100%;
+    height: 100%;
 }
 
 .item-lock-image {
