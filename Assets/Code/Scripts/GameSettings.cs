@@ -3,6 +3,7 @@ using System.Globalization;
 using EventBus;
 using Events;
 using UnityEngine;
+using Utilities.Extensions;
 using Zenject;
 
 public class GameSettings : IInitializable
@@ -11,15 +12,29 @@ public class GameSettings : IInitializable
     private const int DefaultFrameRate = 60;
     private const string LanguageKey = "Language";
     private const string DefaultLanguage = "en";
+    private const string MusicKey = "Music";
+    private const string SfxKey = "Sfx";
     
     public void Initialize()
     {
         int targetFrameRate = GetTargetFrameRate();
-        string language = GetLanguage(); 
+        string language = GetLanguage();
+        bool isMusicEnabled = IsMusicEnabled();
+        bool isSfxEnabled = IsSfxEnabled();
 
         SetFrameRate(targetFrameRate);
         SetLanguage(new CultureInfo(language));
+        SetMusic(isMusicEnabled);
+        SetSfx(isSfxEnabled);
     }
+
+    public static bool IsMusicEnabled() => PlayerPrefs.GetInt(MusicKey, true.ToInt()).ToBoolean();
+
+    public static void SetMusic(bool value) => PlayerPrefs.SetInt(MusicKey, value.ToInt());
+
+    public static bool IsSfxEnabled() => PlayerPrefs.GetInt(SfxKey, true.ToInt()).ToBoolean();
+
+    public static void SetSfx(bool value) => PlayerPrefs.SetInt(SfxKey, value.ToInt());
 
     public static int GetTargetFrameRate() => PlayerPrefs.GetInt(FrameRateKey, DefaultFrameRate);
 
@@ -43,7 +58,7 @@ public class GameSettings : IInitializable
     public static void SetFrameRate(int frameRate)
     {
         if (frameRate is 0 or < -1)
-            throw new ArgumentException(nameof(frameRate), "Wrong value " + frameRate);
+            throw new ArgumentException("Wrong value " + frameRate, nameof(frameRate));
         
         Application.targetFrameRate = frameRate;
 

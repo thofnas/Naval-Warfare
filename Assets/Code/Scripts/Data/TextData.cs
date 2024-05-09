@@ -17,6 +17,7 @@ namespace Data
         public readonly string Unlocked;
         public readonly string Audio;
         public readonly string Music;
+        public readonly string Sfx;
         public readonly string FirstMapBought_Name;
         public readonly string FirstMapBought_UnlockCondition;
         public readonly string WinTenTimes_Name;
@@ -28,7 +29,7 @@ namespace Data
             string settingsButton, string achievementsButton, string backButton,
             string framesPerSecond, string language, string unlocked, 
             string firstMapBought_Name, string firstMapBought_UnlockCondition, string winTenTimes_Name, 
-            string winTenTimes_UnlockCondition, string audio, string music)
+            string winTenTimes_UnlockCondition, string audio, string music, string sfx)
         {
             Title = title;
             PlayButton = playButton;
@@ -45,6 +46,7 @@ namespace Data
             WinTenTimes_UnlockCondition = winTenTimes_UnlockCondition;
             Audio = audio;
             Music = music;
+            Sfx = sfx;
         }
     }
 }

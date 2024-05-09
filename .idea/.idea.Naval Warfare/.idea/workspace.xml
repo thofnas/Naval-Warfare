@@ -5,25 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cf71565-e702-496e-9a67-08766235670e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/AudioType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/AudioType.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/VolumeAdjuster.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/VolumeAdjuster.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Events/OnAudioSwitchValueChanged.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Events/OnAudioSwitchValueChanged.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Extensions/BoolExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Extensions/BoolExtensions.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Extensions/IntExtensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Utilities/Extensions/IntExtensions.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Textures/UI/CheckboxButton.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Textures/UI/CheckboxButton.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Textures/UI/SwitchButton.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Textures/UI/SwitchButton.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/VolumeAdjuster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/VolumeAdjuster.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Data/TextData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/TextData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GlobalInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GlobalInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/GameSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/GameSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Settings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Settings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Settings.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Settings.uss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Store.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/MainMenu/Store.uss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/lang/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/lang/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/lang/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/lang/ru.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +222,7 @@
       <workItem from="1715023137816" duration="648000" />
       <workItem from="1715108202952" duration="3187000" />
       <workItem from="1715198733235" duration="839000" />
-      <workItem from="1715245343861" duration="14509000" />
+      <workItem from="1715245343861" duration="18634000" />
     </task>
     <servers />
   </component>

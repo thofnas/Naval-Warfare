@@ -14,14 +14,18 @@
     flex-direction: row;
 }
 
+.audio-switch Label {
+    font-size: 8px;
+}
+
 .settings-panel {
-    padding: 8px;
-    height: 180px;
-    overflow: scroll;
+    padding: 3px 4px;
+    height: 100%;
 }
 
 .setting-container {
-    min-height: 40px;
+    margin: 1px 0 ;
+    padding: 0 8px 4px 8px;
 }
 
 .unity-base-field__input {

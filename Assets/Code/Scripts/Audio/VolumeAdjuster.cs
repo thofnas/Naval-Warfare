@@ -3,6 +3,7 @@ using EventBus;
 using Events;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine;
 using Utilities.Extensions;
 
 namespace Audio
@@ -13,6 +14,12 @@ namespace Audio
         {
             var onAudioSwitchValueChanged = new EventBinding<OnAudioSwitchValueChanged>(OnAudioSwitchValueChanged);
             EventBus<OnAudioSwitchValueChanged>.Register(onAudioSwitchValueChanged);
+
+            VCA musicVca = RuntimeManager.GetVCA($"vca:/{nameof(AudioType.BGM)}");
+            musicVca.setVolume(GameSettings.IsMusicEnabled().ToInt());
+            
+            VCA sfxVca = RuntimeManager.GetVCA($"vca:/{nameof(AudioType.Sfx)}");
+            sfxVca.setVolume(GameSettings.IsSfxEnabled().ToInt());
         }
 
         private static void OnAudioSwitchValueChanged(OnAudioSwitchValueChanged e)
