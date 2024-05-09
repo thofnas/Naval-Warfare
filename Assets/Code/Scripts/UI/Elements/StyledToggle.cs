@@ -17,14 +17,16 @@ namespace UI.Elements
 
         public StyledToggle(Theme theme, VisualElement parent, bool isSwitch, params string[] wrapperClasses)
         {
-            parent.Add(this);
-            
-            
+            this.AddClass("styled-toggle");
+
             if (isSwitch)
                 this.AddClass("switch");
+
+            if (wrapperClasses is not null)
+                this.AddClass(wrapperClasses);
+
+            parent.Add(this);
                 
-            
-            this.AddClass(wrapperClasses);
             style.unityBackgroundImageTintColor = theme.MainColor;
         }
     }

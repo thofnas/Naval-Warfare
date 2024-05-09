@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Globalization;
-using Data;
+using EventBus;
+using Events;
 using Misc;
 using UI;
 using UI.Elements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Utilities;
 using Utilities.Extensions;
+using AudioType = Audio.AudioType;
 
 namespace States.MainMenuUIStates
 {
@@ -34,10 +33,50 @@ namespace States.MainMenuUIStates
         {
             VisualElement container = Root.CreateChild("container");
 
-            StyledPanel settingsContainer = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, "settings-container");
-            container.Add(settingsContainer);
-            GenerateFPSSetting(settingsContainer);
+            StyledPanel settingsPanel = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, "settings-panel");
+            container.Add(settingsPanel);
+            ScrollView settingsScrollView = new(ScrollViewMode.Vertical)
+            {
+                touchScrollBehavior = ScrollView.TouchScrollBehavior.Elastic,
+                verticalScrollerVisibility = ScrollerVisibility.Hidden
+            };
+            settingsPanel.Add(settingsScrollView);
             
+            CreateAudioSetting(settingsScrollView);
+            CreateFPSSetting(settingsScrollView);
+            CreateLanguageSetting(settingsScrollView);
+            
+            foreach (VisualElement visualElement in settingsPanel.Children())
+            {
+                visualElement.AddClass("setting-container");
+            }
+
+            VisualElement buttonsContainer = container.CreateChild("buttons-container");
+            
+            StyledButton backToMainMenuButton = new(SelectedTheme.PlayerTheme, buttonsContainer,
+                () => StateMachine.SwitchState(MainMenuUIManager.MainMenuState), "back-button")
+            {
+                text = TextData.BackButton
+            };
+        }
+
+        private void CreateAudioSetting(VisualElement settingsContainer)
+        {
+            VisualElement audioContainer = settingsContainer.CreateChild("audio-container");
+            
+            Label label = new(TextData.Audio);
+            audioContainer.Add(label);
+            
+            VisualElement switches = audioContainer.CreateChild("audio-switches");
+            VisualElement musicSwitch = switches.CreateChild("audio-switch"); 
+            musicSwitch.Add(new Label(TextData.Music));
+            StyledToggle musicToggle =
+                new(SelectedTheme.PlayerTheme, musicSwitch, true, "music-switch");
+            musicToggle.RegisterValueChangedCallback(e => ReadyToggle_OnValueChanged(AudioType.BGM, e.newValue));
+        }
+
+        private void CreateLanguageSetting(VisualElement settingsContainer)
+        {
             VisualElement languageContainer = settingsContainer.CreateChild("language-container");
 
             Label label = new(TextData.Language);
@@ -51,24 +90,17 @@ namespace States.MainMenuUIStates
                 if (cultureInfo == null)
                     continue;
 
-                StyledRadioButton radioButton = new(SelectedTheme.PlayerTheme, languageGroupBox, "settings-radio-button")
-                    { text = cultureInfo.NativeName };
+                StyledRadioButton languageRadioButton = new(SelectedTheme.PlayerTheme, languageGroupBox, "language-radio-button")
+                    { 
+                        text = cultureInfo.NativeName,
+                        value = textAsset.name == GameSettings.GetLanguage()
+                    };
 
-                radioButton.value = textAsset.name == GameSettings.GetLanguage();
-
-                radioButton.RegisterValueChangedCallback(_ => GameSettings.SetLanguage(cultureInfo));
+                languageRadioButton.RegisterValueChangedCallback(_ => GameSettings.SetLanguage(cultureInfo));
             }
-
-            VisualElement buttonsContainer = container.CreateChild("buttons-container");
-            
-            StyledButton backToMainMenuButton = new(SelectedTheme.PlayerTheme, buttonsContainer,
-                () => StateMachine.SwitchState(MainMenuUIManager.MainMenuState), "back-button")
-            {
-                text = TextData.BackButton
-            };
         }
 
-        private void GenerateFPSSetting(VisualElement parent)
+        private void CreateFPSSetting(VisualElement parent)
         {
             VisualElement fpsContainer = parent.CreateChild("fps-container");
 
@@ -92,6 +124,11 @@ namespace States.MainMenuUIStates
             StyledRadioButton fpsUnlimitedButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = "Unlimited" };
             fpsUnlimitedButton.RegisterValueChangedCallback(_ => GameSettings.SetFrameRate(-1));
             fpsUnlimitedButton.value = -1 == GameSettings.GetTargetFrameRate();
+        }
+
+        private static void ReadyToggle_OnValueChanged(AudioType audioType, bool value)
+        {
+            EventBus<OnAudioSwitchValueChanged>.Invoke(new OnAudioSwitchValueChanged(audioType, value));
         }
     }
 }

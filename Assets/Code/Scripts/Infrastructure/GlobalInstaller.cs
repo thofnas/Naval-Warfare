@@ -55,10 +55,13 @@ namespace Infrastructure
             SelectedTheme();
             MapLibrary();
             MainMenuMusicManager();
+            VolumeAdjuster();
             GameSettings();
             
             Achievements();
         }
+
+        private void VolumeAdjuster() => Container.Bind<VolumeAdjuster>().AsSingle().NonLazy();
 
         private void LanguageData() => Container.BindInstance(_languageData);
 

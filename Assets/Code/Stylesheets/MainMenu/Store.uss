@@ -66,8 +66,8 @@
 }
 
 .item-image-wrapper {
-    width: 53.8px;
-    height: 54px;
+    width: 53.9px;
+    height: 53.9px;
     overflow: hidden;
     margin-top: -2px;
 }

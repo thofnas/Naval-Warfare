@@ -4,8 +4,24 @@
     width: 100%;
 }
 
-.settings-container {
+.audio-switches {
+    display: flex;
+    flex-direction: row;
+}
+
+.audio-switch {
+    display: flex;
+    flex-direction: row;
+}
+
+.settings-panel {
     padding: 8px;
+    height: 180px;
+    overflow: scroll;
+}
+
+.setting-container {
+    min-height: 40px;
 }
 
 .unity-base-field__input {

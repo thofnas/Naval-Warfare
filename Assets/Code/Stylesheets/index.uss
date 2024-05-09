@@ -5,7 +5,7 @@
     font-size: 12px;
     justify-content: center;
     align-items: center;
-    padding: 8px;
+    padding: 8px 16px;
     color: var(--main-text-color);
     -unity-font-definition: var(--font-main);
 }
@@ -36,42 +36,57 @@ Label {
     color: var(--main-text-color);
 }
 
-.unity-toggle {
-    background-image: url("/Assets/Art/Textures/UI/CheckboxButton.png#Base");
-}
-
-.unity-toggle__checkmark {
+/* Toggle button */
+.styled-toggle .unity-toggle__checkmark {
     display: flex;
     background-image: none;
     background-color: transparent;
     border-width: 0;
     margin-right: 2.5px;
 }
-
-.unity-toggle__input {
+.styled-toggle .unity-toggle__input {
     display: flex;
     align-items: flex-end;
     flex-direction: row-reverse;
     justify-content: flex-end;
 }
-
-.unity-toggle__text {
+.styled-toggle .unity-toggle__text {
     padding-right: 8px;
     padding-left: 16px;
 }
-
-.unity-toggle:checked #unity-checkmark {
+.styled-toggle {
+    background-image: url("/Assets/Art/Textures/UI/CheckboxButton.png");
+    justify-content: space-between;
+}
+.styled-toggle:checked #unity-checkmark {
     background-image: url("/Assets/Art/Textures/UI/CheckmarkIcon.png");
     -unity-background-image-tint-color: greenyellow;
     -unity-background-scale-mode: scale-to-fit;
 }
-
-.unity-toggle:hover {
+.styled-toggle:hover {
     background-image: url("/Assets/Art/Textures/UI/CheckboxButton.png#Hover");
 }
-
-.unity-toggle:active {
+.styled-toggle:active {
     background-image: url("/Assets/Art/Textures/UI/CheckboxButton.png#Press");
+}
+
+/* Toggle switch */
+.styled-toggle.switch {
+    -unity-background-scale-mode: scale-to-fit;
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png");
+}
+.styled-toggle.switch #unity-checkmark {
+    display: none;
+    background-image: none;
+}
+.styled-toggle:hover.switch {
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#Disabled");
+}
+.styled-toggle:hover:checked.switch {
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#Enabled");
+}
+.styled-toggle:checked.switch {
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#Enabled");
 }
 
 .unity-button {
