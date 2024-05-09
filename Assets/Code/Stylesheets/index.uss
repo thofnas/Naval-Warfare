@@ -73,20 +73,26 @@ Label {
 /* Toggle switch */
 .styled-toggle.switch {
     -unity-background-scale-mode: scale-to-fit;
-    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png");
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#BaseDisabled");
 }
 .styled-toggle.switch #unity-checkmark {
     display: none;
     background-image: none;
 }
 .styled-toggle:hover.switch {
-    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#Disabled");
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#HoverDisabled");
 }
 .styled-toggle:hover:checked.switch {
-    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#Enabled");
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#HoverEnabled");
 }
 .styled-toggle:checked.switch {
-    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#Enabled");
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#BaseEnabled");
+}
+.styled-toggle:active.switch {
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#PressDisabled");
+}
+.styled-toggle:active:checked.switch {
+    background-image: url("/Assets/Art/Textures/UI/SwitchButton.png#PressEnabled");
 }
 
 .unity-button {

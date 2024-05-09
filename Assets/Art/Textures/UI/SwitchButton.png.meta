@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 32
+    maxTextureSize: 64
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -123,7 +123,49 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Disabled
+      name: BaseDisabled
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c49a61d1db2726b4baea9e6a05ec8169
+      internalID: 1315798366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaseEnabled
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78bf8d1e25fab6d4e9027383532a86fa
+      internalID: -1633474598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HoverDisabled
       rect:
         serializedVersion: 2
         x: 0
@@ -131,20 +173,41 @@ TextureImporter:
         width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec7488a6bf7cf3f439061cc1f09dc566
-      internalID: -688608771
+      spriteID: 785d4b00624b5944295778f25e8253b9
+      internalID: -1516716374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enabled
+      name: HoverEnabled
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 137aef44f89acc845bf6a6788a7a16b8
+      internalID: 291665755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PressDisabled
       rect:
         serializedVersion: 2
         x: 0
@@ -152,14 +215,35 @@ TextureImporter:
         width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 764e13e6654d8b540889fd3910cb14e1
-      internalID: 1315384308
+      spriteID: 10d20075dbfd7474583f2f282362b6d8
+      internalID: 1108125123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PressEnabled
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 208852cb789eac9438b37dfc2dc43e71
+      internalID: -1680339616
       vertices: []
       indices: 
       edges: []
@@ -175,8 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Disabled: -688608771
-      Enabled: 1315384308
+      BaseDisabled: 1315798366
+      BaseEnabled: -1633474598
+      HoverDisabled: -1516716374
+      HoverEnabled: 291665755
+      PressDisabled: 1108125123
+      PressEnabled: -1680339616
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
