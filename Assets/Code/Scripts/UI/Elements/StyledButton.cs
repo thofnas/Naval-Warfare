@@ -1,4 +1,6 @@
 ﻿using System;
+using EventBus;
+using Events;
 using Themes;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -29,6 +31,8 @@ namespace UI.Elements
             parent.Add(this);
             this.AddClass(wrapperClasses);
             style.unityBackgroundImageTintColor = theme.MainColor;
+
+            clicked += () => EventBus<OnButtonClick>.Invoke(new OnButtonClick());
         }
     }
 }

@@ -27,6 +27,9 @@ namespace AI.Difficulties
             CharacterType characterType = _turnSystem.WhoWillTakeAHit();
 
             int turnCount = _turnSystem.GetCharactersTurnCount(characterType);
+            
+            // debug
+#if  UNITY_EDITOR
             if (turnCount > 0 && turnCount <= _debugSettings.FirstCellPositionsAIWillShoot.Count)
             {
                 CellPosition shootingCellPosition = CellPosition.FromSerializableData(
@@ -34,6 +37,7 @@ namespace AI.Difficulties
                 Debug.Log($"{nameof(characterType)} is forcefully shooting at {shootingCellPosition}");
                 return new List<EnemyAIAction> { new(shootingCellPosition, 1000) };
             }
+#endif
 
             if (_shipsManager.HasUndestroyedShip())
                 if (_aiDamagedShipSearcher.TrySearchForShip(characterType,
@@ -43,7 +47,7 @@ namespace AI.Difficulties
 
             CellPosition cellPosition = _levelManager.GetRandomUnshotCellPosition(characterType);
 
-            return new List<EnemyAIAction> { new(cellPosition, 2) };
+            return new List<EnemyAIAction> { new(cellPosition, 1) };
         }
 
         public int GetWinMoneyAmount() => 10;

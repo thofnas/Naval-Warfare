@@ -76,6 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _themeLibrary: {fileID: 11400000, guid: 3f0c939c2c550b14cbec7188073d6682, type: 2}
   _mapLibrary: {fileID: 11400000, guid: 5b7ddfddf6b621d419cfa8f4d5a57de8, type: 2}
+  _storeContent: {fileID: 11400000, guid: c8475c3b5380bc349adda6129d40dac0, type: 2}
   _mainMenuMusic:
     Guid:
       Data1: 1155329633
@@ -83,4 +84,18 @@ MonoBehaviour:
       Data3: 537044922
       Data4: -1194883120
     Path: event:/BGM/MainMenu
-  _storeContent: {fileID: 11400000, guid: c8475c3b5380bc349adda6129d40dac0, type: 2}
+  _uiSoundLibrary:
+    <ButtonClick>k__BackingField:
+      Guid:
+        Data1: 808332991
+        Data2: 1161401864
+        Data3: -1167959881
+        Data4: -908605389
+      Path: event:/UI/button-click
+    <SwitchButtonClick>k__BackingField:
+      Guid:
+        Data1: -1821006353
+        Data2: 1134798376
+        Data3: -423558494
+        Data4: 364192859
+      Path: event:/UI/switch-button-click

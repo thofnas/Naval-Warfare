@@ -28,7 +28,6 @@ namespace UI.Elements
         private StoreItemView(Theme theme)
         {
             this.AddClass("store-item");
-
             
             VisualElement imageWrapper = this.CreateChild("item-image-wrapper");
             _backgroundImage = imageWrapper.CreateChild<Image>("item-image");

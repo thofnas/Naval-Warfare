@@ -14,6 +14,7 @@ public class GameSettings : IInitializable
     private const string DefaultLanguage = "en";
     private const string MusicKey = "Music";
     private const string SfxKey = "Sfx";
+    private const string UISoundKey = "UISound";
     
     public void Initialize()
     {
@@ -35,6 +36,10 @@ public class GameSettings : IInitializable
     public static bool IsSfxEnabled() => PlayerPrefs.GetInt(SfxKey, true.ToInt()).ToBoolean();
 
     public static void SetSfx(bool value) => PlayerPrefs.SetInt(SfxKey, value.ToInt());
+
+    public static bool IsUISoundEnabled() => PlayerPrefs.GetInt(UISoundKey, true.ToInt()).ToBoolean();
+
+    public static void SetUISound(bool value) => PlayerPrefs.SetInt(UISoundKey, value.ToInt());
 
     public static int GetTargetFrameRate() => PlayerPrefs.GetInt(FrameRateKey, DefaultFrameRate);
 

@@ -5,10 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cf71565-e702-496e-9a67-08766235670e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Audio/Sound/button-click.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Audio/Sound/button-click.wav.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/UISoundLibrary.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/UISoundLibrary.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/UISoundsManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/UISoundsManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Events/OnButtonClick.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Events/OnButtonClick.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Naval Warfare/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Textures/UI/SwitchButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Textures/UI/SwitchButton.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Textures/UI/SwitchButton.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Textures/UI/SwitchButton.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Stylesheets/index.uss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/AI/Difficulties/Easy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/AI/Difficulties/Easy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/MainMenuMusicManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Audio/MainMenuMusicManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Data/TextData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Data/TextData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/GameSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/GameSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GlobalInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/Infrastructure/GlobalInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Settings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/States/MainMenuUIStates/Settings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StoreItemView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledRadioButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledRadioButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Code/Scripts/UI/Elements/StyledToggle.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/ProjectContext.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/lang/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/lang/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/lang/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/lang/ru.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +57,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/31/4ce483ac/VisualElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/4d/40b01f17/GroupBox.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/4f/07fcf899/TextElement.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/78/166058b3/CallbackEventHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/79/c6725257/Toggle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/82/43650610/StyleValues.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/be23de8223754ef396ac79fdc8c15740177e00/8f/f70da102/StyleLength.cs" root0="SKIP_HIGHLIGHTING" />
@@ -75,33 +94,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "XThreadsFramesViewSplitterKey": "0.42946318",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.statistic.project.settings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.42946318&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.statistic.project.settings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\Administrator\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Administrator\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Build\Naval Warfare.exe" />
@@ -137,10 +156,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="12312">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="12312" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -216,7 +235,9 @@
       <workItem from="1715023137816" duration="648000" />
       <workItem from="1715108202952" duration="3187000" />
       <workItem from="1715198733235" duration="839000" />
-      <workItem from="1715245343861" duration="19358000" />
+      <workItem from="1715245343861" duration="19957000" />
+      <workItem from="1715362644051" duration="992000" />
+      <workItem from="1715368138657" duration="5477000" />
     </task>
     <servers />
   </component>

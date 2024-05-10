@@ -20,6 +20,7 @@ namespace Infrastructure
         [SerializeField] private MapLibrary _mapLibrary;
         [SerializeField] private StoreContent _storeContent;
         [SerializeField] private EventReference _mainMenuMusic;
+        [SerializeField] private UISoundLibrary _uiSoundLibrary;
         private PersistentData _persistentData;
         private LocalDataProvider _localDataProvider;
         private Wallet _wallet;
@@ -55,11 +56,14 @@ namespace Infrastructure
             SelectedTheme();
             MapLibrary();
             MainMenuMusicManager();
+            UISoundsManager();
             VolumeAdjuster();
             GameSettings();
             
             Achievements();
         }
+
+        private void UISoundsManager() => Container.BindInterfacesTo<UISoundsManager>().AsSingle().WithArguments(_uiSoundLibrary);
 
         private void VolumeAdjuster() => Container.Bind<VolumeAdjuster>().AsSingle().NonLazy();
 

@@ -68,16 +68,20 @@ namespace States.MainMenuUIStates
             VisualElement musicSwitch = switches.CreateChild("audio-switch"); 
             musicSwitch.Add(new Label(TextData.Music));
             StyledToggle musicToggle =
-                new(SelectedTheme.PlayerTheme, musicSwitch, true, "music-switch");
-            musicToggle.value = GameSettings.IsMusicEnabled();
+                new(SelectedTheme.PlayerTheme, musicSwitch, GameSettings.IsMusicEnabled(), true, "music-switch");
             musicToggle.RegisterValueChangedCallback(e => ReadyToggle_OnValueChanged(AudioType.BGM, e.newValue));
             
             VisualElement sfxSwitch = switches.CreateChild("audio-switch"); 
             sfxSwitch.Add(new Label(TextData.Sfx));
             StyledToggle sfxToggle =
-                new(SelectedTheme.PlayerTheme, sfxSwitch, true, "sfx-switch");
-            sfxToggle.value = GameSettings.IsSfxEnabled();
+                new(SelectedTheme.PlayerTheme, sfxSwitch, GameSettings.IsSfxEnabled(), true, "sfx-switch");
             sfxToggle.RegisterValueChangedCallback(e => ReadyToggle_OnValueChanged(AudioType.Sfx, e.newValue));
+            
+            VisualElement uiSwitch = switches.CreateChild("audio-switch"); 
+            uiSwitch.Add(new Label(TextData.UI));
+            StyledToggle uiToggle =
+                new(SelectedTheme.PlayerTheme, uiSwitch, GameSettings.IsUISoundEnabled(), true, "ui-switch");
+            uiToggle.RegisterValueChangedCallback(e => ReadyToggle_OnValueChanged(AudioType.UI, e.newValue));
             
             audioContainer.AddClass("setting-container");
         }
@@ -98,10 +102,10 @@ namespace States.MainMenuUIStates
                 if (cultureInfo == null)
                     continue;
 
-                StyledRadioButton languageRadioButton = new(SelectedTheme.PlayerTheme, languageGroupBox, "language-radio-button")
+                StyledRadioButton languageRadioButton = new(SelectedTheme.PlayerTheme, languageGroupBox, 
+                    textAsset.name == GameSettings.GetLanguage(), "language-radio-button")
                     { 
                         text = cultureInfo.NativeName,
-                        value = textAsset.name == GameSettings.GetLanguage()
                     };
 
                 languageRadioButton.RegisterValueChangedCallback(_ => GameSettings.SetLanguage(cultureInfo));
@@ -126,9 +130,8 @@ namespace States.MainMenuUIStates
                     ? "Unlimited"
                     : frameRate.ToString();
                 
-                StyledRadioButton fpsButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox) { text = text };
+                StyledRadioButton fpsButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox, frameRate == GameSettings.GetTargetFrameRate()) { text = text };
                 fpsButton.RegisterValueChangedCallback(_ => GameSettings.SetFrameRate(frameRate));
-                fpsButton.value = frameRate == GameSettings.GetTargetFrameRate();
             }
             
             fpsContainer.AddClass("setting-container");
@@ -146,7 +149,8 @@ namespace States.MainMenuUIStates
                     GameSettings.SetSfx(value);
                     break;
                 case AudioType.UI:
-                    throw new ArgumentOutOfRangeException(nameof(audioType), audioType, null);
+                    GameSettings.SetUISound(value);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(audioType), audioType, null);
             }

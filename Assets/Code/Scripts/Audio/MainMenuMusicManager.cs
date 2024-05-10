@@ -12,7 +12,7 @@ namespace Audio
         private readonly EventReference _music;
         private EventInstance _musicInstance;
 
-        public MainMenuMusicManager(EventReference music)
+        private MainMenuMusicManager(EventReference music)
         {
             _music = music;
         }
