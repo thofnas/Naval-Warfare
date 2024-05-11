@@ -55,15 +55,12 @@ namespace Ship
             if (!_levelManager.TryGetValidGridCellPositions(_ship.GetCharacterType(), transform.position, _ship,
                     out List<CellPosition> cellPositions))
                 return;
-
+            
             if (cellPositions.SequenceEqual(_previewCellPositions)) return;
-
+            
             EventBus<OnShipPlacementPreviewMoved>.Invoke(
                 new OnShipPlacementPreviewMoved(_ship, _previewCellPositions, cellPositions));
-            _placementPreviewRenderer.transform
-                .DOMove(
-                    (Vector3)_levelManager.GetWorldCellPosition(_ship.GetCharacterType(), cellPositions.First()) +
-                    _ship.GetSpriteOffset(), 0.2f).SetEase(Ease.InCubic);
+            
             _previewCellPositions = cellPositions;
         }
 

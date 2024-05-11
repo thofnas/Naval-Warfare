@@ -18,13 +18,6 @@ namespace States.GameplayUIStates
 
         public sealed override void GenerateView()
         {
-            VisualElement container = Root.CreateChild("container");
-            VisualElement charactersDiv = container.CreateChild("characters-container");
-            VisualElement characterPlayerDiv = charactersDiv.CreateChild("character-container");
-            VisualElement characterEnemyDiv = charactersDiv.CreateChild("character-container");
-
-            characterPlayerDiv.Add(new Label("YOU"));
-            characterEnemyDiv.Add(new Label("ENEMY"));
         }
     }
 }
