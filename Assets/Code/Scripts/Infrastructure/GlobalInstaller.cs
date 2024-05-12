@@ -78,11 +78,13 @@ namespace Infrastructure
         private void Achievements()
         {
             FirstMapBought firstMapBought = new(_persistentData, "91dfcd2c-715e-41dc-9808-c106e42f6127", _wallet, _languageData);
+            WinFiveTimes winFiveTimes = new(_persistentData, "12255d3a-e0e7-42f3-9be6-47598a873248", _languageData, _storeContent, _themeUnlocker);
             WinTenTimes winTenTimes = new(_persistentData, "c74397d2-9fa4-452f-aadc-13ad8f47576b", _languageData, _storeContent, _themeUnlocker);
             
-            AchievementStorage achievementStorage = new(firstMapBought, winTenTimes);
+            AchievementStorage achievementStorage = new(firstMapBought, winFiveTimes, winTenTimes);
 
             Container.Bind<FirstMapBought>().FromInstance(firstMapBought).AsSingle();
+            Container.Bind<WinFiveTimes>().FromInstance(winFiveTimes).AsSingle();
             Container.Bind<WinTenTimes>().FromInstance(winTenTimes).AsSingle();
             Container.Bind<AchievementStorage>().FromInstance(achievementStorage).AsSingle().NonLazy();
         }

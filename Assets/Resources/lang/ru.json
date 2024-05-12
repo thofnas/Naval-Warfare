@@ -14,6 +14,8 @@
   "UI": "Интерфейс",
   "FirstMapBought_Name": "Первая покупка",
   "FirstMapBought_UnlockCondition": "Купи свою первую тему",
-  "WinTenTimes_Name": "Победы подряд: Islands",
-  "WinTenTimes_UnlockCondition": "Победи 10 раз на карте Islands против компьютера"
+  "WinFiveTimes_Name": "Победы подряд",
+  "WinFiveTimes_UnlockCondition": "Победи 5 раз против компьютера",
+  "WinTenTimes_Name": "Победы подряд",
+  "WinTenTimes_UnlockCondition": "Победи 10 раз против компьютера"
 }

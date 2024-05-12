@@ -29,9 +29,16 @@ namespace States.MainMenuUIStates
         protected sealed override void GenerateUI()
         {
             VisualElement container = Root.CreateChild("container");
+
+            ScrollView scrollView = new ()
+            {
+                mode = ScrollViewMode.Vertical,
+                verticalScrollerVisibility = ScrollerVisibility.Hidden
+            };
             
+            container.Add(scrollView);
             StyledPanel achievementsContainer = new(MainMenuUIManager.SelectedTheme.PlayerTheme, "achievements-container");
-            container.Add(achievementsContainer);
+            scrollView.Add(achievementsContainer);
             
             foreach (IAchievement achievement in _achievementStorage.Achievements)
             {

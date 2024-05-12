@@ -5,25 +5,25 @@ using Themes.Store;
 
 namespace Rewards
 {
-    public class IslandsThemeReward : IReward
+    public class OceanThemeReward : IReward
     {
         public int Amount { get; }
         public NonEmptyString Name { get; }
-        
-        private readonly IslandsThemeType _themeType;
+                 
+        private readonly OceanThemeType _themeType;
         private readonly StoreContent _storeContent;
         private readonly ThemeUnlocker _themeUnlocker;
-
-        public IslandsThemeReward(IslandsThemeType themeType, StoreContent storeContent, ThemeUnlocker themeUnlocker)
+         
+        public OceanThemeReward(OceanThemeType themeType, StoreContent storeContent, ThemeUnlocker themeUnlocker)
         {
             _themeType = themeType;
             _storeContent = storeContent;
             _themeUnlocker = themeUnlocker;
             Amount = 1;
-            Name = $"Islands {themeType} Theme";
+            Name = $"Ocean {themeType} Theme";
         }
-
+         
         public void Award() =>
-            _themeUnlocker.Visit(_storeContent.IslandsThemeItems.First(theme => _themeType == theme.IslandsType));
+            _themeUnlocker.Visit(_storeContent.OceanThemeItems.First(theme => _themeType == theme.OceanType));
     }
 }

@@ -23,14 +23,16 @@ namespace Data
         public readonly string FirstMapBought_UnlockCondition;
         public readonly string WinTenTimes_Name;
         public readonly string WinTenTimes_UnlockCondition;
- 
+        public readonly string WinFiveTimes_Name;
+        public readonly string WinFiveTimes_UnlockCondition;
+
 
         [JsonConstructor]
         public TextData(string title, string playButton, string storeButton,
             string settingsButton, string achievementsButton, string backButton,
             string framesPerSecond, string language, string unlocked, 
             string firstMapBought_Name, string firstMapBought_UnlockCondition, string winTenTimes_Name, 
-            string winTenTimes_UnlockCondition, string audio, string music, string sfx, string ui)
+            string winTenTimes_UnlockCondition, string audio, string music, string sfx, string ui, string winFiveTimes_Name, string winFiveTimes_UnlockCondition)
         {
             Title = title;
             PlayButton = playButton;
@@ -49,6 +51,8 @@ namespace Data
             Music = music;
             Sfx = sfx;
             UI = ui;
+            WinFiveTimes_Name = winFiveTimes_Name;
+            WinFiveTimes_UnlockCondition = winFiveTimes_UnlockCondition;
         }
     }
 }

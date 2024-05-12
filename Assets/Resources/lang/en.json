@@ -14,6 +14,8 @@
   "UI": "UI",
   "FirstMapBought_Name": "First Purchase",
   "FirstMapBought_UnlockCondition": "Buy your first map",
-  "WinTenTimes_Name": "Consecutive wins: Islands",
-  "WinTenTimes_UnlockCondition": "Win 10 times on the Islands map against computer"
+  "WinFiveTimes_Name": "Consecutive wins",
+  "WinFiveTimes_UnlockCondition": "Win 5 times against computer",
+  "WinTenTimes_Name": "Consecutive wins",
+  "WinTenTimes_UnlockCondition": "Win 10 times against computer"
 }
