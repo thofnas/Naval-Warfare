@@ -7,6 +7,7 @@ using Map;
 using Themes;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 // ReSharper disable Unity.PerformanceCriticalCodeInvocation
@@ -16,6 +17,7 @@ namespace Infrastructure
     public class GameplayEssentialsInstaller : MonoInstaller
     {
         [SerializeField] private GameplayUIManager _gameplayUIManager;
+        [SerializeField] private RotateShipButton _rotateShipButton;
         private PersistentData _persistentData;
         private MapLibrary _mapLibrary;
 
@@ -29,6 +31,7 @@ namespace Infrastructure
         public override void InstallBindings()
         {
             InitExecutionOrder();
+            Container.BindInstance(_rotateShipButton);
 
             TurnSystem();
             GameplayManager();
@@ -65,7 +68,7 @@ namespace Infrastructure
 
         private void GridCellVisualFactory() =>
             Container
-                .BindFactory<GridCell, Vector2, Transform, Theme, Sprite, GridCellVisual, GridCellVisual.Factory>()
+                .BindFactory<GridSystemVisual, GridCell, Vector2, Transform, Theme, Sprite, GridCellVisual, GridCellVisual.Factory>()
                 .FromComponentInNewPrefab(GameResources.Instance.GridCellVisualPrefab);
 
         private void GridSystemFactory() =>

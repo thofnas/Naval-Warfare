@@ -12,7 +12,7 @@ public class GameplayManager : IInitializable, IDisposable
 {
     public CharacterType LoserCharacterType { get; private set; }
     
-    private const int CountdownSeconds = 1;
+    private const int CountdownSeconds = 2;
     private const float CountdownWaitSecondsBeforeComplete = 0.95f;
     private readonly ShipsManager _shipsManager;
     private readonly StateMachine.StateMachine _stateMachine;

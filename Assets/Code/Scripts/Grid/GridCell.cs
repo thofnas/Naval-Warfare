@@ -12,6 +12,7 @@ namespace Grid
         public CellPosition CellPosition { get; }
 
         private readonly CharacterType _characterType;
+        
         private readonly EventBinding<OnShipMoved> _onShipMoved;
         private readonly EventBinding<OnShoot> _onShootBinding;
         private readonly EventBinding<OnGridCellSelected> _onGridCellSelected;

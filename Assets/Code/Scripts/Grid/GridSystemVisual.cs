@@ -12,6 +12,9 @@ namespace Grid
     [DisallowMultipleComponent]
     public class GridSystemVisual : MonoBehaviour
     {
+        public bool IsGrabbingAShip { get; private set; }
+        public IEnumerable<CellPosition> PlacementPreviewPositions => _placementPreviewPositions;
+        
         private CharacterType _characterType;
         private GridCellVisual.Factory _gridCellVisualFactory;
         private GridCellVisual[,] _gridCellVisuals;
@@ -19,13 +22,17 @@ namespace Grid
         private GridSystem _gridSystem;
         private Transform _parent;
         private Theme _theme;
-        
+        private List<CellPosition> _placementPreviewPositions;
+
+
         // Events
         private EventBinding<OnCellHit> _onHit;
         private EventBinding<OnGridCellSelected> _onNewGridCellSelected;
         private EventBinding<OnShipMoved> _onShipChangedPositionBinding;
         private EventBinding<OnShipDestroyed> _onShipDestroyed;
         private EventBinding<OnShipPlacementPreviewMoved> _onShipValidPlacementPositionsChanged;
+        private EventBinding<OnShipGrabStatusChanged> _onShipGrabStatusChanged;
+
 
         [Inject]
         private void Construct(GridSystem gridSystem, Vector3 battlePosition, Theme theme,
@@ -49,7 +56,7 @@ namespace Grid
             for (var y = 0; y < gridSystem.Height; y++)
             {
                 GridCellVisual gridCellVisual =
-                    _gridCellVisualFactory.Create(gridSystem.GetGridCell(new CellPosition(x, y)), 
+                    _gridCellVisualFactory.Create(this, gridSystem.GetGridCell(new CellPosition(x, y)), 
                         GetWorldCellPosition(new CellPosition(x, y)), 
                         transform, 
                         theme, 
@@ -67,12 +74,14 @@ namespace Grid
             _onHit = new EventBinding<OnCellHit>(GridCell_OnShipHit);
             _onShipDestroyed = new EventBinding<OnShipDestroyed>(Ship_OnDestroyed);
             _onNewGridCellSelected = new EventBinding<OnGridCellSelected>(GridCell_OnNewSelected);
+            _onShipGrabStatusChanged = new EventBinding<OnShipGrabStatusChanged>(Ship_OnGrabStatusChanged);
 
             EventBus<OnShipMoved>.Register(_onShipChangedPositionBinding);
             EventBus<OnShipPlacementPreviewMoved>.Register(_onShipValidPlacementPositionsChanged);
             EventBus<OnCellHit>.Register(_onHit);
             EventBus<OnShipDestroyed>.Register(_onShipDestroyed);
             EventBus<OnGridCellSelected>.Register(_onNewGridCellSelected);
+            EventBus<OnShipGrabStatusChanged>.Register(_onShipGrabStatusChanged);
         }
 
         private void OnDisable()
@@ -82,6 +91,7 @@ namespace Grid
             EventBus<OnCellHit>.Deregister(_onHit);
             EventBus<OnShipDestroyed>.Deregister(_onShipDestroyed);
             EventBus<OnGridCellSelected>.Deregister(_onNewGridCellSelected);
+            EventBus<OnShipGrabStatusChanged>.Deregister(_onShipGrabStatusChanged);
         }
         
         private Sprite GetCellSprite(int x, int y, IReadOnlyList<Sprite> gridSprites)
@@ -127,8 +137,8 @@ namespace Grid
         {
             if (e.CharacterType != _characterType) return;
             
-            _gridCellVisuals[e.From.x, e.From.y].UpdateFrameSpriteColor(isEnemy: e.CharacterType == CharacterType.Enemy);
-            _gridCellVisuals[e.To.x, e.To.y].UpdateFrameSpriteColor(isEnemy: e.CharacterType == CharacterType.Enemy);
+            _gridCellVisuals[e.From.x, e.From.y].UpdateFrameSpriteColor(isEnemyGrid: e.CharacterType == CharacterType.Enemy);
+            _gridCellVisuals[e.To.x, e.To.y].UpdateFrameSpriteColor(isEnemyGrid: e.CharacterType == CharacterType.Enemy);
         }
 
         private void Ship_OnChangedPosition(OnShipMoved e)
@@ -146,9 +156,21 @@ namespace Grid
             if (_characterType == CharacterType.Enemy) return;
             if (e.Ship.GetCharacterType() == CharacterType.Enemy) return;
 
+            _placementPreviewPositions = e.To;
+
             e.From.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSpriteColor());
 
             e.To.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSpriteColor());
+        }
+
+        private void Ship_OnGrabStatusChanged(OnShipGrabStatusChanged e)
+        {
+            if (_characterType == CharacterType.Enemy) return;
+            if (e.Ship.GetCharacterType() == CharacterType.Enemy) return;
+            
+            IsGrabbingAShip = e.IsGrabbing;
+            
+            _placementPreviewPositions?.ForEach(position => _gridCellVisuals[position.x, position.y].UpdateFrameSpriteColor());
         }
 
         private void Ship_OnDestroyed(OnShipDestroyed e)

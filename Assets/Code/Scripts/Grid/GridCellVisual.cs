@@ -1,4 +1,5 @@
-﻿using Themes;
+﻿using System.Linq;
+using Themes;
 using UnityEngine;
 using Zenject;
 
@@ -11,14 +12,16 @@ namespace Grid
         
         [SerializeField] private SpriteRenderer _gridCellFrame;
         [SerializeField] private SpriteRenderer _hitOrMissIcon;
+        private GridSystemVisual _gridSystemVisual;
         private GridCell _gridCell;
         private Color _defaultColor;
         private Theme _theme;
         private MaterialPropertyBlock _materialPropertyBlock;
 
         [Inject]
-        public void Construct(GridCell gridCell, Vector2 position, Transform parent, Theme theme, Sprite gridCellSprite)
+        public void Construct(GridSystemVisual gridSystemVisual, GridCell gridCell, Vector2 position, Transform parent, Theme theme, Sprite gridCellSprite)
         {
+            _gridSystemVisual = gridSystemVisual;
             _gridCell = gridCell;
             _theme = theme;
             _defaultColor = theme.GridCellSpriteColor;
@@ -34,13 +37,21 @@ namespace Grid
             transform.SetParent(parent);
         }
         
-        public void UpdateFrameSpriteColor(bool isEnemy = false)
+        
+        public void UpdateFrameSpriteColor(bool isEnemyGrid = false)
         {
             Color frameColor;
             
             if (_gridCell.IsSelected)
             {
                 frameColor = _theme.GridCellSpritePlacingColor;
+            }
+            else if (_gridSystemVisual.IsGrabbingAShip)
+            {
+                frameColor = _gridSystemVisual.PlacementPreviewPositions.Any(cellPosition =>
+                    cellPosition == _gridCell.CellPosition)
+                    ? _theme.GridCellSpritePlacingColor
+                    : _defaultColor;
             }
             else if (_gridCell.HasShip())
             {
@@ -50,7 +61,7 @@ namespace Grid
                 }
                 else
                 {
-                    frameColor = isEnemy ? _defaultColor : _theme.GridCellSpritePlacingColor;
+                    frameColor = isEnemyGrid ? _defaultColor : _theme.GridCellSpritePlacingColor;
                 }
             }
             else
@@ -75,7 +86,7 @@ namespace Grid
                 : _theme.GridCellIcons[CellIcon.Miss];
         }
 
-        public class Factory : PlaceholderFactory<GridCell, Vector2, Transform, Theme, Sprite, GridCellVisual>
+        public class Factory : PlaceholderFactory<GridSystemVisual, GridCell, Vector2, Transform, Theme, Sprite, GridCellVisual>
         {
         }
     }

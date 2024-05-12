@@ -14,9 +14,10 @@ namespace States.GameplayUIStates
 
         private Label _countDownLabel;
         private StyledToggle _readyToggle;
-        private StyledButton _styledButton;
+        private StyledButton _randomizeButton;
         private EventBinding<OnCountdownUpdated> _onCountdownUpdated;
         private EventBinding<OnBattleStateEntered> _onBattleStateEntered;
+        private EventBinding<OnShipGrabStatusChanged> _onShipGrabStatusChanged;
 
         public PlacingShips(GameplayUIManager gameplayUIManager, StyleSheet styleSheet) : base(gameplayUIManager)
         {
@@ -34,7 +35,7 @@ namespace States.GameplayUIStates
             VisualElement center = _container.CreateChild("countdown-container");
             VisualElement buttons = _container.CreateChild("buttons-container");
 
-            _styledButton = new StyledButton(GameplayUIManager.Theme, buttons, "randomize-btn")
+            _randomizeButton = new StyledButton(GameplayUIManager.Theme, buttons, "randomize-btn")
             {
                 text = "Randomize"
             };
@@ -42,7 +43,7 @@ namespace States.GameplayUIStates
             {
                 text = "Ready"
             };
-            _countDownLabel = new Label("1") { visible = false };
+            _countDownLabel = new Label("2") { visible = false };
 
             center.CreateChild("countdown-text").Add(_countDownLabel);
         }
@@ -52,11 +53,14 @@ namespace States.GameplayUIStates
             base.OnEnter();
 
             _onCountdownUpdated = new EventBinding<OnCountdownUpdated>(Countdown_OnSecondPassed);
+            _onShipGrabStatusChanged = new EventBinding<OnShipGrabStatusChanged>(Ship_OnGrabStatusChanged);
+            
             EventBus<OnCountdownUpdated>.Register(_onCountdownUpdated);
+            EventBus<OnShipGrabStatusChanged>.Register(_onShipGrabStatusChanged);
 
             _readyToggle.RegisterValueChangedCallback(_ => ReadyToggle_OnValueChanged(_readyToggle.value));
 
-            _styledButton.clicked += () => EventBus<OnRandomizeButtonClicked>.Invoke(new OnRandomizeButtonClicked());
+            _randomizeButton.clicked += () => EventBus<OnRandomizeButtonClicked>.Invoke(new OnRandomizeButtonClicked());
         }
 
         public override void OnExit()
@@ -65,6 +69,8 @@ namespace States.GameplayUIStates
 
             EventBus<OnCountdownUpdated>.Deregister(_onCountdownUpdated);
             EventBus<OnBattleStateEntered>.Deregister(_onBattleStateEntered);
+            EventBus<OnShipGrabStatusChanged>.Deregister(_onShipGrabStatusChanged);
+            
             _readyToggle.UnregisterValueChangedCallback(_ => ReadyToggle_OnValueChanged(_readyToggle.value));
         }
 
@@ -88,6 +94,26 @@ namespace States.GameplayUIStates
         {
             _countDownLabel.visible = isOn;
             EventBus<OnReadyUIButtonToggled>.Invoke(new OnReadyUIButtonToggled(_readyToggle));
+        }
+
+        private void Ship_OnGrabStatusChanged(OnShipGrabStatusChanged e)
+        {
+            const float isGrabbingOpacity = 0.4f;
+            const float isNotGrabbingOpacity = 1f;
+            const int durationMs = 200;
+            
+            if (e.IsGrabbing)
+            {
+                _randomizeButton.AnimateOpacity(isNotGrabbingOpacity, isGrabbingOpacity, durationMs);
+                
+                _readyToggle.AnimateOpacity(isNotGrabbingOpacity, isGrabbingOpacity, durationMs);
+            }
+            else
+            {
+                _randomizeButton.AnimateOpacity(isGrabbingOpacity, isNotGrabbingOpacity, durationMs);
+            
+                _readyToggle.AnimateOpacity(isGrabbingOpacity, isNotGrabbingOpacity, durationMs);
+            }
         }
     }
 }

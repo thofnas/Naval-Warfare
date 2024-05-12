@@ -5,6 +5,7 @@ using DG.Tweening;
 using EventBus;
 using Events;
 using Grid;
+using UI;
 using UnityEngine;
 using Utilities;
 using Utilities.Attributes.SelfAndChildren;
@@ -20,6 +21,10 @@ namespace Ship
     {
         private static readonly int s_flashAmount = Shader.PropertyToID("_FlashAmount");
 
+        public IEnumerable<CellPosition> OccupiedCellPositions => _ship.OccupiedCellPositions;
+        public CharacterType CharacterType => _ship.GetCharacterType();
+        public bool IsHorizontal => _ship.IsHorizontal();
+        
         [SerializeField] [SelfAndChildren] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Material _spriteOutline;
         [SerializeField] private Material _spriteFlash;
@@ -30,22 +35,58 @@ namespace Ship
         private Settings _settings;
         private Ship _ship;
         private Settings.ShipVisualData _shipVisualData;
-
+        private bool _isDragging;
         private Vector3 _spriteRendererOffset;
+        private RotateShipButton _rotateShipButton;
 
-        private void OnDisable() => EventBus<OnCellHit>.Deregister(_onCellHit);
+        [Inject]
+        private void Construct(LevelManager levelManager, Settings settings, RotateShipButton rotateShipButton)
+        {
+            _levelManager = levelManager;
+            _settings = settings;
+            _rotateShipButton = rotateShipButton;
+        }
+
+        public void Init(Ship ship)
+        {
+            _ship = ship;
+            _shipVisualData = _settings.Ships[ship.GetShipLength()];
+
+            _spriteRenderer.materials = new[] { _spriteOutline, _spriteFlash };
+
+            var placement = new GameObject("PlacementPreviewSprite") { transform = { parent = ship.transform } };
+
+            _placementPreviewRenderer = placement.AddComponent<SpriteRenderer>();
+
+            _placementPreviewRenderer.transform.position = ship.transform.position;
+
+            UpdateSprite();
+            UpdatePlacementPreviewSprite();
+
+            _placementPreviewRenderer.gameObject.SetActive(false);
+
+            if (_ship.GetCharacterType() == CharacterType.Enemy)
+                _spriteRenderer.gameObject.SetActive(false);
+
+            _onCellHit = new EventBinding<OnCellHit>(Ship_OnHit);
+            EventBus<OnCellHit>.Register(_onCellHit);
+        }
+
 
         private void OnMouseDown()
         {
             _placementPreviewRenderer.transform.SetParent(_ship.transform.parent);
-
+            _previewCellPositions = _ship.OccupiedCellPositions.ToList();
+            
             if (!_ship.CanDragAndPlace()) return;
 
             UpdateSprite();
-            UpdatePlacementSprite();
+            UpdatePlacementPreviewSprite();
 
             _placementPreviewRenderer.transform.position = _ship.transform.position;
             _placementPreviewRenderer.gameObject.SetActive(true);
+
+            _isDragging = true;
         }
 
         private void OnMouseDrag()
@@ -72,6 +113,8 @@ namespace Ship
 
             transform.position = _ship.transform.position;
             _placementPreviewRenderer.gameObject.SetActive(false);
+            
+            _isDragging = false;
         }
 
         private void OnValidate()
@@ -80,38 +123,8 @@ namespace Ship
             Validation.CheckIfNull(this, _spriteFlash, nameof(_spriteFlash));
             Validation.CheckIfNull(this, _spriteOutline, nameof(_spriteOutline));
         }
-
-        [Inject]
-        private void Construct(LevelManager levelManager, Settings settings)
-        {
-            _levelManager = levelManager;
-            _settings = settings;
-        }
-
-        public void Init(Ship ship)
-        {
-            _ship = ship;
-            _shipVisualData = _settings.Ships[ship.GetShipLength()];
-
-            _spriteRenderer.materials = new[] { _spriteOutline, _spriteFlash };
-
-            var placement = new GameObject("PlacementPreviewSprite") { transform = { parent = ship.transform } };
-
-            _placementPreviewRenderer = placement.AddComponent<SpriteRenderer>();
-
-            _placementPreviewRenderer.transform.position = ship.transform.position;
-
-            UpdateSprite();
-            UpdatePlacementSprite();
-
-            _placementPreviewRenderer.gameObject.SetActive(false);
-
-            if (_ship.GetCharacterType() == CharacterType.Enemy)
-                _spriteRenderer.gameObject.SetActive(false);
-
-            _onCellHit = new EventBinding<OnCellHit>(Ship_OnHit);
-            EventBus<OnCellHit>.Register(_onCellHit);
-        }
+        
+        private void OnDisable() => EventBus<OnCellHit>.Deregister(_onCellHit);
 
         public void UpdateSprite()
         {
@@ -122,12 +135,14 @@ namespace Ship
             _spriteRenderer.sprite = sprite;
         }
 
-        public void UpdatePlacementSprite()
+        public void UpdatePlacementPreviewSprite()
         {
+            if (_isDragging) return;
+            
             Sprite sprite = _ship.IsHorizontal()
                 ? _shipVisualData.Horizontal
                 : _shipVisualData.Vertical;
-
+            
             Quaternion rotation = _placementPreviewRenderer.transform.rotation;
             rotation.eulerAngles = rotation.eulerAngles.With(z: _ship.GetZRotation());
             _placementPreviewRenderer.transform.rotation = rotation;
@@ -136,6 +151,10 @@ namespace Ship
             _placementPreviewRenderer.transform.localScale = _spriteRenderer.transform.localScale;
             _placementPreviewRenderer.color = _placementPreviewRenderer.color.With(a: 0.5f);
         }
+
+        public void ShowInteractButtons() => _rotateShipButton.ShowFor(this, () => _ship.TryRotate());
+
+        public void HideInteractButtons() => _rotateShipButton.Hide();
 
         private void Ship_OnHit(OnCellHit e)
         {

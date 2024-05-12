@@ -15,54 +15,25 @@ namespace Ship
     [DisallowMultipleComponent]
     public class Ship : MonoBehaviour
     {
+        public IEnumerable<CellPosition> OccupiedCellPositions => _occupiedCellPositions;
+        
+        private ShipVisual _shipVisual;
         private CharacterType _characterType;
-        private GameplayManager _gameplayManager;
         private int _health;
         private bool _isDestroyed;
         private bool _isHorizontal;
-        private LevelManager _levelManager;
-        private Vector3 _mouseOffset;
-        private List<CellPosition> _occupiedCellPositions = new();
-
-        private EventBinding<OnCellHit> _onShipHitBinding;
-        private BoxCollider2D _shipCollider;
         private int _shipLength;
-        private ShipVisual _shipVisual;
+        private bool _wasPlacementPreviewMoved;
+        private Vector3 _positionBeforeMoving;
+        private bool _wasTransformMovedBeyondTolerance;
+        private Vector3 _mouseOffset;
+        private LevelManager _levelManager;
+        private List<CellPosition> _occupiedCellPositions = new();
+        private BoxCollider2D _shipCollider;
+        private GameplayManager _gameplayManager;
 
-        private void OnEnable()
-        {
-            _onShipHitBinding = new EventBinding<OnCellHit>(Ship_OnHit);
-            EventBus<OnCellHit>.Register(_onShipHitBinding);
-        }
-
-        private void OnDisable() => EventBus<OnCellHit>.Deregister(_onShipHitBinding);
-
-        private void OnMouseDown()
-        {
-            if (!CanDragAndPlace()) return;
-
-            _mouseOffset = MouseWorld2D.GetPosition() - transform.position;
-        }
-
-        private void OnMouseDrag()
-        {
-            if (!CanDragAndPlace()) return;
-
-            if (Input.GetKeyDown(KeyCode.R)) TryRotate();
-
-            Vector3 mousePos = MouseWorld2D.GetPosition();
-            transform.position = mousePos - _mouseOffset;
-        }
-
-        private void OnMouseUp()
-        {
-            if (!CanDragAndPlace()) return;
-
-            if (!_levelManager.TryGetValidGridCellPositions(_characterType, transform.position, this,
-                    out List<CellPosition> cellPositions)) return;
-
-            TrySetNewShipPositions(cellPositions);
-        }
+        private EventBinding<OnCellHit> _onCellHitBinding;
+        private EventBinding<OnShipPlacementPreviewMoved> _onPlacementPreviewMoved;
 
         [Inject]
         private void Construct(GameplayManager gameplayManager, LevelManager levelManager)
@@ -86,6 +57,72 @@ namespace Ship
             EventBus<OnShipSpawned>.Invoke(new OnShipSpawned(this, _characterType));
 
             return this;
+        }
+
+        private void OnEnable()
+        {
+            _onCellHitBinding = new EventBinding<OnCellHit>(Ship_OnHit);
+            EventBus<OnCellHit>.Register(_onCellHitBinding);
+        }
+
+        private void OnDisable() => EventBus<OnCellHit>.Deregister(_onCellHitBinding);
+
+        private void OnMouseDown()
+        {
+            if (!CanDragAndPlace()) return;
+
+            Vector3 position = transform.position;
+            
+            _mouseOffset = MouseWorld2D.GetPosition() - position;
+            _positionBeforeMoving = position;
+            
+            _onPlacementPreviewMoved = new EventBinding<OnShipPlacementPreviewMoved>(_ => _wasPlacementPreviewMoved = true);
+            EventBus<OnShipPlacementPreviewMoved>.Register(_onPlacementPreviewMoved);
+        }
+
+        private void OnMouseDrag()
+        {
+            if (!CanDragAndPlace()) return;
+
+            if (!_wasTransformMovedBeyondTolerance)
+            {
+                const float tolerance = 0.25f;
+                if ((_positionBeforeMoving - transform.position).magnitude > tolerance)
+                {
+                    EventBus<OnShipGrabStatusChanged>.Invoke(new OnShipGrabStatusChanged(ship: this, isGrabbing: true, _characterType));
+                    _wasTransformMovedBeyondTolerance = true;
+                }
+            }
+            else
+            {
+                _shipVisual.HideInteractButtons();
+            }
+
+            Vector3 mousePos = MouseWorld2D.GetPosition();
+            transform.position = mousePos - _mouseOffset;
+        }
+
+        private void OnMouseUp()
+        {
+            if (!CanDragAndPlace()) return;
+
+            if (!_levelManager.TryGetValidGridCellPositions(_characterType, transform.position, this,
+                    out List<CellPosition> cellPositions)) return;
+
+            if (!_wasPlacementPreviewMoved)
+                if (_occupiedCellPositions.ToHashSet().SetEquals(cellPositions.ToHashSet()))
+                    _shipVisual.ShowInteractButtons();
+            
+            if (_wasTransformMovedBeyondTolerance) 
+                EventBus<OnShipGrabStatusChanged>.Invoke(new OnShipGrabStatusChanged(ship: this, isGrabbing: false, _characterType));
+
+            _wasPlacementPreviewMoved = default;
+            _wasTransformMovedBeyondTolerance = default;
+            _positionBeforeMoving = transform.position;
+
+            TrySetNewShipPositions(cellPositions);
+            
+            EventBus<OnShipPlacementPreviewMoved>.Deregister(_onPlacementPreviewMoved);
         }
 
         public int GetShipLength() => _shipLength;
@@ -126,10 +163,11 @@ namespace Ship
                 return false;
             }
 
-            TrySetNewShipPositions(cellPositions);
+            if (TrySetNewShipPositions(cellPositions))
+                _shipVisual.HideInteractButtons();
 
             _shipVisual.UpdateSprite();
-            _shipVisual.UpdatePlacementSprite();
+            _shipVisual.UpdatePlacementPreviewSprite();
 
             Quaternion rotation = transform.rotation;
             rotation.eulerAngles = rotation.eulerAngles.With(z: GetZRotation());

@@ -38,5 +38,9 @@ namespace Utilities.Extensions
             visualElement.AddManipulator(manipulator);
             return visualElement;
         }
+        
+        public static void AnimateOpacity<T>(this T visualElement, float from, float to, int durationMs) where T : VisualElement =>
+            visualElement.experimental.animation.Start(from, to, durationMs, (element, value) =>
+                element.style.opacity = new StyleFloat(value));
     }
 }
