@@ -22,7 +22,7 @@ namespace AchievementSystem.Achievements
 
         protected override bool AreConditionsMet(OnPlayerStatisticsChanged eventArgs)
         {
-            return eventArgs.PlayerStatistics.Wins > 2;
+            return eventArgs.PlayerStatistics.Wins > 5;
         }
 
         protected override void OnUnlock()

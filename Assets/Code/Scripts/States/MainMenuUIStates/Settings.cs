@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
+using Data;
 using EventBus;
 using Events;
 using Misc;
 using UI;
 using UI.Elements;
-using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 using AudioType = Audio.AudioType;
@@ -95,15 +96,17 @@ namespace States.MainMenuUIStates
             languageContainer.Add(label);
             
             GroupBox languageGroupBox = languageContainer.CreateChild<GroupBox>("language-group-box");
-            
-            foreach (TextAsset textAsset in Resources.LoadAll<TextAsset>("lang"))
+
+            foreach (string textAsset in BetterStreamingAssets.GetFiles(LanguageProvider.FolderName, LanguageProvider.SearchPattern))
             {
-                CultureInfo cultureInfo = new(textAsset.name);
+                string fileName = Path.GetFileNameWithoutExtension(textAsset);
+                
+                CultureInfo cultureInfo = new(fileName);
                 if (cultureInfo == null)
                     continue;
 
                 StyledRadioButton languageRadioButton = new(SelectedTheme.PlayerTheme, languageGroupBox, 
-                    textAsset.name == GameSettings.GetLanguage(), "language-radio-button")
+                    fileName == GameSettings.GetLanguage(), "language-radio-button")
                     { 
                         text = cultureInfo.NativeName,
                     };

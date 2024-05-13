@@ -6,8 +6,15 @@ namespace Data
 {
     public class LanguageProvider
     {
-        private const string FileExtension = ".json";
-        public static string LanguagePath => Path.Combine(Application.dataPath, "Resources/lang/");
+        public const string FileExtension = ".json";
+        public const string SearchPattern = "*" + FileExtension;
+        public const string FolderName = "lang";
+        public static readonly string LanguagePath;
+
+        static LanguageProvider()
+        {
+            LanguagePath = Path.Combine(BetterStreamingAssets.Root, FolderName);
+        }
 
         public bool TryLoad(string fileName, out TextData textData)
         {
