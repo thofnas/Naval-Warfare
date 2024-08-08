@@ -1,9 +1,8 @@
 ﻿using AI;
-using Data;
 using EventBus;
 using Events;
 
-namespace States.GameplayStates
+namespace GameplayStates
 {
     public class BattleResults : BaseState
     {

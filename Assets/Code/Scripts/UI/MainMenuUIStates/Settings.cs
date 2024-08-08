@@ -5,13 +5,12 @@ using Data;
 using EventBus;
 using Events;
 using Misc;
-using UI;
 using UI.Elements;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 using AudioType = Audio.AudioType;
 
-namespace States.MainMenuUIStates
+namespace UI.MainMenuUIStates
 {
     public class Settings : BaseState
     {
@@ -126,15 +125,19 @@ namespace States.MainMenuUIStates
             fpsContainer.Add(label);
             
             GroupBox fpsGroupBox = fpsContainer.CreateChild<GroupBox>("fps-groupbox");
-
+            
             foreach (int frameRate in new [] { 30, 60, 120, -1 })
             {
                 string text = frameRate == -1
-                    ? "Unlimited"
+                    ? TextData.UnlimitedButton
                     : frameRate.ToString();
                 
                 StyledRadioButton fpsButton = new(_mainMenuUIManager.SelectedTheme.PlayerTheme, fpsGroupBox, frameRate == GameSettings.GetTargetFrameRate()) { text = text };
-                fpsButton.RegisterValueChangedCallback(_ => GameSettings.SetFrameRate(frameRate));
+                fpsButton.RegisterValueChangedCallback( e =>
+                {
+                    if (e.newValue is true)
+                        GameSettings.SetFrameRate(frameRate);
+                });
             }
             
             fpsContainer.AddClass("setting-container");
@@ -143,6 +146,7 @@ namespace States.MainMenuUIStates
         private static void ReadyToggle_OnValueChanged(AudioType audioType, bool value)
         {
             EventBus<OnAudioSwitchValueChanged>.Invoke(new OnAudioSwitchValueChanged(audioType, value));
+            
             switch (audioType)
             {
                 case AudioType.BGM:

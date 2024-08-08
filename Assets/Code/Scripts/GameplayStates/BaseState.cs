@@ -1,6 +1,6 @@
 ﻿using StateMachine;
 
-namespace States.GameplayStates
+namespace GameplayStates
 {
     public abstract class BaseState : IState
     {

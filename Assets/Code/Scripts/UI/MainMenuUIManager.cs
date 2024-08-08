@@ -1,10 +1,10 @@
 ﻿using AchievementSystem;
 using Data;
 using Infrastructure;
-using States.MainMenuUIStates;
 using Themes;
 using Themes.Store;
 using UI.Elements;
+using UI.MainMenuUIStates;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
@@ -21,7 +21,6 @@ namespace UI
 
         public ThemeUnlocker ThemeUnlocker { get; set; }
         public ThemeSelector ThemeSelector { get; set; }
-        public ThemeUnlocker Theme { get; set; }
         public OwnedThemesChecker OwnedThemesChecker { get; set; }
         public SelectedThemeChecker SelectedThemeChecker { get; set; }
         
@@ -52,7 +51,6 @@ namespace UI
             Wallet wallet, 
             ThemeUnlocker themeUnlocker,
             ThemeSelector themeSelector, 
-            ThemeUnlocker theme, 
             OwnedThemesChecker ownedThemesChecker, 
             SelectedThemeChecker selectedThemeChecker,
             GameSettings gameSettings,
@@ -65,7 +63,6 @@ namespace UI
             _wallet = wallet;
             ThemeUnlocker = themeUnlocker;
             ThemeSelector = themeSelector;
-            Theme = theme;
             OwnedThemesChecker = ownedThemesChecker;
             SelectedThemeChecker = selectedThemeChecker;
             _gameSettings = gameSettings;

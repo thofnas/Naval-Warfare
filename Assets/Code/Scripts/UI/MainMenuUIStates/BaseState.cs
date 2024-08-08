@@ -3,11 +3,9 @@ using EventBus;
 using Events;
 using Infrastructure;
 using StateMachine;
-using Themes;
-using UI;
 using UnityEngine.UIElements;
 
-namespace States.MainMenuUIStates
+namespace UI.MainMenuUIStates
 {
     public abstract class BaseState : IState
     {

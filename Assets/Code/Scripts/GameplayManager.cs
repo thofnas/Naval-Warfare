@@ -3,8 +3,8 @@ using AI;
 using Data;
 using EventBus;
 using Events;
+using GameplayStates;
 using StateMachine;
-using States.GameplayStates;
 using Utilities;
 using Zenject;
 

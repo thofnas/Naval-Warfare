@@ -1,17 +1,21 @@
-﻿using StateMachine;
-using UI;
+﻿using Data;
+using Infrastructure;
+using StateMachine;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace States.GameplayUIStates
+namespace UI.GameplayUIStates
 {
     public abstract class BaseState : IState
     {
         protected readonly GameplayUIManager GameplayUIManager;
+        protected TextData TextData => GameplayUIManager.LanguageData.TextData;
+        protected SelectedTheme SelectedTheme { get; }
 
         protected BaseState(GameplayUIManager gameplayUIManager)
         {
             GameplayUIManager = gameplayUIManager;
+            SelectedTheme = GameplayUIManager.SelectedTheme;
         }
 
         protected abstract VisualElement Root { get; }

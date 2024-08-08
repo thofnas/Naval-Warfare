@@ -2,7 +2,7 @@
 using EventBus;
 using Events;
 
-namespace States.GameplayStates
+namespace GameplayStates
 {
     public class Battle : BaseState
     {

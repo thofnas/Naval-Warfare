@@ -1,9 +1,6 @@
-﻿using UI;
-using UnityEngine;
-using UnityEngine.UIElements;
-using Utilities.Extensions;
+﻿using UnityEngine.UIElements;
 
-namespace States.GameplayUIStates
+namespace UI.GameplayUIStates
 {
     public class Battle : BaseState
     {

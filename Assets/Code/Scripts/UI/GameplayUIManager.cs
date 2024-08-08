@@ -1,8 +1,10 @@
 using AI;
+using Data;
 using EventBus;
 using Events;
-using States.GameplayUIStates;
+using Infrastructure;
 using Themes;
+using UI.GameplayUIStates;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
@@ -12,10 +14,12 @@ namespace UI
     [DisallowMultipleComponent]
     public class GameplayUIManager : MonoBehaviour
     {
-        public Theme Theme { get; private set; }
+        public SelectedTheme SelectedTheme { get; private set; }
         public PlacingShips PlacingShips { get; private set; }
         public Battle Battle { get; private set; }
         public BattleResults BattleResults { get; private set; }
+        
+        public LanguageData LanguageData { get; private set; }
         
         [SerializeField] private StyleSheet _placingShipsStyleSheet;
         [SerializeField] private StyleSheet _battleStyleSheet;
@@ -27,11 +31,12 @@ namespace UI
         private EventBinding<OnGameplayStateChanged> _onGameplayStateChanged;
 
         [Inject]
-        private void Construct(LevelManager levelManager, StateMachine.StateMachine stateMachine,
-            Theme theme, Wallet wallet, IDifficulty difficulty)
+        private void Construct(LevelManager levelManager, StateMachine.StateMachine stateMachine, LanguageData languageData,
+            SelectedTheme selectedTheme, Wallet wallet, IDifficulty difficulty)
         {
             _stateMachine = stateMachine;
-            Theme = theme;
+            LanguageData = languageData; 
+            SelectedTheme = selectedTheme;
             _wallet = wallet;
             _difficulty = difficulty;
         }
@@ -52,10 +57,10 @@ namespace UI
             _onGameplayStateChanged =
                 new EventBinding<OnGameplayStateChanged>(e =>
                 {
-                    if (e.NewState == typeof(States.GameplayStates.Battle))
+                    if (e.NewState == typeof(GameplayStates.Battle))
                         _stateMachine.SwitchState(Battle);
                     
-                    if (e.NewState == typeof(States.GameplayStates.BattleResults))
+                    if (e.NewState == typeof(GameplayStates.BattleResults))
                         _stateMachine.SwitchState(BattleResults);
                 });
             

@@ -5,7 +5,7 @@ using EventBus;
 using Events;
 using FMOD.Studio;
 using FMODUnity;
-using States.GameplayStates;
+using GameplayStates;
 using UnityEngine;
 using Zenject;
 using STOP_MODE = FMOD.Studio.STOP_MODE;

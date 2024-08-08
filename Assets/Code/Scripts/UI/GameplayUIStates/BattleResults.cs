@@ -2,7 +2,6 @@
 using AI;
 using EventBus;
 using Events;
-using UI;
 using UI.Elements;
 using UniRx;
 using UnityEngine;
@@ -10,7 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 
-namespace States.GameplayUIStates
+namespace UI.GameplayUIStates
 {
     public class BattleResults : BaseState
     {
@@ -65,14 +64,14 @@ namespace States.GameplayUIStates
             
             VisualElement containerButtons = container.CreateChild("container-buttons");
 
-            _restartButton = new StyledButton(GameplayUIManager.Theme, containerButtons)
+            _restartButton = new StyledButton(SelectedTheme.PlayerTheme, containerButtons)
             {
-                text = "Restart"
+                text = TextData.BattleResults_Restart
             };
 
-            _goToMainMenuButton = new StyledButton(GameplayUIManager.Theme, containerButtons)
+            _goToMainMenuButton = new StyledButton(SelectedTheme.PlayerTheme, containerButtons)
             {
-                text = "Main menu"
+                text = TextData.BattleResults_MainMenuButton
             };
         }
 
@@ -115,12 +114,12 @@ namespace States.GameplayUIStates
         {
             if (e.LoserCharacterType == CharacterType.Enemy)
             {
-                _winLoseLabel.text = "You won";
+                _winLoseLabel.text = TextData.BattleResults_YouWon;
 
                 _resultsMoneyContainer.visible = true;
             }
             else
-                _winLoseLabel.text = "You lost";
+                _winLoseLabel.text = TextData.BattleResults_YouLost;
         }
     }
 }

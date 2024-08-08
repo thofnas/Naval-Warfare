@@ -1,4 +1,4 @@
-﻿namespace States.GameplayStates
+﻿namespace GameplayStates
 {
     public class PlacingShips : BaseState
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using DG.Tweening;
 using EventBus;
 using Events;
+using GameplayStates;
 using Grid;
 using UI;
 using UnityEngine;
@@ -29,7 +30,6 @@ namespace Ship
         [SerializeField] private Material _spriteOutline;
         [SerializeField] private Material _spriteFlash;
         private LevelManager _levelManager;
-        private EventBinding<OnCellHit> _onCellHit;
         private SpriteRenderer _placementPreviewRenderer;
         private List<CellPosition> _previewCellPositions = new();
         private Settings _settings;
@@ -39,6 +39,10 @@ namespace Ship
         private Vector3 _spriteRendererOffset;
         private RotateShipButton _rotateShipButton;
 
+        private EventBinding<OnCellHit> _onCellHit;
+        private EventBinding<OnShipDestroyed> _onShipDestroyed;
+        private EventBinding<OnGameplayStateChanged> _onGameplayStateChanged;
+        
         [Inject]
         private void Construct(LevelManager levelManager, Settings settings, RotateShipButton rotateShipButton)
         {
@@ -70,8 +74,14 @@ namespace Ship
 
             _onCellHit = new EventBinding<OnCellHit>(Ship_OnHit);
             EventBus<OnCellHit>.Register(_onCellHit);
-        }
 
+            _onShipDestroyed = new EventBinding<OnShipDestroyed>(Ship_OnDestroyed);
+            EventBus<OnShipDestroyed>.Register(_onShipDestroyed);
+
+            _onGameplayStateChanged = new EventBinding<OnGameplayStateChanged>(Gameplay_OnStateChanged);
+            EventBus<OnGameplayStateChanged>.Register(_onGameplayStateChanged);
+
+        }
 
         private void OnMouseDown()
         {
@@ -108,6 +118,9 @@ namespace Ship
         private void OnMouseUp()
         {
             _placementPreviewRenderer.transform.SetParent(_ship.transform);
+            
+            EventBus<OnShipPlacementPreviewMoved>.Invoke(
+                new OnShipPlacementPreviewMoved(_ship, _previewCellPositions, _ship.OccupiedCellPositions.ToList()));
 
             if (!_ship.CanDragAndPlace()) return;
 
@@ -170,6 +183,20 @@ namespace Ship
                 _settings.SpriteFlashDuration));
             
             Instantiate(GameResources.Instance.ShipHitExplosionPrefab, _levelManager.GetWorldCellPosition(e.WoundedCharacterType, e.HitCellPosition), Quaternion.identity);
+        }
+        
+
+        private void Ship_OnDestroyed(OnShipDestroyed e)
+        {
+            if (e.Ship != _ship) return;
+            
+            _spriteRenderer.gameObject.SetActive(true);
+        }
+        
+        private void Gameplay_OnStateChanged(OnGameplayStateChanged e)
+        {
+            if (e.NewState == typeof(BattleResults)) 
+                _spriteRenderer.gameObject.SetActive(true);
         }
 
         [Serializable]

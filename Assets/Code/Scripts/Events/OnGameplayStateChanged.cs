@@ -1,6 +1,6 @@
 ﻿using System;
 using EventBus;
-using States.GameplayStates;
+using GameplayStates;
 
 namespace Events
 {

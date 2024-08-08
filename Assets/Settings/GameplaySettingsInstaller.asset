@@ -18,7 +18,9 @@ MonoBehaviour:
     CellGap: 1.04
   _shipsSpawner:
     ShipData:
+    - ShipLength: 2
     - ShipLength: 3
+    - ShipLength: 4
   _debugSettings:
     FirstCellPositionsAIWillShoot: []
     CreateDebugObjects: 0

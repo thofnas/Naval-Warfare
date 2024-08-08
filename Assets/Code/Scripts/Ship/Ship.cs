@@ -2,8 +2,8 @@
 using System.Linq;
 using EventBus;
 using Events;
+using GameplayStates;
 using Grid;
-using States.GameplayStates;
 using UnityEngine;
 using Utilities;
 using Utilities.Extensions;
@@ -76,6 +76,9 @@ namespace Ship
             _mouseOffset = MouseWorld2D.GetPosition() - position;
             _positionBeforeMoving = position;
             
+            _wasPlacementPreviewMoved = false;
+            _wasTransformMovedBeyondTolerance = false;
+            
             _onPlacementPreviewMoved = new EventBinding<OnShipPlacementPreviewMoved>(_ => _wasPlacementPreviewMoved = true);
             EventBus<OnShipPlacementPreviewMoved>.Register(_onPlacementPreviewMoved);
         }
@@ -107,7 +110,12 @@ namespace Ship
             if (!CanDragAndPlace()) return;
 
             if (!_levelManager.TryGetValidGridCellPositions(_characterType, transform.position, this,
-                    out List<CellPosition> cellPositions)) return;
+                    out List<CellPosition> cellPositions))
+            {
+                transform.position = (Vector3)_levelManager.GetWorldCellPosition(_characterType, _occupiedCellPositions[0]) +
+                                     GetSpriteOffset();
+                return;
+            }
 
             if (!_wasPlacementPreviewMoved)
                 if (_occupiedCellPositions.ToHashSet().SetEquals(cellPositions.ToHashSet()))
@@ -115,10 +123,6 @@ namespace Ship
             
             if (_wasTransformMovedBeyondTolerance) 
                 EventBus<OnShipGrabStatusChanged>.Invoke(new OnShipGrabStatusChanged(ship: this, isGrabbing: false, _characterType));
-
-            _wasPlacementPreviewMoved = default;
-            _wasTransformMovedBeyondTolerance = default;
-            _positionBeforeMoving = transform.position;
 
             TrySetNewShipPositions(cellPositions);
             
@@ -137,8 +141,13 @@ namespace Ship
 
             EventBus<OnShipMoved>.Invoke(
                 new OnShipMoved(this, _occupiedCellPositions, newCellPositions));
+            
+            EventBus<OnShipPlacementPreviewMoved>.Invoke(
+                new OnShipPlacementPreviewMoved(this, _occupiedCellPositions, newCellPositions));
 
             _occupiedCellPositions = newCellPositions;
+            
+            _shipVisual.UpdatePlacementPreviewSprite();
 
             return true;
         }
@@ -167,7 +176,6 @@ namespace Ship
                 _shipVisual.HideInteractButtons();
 
             _shipVisual.UpdateSprite();
-            _shipVisual.UpdatePlacementPreviewSprite();
 
             Quaternion rotation = transform.rotation;
             rotation.eulerAngles = rotation.eulerAngles.With(z: GetZRotation());

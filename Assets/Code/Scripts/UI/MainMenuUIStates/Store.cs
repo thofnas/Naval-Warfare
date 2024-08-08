@@ -3,12 +3,11 @@ using Events;
 using Map;
 using Misc;
 using Themes.Store;
-using UI;
 using UI.Elements;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 
-namespace States.MainMenuUIStates
+namespace UI.MainMenuUIStates
 {
     public class Store : BaseState
     {

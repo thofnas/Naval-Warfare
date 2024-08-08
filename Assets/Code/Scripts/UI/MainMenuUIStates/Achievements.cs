@@ -1,12 +1,10 @@
 ﻿using AchievementSystem;
 using Misc;
-using UI;
 using UI.Elements;
 using UnityEngine.UIElements;
-using Utilities;
 using Utilities.Extensions;
 
-namespace States.MainMenuUIStates
+namespace UI.MainMenuUIStates
 {
     public class Achievements : BaseState
     {

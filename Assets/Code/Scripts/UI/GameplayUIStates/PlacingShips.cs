@@ -1,12 +1,11 @@
 ﻿using EventBus;
 using Events;
-using UI;
 using UI.Elements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Utilities.Extensions;
 
-namespace States.GameplayUIStates
+namespace UI.GameplayUIStates
 {
     public class PlacingShips : BaseState
     {
@@ -35,13 +34,13 @@ namespace States.GameplayUIStates
             VisualElement center = _container.CreateChild("countdown-container");
             VisualElement buttons = _container.CreateChild("buttons-container");
 
-            _randomizeButton = new StyledButton(GameplayUIManager.Theme, buttons, "randomize-btn")
+            _randomizeButton = new StyledButton(SelectedTheme.PlayerTheme, buttons, "randomize-btn")
             {
-                text = "Randomize"
+                text = TextData.RandomizeButton
             };
-            _readyToggle = new StyledToggle(GameplayUIManager.Theme, buttons, "ready-toggle")
+            _readyToggle = new StyledToggle(SelectedTheme.PlayerTheme, buttons, "ready-toggle")
             {
-                text = "Ready"
+                text = TextData.ReadyToggle
             };
             _countDownLabel = new Label("2") { visible = false };
 

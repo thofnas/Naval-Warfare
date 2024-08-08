@@ -32,7 +32,7 @@ namespace Infrastructure
         public override void InstallBindings()
         {
             BetterStreamingAssets.Initialize();
-            
+
             _persistentData = new PersistentData();
             _languageProvider = new LanguageProvider();
             _languageData = new LanguageData(_languageProvider);
